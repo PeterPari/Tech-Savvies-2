@@ -726,7 +726,6 @@ main .eyebrow + * {
   height: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  object-fit: cover;
 }
 
 .showcase-text .h3 + p {
@@ -734,8 +733,9 @@ main .eyebrow + * {
   margin-top: 0.75rem;
 }
 
-@media (min-width: 64em) {
-  /* The photo sits beside the heading, text and checklist. */
+/* The screenshot is wide, so it only moves beside the text once there is room
+   to show it whole; below this it stays stacked under the link. */
+@media (min-width: 75em) {
   .showcase-body {
     grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
@@ -751,13 +751,9 @@ main .eyebrow + * {
     padding-top: 1.625rem;
   }
 
-  /* Match the height of the content beside it, cropping rather than stretching.
-     height: 0 keeps the photo from setting the row height itself. */
   .showcase-photo {
+    align-self: center;
     max-width: none;
-    height: 0;
-    min-height: 100%;
-    object-position: 100% 50%; /* keep the sculpture in frame when the sides are cropped */
   }
 
   .showcase-body .checklist {
