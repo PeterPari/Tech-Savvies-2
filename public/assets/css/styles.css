@@ -756,6 +756,13 @@ main .eyebrow + * {
   line-height: 1.4;
   letter-spacing: 0.02em;
   color: var(--muted);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.showcase-frame-url:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--heading);
+  text-decoration: none;
 }
 
 .showcase-frame img {
