@@ -936,7 +936,9 @@ main .eyebrow + * {
 /* ---------- Our story ---------- */
 
 .story {
-  max-width: var(--measure);
+  max-width: 50rem;
+  margin-inline: auto;
+  text-align: center;
   font-size: 1.09375rem;
   line-height: 1.75;
   color: var(--text);
@@ -944,6 +946,7 @@ main .eyebrow + * {
 
 .story-contact {
   margin-top: 1.25rem;
+  text-align: center;
 }
 
 /* ---------- Contact ---------- */
