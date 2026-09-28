@@ -702,24 +702,57 @@ main .eyebrow + * {
 
 .showcase-body {
   display: grid;
-  row-gap: 1.25rem;
-  margin-top: 1.625rem;
+  grid-template-areas:
+    "intro"
+    "photo"
+    "text"
+    "list";
+  row-gap: 1.625rem;
 }
 
-.showcase-body .h3 + p {
+.showcase-intro { grid-area: intro; }
+.showcase-text { grid-area: text; }
+.showcase-body .checklist { grid-area: list; }
+
+.showcase-photo {
+  grid-area: photo;
+  width: 100%;
+  max-width: 32rem;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.showcase-text .h3 + p {
   max-width: var(--measure);
   margin-top: 0.75rem;
 }
 
 @media (min-width: 64em) {
+  /* The photo sits beside the heading and link; the checklist tucks in under it. */
   .showcase-body {
-    grid-template-columns: minmax(0, var(--measure)) max-content;
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "intro photo"
+      "text  photo"
+      "text  list";
     column-gap: 4rem;
+    row-gap: 0;
+  }
+
+  .showcase-text {
+    padding-top: 1.625rem;
+  }
+
+  .showcase-photo {
+    max-width: none;
   }
 
   .showcase-body .checklist {
     align-content: start;
-    padding-top: 2.5rem;
+    padding-top: 1.5rem;
   }
 }
 
