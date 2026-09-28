@@ -757,7 +757,7 @@ main .eyebrow + * {
     max-width: none;
     height: 0;
     min-height: 100%;
-    object-position: 60% 50%; /* keep Grisha in frame when the sides are cropped */
+    object-position: 100% 50%; /* keep the sculpture in frame when the sides are cropped */
   }
 
   .showcase-body .checklist {
