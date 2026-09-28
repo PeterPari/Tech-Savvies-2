@@ -782,6 +782,7 @@ main .eyebrow + * {
 .showcase-body > .checklist {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem 2.5rem;
   margin-top: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
 }
