@@ -1,0 +1,74 @@
+# Tech-Savvies website
+
+The Tech-Savvies site, built from the mockup in [`design/Tech-Savvies_Website_Mockup.pdf`](design/Tech-Savvies_Website_Mockup.pdf).
+It is plain HTML, CSS and a little JavaScript, with no build step and no dependencies.
+
+## Pages
+
+| URL | File | Content |
+| --- | --- | --- |
+| `/` | `public/index.html` | Hero, What we offer, Featured Showcase, Start Your Project |
+| `/solutions/` | `public/solutions/index.html` | Core Services and pricing |
+| `/our-story/` | `public/our-story/index.html` | Our Story |
+| `/contact/` | `public/contact/index.html` | Contact info and the contact form |
+| `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
+| any missing page | `public/404.html` | Page not found |
+
+Everything the site serves lives in `public/`:
+
+```
+public/
+  assets/css/styles.css   all styles; colors, fonts and sizes are variables at the top
+  assets/js/main.js       mobile menu, footer year, form double-submit guard
+  assets/fonts/           Plus Jakarta Sans + JetBrains Mono (self-hosted, OFL licensed)
+  assets/img/             logo, icons, social share image
+  robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
+```
+
+## Preview locally
+
+Pages link to files with paths like `/assets/...`, so open the site through a local web server
+(double-clicking the HTML files won't load the styles):
+
+```sh
+python3 -m http.server 8080 --directory public
+# or: npx serve public
+```
+
+Then visit <http://localhost:8080>.
+
+## Editing
+
+- **Text:** edit the HTML file for that page. On the two big headlines, the periods and
+  apostrophes are wrapped in `<span class="kern-dot">` / `<span class="kern-apos">` to tuck
+  them in tighter, like in the mockup. Keep those spans if you change the wording.
+- **Header and footer:** repeated in every HTML file (6 files). Change all of them together.
+- **Colors, fonts, spacing:** the variables at the top of `public/assets/css/styles.css`.
+- **Domain:** links for Google and social sharing use `https://tech-savvies.com`
+  (the `canonical` and `og:` tags in each page, `sitemap.xml` and `robots.txt`).
+  Update them if the site ends up on a different domain.
+
+## Deploy on Netlify
+
+1. In Netlify, choose **Add new site** (newer accounts: **Add new project**) → **Import an existing project**,
+   and pick this repository.
+2. Leave the build command empty. `netlify.toml` already tells Netlify to publish the `public/` folder.
+3. Add the custom domain under **Domain management**. Netlify sets up HTTPS automatically.
+
+`netlify.toml` also adds security headers, including a Content Security Policy that only allows
+files from this site. If you later add a third-party script, font, video embed or analytics tool,
+add its domain to that policy or the browser will block it.
+
+## Contact form (Netlify Forms)
+
+The form on `/contact/` is a Netlify form named `contact`. It works without any server code, but
+two settings have to be switched on in the Netlify dashboard once the site is deployed:
+
+1. **Turn on form detection:** open the site's **Forms** page and enable form detection (if it isn't
+   already on), then redeploy. Netlify finds the form in `contact/index.html` during the deploy.
+2. **Get submissions by email:** in the site's configuration, open **Notifications → Emails and webhooks**
+   and add a *form submission notification* sent to `info@tech-savvies.com`.
+
+Submissions also appear on the **Forms** page in Netlify. A hidden honeypot field (`bot-field`)
+filters out simple spam bots. After sending, visitors land on `/contact/thanks/`.
+The form can't be tested with a local server, so test it after deploying to Netlify.
