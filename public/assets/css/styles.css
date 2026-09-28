@@ -751,8 +751,12 @@ main .eyebrow + * {
     padding-top: 1.625rem;
   }
 
+  /* Match the height of the text beside it, cropping rather than stretching.
+     height: 0 keeps the photo from setting the row height itself. */
   .showcase-photo {
     max-width: none;
+    height: 0;
+    min-height: 100%;
   }
 
   .showcase-body .checklist {
