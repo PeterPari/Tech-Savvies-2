@@ -945,8 +945,12 @@ main .eyebrow + * {
 }
 
 .story-contact {
-  margin-top: 1.25rem;
+  margin-top: 1.75rem;
   text-align: center;
+}
+
+.story-contact .btn {
+  min-width: 270px;
 }
 
 /* ---------- Contact ---------- */
