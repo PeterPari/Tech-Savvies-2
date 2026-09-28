@@ -1,97 +1,74 @@
 # Prompt 24: Check local laws (compliance map)
 
-Run in Phase 1 (right after Prompt 00), and again at the very end for the "Final pass" section.
-Paste everything below the line into a new Claude Code session opened at the repository root.
+````text
+<context>
+Tech-Savvies is a one-person web-design business in New York City. It sells website builds, website repairs, and Google Business Profile and social media help, with prices on /solutions/, including a monthly management plan. It collects enquiries through a Netlify contact form. The Privacy Policy, Terms, Refund Policy, email policy and accessibility statement will all be written against the map this prompt produces.
 
----
+Laws to assess:
+- FTC Act §5; FTC Rule on Consumer Reviews and Testimonials (16 CFR 465); FTC Endorsement Guides (16 CFR 255); current legal status of the FTC negative-option ("click-to-cancel") rule.
+- NY GBL §349/§350; NY GBL §527-a (automatic renewal); NY GBL §130 (assumed name); NY GBL §218-a (refund policy posting; confirm whether it covers services); NY SHIELD Act (GBL §899-aa/bb); NY Child Data Protection Act; NY General Obligations Law §3-101 (minors' contracts).
+- CalOPPA (Cal. Bus. & Prof. Code §22575–22579); CCPA/CPRA and other US state privacy law thresholds; GDPR/UK GDPR (only if docs/business-facts.md says EU/UK clients are targeted); COPPA; CAN-SPAM.
+- ADA Title III, NY State Human Rights Law, NYC Human Rights Law (website accessibility).
+- NY sales tax guidance on web design, hosting and domain resale; NYC consumer protection rules on service pricing; record-retention periods for invoices and tax records.
+</context>
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 (Key decisions) and §4 (Ground rules), then `docs/business-facts.md` and
-`docs/compliance-log.md`.
+<inputs>
+docs/business-facts.md, docs/compliance-log.md
+</inputs>
 
-Tech-Savvies is a small web-design business run by one person in New York City. It sells
-website builds, website repairs, and Google Business Profile / social media help, with prices
-published on `/solutions/`. It collects enquiries through a Netlify contact form.
+<deliverables>
+1. docs/legal-compliance.md, containing:
+   - a one-line "Not legal advice" note;
+   - a summary of at most 150 words;
+   - a table with the columns Law | Applies? (Yes / No / Only if …) | Why | Requirement (quoted from the source, at most 40 words) | Handled by (prompt # and page) | Source URL | Checked (date). One row per law above;
+   - "Owner actions outside the website": DBA filing, attorney review of Terms, Refunds and Privacy, accountant review of sales tax, and parent/guardian co-signing if docs/business-facts.md says the contract signer is under 18.
+2. A note under fix-plan.md §2 for any finding that contradicts a decision there, also reported in the final message.
+3. Item 24 updated in docs/compliance-log.md.
+4. One commit, "Fix #24: add legal compliance map", pushed.
+5. A final message of at most 8 bullets.
+</deliverables>
 
-## Goal
+<examples>
+<example index="1">
+| NY GBL §527-a | Yes | The monthly management plan renews each month | "clear and conspicuous" disclosure of the automatic renewal terms before purchase, plus an easy cancellation method | 02 /terms/#monthly-plan, 10 /solutions/ | https://… | 2026-… |
+</example>
+<example index="2">
+| CCPA/CPRA | No | Below every threshold (revenue, record count, data-sale share) | n/a | n/a | https://… | 2026-… |
+</example>
+<example index="3">
+| GDPR | Only if EU clients are deliberately targeted | docs/business-facts.md says they aren't | n/a unless that changes | 01 /privacy/#international | https://… | 2026-… |
+</example>
+</examples>
 
-Create `docs/legal-compliance.md`, a map of which laws apply to this site and business, what
-each one requires, and which prompt or page handles it. Every legal page in this plan will be
-written against this map, so it must be accurate and current.
+<constraints>
+- Take every requirement, threshold, effective date and legal status from a primary or official source fetched in this session (statute text, ftc.gov, ag.ny.gov, dos.ny.gov, tax.ny.gov, ada.gov, oag.ca.gov). If you can't fetch one, say so in that row rather than filling it from memory.
+- Don't draw tax conclusions. Link the guidance and route the question to an accountant.
+- Leave public/ unchanged.
+- Leave the owner's personal details out, unless they're already in docs/business-facts.md.
+</constraints>
 
-## Why
+<final_pass>
+When the user's message says "final pass", do this instead of the deliverables above. For each "Handled by" entry, open the page in public/ and quote the clause or feature that satisfies the requirement. Add a "Final pass (date)" section listing each entry as met or gap. Fix gaps that need at most 3 lines of copy. Refresh any source whose checked date is more than 6 months old. Commit as "Fix #24: final compliance pass".
+</final_pass>
 
-Laws change, and model memory lags. The plan's other prompts make concrete promises about
-privacy, pricing, refunds and accessibility. If they are built on a stale or wrong reading of
-the law, the site gets confidently wrong legal pages, which is worse than none. This prompt
-makes the legal basis explicit, sourced and reviewable.
+<if_uncertain>
+Write "Unclear; ask an attorney" in the Applies? column when the source doesn't settle whether the law applies.
+</if_uncertain>
 
-## Task
+<task>
+Write docs/legal-compliance.md, mapping each law listed above to whether it applies to Tech-Savvies, what it requires, and which prompt and page handles it.
+</task>
+````
 
-1. **Research each candidate law with `WebSearch`/`WebFetch`.** Confirm its current status and
-   requirements from a primary or authoritative source: statute text, FTC.gov, ag.ny.gov,
-   dos.ny.gov, tax.ny.gov, ada.gov, the California AG. Cite the URL and the date you checked.
-   Don't rely on memory for thresholds, effective dates, or whether a rule was vacated.
+## Assumptions
+- Run in Phase 1, right after Prompt 00, and again with "final pass" added after every other prompt.
+- WebSearch and WebFetch can reach official government sites from the session.
 
-   Candidates to assess:
-   - **FTC Act §5** (unfair/deceptive practices): marketing claims and pricing.
-   - **FTC Trade Regulation Rule on Consumer Reviews and Testimonials (16 CFR Part 465)** and the
-     **FTC Endorsement Guides (16 CFR Part 255)**: case studies and testimonials.
-   - **FTC negative-option / "click-to-cancel" rule**: check its current legal status.
-   - **NY General Business Law §349/§350**: deceptive acts and false advertising.
-   - **NY GBL §527-a** (automatic renewal): the "monthly for ongoing management" plan.
-   - **NY GBL §130** (assumed name / DBA): trading as "Tech-Savvies" rather than the owner's
-     legal name.
-   - **NY SHIELD Act** (GBL §899-aa, §899-bb): what counts as "private information", and whether
-     contact-form data triggers it.
-   - **NY Child Data Protection Act**: scope, and whether a general-audience B2B site with no
-     knowledge of minor users is covered.
-   - **Minors' capacity to contract in NY** (General Obligations Law §3-101). This matters if the
-     business owner or a client is under 18.
-   - **CalOPPA** (Cal. Bus. & Prof. Code §22575–22579): requires a posted privacy policy, including
-     a statement on Do Not Track, for any site collecting PII from California residents.
-   - **CCPA/CPRA thresholds**: expected answer is "not applicable", but show the thresholds.
-   - **Other US state comprehensive privacy laws**: thresholds; expected not applicable.
-   - **GDPR / UK GDPR**: only if `docs/business-facts.md` says EU/UK clients are deliberately
-     targeted.
-   - **COPPA**: site not directed to children; still state that in the policy.
-   - **CAN-SPAM Act**: any promotional email.
-   - **ADA Title III, NY State Human Rights Law, NYC Human Rights Law**: website accessibility,
-     and the level of NY accessibility litigation.
-   - **NY sales tax on web design / hosting / domain resale**: find the relevant tax.ny.gov
-     guidance, then route the conclusion to an accountant. Don't state a tax position on the site.
-   - **NYC Consumer and Worker Protection rules** relevant to service pricing and advertising, if any.
-   - **Record-retention requirements** for invoices and tax records (for the deletion policy in #20).
+## Parameters
+- Reasoning effort: high. Applicability depends on reading statutes against facts.
+- Temperature: default.
 
-2. **Write `docs/legal-compliance.md`** with:
-   - A summary of the laws that apply and the top 5 owner actions.
-   - A table: `Law` | `Applies?` (Yes / No / Only if …) | `Why` | `What it requires of this site` |
-     `Handled by` (prompt # and page) | `Source (URL, checked date)`.
-   - An "Owner actions outside the website" section: DBA filing, attorney review of Terms,
-     Refunds and Privacy, accountant on sales tax, and contract co-signing if the signer is
-     under 18. Base these on the facts file, and don't make assumptions about the owner.
-   - A "Not legal advice" note at the top.
-
-3. **Check for plan conflicts.** If any finding changes a decision in `fix-plan.md` §2 (for
-   example, a law requires a consent mechanism the plan decided against), say so prominently in
-   your final message and add a note under §2. Don't silently rewrite other prompts.
-
-4. Update item 24 in `docs/compliance-log.md`.
-
-## Final pass (run again after every other prompt is done)
-
-Re-open `docs/legal-compliance.md` and check every "Handled by" entry against the live pages in
-`public/`: open the page, find the clause or feature, and confirm it matches. Record the result
-in a "Final pass (date)" section, listing any gaps, and fix small gaps directly. Refresh any
-source whose checked date is more than 6 months old.
-
-## Constraints
-
-- Don't edit `public/` in the first run. This prompt produces documentation only.
-- Say "unclear, ask an attorney" rather than guessing.
-- Keep the owner's personal details out of the doc unless they're already in the facts file.
-
-## Commit
-
-`Fix #24: add legal compliance map for NY-based web design business` (final pass:
-`Fix #24: final compliance pass`). Push to the current branch.
+## What to test
+- Check 3 rows by hand against their sources: §527-a, CalOPPA, and the FTC negative-option rule's status.
+- Run once with EU clients set to "no" and once set to "yes" in the facts file. The GDPR row and the Privacy Policy "Handled by" entry should change.
+- In the final-pass run, every "met" entry should quote actual page text.

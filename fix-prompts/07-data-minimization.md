@@ -1,91 +1,69 @@
 # Prompt 07: Only collect necessary data
 
-Phase 1 (after 05). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+The contact form (public/contact/index.html:71-105) collects:
 
----
+| Field | Required | Assessment |
+|-------|----------|-----------|
+| name | yes | Needed to address the reply |
+| email | yes | Needed to reply |
+| business ("Business or current website") | no | Useful for quoting |
+| service (select) | yes | Routes the enquiry; "Not sure yet" option exists |
+| message | yes | Needed |
+| bot-field | hidden | Honeypot, used instead of a CAPTCHA vendor |
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/business-facts.md`, `docs/compliance-log.md`,
-`docs/third-parties.md` and `docs/legal-compliance.md`.
+Gaps outside the form:
+- no retention period;
+- Netlify Forms stores technical metadata alongside the fields (see docs/third-parties.md);
+- Netlify emails a copy of every submission to the inbox.
 
-## Goal
+The Privacy Policy (Prompt 01) and the deletion runbook (Prompt 20) are built from the inventory this prompt writes.
+</context>
 
-Make sure the site and business collect only the personal data they need, keep it only as long
-as needed, and document every piece of it in `docs/data-inventory.md`. The Privacy Policy and
-the deletion runbook will be built from that inventory.
+<inputs>
+docs/business-facts.md, docs/third-parties.md, docs/legal-compliance.md, docs/compliance-log.md, public/contact/index.html, public/contact/thanks/index.html
+</inputs>
 
-## Why
+<deliverables>
+1. docs/data-inventory.md, containing:
+   - a table with the columns Data | Source | Purpose | Legal basis (EU/UK terms plus plain words) | Where stored (Netlify Forms, inbox, invoices, project files) | Who can access | Retention | How to delete. It covers the form fields, the Netlify metadata, the email copies, and client project records;
+   - a "Retention routine" section: the schedule (for example the first Monday of each quarter), each place to delete from (including Netlify's Spam submissions tab), and who does it.
+2. A decision for each form field (keep / make optional / remove), with one line of justification, recorded in the inventory. Apply any change to public/contact/index.html using the existing .field and .optional markup.
+3. The retention rule written into docs/business-facts.md, and item 7 updated in docs/compliance-log.md.
+4. One commit, "Fix #07: document collected data and set retention", pushed.
+5. A final message of at most 6 bullets.
+</deliverables>
 
-Data minimisation is a core privacy principle (GDPR Art. 5(1)(c), the FTC's data-security
-guidance, and NY SHIELD's "reasonable safeguards"). Data you don't collect can't leak and
-doesn't need deleting. The contact form (`public/contact/index.html:71-105`) is already lean:
+<constraints>
+- Add no fields. Prompt 17 deliberately avoids an age field.
+- Take the retention period for non-converted enquiries from docs/business-facts.md. If it's missing, ask the owner with the options 6 / 12 (recommended) / 24 months.
+- Take the retention period for client records from docs/legal-compliance.md, and write "per accountant" if it isn't settled there.
+- Document deletion as a manual routine, and mention the Netlify API as an option. Keep API tokens and scripts that need them out of the repo.
+- Leave the Privacy Policy to Prompt 01.
+</constraints>
 
-| Field | Required | Needed? |
-|-------|----------|---------|
-| `name` | yes | Yes, to address the reply |
-| `email` | yes | Yes, to reply |
-| `business` (business or current website) | no | Useful for quoting; already optional |
-| `service` | yes | Routes the enquiry; has a "Not sure yet" escape hatch |
-| `message` | yes | Yes |
-| `bot-field` (honeypot) | hidden | Spam protection without a CAPTCHA vendor |
+<acceptance_criteria>
+- The checker exits 0.
+- The form still posts with method="POST", has no hidden fields other than form-name and bot-field, and /contact/thanks/ shows no submitted data.
+- If the form changed, it renders correctly at 375px and 1280px, and an empty submit is still blocked.
+</acceptance_criteria>
 
-The gaps are outside the form: there is no retention period, and Netlify Forms stores more than
-the visible fields. It keeps technical metadata (verify exactly what in `docs/third-parties.md`)
-and emails a copy of every submission to an inbox.
+<if_uncertain>
+Mark any metadata field that Netlify's docs don't confirm as "unverified" in the inventory.
+</if_uncertain>
 
-## Task
+<task>
+Record every piece of personal data Tech-Savvies collects in docs/data-inventory.md, with a retention period, and remove any collection that isn't needed.
+</task>
+````
 
-1. **Review each field.** Confirm the table above, or argue for a change. Specifically:
-   - Should `service` stay required? Keep it if "Not sure yet" makes it non-blocking. Otherwise
-     make it optional.
-   - Is `autocomplete="organization"` right for a field that may hold a URL? Keep it unless you
-     find a concrete autofill problem.
-   - Don't add fields such as phone, budget or date of birth. Prompt 17 deliberately avoids an
-     age field.
+## Assumptions
+- Prompts 08, 23 and 05 have run.
 
-2. **Check for hidden collection.** No query-string capture, no hidden fields besides
-   `form-name` and the honeypot, no echo of submitted data on `/contact/thanks/`, and the form
-   `method="POST"` over HTTPS (Netlify serves HTTPS; confirm the production site redirects HTTP
-   to HTTPS if reachable).
+## Parameters
+- Reasoning effort: medium.
 
-3. **Retention.** Read the retention answer in `docs/business-facts.md`. If it's missing, ask the
-   owner with `AskUserQuestion`, offering these options:
-   - enquiries that don't become projects are deleted after 12 months (recommended);
-   - after 6 months;
-   - after 24 months.
-
-   Client project records are kept for the engagement plus whatever tax and record-keeping law
-   requires. Take that period from `docs/legal-compliance.md`, and don't invent a number.
-
-   Record the answer. Then write a short "Retention routine" section in the inventory: how often
-   (for example, the first Monday of each quarter), where to delete (Netlify → Forms → contact,
-   including the Spam tab; the notification emails in the inbox; sent replies), and who does it.
-
-4. **Write `docs/data-inventory.md`**: a table with `Data`, `Source`, `Purpose`, `Legal basis`
-   (for EU/UK visitors; plain words otherwise), `Where stored` (Netlify Forms, inbox, invoices,
-   project files), `Who can access`, `Retention`, `How to delete`. Include the Netlify metadata
-   and the email copies. Link to `docs/third-parties.md` for vendor details.
-
-5. **Apply field changes, if any.** Edit `public/contact/index.html` using the existing markup
-   patterns (`.field`, `.optional`). Keep labels explicit and the `autocomplete` values valid.
-
-6. Update item 7 in `docs/compliance-log.md`, and write the retention rule into
-   `docs/business-facts.md`.
-
-## Constraints
-
-- Don't write the Privacy Policy here (that's Prompt 01). This prompt produces its input.
-- Don't set up automated deletion scripts that need Netlify API tokens in the repo. Document the
-  manual routine and mention the Netlify API as an option, with no secrets.
-
-## Verify
-
-- `python3 tools/check_site.py` passes.
-- If the form changed: Playwright check at 375px and 1280px that it renders and that native
-  validation still blocks an empty submit.
-
-## Commit
-
-`Fix #07: document collected data, set retention, confirm form minimality`. Push to the current
-branch.
+## What to test
+- Every row in the inventory has a retention value and a deletion method.
+- Run with the retention fact missing. The session should ask using the three options, not choose one itself.

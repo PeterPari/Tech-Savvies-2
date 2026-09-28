@@ -1,102 +1,76 @@
-# Prompt 10: Remove hidden fees (full price disclosure)
+# Prompt 10: Remove hidden fees
 
-Phase 2 (after 16). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+public/solutions/index.html promises "Transparent pricing (no surprise invoices)" (:107), but leaves these costs undisclosed or vague:
 
----
+| Location | Problem |
+|----------|---------|
+| :95 "$50 (flat fee, for a one-time fix; monthly for ongoing management)" | The monthly price is missing. An unpriced recurring charge is drip pricing, and NY GBL §527-a requires clear auto-renewal terms. |
+| :62 "Includes your domain setup" | The yearly domain registration fee, hosting costs, who pays, and whose name the domain is in are all unstated. |
+| :80 "up to $250 rush order" | "Rush" is undefined. |
+| :65 "$250-$375 (depending on website caliber and time frame)" | "Caliber" is undefined. |
+| nowhere | Deposit, payment schedule, payment methods, card fees and sales tax are missing. |
+| :7 and :13 meta and og descriptions | Both repeat headline prices. |
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/business-facts.md`, `docs/compliance-log.md` and
-`docs/legal-compliance.md`.
+Deceptive pricing is actionable under FTC Act §5 and NY GBL §349/§350.
+</context>
 
-## Goal
+<inputs>
+docs/business-facts.md, docs/legal-compliance.md, docs/compliance-log.md, public/solutions/index.html, public/assets/css/styles.css
+</inputs>
 
-A visitor reading `/solutions/` should be able to work out the total they'll pay, now and
-later, for each service before they get in touch. That means every mandatory cost, every
-recurring cost, and every cost paid to someone else.
+<deliverables>
+1. Each service block on /solutions/, rewritten within the existing .service / .price / .price-amount / .price-note / .checklist markup, stating:
+   - the rule that sets each price;
+   - the rush definition and its price;
+   - for the monthly plan: price per month, billing date, "renews monthly until you cancel", and how to cancel.
+2. A "Costs outside our fee" block (h2 styled with .h3), before "Every Project Includes", listing each third-party cost the facts support: domain registration (approximate yearly cost, paid to the registrar, whose name it's registered in), hosting, and paid plugins or images (only with the client's approval).
+3. A "Payment" block covering deposit, balance due date, accepted methods, card fees, and sales tax handling, ending with the comment <!-- links to /terms/ and /refunds/ added by prompts 02/03 -->.
+4. "Every Project Includes", with each claim true under the new pricing. The completion guarantee wording must match docs/business-facts.md exactly.
+5. Meta description and og:description (:7, :13) consistent with the new prices.
+6. Any new CSS placed next to the Solutions section, using existing tokens.
+7. Every published price and term recorded in docs/business-facts.md as the source for Prompts 02 and 03. Item 10 updated in docs/compliance-log.md.
+8. One commit, "Fix #10: disclose all prices, recurring charges and third-party costs", pushed.
+9. A final message of at most 8 bullets, including the year-one total a customer pays for each service (including domain and hosting).
+</deliverables>
 
-## Why
+<examples>
+<example index="1">$250 for a site of up to 5 pages · $375 for 6–10 pages or delivery within 7 days</example>
+<example index="2">$200 flat fee · Rush (finished within 3 business days): $250</example>
+<example index="3">$40/month, billed on the 1st. Renews monthly until you cancel. Cancel any time by emailing info@tech-savvies.com; it stops at the end of that month.</example>
+</examples>
 
-The page says "Transparent pricing (no surprise invoices)" (`public/solutions/index.html:107`),
-but several costs are missing or vague:
+<constraints>
+- Take every number and term from docs/business-facts.md. Ask the owner for any that are TODO(owner).
+- If the monthly price is still undecided after asking, remove "monthly" from the page rather than publishing an unpriced recurring service.
+- Put each condition next to its price. Don't use asterisks or footnotes, and don't write "starting at" or "from $X" unless the page also states what raises the price.
+- Keep each price note to one sentence of at most 25 words.
+</constraints>
 
-| Where | Problem |
-|-------|---------|
-| `:95` "$50 (flat fee, for a one-time fix; monthly for ongoing management)" | The monthly price isn't stated. A recurring charge with no price is classic drip pricing, and if it auto-renews, NY GBL §527-a requires clear disclosure of the renewal terms and how to cancel. |
-| `:62` "Includes your domain setup" | The domain registration itself (and any renewal) costs money every year, and so may hosting. The page never says who pays, roughly how much, or whose name the domain is in. |
-| `:80` "up to $250 rush order" | "Rush" is undefined, and so is what determines the $200–$250 range. |
-| `:65` "$250-$375 (depending on website caliber and time frame)" | "Caliber" isn't defined, so the visitor can't tell which price applies. |
-| none | Deposit, payment schedule, accepted payment methods, card surcharges, and sales tax are never mentioned. |
-| `:7`, `:13` meta/og descriptions | They repeat the headline prices, so they must stay consistent with the full terms. |
+<acceptance_criteria>
+- The checker exits 0.
+- /solutions/ has no overflow at 375px, 768px and 1280px.
+- Every price, and every price condition shown on the page, appears in docs/business-facts.md.
+</acceptance_criteria>
 
-Deceptive pricing is actionable under FTC Act §5 and NY GBL §349/§350, and it undermines the
-page's own "no surprise invoices" promise.
+<if_uncertain>
+List any cost you believe exists but that the facts don't cover in the final message, as a question for the owner.
+</if_uncertain>
 
-## Task
+<task>
+Rewrite /solutions/ so a visitor can see every cost of each service before contacting Tech-Savvies: upfront, recurring, and paid to third parties.
+</task>
+````
 
-1. **Gather facts** from `docs/business-facts.md`: what separates the $250 and $375 tiers; the
-   rush definition and prices for both Launch and Rescue; the monthly management price, what it
-   includes, billing date, auto-renewal, how to cancel, and any minimum term; deposit and
-   payment schedule; payment methods and fees; how sales tax is handled (an accountant's answer,
-   per `docs/legal-compliance.md`); domain and hosting costs, who pays, and in whose name;
-   revisions included. Ask with `AskUserQuestion` for anything that's `TODO(owner)`, and write
-   the answers back. **Don't invent a number.** If the owner hasn't decided the monthly price,
-   remove the word "monthly" from the page until they do. Don't publish an unpriced recurring
-   service.
+## Assumptions
+- Prompts 00, 24 and 16 have run.
+- The owner has decided their prices, or can decide during the session.
 
-2. **Rewrite each service's offer block** in `public/solutions/index.html`, keeping the existing
-   structure (`.service`, `.service-info`, `.service-offer`, `.price`, `.price-amount`,
-   `.price-note`, `.checklist`):
-   - **Website Launch:** replace "depending on website caliber and time frame" with the concrete
-     rule, for example "$250 for up to N pages; $375 for N+ pages or delivery within N days". Use
-     the owner's actual rule.
-   - **Website Rescue:** "$200 flat fee. Rush (done within N days): $250."
-   - **Google Business Profile & Social Media:** separate the one-time fix and the monthly plan
-     as two clearly priced lines. The monthly line states "$X/month, billed <when>, renews
-     monthly until you cancel. Cancel any time by email, effective at the end of the current
-     month." Adjust to the owner's actual terms.
+## Parameters
+- Reasoning effort: high. Pricing copy has legal consequences.
 
-3. **Add a "Costs outside our fee" block** after the services, before "Every Project Includes".
-   Use an `h2.h3` heading and a short list: domain registration (approximate yearly cost, paid
-   directly to the registrar and registered in the client's name, if that's the policy), hosting
-   (cost, or "free on Netlify's starter plan" only if true), paid themes, plugins or stock
-   images (only with the client's approval, at cost). Only list what the facts support.
-
-4. **Add a "Payment" block**: deposit, when the balance is due, accepted methods, whether there
-   are card fees, and how sales tax works. Link "Terms of Service" and "Refund Policy" here once
-   those pages exist. Prompts 02 and 03 add the links if they come later, so leave a comment
-   marker `<!-- links to /terms/ and /refunds/ added by prompts 02/03 -->`.
-
-5. **Make "Every Project Includes" true.** Keep "Transparent pricing (no surprise invoices)"
-   only if, after this change, every cost is listed. Make "Completion guarantee (we don't bill
-   extra if a project takes longer)" match exactly what the owner confirmed. Prompt 12 handles
-   the other claims in that paragraph.
-
-6. **Update the meta description and `og:description`** (`:7`, `:13`) so any price shown there
-   is accurate and not misleading. For example, drop "$50" if it now reads as cheaper than the
-   real monthly offer.
-
-7. **Styling.** Reuse existing classes. If you need a definition list or a small table, add
-   minimal CSS next to the Solutions section in `public/assets/css/styles.css`, using existing
-   tokens. It must look right at 375px, 768px and 1280px.
-
-8. **Record every published price and term** in `docs/business-facts.md`, marked as the source
-   for the Terms (Prompt 02) and Refunds (Prompt 03). Update item 10 in `docs/compliance-log.md`.
-
-## Constraints
-
-- No "starting at" or "from $X" unless the page also explains what moves the price up.
-- No asterisks leading to fine print. Disclose the terms next to the price.
-- Keep the copy plain and short. The audience "doesn't feel tech-savvy yet".
-
-## Verify
-
-- `python3 tools/check_site.py` passes.
-- Playwright screenshots of `/solutions/` at 375px, 768px and 1280px.
-- Read the page as a customer and total up each service, including year-one domain and hosting.
-  Put that total in your summary so the owner can sanity-check it.
-
-## Commit
-
-`Fix #10: disclose all prices, recurring charges and third-party costs`. Push to the current
-branch.
+## What to test
+- Run with the monthly price as `TODO(owner)` and the owner declining to answer. "Monthly" should disappear from the page.
+- Check the year-one totals in the final message against the facts by hand.
+- Check the page at 375px for price-note wrapping.

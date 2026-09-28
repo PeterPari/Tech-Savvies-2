@@ -1,78 +1,65 @@
 # Prompt 25: Use clear button labels
 
-Phase 5 (after 15). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+WCAG criteria covered:
+- 2.4.4: link purpose;
+- 2.4.6: labels;
+- 2.5.3: label in name;
+- 3.2.4: consistent identification.
 
----
+The original controls pass: "Send message", "Start your project", "Back to home", "Contact", the menu toggle named "Menu" with aria-expanded, "(opens in a new tab)" on external links, and the logo link "Tech-Savvies NYC home". Prompts 01–21 added controls that haven't been checked: legal-page links, "Email a data request", the form-notice link, error states, the refund mailto.
+</context>
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/compliance-log.md`, `docs/accessibility-audit.md` and
-`docs/ux-honesty-rules.md`.
+<inputs>
+docs/accessibility-audit.md, docs/ux-honesty-rules.md, docs/compliance-log.md, public/
+</inputs>
 
-## Goal
+<deliverables>
+1. A "Labels" section in docs/accessibility-audit.md, with one row per <a>, <button>, input[type=submit|button], <summary> and [role=button] on every page: Page | Element | Visible text | Accessible name (computed) | Action or destination | Verdict.
+2. Fixes in public/, so that every control meets these rules:
+   - it names the action or destination;
+   - its accessible name starts with its visible text;
+   - the same destination or action uses the same key words everywhere;
+   - mailto links show the address or begin "Email";
+   - links that open a new tab say so;
+   - icon-only controls have a text name;
+   - after a failed JS validation the submit button reads "Send message".
+3. docs/microcopy.md: the rules above, each in at most 15 words, plus a glossary of canonical labels ("Start your project", "Send message", "Privacy Policy", "Terms of Service", "Refund Policy", "Cookie Policy", "Accessibility", "Email a data request", "Back to home"). Linked from the README "Editing" section.
+4. A check named link-text in tools/check_site.py. Visible text is the text after removing tags and visually hidden spans. The check fails when visible text equals click here, here, learn more, read more, more, submit or go (case-insensitive), and when an <a> or <button> has no accessible name.
+5. Item 25 updated in docs/compliance-log.md.
+6. One commit, "Fix #25: audit control labels and add microcopy rules", pushed.
+7. A final message of at most 5 bullets.
+</deliverables>
 
-Every button and link should say exactly what happens when you use it, to sighted users and
-screen-reader users alike, and use the same words for the same action everywhere.
+<examples>
+<example index="1">Weak: "Click here" · Clear: "Read our Privacy Policy"</example>
+<example index="2">Weak: "Submit" · Clear: "Send message"</example>
+<example index="3">Name mismatch: visible "Contact", aria-label "Get in touch" · Clear: visible "Contact", no aria-label</example>
+<example index="4">Weak: "info@…" opening a form · Clear: "info@tech-savvies.com" as a mailto link</example>
+</examples>
 
-## Why
+<constraints>
+- Keep the toggle's name as "Menu". aria-expanded already conveys its state.
+- Change a label only when it breaks one of the rules above.
+</constraints>
 
-Clear labels are WCAG 2.4.4 (link purpose), 2.4.6 (labels), 2.5.3 (label in name) and 3.2.4
-(consistent identification), and they're the basis of honest UI (no misleading buttons). The
-audience "doesn't feel tech-savvy yet", so vague labels cost real enquiries. The audit found the
-original controls good:
-- "Send message" (submit), "Start your project", "Back to home", "Contact";
-- the menu toggle is named "Menu", with `aria-expanded` for its state;
-- the external link says "(opens in a new tab)";
-- the logo link is "Tech-Savvies NYC home".
+<acceptance_criteria>
+- axe button-name, link-name and label-content-name-mismatch report 0 violations on every page.
+- The checker exits 0, and a temporary copy of public/ with <a href="/">click here</a> makes link-text fail.
+</acceptance_criteria>
 
-Prompts 01–20 added new links and controls (legal pages, "Email a data request", the privacy
-notice link, form errors, maybe a refund-request link), and those need the same bar.
+<task>
+Make every button and link on the Tech-Savvies site name exactly what it does, consistently across pages, and make the checker reject vague labels.
+</task>
+````
 
-## Task
+## Assumptions
+- Prompts 01–21, except 21, have run, so all new controls exist.
 
-1. **Inventory** every `<a>`, `<button>`, `<input type="submit|button">`, `<summary>`, and
-   element with `role="button"` on every page. For each, get the computed accessible name with
-   Playwright (`page.accessibility.snapshot()` or `locator.evaluate` + axe). Put the table in
-   `docs/accessibility-audit.md` (Labels section): page, element, visible text, accessible name,
-   destination or action, verdict.
+## Parameters
+- Reasoning effort: low.
 
-2. **Check each against these rules:**
-   - Starts with a verb or names the destination ("Send message", "Read our Privacy Policy",
-     "Email a data request"). Never "Click here", "Learn more", "Submit", "Read more" or "Go".
-   - The accessible name **contains the visible text**, starting with it (2.5.3). For example,
-     don't add an `aria-label` that replaces the visible words.
-   - The same destination or action uses the same label across pages (3.2.4). For example, the
-     privacy link is "Privacy Policy" in the footer and "Read our Privacy Policy" in running text,
-     which is fine because it's the same key words. It must not become "Data info" somewhere else.
-   - `mailto:` links show the address or say "Email …". Links that open a new tab say so.
-   - Icon-only controls have a text name (the toggle does). Decide whether the toggle should say
-     "Close menu" when open. `aria-expanded` already conveys state, so keeping "Menu" is correct.
-     Don't change it without a reason.
-   - Loading state: when the submit label switches to "Sending…", confirm the page navigation
-     makes an extra announcement unnecessary. If a JS validation failure (Prompt 15) keeps the
-     user on the page, the button must return to "Send message".
-   - Buttons that do the same thing look the same. Choices of equal weight look equal
-     (`docs/ux-honesty-rules.md`).
-
-3. **Fix** anything that fails, in every affected HTML file.
-
-4. **Write `docs/microcopy.md`:** the rules above as a short checklist, plus a glossary of the
-   site's canonical labels ("Start your project", "Send message", "Privacy Policy", "Terms of
-   Service", "Refund Policy", "Cookie Policy", "Accessibility", "Email a data request", "Back to
-   home"). Link it from the README "Editing" section.
-
-5. **Guard.** Add a `link-text` check to `tools/check_site.py` that fails on link or button text
-   (after stripping tags and visually hidden spans) equal to `click here`, `here`, `learn more`,
-   `read more`, `more`, `submit` or `go`, case-insensitive, and on any `<a>`/`<button>` with an
-   empty accessible name (no text, no `aria-label`, no `img[alt]`).
-
-6. Update item 25 in `docs/compliance-log.md`.
-
-## Verify
-
-- axe `button-name`, `link-name` and `label-content-name-mismatch` show 0 violations on every page.
-- `python3 tools/check_site.py` passes, and a temp copy with `<a href="/">click here</a>` fails.
-
-## Commit
-
-`Fix #25: audit control labels and add microcopy rules`. Push to the current branch.
+## What to test
+- The Labels table row count equals the number of interactive elements Playwright counts across all pages.
+- The seeded vague link fails the checker.

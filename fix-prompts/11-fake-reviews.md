@@ -1,92 +1,72 @@
-# Prompt 11: Remove fake reviews (and keep it that way)
+# Prompt 11: Remove fake reviews
 
-Phase 2 (after 12). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+The FTC Rule on Consumer Reviews and Testimonials (16 CFR 465) allows civil penalties for fake or misrepresented reviews and testimonials, undisclosed insider reviews, and suppressing negative reviews. The FTC Endorsement Guides (16 CFR 255) require disclosure of material connections: family, friends, free or discounted work. NY GBL §349 also applies.
 
----
+The initial audit found no reviews, ratings, testimonials or aggregateRating schema. It found one case study, "Featured Showcase" (public/index.html:98-116). The case study names Grisha.studio, links to it, states specific facts ("secured his preferred domain", "created his Instagram page"), and presents the relationship as an ordinary client engagement.
+</context>
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/business-facts.md`, `docs/compliance-log.md` and
-`docs/legal-compliance.md`.
+<inputs>
+docs/business-facts.md, docs/claims-register.md, docs/third-parties.md, docs/compliance-log.md, public/
+</inputs>
 
-## Goal
+<deliverables>
+1. A scan result for public/, covering quotes, testimonials, ratings, ★ or ⭐ characters, "clients say", "trusted by", client logos, client counts, and review schema, recorded in docs/testimonials-policy.md.
+2. The case study updated according to the owner's answers:
+   - inaccurate facts corrected;
+   - if there's no permission to name the client: the name and link removed and the client described as "a local artist" (or the section removed, if the owner prefers), with ALLOWED_LINK_ORIGINS and docs/third-parties.md updated;
+   - if there's a personal connection or free or discounted work: a disclosure in the same .meta line as the client name.
+3. docs/testimonials-policy.md: rules for future endorsements, each citing the FTC source URL, covering:
+   - real customers only, quoted verbatim;
+   - written permission stored outside the repo;
+   - a date on each quote;
+   - disclosed incentives and relationships;
+   - no written, bought or AI-generated reviews;
+   - no suppression of negative reviews;
+   - rating schema only for genuine reviews shown on the page.
+4. A check named testimonial-source in tools/check_site.py: any <blockquote>, or any element whose class contains "testimonial" or "review", must have a data-source attribute. Confirm that no-review-schema catches nested aggregateRating and Review.
+5. The owner's answers recorded in docs/business-facts.md, and item 11 updated in docs/compliance-log.md.
+6. One commit, "Fix #11: verify case study and add testimonial rules", pushed.
+7. A final message of at most 6 bullets.
+</deliverables>
 
-Confirm the site shows no fake, unverifiable or undisclosed endorsements. Make sure the one
-case study is accurate, permitted, and discloses any connection. Set rules and a guard for any
-testimonial added later.
+<examples>
+<example index="1">Grisha.studio (opens in a new tab) - Local Artist</example>
+<example index="2">Grisha.studio (opens in a new tab) - Local Artist (a friend of the founder; our first project, at a reduced rate)</example>
+<example index="3">A local artist - New website build and social presence</example>
+</examples>
 
-## Why
+<constraints>
+- Ask the owner in one AskUserQuestion call, after showing them the case-study paragraph:
+  - whether it was a real engagement with accurate facts;
+  - whether the client gave permission to be named (written is preferred);
+  - whether there's a personal connection or the work was free or discounted.
+- Add no testimonials to fill the space.
+- Leave contacting the client to the owner.
+</constraints>
 
-The FTC's Rule on the Use of Consumer Reviews and Testimonials (16 CFR Part 465, in force since
-October 2024) allows civil penalties for fake or misrepresented reviews and testimonials,
-undisclosed insider reviews, and suppressing negative reviews. The FTC Endorsement Guides
-(16 CFR Part 255) require disclosure of material connections (family, friends, free or
-discounted work). NY GBL §349/§350 applies too.
+<acceptance_criteria>
+- The checker exits 0.
+- A temporary copy of public/ with a <blockquote> lacking data-source makes testimonial-source fail.
+- If the case study changed, / renders without layout breaks at 375px and 1280px.
+</acceptance_criteria>
 
-Audit result: the site has **no** reviews, star ratings, testimonials, or `aggregateRating`
-schema. It has one case study, the "Featured Showcase" of Grisha.studio
-(`public/index.html:98-116`). That's the business describing its own work, not a customer
-review. But it names a real person's business and makes specific claims ("secured his preferred
-domain", "created his Instagram page"), and it presents the relationship as an ordinary client
-engagement.
+<if_uncertain>
+If the owner can't confirm permission, anonymise the case study (example 3) and list getting permission as an owner action.
+</if_uncertain>
 
-## Task
+<task>
+Correct or remove any endorsement on the Tech-Savvies site that is not genuine, permitted and disclosed, and add rules and a check that keep it that way.
+</task>
+````
 
-1. **Re-scan** all of `public/` for reviews, testimonials, quotes, ratings, star characters
-   (★, ⭐), "clients say", "trusted by", logos of other businesses, client counts ("100+ happy
-   clients") and review schema. Record what you find (expected: nothing besides the case study).
+## Assumptions
+- Prompts 00, 08 and 12 have run.
 
-2. **Verify the case study with the owner** (`AskUserQuestion`, skipping anything already in
-   `docs/business-facts.md`):
-   - Was Grisha.studio a real client engagement, and are all the stated facts accurate? (Show the
-     owner the paragraph from `public/index.html`.)
-   - Do you have the client's permission, ideally in writing, to name and link them?
-   - Is there a personal connection (family, friend) or was the work free or discounted?
+## Parameters
+- Reasoning effort: medium.
 
-   Apply the answers:
-   - **Not accurate:** correct the text to what actually happened.
-   - **No permission:** tell the owner to get it. Until they do, anonymise the case study ("a
-     local artist") and remove the name and link, or remove the section if the owner prefers.
-     Update `ALLOWED_LINK_ORIGINS` in `tools/check_site.py` and `docs/third-parties.md` if the
-     link goes.
-   - **Connection or free work:** add a short, clear disclosure right next to the client name,
-     in the same `.meta` line, not a footnote. For example: "— Local Artist (a friend of the
-     founder; our first project, done at a reduced rate)". Use the owner's facts.
-
-3. **Write `docs/testimonials-policy.md`**. Rules for any future testimonial or review:
-   - real customers only, quoted verbatim (trimming for length is fine as long as the meaning is
-     kept);
-   - written permission stored off-repo;
-   - dated;
-   - disclose any incentive, discount or relationship;
-   - never write, buy or AI-generate reviews;
-   - never cherry-pick by hiding negative reviews that exist elsewhere;
-   - star ratings or `aggregateRating` schema only if the reviews are shown on the page and come
-     from a verifiable source.
-
-   Cite the FTC rule and guides with URLs verified via `WebFetch`.
-
-4. **Guard.** Extend `tools/check_site.py`:
-   - `no-review-schema` already exists. Confirm it catches `aggregateRating` and `Review` in
-     nested JSON-LD.
-   - Add a `testimonial-source` check. Any element with `class` containing `testimonial` or
-     `review`, or any `<blockquote>`, must have a `data-source` attribute saying where the quote
-     came from, for example `data-source="email 2026-05-02, permission on file"`.
-
-5. Update item 11 in `docs/compliance-log.md`, and record the case-study answers in
-   `docs/business-facts.md`.
-
-## Constraints
-
-- Don't add testimonials to "replace" anything.
-- Don't contact the client yourself. That's the owner's job.
-
-## Verify
-
-- `python3 tools/check_site.py` passes. A temp copy with `<blockquote>` and no `data-source`
-  fails.
-- If the showcase text changed: Playwright screenshots of `/` at 375px and 1280px.
-
-## Commit
-
-`Fix #11: verify case study and add testimonial rules and guards`. Push to the current branch.
+## What to test
+- Run 3 times with the owner answering (a) permission and no connection, (b) permission and a friend, (c) no permission. The page should match examples 1, 2 and 3 respectively.
+- Check that the outbound-link allowlist changes in case (c).

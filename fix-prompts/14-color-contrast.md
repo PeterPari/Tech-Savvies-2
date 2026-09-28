@@ -1,96 +1,71 @@
 # Prompt 14: Check and fix color contrast
 
-Phase 5 (after 13). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+WCAG requirements that apply:
+- 1.4.3: 4.5:1 for body text, 3:1 for large text;
+- 1.4.11: 3:1 for UI boundaries and focus indicators;
+- 1.4.1: color can't be the only signal.
 
----
-
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/compliance-log.md` and `docs/accessibility-audit.md`.
-
-## Goal
-
-Every text, icon, link and control on every page should meet WCAG 2.2 AA contrast, and stay
-usable in Windows forced-colors (high contrast) mode. Record the measured ratios.
-
-## Why
-
-WCAG 1.4.3 requires 4.5:1 for body text (3:1 for large text), 1.4.11 requires 3:1 for UI
-component boundaries and focus indicators, and 1.4.1 says color can't be the only way to tell
-things apart. Ratios measured in the audit from the tokens in `public/assets/css/styles.css`
-`:root`:
+Ratios measured from the :root tokens in public/assets/css/styles.css:
 
 | Pair | Ratio | Needs |
 |------|-------|-------|
-| `--text` #e8eef7 on `--bg` #0f1419 | 15.87 | 4.5 ✅ |
-| `--muted` #94a3b8 on `--bg` | 7.22 | 4.5 ✅ |
-| `--accent` #10b981 on `--bg` | 7.30 | 4.5 ✅ |
-| `--bg` on `--accent` (button text) | 7.30 | 4.5 ✅ |
-| `--bg` on `--accent-hover` #34d399 | 9.63 | 4.5 ✅ |
-| placeholder #8391a5 on `--field-bg` #131a20 | 5.48 | 4.5 ✅ |
-| `--field-border` #64748b on `--field-bg` | 3.69 | 3.0 ✅ |
-| `--error` #f87171 on `--bg` | 6.69 | 4.5 ✅ |
-| **`--accent` link vs `--text` body** | **2.17** | 3.0 ❌ if the link has no underline |
-| **`--accent` link vs `--muted` body** | **1.01** | 3.0 ❌ if the link has no underline |
+| --text #e8eef7 on --bg #0f1419 | 15.87 | 4.5 |
+| --muted #94a3b8 on --bg | 7.22 | 4.5 |
+| --accent #10b981 on --bg | 7.30 | 4.5 |
+| --bg on --accent (button text) | 7.30 | 4.5 |
+| --bg on --accent-hover #34d399 | 9.63 | 4.5 |
+| placeholder #8391a5 on --field-bg #131a20 | 5.48 | 4.5 |
+| --field-border #64748b on --field-bg | 3.69 | 3.0 |
+| --error #f87171 on --bg | 6.69 | 4.5 |
+| --accent link vs --text body | 2.17 | 3.0, or an underline |
+| --accent link vs --muted body | 1.01 | 3.0, or an underline |
 
-The tokens pass. The problems are:
-1. **In-sentence links without underline.** `.lead a` and `.meta a` are underlined, but the Our
-   Story "Contact Peter: info@tech-savvies.com" link (`public/our-story/index.html:58`,
-   `.story-contact`) is color-only. Check links inside `.body-muted`, `.story`, `.contact-info`,
-   the new `.prose` pages, `.form-note`, and the contact info block from Prompt 16.
-2. **Forced-colors mode.** `.btn` is drawn with a background color and no border. In Windows
-   High Contrast the background is removed, so the button becomes plain text with no visible
-   boundary. Check the `.input:focus` box-shadow too, since box-shadows are removed in forced
-   colors; the transparent outline on `.input` already covers that case.
-3. **Error state.** Invalid fields are shown by a red border only (`.input:user-invalid`).
-   Prompt 15 adds text error messages, which fixes this. Make sure the error text color passes on
-   the form background.
+Known failures:
+1. The .story-contact link on /our-story/ (public/our-story/index.html:58) sits in running text with no underline. .lead a and .meta a are already underlined.
+2. .btn has a background and no border, so in forced-colors mode it loses its boundary. .input:focus uses a box-shadow, which forced colors removes; the transparent outline on .input covers that case.
 
-## Task
+Prompt 15 adds text error messages, which fixes the color-only invalid-field border.
+</context>
 
-1. **Measure everything,** with no guessing. Write a small script in your scratchpad (Node or
-   Python) that computes WCAG contrast for every color pair, including rgba colors composited
-   over their real background (for example `rgba(15,20,25,.88)` for the header, and the
-   `rgba(255,255,255,.1)` lines if they separate anything interactive). Also run axe-core's
-   `color-contrast` and `link-in-text-block` rules on every page at 375px and 1280px with
-   Playwright: install axe-core in your scratchpad, not the repo. Include hover, focus,
-   `aria-current`, disabled ("Sending…" at `opacity: .75`; disabled controls are exempt, but note
-   the ratio) and `::selection` states.
+<inputs>
+docs/accessibility-audit.md, docs/compliance-log.md, public/assets/css/styles.css, public/
+</inputs>
 
-2. **Fix in-text links.** Add underline styling for links inside running text. Either extend the
-   `.lead a` rule into a shared selector (for example
-   `.lead a, .story-contact a, .prose a, .form-note a, .body-muted a`), or add a small `.link`
-   utility. Keep the existing look: underline in `rgba(16,185,129,.5)`, solid on hover. Don't
-   underline nav, footer lists, buttons or the `.contact-email` feature link, since those aren't
-   inside sentences.
+<deliverables>
+1. A "Contrast" section in docs/accessibility-audit.md: a ratio table for every foreground/background pair in use (rgba colors composited over their real background, including the rgba(15,20,25,.88) header), covering hover, focus, aria-current, disabled (opacity .75; exempt but recorded), ::selection, and elements added by later prompts (.prose, .form-note, .field-error if present); plus axe results.
+2. In-sentence links underlined with the .lead a treatment, via a shared selector or a .link utility, covering .story-contact, .prose, .form-note, .body-muted and the /contact/ info block. Nav links, footer lists, buttons and .contact-email stay unchanged.
+3. An @media (forced-colors: active) block: .btn keeps a visible border, .nav-link[aria-current] keeps its underline, and focus outlines stay visible.
+4. A comment above :root: "All color pairs meet WCAG AA; ratios in docs/accessibility-audit.md. Re-check when changing a token."
+5. Item 14 updated in docs/compliance-log.md.
+6. One commit, "Fix #14: underline in-text links, support forced colors, record contrast ratios", pushed.
+7. A final message of at most 5 bullets.
+</deliverables>
 
-3. **Forced colors.** Add a `@media (forced-colors: active)` block: `.btn { border: 1px solid
-   ButtonText; }` (or `border: 1px solid transparent` on `.btn` by default, which forced colors
-   turn visible). Make sure `.nav-link[aria-current]` keeps its underline, the skip link is
-   visible, and focus outlines use `Highlight`. Test with Playwright:
-   `page.emulateMedia({ forcedColors: 'active' })` and screenshots.
+<constraints>
+- Keep every color token unchanged. They already pass.
+- Install axe-core in a scratch directory outside the repo.
+</constraints>
 
-4. **Error text contrast.** Once Prompt 15 has added error messages, confirm they pass on their
-   background. If Prompt 15 hasn't run yet, note it in the audit doc.
+<acceptance_criteria>
+- The checker exits 0.
+- axe color-contrast and link-in-text-block report 0 violations on every page at 375px and 1280px.
+- In forced-colors emulation, the home page, contact form and open mobile menu show button boundaries and focus outlines.
+</acceptance_criteria>
 
-5. **Record** the full ratio table and the axe results in `docs/accessibility-audit.md`
-   (Contrast section). Add a comment above `:root` in `styles.css`: "All color pairs meet WCAG AA;
-   ratios in docs/accessibility-audit.md. Re-check when changing a token."
+<task>
+Make every text, link, control and focus indicator on every page meet WCAG 2.2 AA contrast and remain visible in forced-colors mode.
+</task>
+````
 
-6. Update item 14 in `docs/compliance-log.md`.
+## Assumptions
+- Prompt 13 has run. Prompt 15 may not have run yet.
 
-## Constraints
+## Parameters
+- Reasoning effort: medium.
 
-- Keep the visual design. Don't change the brand colors, since they already pass.
-
-## Verify
-
-- axe `color-contrast` and `link-in-text-block`: 0 violations on every page and viewport.
-- Forced-colors screenshots of the home page, contact form and mobile menu show visible button
-  boundaries and focus.
-- `python3 tools/check_site.py` passes.
-
-## Commit
-
-`Fix #14: underline in-text links, support forced colors, record contrast ratios`. Push to the
-current branch.
+## What to test
+- axe across all pages at both widths.
+- Forced-colors screenshots (Playwright `emulateMedia({ forcedColors: 'active' })`).
+- Confirm by pixel inspection that the /our-story/ email link has an underline.

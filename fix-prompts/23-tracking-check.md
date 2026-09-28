@@ -1,81 +1,68 @@
 # Prompt 23: Check tracking
 
-Phase 1 (after 08). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+The Privacy Policy and Cookie Policy will say whether Tech-Savvies tracks visitors, and a false statement there is a deceptive practice under FTC Act §5 and NY GBL §349.
 
----
+A Playwright probe on 2026-09-28 (all 6 pages, 375px and 1280px) measured 0 cookies, 0 localStorage/sessionStorage keys, and requests only to the site's own origin. The code contains no analytics, pixels or tag managers.
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/business-facts.md`, `docs/compliance-log.md` and
-`docs/third-parties.md`.
+Tracking can still exist outside the code:
+- Netlify Analytics: server-side, switched on in the dashboard;
+- Netlify split testing: sets an nf_ab cookie;
+- Netlify snippet injection;
+- email read receipts or open-tracking pixels in the owner's mail client.
+</context>
 
-## Goal
+<inputs>
+docs/business-facts.md, docs/compliance-log.md, docs/third-parties.md, public/
+</inputs>
 
-Prove, with evidence, whether Tech-Savvies tracks visitors or email recipients in any way.
-Write the result to `docs/tracking-audit.md` and add guards so tracking can't be added without
-a deliberate decision.
+<deliverables>
+1. docs/tracking-audit.md, containing:
+   - the method and date;
+   - a results table with one row per page × viewport, and columns for request origins, cookies, localStorage, sessionStorage, IndexedDB and service workers, including a contact-form submit (a local 501 response is expected);
+   - production results, or "production not reachable";
+   - the owner's answers about Netlify Analytics, split testing, snippet injection, email open-tracking, and plans for analytics in the next 6 months;
+   - a one-sentence conclusion the Privacy Policy can quote.
+2. A check named no-trackers in tools/check_site.py, failing on any entry in a TRACKER_SIGNATURES constant found in public/ HTML or JS. The constant covers at least: gtag, googletagmanager, google-analytics, analytics.js, fbq, connect.facebook, doubleclick, hotjar, clarity.ms, segment, mixpanel, plausible, umami, cloudflareinsights, tiktok, snap.licdn, sendBeacon, <noscript><img. Add a comment pointing to fix-prompts/05-cookie-consent.md.
+3. The owner's answers added to docs/business-facts.md, and item 23 updated in docs/compliance-log.md.
+4. One commit, "Fix #23: audit tracking and block tracker scripts", pushed.
+5. A final message of at most 8 bullets.
+</deliverables>
 
-## Why
+<examples>
+<example index="1">Conclusion when everything is clean: "Tech-Savvies doesn't use analytics, advertising or tracking tools, and this website doesn't set cookies."</example>
+<example index="2">Conclusion with Netlify Analytics on: "Tech-Savvies doesn't use advertising or tracking tools. Our host counts page visits from its server logs, without cookies."</example>
+<example index="3">Conclusion with email open-tracking on: "This website doesn't set cookies or track you. Emails we send may include a read receipt that tells us when an email is opened."</example>
+</examples>
 
-The Privacy Policy and Cookie Policy will state "we don't track you". That must be verifiably
-true, because a false privacy claim is a deceptive practice (FTC Act §5, NY GBL §349). A code
-audit found no analytics, pixels or tag managers. A 2026-09-28 Playwright probe measured 0
-cookies, 0 storage keys and only same-origin requests. Tracking can still exist outside the
-code, though:
-- **Netlify Analytics:** server-side log analysis, switched on in the dashboard, invisible in
-  the HTML.
-- **Netlify split testing:** can set an `nf_ab` cookie.
-- **Email open-tracking:** tracking pixels added by the owner's mail client or extensions
-  (Mailtrack, HubSpot, Superhuman read receipts, etc.).
+<constraints>
+- Leave analytics and tracking settings as they are. Record owner-side tracking (Netlify Analytics, email open-tracking) as an owner action, not something to change in this prompt.
+- Ask the owner only the questions docs/business-facts.md doesn't already answer, in one AskUserQuestion call.
+</constraints>
 
-## Task
+<acceptance_criteria>
+- The checker exits 0.
+- A temporary copy of public/ containing "gtag(" makes no-trackers fail.
+</acceptance_criteria>
 
-1. **Code scan.** Search `public/` for known tracker signatures, including: `gtag`,
-   `googletagmanager`, `google-analytics`, `analytics.js`, `fbq`, `connect.facebook`,
-   `doubleclick`, `hotjar`, `clarity.ms`, `segment`, `mixpanel`, `plausible`, `umami`,
-   `cloudflareinsights`, `tiktok`, `linkedin insight`, `sendBeacon`, 1×1 images, `data:image/gif`
-   beacons, and `<noscript><img`.
+<if_uncertain>
+If the owner doesn't know whether a dashboard setting is on, record "unknown: owner to check" and word the conclusion so it stays true either way.
+</if_uncertain>
 
-2. **Runtime scan.** Use Playwright (script in your scratchpad) on every page at 375px and
-   1280px. Submit the contact form locally: the Python server will return 501 on POST, which is
-   fine, because you're only watching network calls. Record requests, cookies (`context.cookies()`),
-   localStorage, sessionStorage, IndexedDB databases, and service worker registrations.
+<task>
+Establish with evidence whether Tech-Savvies tracks website visitors or email recipients, record the result in docs/tracking-audit.md, and make the checker reject tracker code.
+</task>
+````
 
-3. **Production scan.** If `https://tech-savvies.com` is reachable, fetch each page with `curl -sI`
-   and in Playwright. Look for `Set-Cookie`, for scripts Netlify injects (snippet injection,
-   analytics), and for any `nf_ab` cookie. If it isn't reachable, say so.
+## Assumptions
+- Prompt 08 has run.
+- The owner can check their Netlify dashboard and email settings.
 
-4. **Owner questions** (use `AskUserQuestion`, and skip any already answered in
-   `docs/business-facts.md`):
-   - Is Netlify Analytics enabled for this site?
-   - Is Netlify split testing or snippet injection enabled?
-   - Do you use read receipts or open-tracking in your email?
-   - Do you plan to add analytics in the next 6 months? If yes, send them to Prompt 05's
-     conditional section.
+## Parameters
+- Reasoning effort: medium.
 
-5. **Write `docs/tracking-audit.md`**: the date, method, results table (page × viewport ×
-   requests/cookies/storage), production results, owner answers, and a conclusion in one sentence
-   that the Privacy Policy can quote. Suggested wording if everything is clean: "Tech-Savvies
-   doesn't use analytics, advertising or tracking tools, and doesn't set cookies." If Netlify
-   Analytics is on, the conclusion must say so and describe it: server-side, no cookies, based on
-   request logs.
-
-6. **Extend `tools/check_site.py`.** Add a `no-trackers` check that fails on any of the
-   signatures above in HTML/JS. Keep the list in one `TRACKER_SIGNATURES` constant with a comment
-   pointing to Prompt 05 for the consent requirements before any tracker is added.
-
-7. Update item 23 in `docs/compliance-log.md`, and add the answers to `docs/business-facts.md`.
-
-## Constraints
-
-- Don't add or remove any analytics in this prompt.
-- If email open-tracking is on, don't change it yourself. Note it as an owner action, and note
-  that the Privacy Policy must disclose it or it must be turned off.
-
-## Verify
-
-- `python3 tools/check_site.py` passes; inserting `gtag(` into a temp copy makes it fail.
-
-## Commit
-
-`Fix #23: audit tracking and block tracker scripts in site checks`. Push to the current branch.
+## What to test
+- The results table covers all 6 pages at both widths, plus the form submit.
+- Run with the owner saying Netlify Analytics is "on". The conclusion should change to the example 2 pattern.
+- A seeded tracker signature makes the checker fail.

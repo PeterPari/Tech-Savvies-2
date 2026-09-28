@@ -1,91 +1,61 @@
 # Prompt 19: License fonts and images
 
-Phase 4. Paste everything below the line into a new Claude Code session opened at the
-repository root.
+````text
+<context>
+Audit findings:
+- Fonts: public/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2 and jetbrains-mono-latin-500-normal.woff2 are under SIL OFL 1.1. The full licence texts ship beside them (LICENSE-PlusJakartaSans.txt, LICENSE-JetBrainsMono.txt), and neither declares a Reserved Font Name, so the latin subsets can keep their names. The filenames follow Fontsource's naming.
+- Images: logo.png, og-image.png, icon-192.png, icon-512.png, favicon-64.png, favicon.ico and apple-touch-icon.png carry no embedded metadata, so their origin must come from the owner. og-image.png looks like the logo composed with the two OFL fonts.
+- Inline SVG icons in the HTML (menu, close, arrow "M4 10h12M11 5l5 5-5 5", external link "M5 11l6-6M6 5h5v5") and the checkmark SVG in styles.css have no recorded source. If one comes from an icon set (Heroicons, Lucide, Feather, etc.), it carries a licence notice requirement.
+- design/Tech-Savvies_Website_Mockup.pdf was printed from Chromium.
+</context>
 
----
+<inputs>
+docs/business-facts.md, docs/compliance-log.md, public/, design/
+</inputs>
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/business-facts.md` and `docs/compliance-log.md`.
+<deliverables>
+1. docs/asset-licenses.md, containing:
+   - one row per non-code asset in public/ and design/, per inline SVG shape, and per CSS data-URI image, with the columns Asset | Path(s) | Creator | Source / upstream URL | Licence | Obligations | Evidence (location of the proof, outside the repo for contracts) | Status;
+   - a section "Adding an asset" with 4 rules: a row before the asset is added; prefer self-made, OFL, CC0 or MIT; no hotlinking; keep licence files beside assets when the licence requires it.
+2. For any SVG matching an icon set: the set's notice added where its licence requires it (for example public/assets/LICENSES.md).
+3. A "Credits & licences" section in the README, of at most 5 lines, linking docs/asset-licenses.md.
+4. A check named asset-inventory in tools/check_site.py: every file in public/assets/img/, public/assets/fonts/, and the root icon files is named in docs/asset-licenses.md.
+5. The owner's answers recorded in docs/business-facts.md. Item 19 updated in docs/compliance-log.md, with any asset of unknown origin listed as an owner action.
+6. One commit, "Fix #19: document asset licences", pushed.
+7. A final message of at most 6 bullets.
+</deliverables>
 
-## Goal
+<constraints>
+- Ask the owner in AskUserQuestion calls, starting with the logo, skipping anything already in the facts:
+  - who made each image (you / designer / logo maker / Canva / AI tool / other);
+  - whether the source file exists;
+  - for designer-made images, whether a written rights transfer exists.
+- Confirm font origin and version from the Fontsource package page or upstream repository, citing the URL.
+- Leave every asset in place. Prompt 22 decides on ownership risks.
+</constraints>
 
-Record, for every font, image, icon and design file in the repo, who made it, under what
-licence it's used, and whether that licence is being followed. Put it in
-`docs/asset-licenses.md`, fix any licence gap, and make new assets impossible to add without an
-entry.
+<acceptance_criteria>
+- The checker exits 0.
+- A temporary copy of the repo with an extra public/assets/img/x.png makes asset-inventory fail.
+</acceptance_criteria>
 
-## Why
+<if_uncertain>
+Set Status to "origin unknown: owner action" for any asset the owner can't account for.
+</if_uncertain>
 
-Using a font or image outside its licence can lead to takedown demands and damages claims, and
-a web designer's own site is the first place clients and competitors look. What the audit
-found:
-- **Fonts:** `public/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2` and
-  `jetbrains-mono-latin-500-normal.woff2` are SIL Open Font License 1.1, and the full licence
-  texts ship alongside them (`LICENSE-PlusJakartaSans.txt`, `LICENSE-JetBrainsMono.txt`). That
-  satisfies OFL's requirement to distribute the licence with the font. Neither licence declares a
-  Reserved Font Name, so the latin-subset woff2 files (a "Modified Version" under OFL) can keep
-  their names. **Compliant; document it.**
-- **Images:** `logo.png`, `og-image.png`, `icon-192.png`, `icon-512.png`, `favicon-64.png`,
-  `favicon.ico` and `apple-touch-icon.png` have no embedded metadata (it was probably stripped
-  during optimisation), so their origin can't be read from the files. **Owner must supply
-  provenance.**
-- **Inline SVG icons** (menu, close, arrows, external-link) in the HTML, and the checkmark SVG in
-  `styles.css`: simple paths. Check whether they were hand-drawn or copied from an icon set
-  (Heroicons, Lucide, Feather, etc.), which would carry a licence with attribution or notice
-  terms.
-- **`design/Tech-Savvies_Website_Mockup.pdf`:** printed from Chromium; the author is presumably
-  the owner.
+<task>
+Record the creator and licence of every font, image and icon in the repo in docs/asset-licenses.md, meeting any licence obligations that are unmet.
+</task>
+````
 
-## Task
+## Assumptions
+- Prompt 00 has run.
+- The owner knows where the logo came from, or can find out.
 
-1. **Inventory:** `find public design -type f` for every non-code asset, plus every inline
-   `<svg>` and every `url(data:image/svg…)` in CSS. Compare the SVG path data against the common
-   open icon sets (search their repos with `WebFetch` if a shape looks familiar, for example the
-   arrow `M4 10h12M11 5l5 5-5 5` or the external-link `M5 11l6-6M6 5h5v5`). If one matches, note
-   the set and its licence (MIT/ISC), and add the required notice.
+## Parameters
+- Reasoning effort: medium.
 
-2. **Fonts:** confirm each woff2's origin. The filenames match Fontsource's naming, so check the
-   Fontsource package page and upstream repo with `WebFetch`. Confirm the licence files are the
-   complete OFL 1.1 text with the correct copyright lines, and that they're publicly reachable
-   next to the fonts (they are, under `public/assets/fonts/`). Record the upstream URL and
-   version if you can determine them.
-
-3. **Images:** ask the owner (`AskUserQuestion`, skipping anything already in
-   `docs/business-facts.md`), for the logo and then the other images:
-   - who made it (you / a designer / an online logo maker / Canva / an AI tool / other)?
-   - do you have the source file?
-   - if a designer made it, did they sign over the rights in writing?
-
-   Record the answers. `og-image.png` looks like it was composed from the logo plus the two OFL
-   fonts. If so, it's owner-made, and the OFL allows fonts to be used in images.
-
-4. **Write `docs/asset-licenses.md`:** a table with `Asset`, `Path(s)`, `Creator`,
-   `Source / upstream`, `Licence`, `Obligations` (for example "ship licence text", "keep
-   copyright notice"), `Evidence` (where the proof lives, off-repo if it's a contract), `Status`.
-   Add a section, "Adding an asset": no asset without a row; prefer self-made or OFL/CC0/MIT;
-   never hotlink; keep licence files next to the asset if the licence requires it.
-
-5. **Fix gaps:** add missing licence notices (for example, an icon-set MIT notice as
-   `public/assets/LICENSES.md`, or a comment near the SVG, whichever the licence requires).
-   Anything with unknown provenance becomes an owner action in `docs/compliance-log.md`, and
-   Prompt 22 digs into copyright ownership.
-
-6. **README:** add a short "Credits & licences" section linking `docs/asset-licenses.md`, and
-   keep the existing "OFL licensed" note accurate.
-
-7. **Guard.** Add an `asset-inventory` check to `tools/check_site.py`: every file under
-   `public/assets/img/`, `public/assets/fonts/` and the root icon files must be mentioned in
-   `docs/asset-licenses.md`.
-
-8. Update item 19 in `docs/compliance-log.md`.
-
-## Verify
-
-- `python3 tools/check_site.py` passes. Adding a dummy `public/assets/img/x.png` to a temp copy
-  fails the inventory check.
-
-## Commit
-
-`Fix #19: document asset licences and require an entry for new assets`. Push to the current
-branch.
+## What to test
+- Every file under `public/assets/img` and `public/assets/fonts` has a row.
+- Compare at least one SVG path against Heroicons and Lucide sources, and check the recorded conclusion.
+- A seeded extra image fails the checker.

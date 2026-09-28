@@ -1,94 +1,68 @@
-# Prompt 05: Cookie consent (verify, guard, and conditional banner)
+# Prompt 05: Cookie consent (decide, guard, conditional banner)
 
-Phase 1 (after 23). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+Consent laws (EU ePrivacy/GDPR, UK PECR, US state opt-out laws) are triggered by non-essential cookies, device storage or tracking. docs/tracking-audit.md records 0 cookies, 0 browser storage and no third-party requests.
 
----
+A banner on this site would ask for consent to nothing, which misleads. It would also add a keyboard and screen-reader obstacle to every first visit, and it would need a cookie of its own to remember the choice. The planned outcome is therefore: no banner, a recorded decision, and a guard. Branch B below applies only when a non-essential cookie or tracker exists, or the owner explicitly asks for analytics.
+</context>
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 (especially Decision 1) and §4, then `docs/business-facts.md`,
-`docs/compliance-log.md`, `docs/tracking-audit.md` and `docs/third-parties.md`.
+<inputs>
+docs/tracking-audit.md, docs/third-parties.md, docs/business-facts.md, docs/compliance-log.md, public/assets/js/main.js
+</inputs>
 
-## Goal
+<branch_a>
+Applies when there are no non-essential cookies, storage or trackers.
+1. A "Cookie consent" section in docs/tracking-audit.md recording the decision, the evidence and the date.
+2. A check named consent-required in tools/check_site.py that fails when both are true:
+   - any page has a <script src> other than /assets/js/main.js, or inline or linked JS that uses cookies, Web Storage or a TRACKER_SIGNATURES entry;
+   - no element has data-consent-banner.
+   The failure message is "Non-essential storage or tracking added without consent. See fix-prompts/05-cookie-consent.md". The check must pass on the current main.js.
+3. One line in the README "Checks" section: "Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first."
+</branch_a>
 
-Decide, based on evidence, whether the site needs a cookie consent banner. Today the expected
-answer is **no**. Record that decision, make it enforceable, and leave an exact spec for the day
-the answer changes.
+<branch_b>
+Applies when a non-essential cookie or tracker exists, or the owner explicitly asks for analytics. First offer a cookieless server-side option, such as Netlify Analytics, which needs disclosure but no banner. Build a banner only if the owner still chooses a cookie-based tool. The banner must meet all of the following:
+- The tracker loads only after "Accept analytics". Nothing is preloaded, and the tracker origin is added to the CSP and EXPECTED_CSP.
+- "Accept analytics" and "Reject analytics" are the same size and style, in the same row. A "Cookie settings" link goes to /cookies/. No pre-ticked options, and no "by continuing you agree".
+- navigator.globalPrivacyControl === true counts as Reject, and the banner isn't shown.
+- The choice is stored in one first-party cookie, ts_consent (6 months, SameSite=Lax, Secure), listed on /cookies/.
+- A "Cookie settings" link in every footer reopens the choice.
+- The banner is a non-modal <section role="region" aria-label="Cookie choices" data-consent-banner> at the end of <body>. It doesn't trap focus. While it's shown, body gets bottom padding so it never covers focused content. It uses existing .btn styles and meets AA contrast.
+- With JavaScript off, no tracker loads.
+- /cookies/, /privacy/, docs/third-parties.md and docs/tracking-audit.md are updated in the same commit.
+</branch_b>
 
-## Why
+<deliverables>
+1. The branch A or branch B output.
+2. Item 5 updated in docs/compliance-log.md, naming the branch taken and the evidence.
+3. One commit, "Fix #05: record cookie consent decision and guard against unconsented tracking" (branch A) or "Fix #05: add analytics consent banner" (branch B), pushed.
+4. A final message of at most 6 bullets.
+</deliverables>
 
-Consent laws (the EU ePrivacy Directive and GDPR, UK PECR, and US state opt-out regimes) are
-triggered by **non-essential** cookies, device storage or tracking. Tech-Savvies sets 0 cookies,
-stores nothing in the browser, and loads nothing from other origins (measured 2026-09-28; see
-`docs/tracking-audit.md`).
+<constraints>
+- In branch A, leave all page markup unchanged.
+- If docs/tracking-audit.md is older than the latest commit touching public/, re-measure cookies and storage before deciding, and update the audit.
+</constraints>
 
-A banner here would:
-- ask for consent to nothing, which is misleading in its own right;
-- train visitors to click "Accept" without reading, which regulators criticise;
-- add a keyboard and screen-reader obstacle to every first visit;
-- need JavaScript and storage to remember the choice, which itself adds a cookie.
+<acceptance_criteria>
+- The checker exits 0.
+- Branch A: a temporary copy of public/ with <script>document.cookie="x=1"</script> makes consent-required fail.
+- Branch B: with JavaScript on and before any choice, the page makes no tracker request; with GPC on, no tracker request ever.
+</acceptance_criteria>
 
-The right fix is to confirm, document, and guard. Build a banner only if a non-essential
-cookie or tracker actually exists or is being added.
+<task>
+Decide from the tracking evidence whether the site needs cookie consent, and implement the matching branch.
+</task>
+````
 
-## Task
+## Assumptions
+- Prompts 08 and 23 have run.
+- The expected result is branch A.
 
-1. **Re-verify.** Read `docs/tracking-audit.md`. If it's older than the latest change in
-   `public/`, re-run its cookie and storage probe with Playwright (script in your scratchpad).
-   Also verify that Netlify's own platform sets no cookies on this site in production, if
-   reachable.
+## Parameters
+- Reasoning effort: medium.
 
-2. **Branch on the result.**
-
-   **A. No non-essential cookies, storage or trackers (expected).**
-   - Don't add a banner.
-   - Add a `## Cookie consent` section to `docs/tracking-audit.md` that records the decision,
-     the evidence, and the date.
-   - Extend `tools/check_site.py` with a `consent-required` check. If any page contains a
-     `<script>` with `src`, or inline JS containing `cookie`, `Storage`, or a tracker signature,
-     and the site has no `data-consent-banner` element, fail with the message: "Non-essential
-     storage or tracking added without a consent mechanism. See fix-prompts/05-cookie-consent.md
-     §B." Make sure this doesn't trip on `main.js` as it is today.
-   - Add a line to the README "Checks" section: "Adding analytics or any cookie? Read
-     `fix-prompts/05-cookie-consent.md` first."
-
-   **B. A non-essential cookie or tracker exists, or the owner explicitly asks for analytics.**
-   First recommend a cookieless, server-side option such as Netlify Analytics, which needs
-   disclosure but usually no banner. Build a banner only if the owner still chooses a
-   cookie-based tool. The banner must meet all of these requirements:
-   - Nothing non-essential loads before consent. The tracker script is injected by JS only after
-     "Accept". Nothing is preloaded, and the tracker's origin is added to the CSP.
-   - The first layer shows **"Accept analytics"** and **"Reject analytics"** as equally
-     prominent buttons: same size, same style, same row. There is a "Cookie settings" link to
-     `/cookies/`. No pre-ticked options, no "by continuing to browse you agree".
-   - A Global Privacy Control signal (`navigator.globalPrivacyControl === true`) counts as Reject
-     and skips the banner.
-   - The choice is stored in one first-party, strictly necessary cookie (`ts_consent`, 6 months,
-     `SameSite=Lax; Secure`) and listed in the Cookie Policy.
-   - A persistent "Cookie settings" link in every page footer reopens the choice. Withdrawing
-     must be as easy as giving consent.
-   - Accessibility: a non-modal `<section role="region" aria-label="Cookie choices"
-     data-consent-banner>` at the end of `<body>`. It doesn't trap focus, doesn't cover focused
-     content (WCAG 2.4.11; add bottom padding to `body` while it's shown), is reachable by
-     keyboard, has visible focus, and meets AA contrast. It uses existing `.btn` styles and design
-     tokens.
-   - Works with the site's no-JS baseline: without JS, no tracker ever loads.
-   - Update `/cookies/`, `/privacy/`, `docs/third-parties.md`, `EXPECTED_CSP`, and
-     `docs/tracking-audit.md`.
-
-3. Update item 5 in `docs/compliance-log.md` with the branch taken and the evidence.
-
-## Constraints
-
-- In branch A, change no page markup.
-- Don't add a banner "just in case". The owner has to ask for analytics explicitly for branch B.
-
-## Verify
-
-- `python3 tools/check_site.py` passes. Adding `<script>document.cookie="x=1"</script>` to a temp
-  copy makes `consent-required` fail.
-
-## Commit
-
-Branch A: `Fix #05: confirm no cookie banner is needed and guard against unconsented tracking`.
-Push to the current branch.
+## What to test
+- Branch A on the current site: no markup changes, and the seeded cookie write fails the checker.
+- Tell the session "the owner wants Google Analytics" and confirm it offers the cookieless option before building branch B.

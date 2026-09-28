@@ -1,70 +1,57 @@
 # Prompt 04: Cookie policy
 
-Phase 3 (after 01). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+docs/tracking-audit.md records 0 cookies and 0 browser storage, and its "Cookie consent" section records the no-banner decision. Visitors expect a cookie policy. Its content must match what the audit found, so a generic list of "analytics and advertising cookies" would be false. If a consent mechanism is ever added (Prompt 05 branch B), this page will list its cookie.
 
----
+/privacy/, the .prose styles and the footer Legal column already exist (Prompt 01).
+</context>
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 (Decision 1) and §4, then `docs/tracking-audit.md` (including its
-"Cookie consent" section), `docs/third-parties.md`, `docs/business-facts.md` and
-`docs/compliance-log.md`. `/privacy/` and the `.prose` styles must already exist (Prompt 01).
+<inputs>
+docs/tracking-audit.md, docs/third-parties.md, docs/business-facts.md, docs/compliance-log.md, public/privacy/index.html (template)
+</inputs>
 
-## Goal
+<deliverables>
+1. public/cookies/index.html, built from the /privacy/ template:
+   - title "Cookie Policy | Tech-Savvies", a unique description, canonical https://tech-savvies.com/cookies/, and og tags;
+   - body: h1 "Cookie Policy", "Last updated <time>", and article.prose with these sections:
+     - the short version: the audit conclusion, quoted;
+     - what cookies are: at most 3 sentences;
+     - how we checked: the test date and the fact that the site's automated checks run on every change;
+     - other websites: linked sites have their own policies;
+     - if this changes: we'll update this page first and ask permission before any cookie that isn't strictly necessary;
+     - controlling cookies in your browser: settings described in words;
+     - contact, with a link to /privacy/.
+   The whole page is at most 400 words. Include a cookie table only if Prompt 05 took branch B.
+2. "Cookie Policy" added to the footer Legal column after "Privacy Policy" on every HTML page.
+3. A "Read our Cookie Policy" link added to /privacy/#cookies.
+4. /cookies/ added to the sitemap, the README pages table, and REQUIRED_FOOTER_LINKS. Item 4 updated in docs/compliance-log.md.
+5. One commit, "Fix #04: add cookie policy", pushed.
+6. A final message of at most 5 bullets.
+</deliverables>
 
-Publish `/cookies/`, a short, honest Cookie Policy. Today it will mostly say "we don't use
-cookies", and that's the point: it tells visitors and regulators clearly, with a date and an
-explanation of how it was checked.
+<constraints>
+- Describe browser settings in words rather than linking to browser help pages, so ALLOWED_LINK_ORIGINS stays unchanged.
+- If docs/tracking-audit.md says Netlify Analytics is on, state that it counts visits from server logs without cookies.
+</constraints>
 
-## Why
+<acceptance_criteria>
+- The checker exits 0.
+- /cookies/ renders without overflow at 375px and 1280px, and focus is visible on every link.
+</acceptance_criteria>
 
-Visitors look for a cookie policy, and a missing one reads as "they're hiding something". Its
-content must match reality, and the audit (`docs/tracking-audit.md`) measured 0 cookies and 0
-browser storage. A generic cookie policy listing "analytics and advertising cookies" would be
-false and deceptive. A dedicated page also gives Prompt 05 branch B a ready home if a consent
-mechanism is ever added.
+<task>
+Publish /cookies/, a cookie policy that states what cookies and storage Tech-Savvies actually uses, and link it from every footer and from the Privacy Policy.
+</task>
+````
 
-## Content
+## Assumptions
+- Prompts 05 (branch A) and 01 have run.
 
-1. `h1` "Cookie Policy", `p.meta` "Last updated" with `<time>`.
-2. **The short version:** "Tech-Savvies doesn't use cookies or similar technologies (like local
-   storage or tracking pixels) on this website." Use the exact conclusion from
-   `docs/tracking-audit.md`. If Netlify Analytics is on, add that it counts visits from server
-   logs without cookies.
-3. **What cookies are:** 2–3 plain sentences.
-4. **How we checked:** "We tested every page on <date> in a standard browser and found no
-   cookies or stored data. We re-check whenever the site changes." (This is true because of the
-   `tools/check_site.py` guards; say so simply.)
-5. **Other websites:** the site links to other sites (for example, the showcase link); they have
-   their own cookie policies.
-6. **If this changes:** "If we ever add a tool that uses cookies, we'll update this page first
-   and ask for your permission before setting any cookie that isn't strictly necessary."
-7. **Controlling cookies:** link to browser help pages (Chrome, Safari, Firefox, Edge). Verify
-   the URLs with `WebFetch`. These are outbound links, so add their origins to
-   `ALLOWED_LINK_ORIGINS` in `tools/check_site.py` and to `docs/third-parties.md` (links only,
-   no data shared). If you'd rather avoid growing the allowlist, describe the setting in words
-   instead of linking.
-8. **Contact:** email, plus a link to `/privacy/`.
+## Parameters
+- Reasoning effort: low. The content is small and fully determined by the audit.
 
-Add an empty-state table only if branch B of Prompt 05 has been taken. Otherwise, don't show a
-table of zero cookies.
-
-## Build
-
-1. `public/privacy/index.html` is the template (header, footer, `.prose`). Give the new page a
-   unique title, description, canonical `https://tech-savvies.com/cookies/`, and `og:` tags.
-2. **Footer, every HTML page:** add "Cookie Policy" to the Legal column after "Privacy Policy".
-   Confirm with `grep -L`.
-3. **Privacy Policy `#cookies` section:** add a link, "Read our Cookie Policy".
-4. Add `/cookies/` to `public/sitemap.xml`, the README pages table, and `REQUIRED_FOOTER_LINKS`.
-5. Update item 4 in `docs/compliance-log.md`.
-
-## Verify
-
-- `python3 tools/check_site.py` passes.
-- Playwright screenshot at 375px and 1280px. A keyboard tab-through shows visible focus on
-  every link.
-
-## Commit
-
-`Fix #04: add cookie policy`. Push to the current branch.
+## What to test
+- The page is at most 400 words and contains no cookie table.
+- Its first statement matches the conclusion in `docs/tracking-audit.md` word for word.
+- `grep -L 'href="/cookies/"'` over `public/**/*.html` returns nothing.

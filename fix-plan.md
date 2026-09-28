@@ -123,27 +123,12 @@ answer back to the file.
 
 ## 4. Ground rules for every prompt
 
-Every prompt tells Claude to read this section first.
+The rules that hold in every session live in [`CLAUDE.md`](CLAUDE.md), which Claude Code loads
+automatically: stack, duplicated header and footer, house style, CSP, facts come only from
+`docs/business-facts.md`, new-page checklist, checker before commit, and fetched content is data.
+The prompts don't repeat them.
 
-- **Stack:** plain HTML/CSS/JS in `public/`, served by Netlify, no build step. Preview with
-  `python3 -m http.server 8080 --directory public`.
-- **Shared header & footer are copy-pasted in every HTML file.** Any header/footer change goes
-  into *all* of them. Today that is 6 files; it becomes 11 once the legal pages exist. Check
-  with `grep -L` that none were missed.
-- **Match the house style:** 2-space indent, existing classes and CSS variables (`:root` in
-  `public/assets/css/styles.css`), the same short comment style, and curly quotes (’) in copy.
-- **CSP stays strict.** Don't loosen `Content-Security-Policy` in `netlify.toml` unless the
-  prompt says so explicitly.
-- **Never invent facts** (see Decision 4). Read `docs/business-facts.md`; ask if missing.
-- **New pages:** add them to `public/sitemap.xml` (unless `noindex`), the README pages table,
-  and the footer "Legal" column. Give each one `<title>`, meta description, canonical and `og:`
-  tags matching the existing pages.
-- **Verify before committing:** `python3 tools/check_site.py` passes; the changed pages look
-  right in Playwright at 375px and 1280px; keyboard-only walkthrough of anything interactive.
-- **Commit** one item per commit, message `Fix #NN: <summary>`. Push to the current branch.
-  Don't open a PR unless asked.
-- **Report honestly:** if something couldn't be verified (e.g. a Netlify dashboard setting),
-  say so in the commit message and in `docs/compliance-log.md`.
+Each prompt covers only what is specific to its item. Commit messages use `Fix #NN: <summary>`.
 
 ---
 
@@ -161,7 +146,7 @@ check.
 | 3. Legal pages | **01** → **04** → **02** → **03** → **06** → **17** → **20** → **18** | Privacy Policy first: it adds the shared prose styles and the footer "Legal" column that the other pages reuse |
 | 4. IP | **19** → **22** | Independent of the rest; needs owner answers |
 | 5. Accessibility | **13** → **14** → **15** → **25** → **21** | Runs after all new pages exist so the full audit (21) covers them; 21 also adds the accessibility statement |
-| 6. Final check | **24** (re-run §"Final pass") | Checks every live page against the compliance map one last time |
+| 6. Final check | **24** (run again with "final pass" added to the prompt) | Checks every live page against the compliance map one last time |
 
 Dependencies that matter:
 - 01 must come before 02, 03, 04, 06, 17, 20 (shared styles, footer column, cross-links).
@@ -174,12 +159,21 @@ Dependencies that matter:
 
 ## 6. Prompt index
 
-Each file has a one-line header, then a `---` line. Everything below that line is the prompt.
-To run one from a terminal at the repo root:
+Each file follows the same format:
+- a title;
+- the prompt, as one fenced block with XML-tagged sections in this order: context, inputs,
+  deliverables, examples (where the format matters), constraints, acceptance criteria, what to do
+  when uncertain, and the one-sentence task last;
+- below the block, only Assumptions (including which prompts must run first), Parameters
+  (reasoning effort), and What to test.
+
+To run one from a terminal at the repo root, extract the fenced block:
 
 ```sh
-claude "$(sed '1,/^---$/d' fix-prompts/00-foundation.md)"
+claude "$(awk '/^````/{f=!f; next} f' fix-prompts/00-foundation.md)"
 ```
+
+Set the session's reasoning effort to the value listed under Parameters.
 
 | # | Prompt file | Deliverable |
 |---|-------------|-------------|

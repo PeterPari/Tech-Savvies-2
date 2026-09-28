@@ -1,120 +1,84 @@
 # Prompt 01: Privacy policy
 
-Phase 3, the first legal page. Paste everything below the line into a new Claude Code session
-opened at the repository root.
+````text
+<context>
+The site collects personal data in two ways: the contact form (name, email, business, service, message) and Netlify's request logs and form metadata. CalOPPA requires a conspicuously posted privacy policy for commercial sites that collect personal information from California residents. A policy that misdescribes actual practice is deceptive under FTC Act §5 and NY GBL §349.
 
----
+Generic boilerplate ("we may use cookies and share data with partners") would therefore be false here. The site sets no cookies, runs no analytics and has no ad partners, and every statement in the policy must come from the input documents.
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then these docs, which are this page's source material:
-`docs/business-facts.md`, `docs/data-inventory.md`, `docs/third-parties.md`,
-`docs/tracking-audit.md`, `docs/legal-compliance.md`, `docs/compliance-log.md`. If any of the
-first five is missing, stop and tell the user which earlier prompt to run (07, 08, 23, 24).
+This is the first legal page. It also creates two shared pieces the other legal pages reuse: .prose styles and a footer "Legal" column.
 
-## Goal
+Two CSS facts matter here:
+- The reset removes bullets only from ul[role="list"].
+- Accent link color against body text is 2.17:1, so a link inside running text needs an underline (WCAG 1.4.1). The .lead a rule already has that treatment.
+</context>
 
-Publish `/privacy/`, a plain-English privacy policy that exactly describes what Tech-Savvies
-collects, why, who processes it, how long it's kept, and how people can get it deleted. This
-prompt also builds the shared pieces the other legal pages reuse: `.prose` styles and a footer
-"Legal" column.
+<inputs>
+docs/business-facts.md, docs/data-inventory.md, docs/third-parties.md, docs/tracking-audit.md, docs/legal-compliance.md, docs/compliance-log.md, public/our-story/index.html (page template)
+</inputs>
 
-## Why
+<deliverables>
+1. public/privacy/index.html:
+   - head, header and footer copied from public/our-story/index.html;
+   - title "Privacy Policy | Tech-Savvies", a unique meta description, canonical https://tech-savvies.com/privacy/, and og tags;
+   - body structure: main#main > section.section.section--first > .container > p.eyebrow "Legal" > h1.display-md "Privacy Policy" > p.meta "Last updated <time datetime>" > article.prose.
+   Sections, each an h2 with the given id:
+   - #summary: 4–5 bullets;
+   - #what-we-collect;
+   - #how-we-use-it, including what we don't do: no sale or "sharing" in the CCPA sense, no targeted advertising, no marketing email without separate opt-in;
+   - #sharing: one entry per processor in docs/third-parties.md, each linking to its privacy policy;
+   - #cookies: the conclusion from docs/tracking-audit.md, plus one sentence on Do Not Track and Global Privacy Control;
+   - #retention;
+   - #your-rights: access, correction, deletion and marketing opt-out via a mailto link with subject "Data request", identity confirmed by replying to the address on file, the response time supported by docs/legal-compliance.md, no charge;
+   - #security: only measures confirmed in docs/business-facts.md;
+   - #children: not directed to under-13s; delete on discovery; parents can contact us;
+   - #international: legal bases and the right to complain if EU/UK clients are served; otherwise one sentence saying data is processed in the US;
+   - #changes;
+   - #contact, with legal name, dba, mailing address and email.
+2. A "Legal pages" block in public/assets/css/styles.css:
+   - .prose with max-width var(--measure);
+   - h2 and h3 spacing;
+   - paragraph and list spacing, with visible bullets;
+   - links underlined like .lead a;
+   - a table style with var(--line) borders, and a scroll wrapper (tabindex="0", role="region", aria-label) for tables wider than 320px.
+3. A fourth footer block on every HTML page, after "Contact": <nav aria-label="Legal"> containing p.eyebrow.footer-heading "Legal" and ul.footer-links[role=list] with "Privacy Policy". .footer-grid gets four columns at 48em; if they don't fit at 768px, the brand spans a full row at 48em and four columns start around 64em.
+4. /privacy/ added to public/sitemap.xml, the README pages table, and REQUIRED_FOOTER_LINKS.
+5. Item 1 updated in docs/compliance-log.md, marked "attorney review recommended".
+6. One commit, "Fix #01: add privacy policy, legal page styles and footer legal links", pushed.
+7. A final message of at most 8 bullets, listing any section left out for lack of source facts.
+</deliverables>
 
-The site collects personal data through the contact form (name, email, business, message) and
-through Netlify's request logs and form metadata. CalOPPA requires a conspicuously posted
-privacy policy for any commercial site that collects personal information from California
-residents, which includes this one. The FTC and NY GBL §349 treat a policy that misdescribes
-practices as deceptive, so it must describe **this** site, not generic "we may use cookies and
-share with partners" boilerplate. That boilerplate would be false here: there are no cookies,
-no analytics and no ad partners.
+<constraints>
+- Every factual statement comes from the input documents. Leave out any practice the inputs don't document.
+- Writing level: Flesch-Kincaid grade 8 or lower, average sentence length at most 20 words, "we" and "you". Don't write "may" for practices that never happen.
+- Publish no TODO or placeholder text. Ask the owner for any missing fact.
+- If any of data-inventory.md, third-parties.md, tracking-audit.md or legal-compliance.md is missing, stop and name the prompt that creates it (07, 08, 23, 24).
+</constraints>
 
-## Content (in this order, with `id`s for deep links)
+<acceptance_criteria>
+- The checker exits 0, including shared-chrome and required-footer-links.
+- /privacy/ and the footer render without overflow at 375px, 768px and 1280px.
+- Keyboard focus is visible on every link on the page.
+</acceptance_criteria>
 
-1. **Intro.** Who we are: legal name, "doing business as Tech-Savvies", mailing address, email.
-   Effective date in a `<time datetime="YYYY-MM-DD">`.
-2. **Summary** (`#summary`): 4–5 bullets a visitor can read in 20 seconds. For example: we only
-   collect what you send us; we use it to reply and to do your project; we don't sell it or use
-   it for ads; no cookies or tracking; email us to see or delete your data.
-3. **What we collect** (`#what-we-collect`): the contact form fields; what you send by email;
-   technical data Netlify records (take the exact list from `docs/third-parties.md`); client
-   project information (content, logins you choose to share, invoices).
-4. **How we use it** (`#how-we-use-it`): reply to enquiries; quote and deliver projects;
-   invoicing and legal or tax obligations; spam prevention. State plainly what we **don't** do,
-   using `docs/tracking-audit.md` and the owner's email answers: no marketing emails without a
-   separate opt-in, no selling or sharing for targeted advertising (use the CCPA terms "sell"
-   and "share" and say "we don't"), no profiling.
-5. **Who we share it with** (`#sharing`): one row per processor from `docs/third-parties.md`
-   (Netlify, including its spam filtering and the named third party if one exists; mailbox
-   provider; payment processor if any), with a link to each one's privacy policy. Also: legal
-   requests, and a business transfer.
-6. **Cookies and tracking** (`#cookies`): a short statement taken from the conclusion in
-   `docs/tracking-audit.md`. Include a **Do Not Track / Global Privacy Control** sentence, which
-   CalOPPA requires: we don't track visitors across sites, so these signals don't change
-   anything. Prompt 04 will add a link to `/cookies/` here.
-7. **How long we keep it** (`#retention`): straight from `docs/data-inventory.md`.
-8. **Your rights and choices** (`#your-rights`): access, correct, delete, and opt out of any
-   future marketing. How to ask: a `mailto:` link with a prefilled subject. What we need from
-   you (we reply to the email address on file to confirm it's you). Response time (use the
-   figure `docs/legal-compliance.md` supports; 30 days is a safe default). No charge. Prompt 20
-   refines this section and adds the internal runbook.
-9. **Security** (`#security`): HTTPS, limited access, strong passwords and 2FA on the accounts
-   that hold data. Only claim what the owner confirms in `docs/business-facts.md`.
-10. **Children** (`#children`): not directed to children under 13; we don't knowingly collect
-    their data; if we learn we have, we delete it; parents can contact us. Prompt 17 refines this.
-11. **Visitors outside the US** (`#international`): include only if the facts file says EU/UK
-    clients are served, with the legal bases (contract / legitimate interests / legal obligation)
-    and the right to complain to a supervisory authority. Otherwise one sentence: data is stored
-    and processed in the US.
-12. **Changes to this policy** (`#changes`), and **Contact** (`#contact`).
+<if_uncertain>
+If an input document marks a fact "unverified", word the policy so it's true either way, and list the fact in the final message.
+</if_uncertain>
 
-Writing rules: short sentences, "we" and "you", roughly grade-8 reading level, no "may" for
-things that never happen, and every fact traceable to a doc. No `TODO` or placeholder text on
-the page. If a fact is missing, ask the owner.
+<task>
+Publish /privacy/, a privacy policy that describes exactly what Tech-Savvies collects, why, who processes it, how long it's kept and how to have it deleted, together with the shared legal-page styles and footer Legal column.
+</task>
+````
 
-## Build
+## Assumptions
+- Prompts 00, 24, 08, 23, 05, 07, and Phase 2 have run.
+- An attorney will review the page before anyone relies on it.
 
-1. **`public/privacy/index.html`.** Copy the full `<head>`, header and footer pattern from
-   `public/our-story/index.html`. Give it a unique `<title>` ("Privacy Policy | Tech-Savvies"),
-   meta description, canonical `https://tech-savvies.com/privacy/`, and `og:` tags. Structure:
-   `<main id="main">` → `section.section.section--first` → `.container` → `p.eyebrow`
-   ("Legal") → `h1.display-md` ("Privacy Policy") → `p.meta` with "Last updated" → an
-   `<article class="prose">` holding h2/h3/p/ul.
+## Parameters
+- Reasoning effort: high.
 
-2. **`.prose` styles** in `public/assets/css/styles.css`, in a new `/* ---------- Legal pages
-   ---------- */` block using the existing tokens:
-   - `max-width: var(--measure)`;
-   - h2 using `--fs-h2`-like sizing with top spacing, h3 smaller;
-   - paragraph and list spacing;
-   - `ul`/`ol` restored to visible bullets (the reset only removes them for `ul[role="list"]`,
-     so don't add `role="list"` inside `.prose`);
-   - **links underlined.** Accent vs body text is only 2.17:1, so color alone fails WCAG 1.4.1.
-     Reuse the `.lead a` underline treatment;
-   - an optional `.prose table` style with borders using `var(--line)`, and horizontal scroll
-     wrapped in a focusable `div` (`tabindex="0"`, `role="region"`, `aria-label`) if a table can
-     exceed 320px.
-
-3. **Footer "Legal" column, on every HTML page.** Add a fourth footer block after "Contact":
-   `<nav aria-label="Legal">` with `p.eyebrow.footer-heading` "Legal" and
-   `ul.footer-links[role=list]` containing "Privacy Policy". Update `.footer-grid` in
-   `@media (min-width: 48em)` to four columns (`minmax(0, 1fr) auto auto auto`), and check that
-   it still fits at 768px. If it doesn't, let the brand span a full row at 48em and use four
-   columns from about 64em. Apply this to every HTML file in `public/`, and confirm with
-   `grep -L 'aria-label="Legal"' $(find public -name '*.html')` that it returns nothing.
-
-4. **Registration.** Add `/privacy/` to `public/sitemap.xml` and to the README pages table.
-   Append `/privacy/` to `REQUIRED_FOOTER_LINKS` in `tools/check_site.py`.
-
-5. Update item 1 in `docs/compliance-log.md`, and note "attorney review recommended".
-
-## Verify
-
-- `python3 tools/check_site.py` passes, including shared-chrome and required-footer-links.
-- Playwright screenshots of `/privacy/` and a footer at 375px, 768px and 1280px. Tab through
-  the page and check that focus is visible on every link.
-- Cross-check every sentence against the source docs. List in your summary any statement you
-  couldn't trace.
-
-## Commit
-
-`Fix #01: add privacy policy, legal page styles and footer legal links`. Push to the current
-branch.
+## What to test
+- Every processor in `docs/third-parties.md` appears in `#sharing`, and no others.
+- Remove `docs/tracking-audit.md` in a scratch branch. The session should stop and name Prompt 23.
+- Run a readability check (for example the textstat package in a scratch venv) and confirm grade 8 or lower.
+- Check the footer layout at 768px.

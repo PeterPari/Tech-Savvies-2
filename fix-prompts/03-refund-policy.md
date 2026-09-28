@@ -1,87 +1,62 @@
 # Prompt 03: Refund policy
 
-Phase 3 (after 02). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+Clients pay up to a few hundred dollars upfront. The site promises a completion guarantee and sells an auto-renewing monthly plan, and neither has written refund or cancellation rules. docs/legal-compliance.md covers NY GBL §218-a (refund policy posting) and §527-a (auto-renewal cancellation). The refund rules must agree with /solutions/ and /terms/.
+</context>
 
----
+<inputs>
+docs/business-facts.md, docs/legal-compliance.md, docs/ux-honesty-rules.md, docs/compliance-log.md, public/solutions/index.html, public/terms/index.html, public/privacy/index.html (template)
+</inputs>
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/business-facts.md`, `docs/legal-compliance.md`,
-`docs/ux-honesty-rules.md` and `docs/compliance-log.md`. Read `public/solutions/index.html` and
-`public/terms/index.html`; the refund rules must agree with both.
+<deliverables>
+1. public/refunds/index.html, built from the /privacy/ template:
+   - title "Refund Policy | Tech-Savvies", a unique description, canonical, og tags, "Last updated <time>";
+   - article.prose containing a summary table with one row per service (Website Launch, Website Rescue, Google & Social one-time, Monthly plan) and the columns Before work starts | During the project | After delivery. The table has a <caption>, th scope attributes, and the .prose scroll wrapper;
+   - h2 sections #before-work-starts, #during-a-project, #after-delivery, #rush-orders, #monthly-plan, #third-party-costs;
+   - #how-to-ask, with a mailto link, subject "Refund request", asking for the project name or invoice number;
+   - #timing;
+   - #if-we-miss-a-promise, covering how the completion guarantee and missed rush deadlines are honoured;
+   - #chargebacks: at most 2 sentences asking the client to contact us first, with a response time;
+   - #contact.
+2. On /terms/, refund mentions link to /refunds/, with any conflicting wording removed. On /solutions/, a "Refund Policy" link next to the Terms link in the Payment block.
+3. "Refund Policy" after "Terms of Service" in the footer Legal column on every HTML page.
+4. /refunds/ added to the sitemap, the README, and REQUIRED_FOOTER_LINKS. The final rules recorded in docs/business-facts.md. Item 3 updated in docs/compliance-log.md and flagged for attorney review.
+5. One commit, "Fix #03: add refund and cancellation policy", pushed.
+6. A final message of at most 6 bullets.
+</deliverables>
 
-## Goal
+<constraints>
+- Take the rules from docs/business-facts.md. For gaps, ask the owner in AskUserQuestion calls, with the recommended option listed first:
+  - cancel before work starts: full deposit refund (recommended) / deposit non-refundable / refund minus a fixed admin amount;
+  - cancel mid-project: pay for work done, refund the rest (recommended) / no refund;
+  - after delivery: free bug fixes within N days, no refund (recommended) / satisfaction refund within N days;
+  - rush fee: refunded if the deadline is missed (recommended) / non-refundable;
+  - monthly plan: cancel any time, effective at the end of the paid month, no partial refund (recommended) / prorated refund;
+  - refund method and timing: same payment method, within N business days.
+- Cancelling the monthly plan uses the same channel as signing up.
+- Leave out wording that discourages refund requests.
+</constraints>
 
-Publish `/refunds/`, a clear refund and cancellation policy for each service: before work
-starts, during the project, after delivery, rush fees, the monthly plan, and third-party costs.
-Include how to ask and how fast the money comes back.
+<acceptance_criteria>
+- The checker exits 0.
+- /refunds/ renders at 320px, 375px and 1280px with no page-level horizontal scroll. The table scrolls inside its focusable wrapper.
+- No refund or cancellation statement on /solutions/, /terms/ or /refunds/ contradicts another.
+</acceptance_criteria>
 
-## Why
+<task>
+Publish /refunds/, a refund and cancellation policy for each Tech-Savvies service that agrees with /solutions/ and /terms/.
+</task>
+````
 
-People paying a small business a few hundred dollars upfront want to know what happens if
-things go wrong. The site promises a "completion guarantee" and sells a recurring monthly plan,
-and both need matching refund and cancellation rules. Without a written policy, every
-disagreement is a negotiation, and customers may go straight to a card chargeback. NY GBL
-§218-a requires retailers to conspicuously post their refund policy for goods. It's aimed at
-goods rather than services, so check its scope in `docs/legal-compliance.md`, but posting one is
-best practice either way. NY §527-a also covers cancelling auto-renewing plans.
+## Assumptions
+- Prompts 01 and 02 have run.
+- The owner chooses the refund rules during the session if they aren't already in the facts file.
 
-## Task
+## Parameters
+- Reasoning effort: high.
 
-1. **Get the rules from the owner.** Use `docs/business-facts.md` first, then `AskUserQuestion`
-   for gaps. Offer sensible options and mark a recommendation where one is fair to both sides:
-   - **Cancel before work starts:** full refund of the deposit (recommended) / deposit
-     non-refundable / refund minus a fixed admin amount.
-   - **Cancel mid-project:** pay for work done so far at a stated rate or percentage, refund the
-     rest (recommended) / no refund.
-   - **After delivery:** no refund, but bugs are fixed free within N days (recommended) /
-     satisfaction refund within N days.
-   - **Rush fee:** refunded if the rush deadline is missed (recommended) / not refundable.
-   - **Monthly plan:** cancel any time, effective end of the current paid month, no partial
-     refund (recommended) / prorated refund.
-   - **Third-party costs** (domains, paid plugins bought for the client): not refundable by us,
-     but the domain stays the client's.
-   - **Refund method and timing:** same payment method, within N business days of approval.
-
-2. **Write `public/refunds/index.html`** from the privacy page template. Title "Refund Policy |
-   Tech-Savvies", unique description, canonical, `og:` tags. Content:
-   - `h1`, "Last updated";
-   - a **summary table or list** per service (Website Launch, Website Rescue, Google & Social
-     one-time, Monthly plan), in plain language;
-   - sections: `#before-work-starts`, `#during-a-project`, `#after-delivery`, `#rush-orders`,
-     `#monthly-plan`, `#third-party-costs`, `#how-to-ask` (a `mailto:` with a prefilled subject
-     "Refund request"; include the project name or invoice number), `#timing`,
-     `#if-we-miss-a-promise` (how the completion guarantee and missed rush deadlines are
-     honoured), `#chargebacks` (a friendly note: please contact us first; we'll respond within N
-     business days; no threats), and `#contact`.
-
-   If you use a table, it needs a `<caption>` and `<th scope>`, and must reflow at 320px using
-   the scroll-region pattern from `.prose table`.
-
-3. **Consistency.** Where `/terms/` mentions refunds, link to `/refunds/` and remove any
-   conflicting wording. On `/solutions/`, add "Refund Policy" next to the Terms link in the
-   Payment block.
-
-4. **Footer, every HTML page:** add "Refund Policy" after "Terms of Service" in the Legal column.
-   Confirm with `grep -L`.
-
-5. Add `/refunds/` to the sitemap, README pages table, and `REQUIRED_FOOTER_LINKS`.
-
-6. Write the final refund rules into `docs/business-facts.md`. Update item 3 in
-   `docs/compliance-log.md` and flag it for attorney review.
-
-## Constraints
-
-- The monthly plan's cancel path must be as easy as signing up (see `docs/ux-honesty-rules.md`).
-- No wording that discourages refunds ("refunds are rarely granted").
-
-## Verify
-
-- `python3 tools/check_site.py` passes.
-- Playwright screenshots at 320px, 375px and 1280px, since the table must not overflow.
-- Read `/solutions/`, `/terms/` and `/refunds/` together and list any contradiction, which
-  should be none.
-
-## Commit
-
-`Fix #03: add refund and cancellation policy`. Push to the current branch.
+## What to test
+- Run with all refund facts missing. There should be exactly one question per rule, each with the recommended option first.
+- Grep `/terms/` for "refund". Every mention should link to `/refunds/`.
+- Screenshot the table at 320px.

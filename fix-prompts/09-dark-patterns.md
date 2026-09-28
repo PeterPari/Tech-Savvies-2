@@ -1,88 +1,72 @@
 # Prompt 09: Remove dark patterns
 
-Phase 2 (after 11). Paste everything below the line into a new Claude Code session opened at
-the repository root.
+````text
+<context>
+The FTC staff report "Bringing Dark Patterns to Light" (2022) and FTC enforcement treat manipulative interfaces as unfair or deceptive under FTC Act §5. NY GBL §527-a targets subscriptions that are hard to cancel.
 
----
+The initial audit found no UI dark patterns: no pre-ticked boxes, confirmshaming, countdowns, fake scarcity or disguised ads. It found one pricing risk, the unpriced "monthly" plan behind a "$50" headline, which Prompt 10 addresses. The remaining prompts add legal pages, a form notice, a data-request flow and possibly a cancellation path, so this prompt also sets the rules that UI must follow.
 
-You're working in the Tech-Savvies website repo (static site in `public/`, hosted on Netlify).
-Read `fix-plan.md` §2 and §4, then `docs/business-facts.md`, `docs/compliance-log.md`, and
-`docs/claims-register.md` if it exists.
+Categories to check:
+- false urgency and false scarcity;
+- confirmshaming;
+- pre-selected options;
+- hidden costs and drip pricing;
+- bait-and-switch;
+- forced continuity (is cancelling as easy as signing up?);
+- obstruction (is requesting deletion as easy as sending an enquiry?);
+- misleading visual hierarchy;
+- trick wording;
+- nagging overlays;
+- disguised ads and undisclosed relationships;
+- privacy-unfriendly defaults;
+- fake social proof;
+- forced registration and unnecessary fields.
+</context>
 
-## Goal
+<inputs>
+docs/business-facts.md, docs/claims-register.md, docs/compliance-log.md, public/
+</inputs>
 
-Audit every page and flow for manipulative design, fix whatever you find, and write rules that
-keep the prompts that follow (legal pages, form notices, and any future consent banner) from
-introducing new ones.
-
-## Why
-
-The FTC's staff report "Bringing Dark Patterns to Light" (2022) and its enforcement actions
-treat manipulative interfaces as unfair or deceptive under FTC Act §5. NY's auto-renewal law
-(GBL §527-a) specifically targets hard-to-cancel subscriptions. The first audit found no
-classic UI dark patterns: no pre-ticked boxes, confirmshaming, countdown timers, fake scarcity,
-or disguised ads. It did find one pricing problem: a "$50" headline for a service whose monthly
-plan had no price. That's drip pricing and a bait risk, fixed in Prompt 10.
-
-A lot of UI is about to be added (legal pages, a form notice, a rights-request flow, maybe a
-cancellation path), so it's the right time to set the rules.
-
-## Task
-
-1. **Walk every page and flow** in a real browser (Playwright, 375px and 1280px): home,
-   solutions, our-story, contact, the form submit, thanks, 404, and every legal page that
-   exists. Check each of these categories and record pass or fail with evidence in the table
-   below:
-   - false urgency or scarcity;
-   - confirmshaming;
-   - pre-selected options;
-   - hidden costs or drip pricing (re-check Prompt 10's result);
-   - bait-and-switch (headline offer vs. real terms);
-   - forced continuity or hard cancellation: is cancelling the monthly plan as easy as starting
-     it (same channel, email)?
-   - obstruction: is a data-deletion request as easy as sending the enquiry?
-   - misleading visual hierarchy: the primary vs. secondary actions in any choice;
-   - trick wording or double negatives;
-   - nagging or interruptive overlays;
-   - disguised ads or undisclosed relationships (re-check Prompt 11);
-   - privacy defaults that favour the business;
-   - fake social proof;
-   - forced registration or unnecessary fields (re-check Prompt 07).
-
-2. **Fix what you find**, within this prompt's scope:
-   - Copy and markup fixes on existing pages: do them now.
-   - If Prompt 10 hasn't been run and the unpriced "monthly" is still there, stop and tell the
-     user to run Prompt 10 first. Don't duplicate its work.
-   - If cancelling the monthly plan isn't explained anywhere, add one plain sentence next to its
-     price on `/solutions/` ("Cancel any time by emailing info@tech-savvies.com"), matching the
-     owner's facts. The Terms (Prompt 02) will give the details.
-
-3. **Write `docs/ux-honesty-rules.md`**:
-   - the audit table: category, pass/fail, evidence, fix, commit;
-   - "Rules for new UI":
+<deliverables>
+1. docs/ux-honesty-rules.md, containing:
+   - an audit table with the columns Category | Pages and flows checked | Result (pass/fail) | Evidence (file:line or screenshot description) | Fix. It covers every page in public/ and the contact form submit flow, at 375px and 1280px;
+   - "Rules for new UI", each rule stated in at most 20 words:
      - choices of equal weight look equal;
      - no pre-ticked consent;
-     - declining never costs more clicks than accepting;
+     - declining takes no more steps than accepting;
      - cancelling or deleting uses the same channel as signing up;
      - every price is shown with its recurring terms;
-     - no countdowns or "only N spots left" unless literally true and automatically enforced;
-     - no guilt-trip wording on decline options;
-     - disclosures sit next to the claim, not in a footnote.
+     - no countdowns or "only N left" unless true and enforced automatically;
+     - no guilt-trip decline wording;
+     - disclosures sit next to their claim.
+2. Fixes for every failure in public/, using existing classes. If no cancellation path for the monthly plan is stated anywhere, add one sentence next to its price on /solutions/, using the cancellation method in docs/business-facts.md.
+3. A link to docs/ux-honesty-rules.md in the README "Editing" section, and item 9 updated in docs/compliance-log.md.
+4. One commit, "Fix #09: audit for dark patterns and add honest-UI rules", pushed.
+5. A final message of at most 6 bullets.
+</deliverables>
 
-   Link it from the README "Editing" section.
+<constraints>
+- If /solutions/ still shows "monthly" without a price, stop and report that Prompt 10 must run first. Leave pricing changes to Prompt 10.
+- Make the smallest markup or copy change that removes each manipulation. Leave page layouts unchanged.
+</constraints>
 
-4. Update item 9 in `docs/compliance-log.md`.
+<acceptance_criteria>
+- The checker exits 0.
+- Every category above has a row in the audit table.
+- Changed pages have no layout breaks at 375px and 1280px.
+</acceptance_criteria>
 
-## Constraints
+<task>
+Audit every Tech-Savvies page and flow for dark patterns, remove any you find, and write the honest-UI rules that new UI must follow.
+</task>
+````
 
-- Don't redesign pages. Make the smallest change that removes the manipulation.
-- Keep existing classes and tokens.
+## Assumptions
+- Prompts 10, 12 and 11 have run.
 
-## Verify
+## Parameters
+- Reasoning effort: medium.
 
-- `python3 tools/check_site.py` passes.
-- Screenshots of any changed page at 375px and 1280px.
-
-## Commit
-
-`Fix #09: audit for dark patterns and add honest-UI rules`. Push to the current branch.
+## What to test
+- Run before Prompt 10 on purpose. The session should stop at the "monthly" check.
+- Every one of the 14 categories appears in the audit table with evidence.

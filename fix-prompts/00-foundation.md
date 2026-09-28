@@ -1,112 +1,78 @@
-# Prompt 00: Foundation (facts file, compliance log, regression guard)
+# Prompt 00: Foundation (facts file, compliance log, site checker)
 
-Run this first. Paste everything below the line into a new Claude Code session opened at the
-repository root.
+````text
+<context>
+The fix prompts in fix-prompts/ publish prices, promises, addresses and legal terms. They can do that safely only with three shared artifacts in place:
+- a single facts file the owner fills in;
+- a status log for the 25 items;
+- a regression checker. The repo has no tests and no CI, so nothing currently stops a later edit from adding a tracker or dropping a footer link.
 
----
+Facts the repo already establishes:
+- brand "Tech-Savvies" (logo reads "Tech-Savvies NYC");
+- email info@tech-savvies.com;
+- founder Peter Parizhsky; founded 2020, paused 2023, relaunched 2026;
+- domain tech-savvies.com, hosted on Netlify, contact form via Netlify Forms;
+- the prices currently published in public/solutions/index.html.
 
-You're working in the Tech-Savvies website repo: plain HTML/CSS/JS in `public/`, hosted on
-Netlify, with no build step and no dependencies. Read `fix-plan.md` in full first. It holds the
-audit, the key decisions, and the ground rules that every later prompt relies on.
+The owner-input fields are the rows of the table in fix-plan.md §3. The starting status of each item is the "Status today" column in fix-plan.md §1.
+</context>
 
-This prompt sets up three things that the 25 fix prompts depend on:
+<deliverables>
+1. docs/business-facts.md:
+   - one table per topic, with columns Fact | Value | Source (who confirmed it, and the date);
+   - one row per field in fix-plan.md §3;
+   - the repo-established facts above filled in and marked "(from site, confirm)";
+   - every other value set to TODO(owner), except answers the owner gives during this session.
+2. docs/compliance-log.md: a 25-row table with columns # | Item | Status | Prompt | Commit | Owner follow-ups.
+3. tools/check_site.py:
+   - Python 3 standard library only, run from the repo root;
+   - exits 1 on any failure and prints `path:line: [check-name] message`;
+   - checks are functions registered in a CHECKS list, with a header comment of at most 5 lines explaining how to add one.
+   Initial checks:
+   - img-alt: every <img> has an alt attribute; an <img> that is a link's only content has non-empty alt.
+   - no-external-resources: no script, iframe, stylesheet or preload link, img, video, audio or source loaded from another origin. Plain <a href> links are allowed.
+   - no-client-storage: no document.cookie, localStorage, sessionStorage, indexedDB or navigator.sendBeacon in public/**/*.js or in inline scripts.
+   - csp-unchanged: the CSP in netlify.toml equals an EXPECTED_CSP constant.
+   - no-review-schema: every JSON-LD block parses and contains no aggregateRating or "@type": "Review".
+   - no-placeholders: no TODO(owner), [PLACEHOLDER, lorem ipsum, XXX or [ADDRESS in public/.
+   - internal-links: every root-relative href/src resolves to a file in public/ (/x/ maps to public/x/index.html). Ignore fragments, mailto: and tel:.
+   - new-tab-links: every target="_blank" link has rel containing noopener, plus visually hidden text "(opens in a new tab)".
+   - shared-chrome: every page's main-nav and footer href sets equal those in public/index.html.
+   - required-footer-links: every page's footer contains each entry of REQUIRED_FOOTER_LINKS. The list starts empty; later prompts append to it.
+4. .github/workflows/site-checks.yml: runs the checker on push and pull_request, on ubuntu-latest, with no install step.
+5. README.md: a "Checks" section of at most 8 lines, and docs/ added to the file tree.
+6. One commit, "Fix #00: add business facts file, compliance log and site checker", pushed.
+7. A final message of at most 8 bullets, followed by the list of free-text facts still set to TODO(owner).
+</deliverables>
 
-1. `docs/business-facts.md`: the one source of truth for every business fact the site states.
-2. `docs/compliance-log.md`: status tracking for the 25 items.
-3. `tools/check_site.py`: a standard-library-only regression checker. Later prompts add checks
-   to it so fixed issues can't quietly come back.
+<constraints>
+- Leave public/ unchanged.
+- Ask about choice-type facts (entity type, yes/no questions, auto-renewal, whether the contract signer is 18 or older) with AskUserQuestion, at most 4 questions per call. List free-text facts (address, prices, hours, refund rules) in the final message instead of asking them one at a time.
+- If a check finds a real existing problem, record it in docs/compliance-log.md and keep the check strict. Don't loosen it.
+</constraints>
 
-## Why
+<acceptance_criteria>
+- The checker exits 0 on the current tree.
+- For each check, a temporary copy of public/ outside the repo, seeded with one violation of that check, makes the checker exit 1 with that check's name.
+</acceptance_criteria>
 
-The later prompts write prices, promises, addresses and legal terms. If each prompt guessed,
-the site would contradict itself and could publish claims that aren't true, which is exactly
-what items 10, 12 and 16 are fixing. A single facts file, filled in by the owner, stops that.
-The checker matters because this site has no CI and no tests, so nothing currently prevents a
-future edit from adding a tracking script or dropping a footer link.
+<if_uncertain>
+Leave a value as TODO(owner) when the repo doesn't establish it and the owner hasn't answered.
+</if_uncertain>
 
-## Task
+<task>
+Create the shared compliance foundation (facts file, compliance log, and site checker with CI) that the prompts in fix-prompts/ build on.
+</task>
+````
 
-### 1. `docs/business-facts.md`
+## Assumptions
+- This is the first prompt run, on a branch that contains `fix-plan.md` and `CLAUDE.md`.
+- The owner is available to answer questions during the session.
 
-Create it with one table per topic. Columns: `Fact`, `Value`, `Source` (who confirmed it, and
-the date). Include every field listed in `fix-plan.md` §3 "Owner inputs required".
+## Parameters
+- Reasoning effort: medium.
+- Output schema and temperature: none, and default. The output is repo changes plus the final message.
 
-Pre-fill only what the repo already establishes, and mark each pre-filled value
-`(from site, confirm)`: brand name "Tech-Savvies" (logo says "Tech-Savvies NYC"), email
-`info@tech-savvies.com`, founder Peter Parizhsky, founded 2020, paused 2023, relaunched 2026,
-domain `tech-savvies.com`, host Netlify, contact form handled by Netlify Forms, and the prices
-exactly as currently published in `public/solutions/index.html`.
-
-Leave every other value as `TODO(owner)`.
-
-Then gather answers:
-- For questions with a small set of answers (entity type, yes/no questions, "does the monthly
-  plan auto-renew", "is the contract signer 18 or older", "Netlify Analytics on?"), use the
-  `AskUserQuestion` tool, up to 4 questions per call, grouped by topic.
-- For free-text facts (address, prices, hours, refund rules), list them clearly in your final
-  message and ask the owner to reply with answers or edit the file.
-- Write every answer you receive into the file with today's date. Never guess a value.
-
-### 2. `docs/compliance-log.md`
-
-A table with one row per item 1–25: `#`, `Item`, `Status` (copy the "Status today" column from
-`fix-plan.md` §1), `Prompt`, `Commit`, `Owner follow-ups`. Later prompts update their row.
-
-### 3. `tools/check_site.py`
-
-Python 3 standard library only (`html.parser`, `json`, `re`, `pathlib`, `tomllib` if needed). Run
-it as `python3 tools/check_site.py` from the repo root. It exits 1 on any failure and prints
-`path:line: message`.
-
-Structure it as a list of small check functions registered in one `CHECKS` list, so later
-prompts add a check by writing a function and appending it. Keep a short comment at the top
-explaining how to add one. Start with these checks:
-
-- **img-alt:** every `<img>` has an `alt` attribute. Also, an `<img>` that is the only content
-  of a link has a non-empty `alt`.
-- **no-external-resources:** no `<script src>`, `<iframe>`, `<link rel="stylesheet">`,
-  `<link rel="preload">`, `<img src>`, `<video>`, `<audio>` or `<source>` pointing to another
-  origin. (Plain `<a href>` links to other sites are fine.)
-- **no-client-storage:** no `document.cookie`, `localStorage`, `sessionStorage`, `indexedDB` or
-  `navigator.sendBeacon` in `public/**/*.js` or in inline `<script>` blocks.
-- **csp-unchanged:** the `Content-Security-Policy` value in `netlify.toml` equals an
-  `EXPECTED_CSP` constant in the script. The constant's comment says: change it only together
-  with the privacy, cookie and third-party docs.
-- **no-review-schema:** JSON-LD blocks parse as JSON and contain no `aggregateRating` or
-  `"@type": "Review"`.
-- **no-placeholders:** no `TODO(owner)`, `[PLACEHOLDER`, `lorem ipsum`, `XXX` or `[ADDRESS` in
-  `public/`.
-- **internal-links:** every root-relative `href`/`src` (`/…`) resolves to a file in `public/`
-  (`/x/` maps to `public/x/index.html`). Ignore `#fragment`, `mailto:` and `tel:`.
-- **new-tab-links:** every `target="_blank"` link has `rel` containing `noopener` and contains
-  visually-hidden text "(opens in a new tab)".
-- **shared-chrome:** every HTML page's main nav links and footer links match `public/index.html`,
-  as sets of `href`s. This catches the "header/footer are copy-pasted into every file" problem.
-- **required-footer-links:** a `REQUIRED_FOOTER_LINKS` list, empty for now. Prompts 01, 02, 03,
-  04 and 21 add `/privacy/`, `/terms/`, `/refunds/`, `/cookies/` and `/accessibility/`.
-
-Run it on the current site. It should pass. If a check finds a genuine existing problem, don't
-weaken the check. Report the problem in your summary and in the compliance log.
-
-### 4. CI and docs
-
-- Add `.github/workflows/site-checks.yml` that runs `python3 tools/check_site.py` on push and
-  pull requests (ubuntu-latest, no dependencies to install).
-- Add a short "Checks" section to `README.md` explaining how to run the script and what it guards.
-- Add `docs/` to the README file tree.
-
-## Constraints
-
-- Don't change anything in `public/` in this prompt.
-- No `package.json`, no pip dependencies.
-
-## Verify
-
-- `python3 tools/check_site.py` exits 0 on the current tree.
-- Temporarily break each check (for example, add `<script src="https://example.com/x.js">` to a
-  copy of a page in your scratchpad, or run the checker against a temp copy of `public/`) and
-  confirm each one fails with a clear message. Don't commit the broken copies.
-
-## Commit
-
-`Fix #00: add business facts file, compliance log and site checker`. Push to the current branch.
+## What to test
+- Run on a clean checkout. The checker exits 0, and each seeded violation fails with the right check name.
+- Run once without answering any questions. `docs/business-facts.md` should contain `TODO(owner)` values, never guessed ones.
