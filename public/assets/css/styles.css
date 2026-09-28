@@ -696,10 +696,6 @@ main .eyebrow + * {
 
 /* ---------- Home: featured showcase ---------- */
 
-.showcase .meta {
-  margin-top: 0.75rem;
-}
-
 /* Case-study layout: the site screenshot runs the full width in a browser
    frame, with the write-up underneath. */
 .showcase-body {
@@ -728,7 +724,8 @@ main .eyebrow + * {
 
 .showcase-frame-bar {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr minmax(0, auto) 1fr;
+  column-gap: 0.75rem;
   align-items: center;
   height: clamp(1.75rem, 1.5rem + 0.9vw, 2.375rem);
   padding-inline: clamp(0.625rem, 0.4rem + 0.8vw, 1rem);
@@ -748,6 +745,9 @@ main .eyebrow + * {
 }
 
 .showcase-frame-url {
+  display: flex;
+  align-items: center;
+  min-width: 0;
   padding: 0.1875rem 1rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.05);
@@ -757,6 +757,17 @@ main .eyebrow + * {
   letter-spacing: 0.02em;
   color: var(--muted);
   transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+/* Long title: truncate with an ellipsis on narrow screens. */
+.showcase-frame-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.showcase-frame-url .icon-inline {
+  flex: none;
 }
 
 .showcase-frame-url:hover {
