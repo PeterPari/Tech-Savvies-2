@@ -711,16 +711,13 @@ main .eyebrow + * {
   /* Project title on the left, write-up on the right. */
   .showcase-intro {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, var(--measure));
+    grid-template-columns: max-content minmax(0, var(--measure));
+    justify-content: space-between;
     column-gap: 4rem;
   }
 
   .showcase-intro .h2 {
     grid-column: 1 / -1;
-  }
-
-  .showcase-title {
-    max-width: 18rem;
   }
 
   .showcase-intro p {
