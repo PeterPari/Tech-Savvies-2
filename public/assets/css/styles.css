@@ -785,10 +785,31 @@ main .eyebrow + * {
   flex: none;
 }
 
-.showcase-frame-url:hover {
+/* Stretched link: the whole frame is the click target for the grisha.studio link. */
+.showcase-frame-url::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.showcase-frame-url:hover,
+.showcase-frame:hover .showcase-frame-url {
   background: rgba(255, 255, 255, 0.1);
   color: var(--heading);
   text-decoration: none;
+}
+
+.showcase-frame:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.showcase-frame-url:focus-visible {
+  outline: none;
+}
+
+.showcase-frame:has(.showcase-frame-url:focus-visible) {
+  outline: 2px solid var(--heading);
+  outline-offset: 4px;
 }
 
 .showcase-frame img {
