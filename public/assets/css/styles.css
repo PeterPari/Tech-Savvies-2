@@ -735,14 +735,14 @@ main .eyebrow + * {
 }
 
 @media (min-width: 64em) {
-  /* The photo sits beside the heading and link; the checklist runs along the bottom. */
+  /* The photo sits beside the heading, text and checklist. */
   .showcase-body {
     grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
       "intro photo"
       "text  photo"
-      "list  list";
+      "list  photo";
     column-gap: 4rem;
     row-gap: 0;
   }
@@ -751,12 +751,13 @@ main .eyebrow + * {
     padding-top: 1.625rem;
   }
 
-  /* Match the height of the text beside it, cropping rather than stretching.
+  /* Match the height of the content beside it, cropping rather than stretching.
      height: 0 keeps the photo from setting the row height itself. */
   .showcase-photo {
     max-width: none;
     height: 0;
     min-height: 100%;
+    object-position: 60% 50%; /* keep Grisha in frame when the sides are cropped */
   }
 
   .showcase-body .checklist {
