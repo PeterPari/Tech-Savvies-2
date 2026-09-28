@@ -949,6 +949,10 @@ main .eyebrow + * {
   text-align: center;
 }
 
+.story-contact .btn {
+  min-width: 15rem;
+}
+
 /* ---------- Contact ---------- */
 
 .contact-intro .lead {
