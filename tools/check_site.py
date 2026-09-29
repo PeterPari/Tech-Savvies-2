@@ -24,6 +24,15 @@ ALLOWED_LINK_ORIGINS = ["https://grisha.studio"]
 # Footer hrefs every page must contain. Later prompts append here, e.g. "/privacy/".
 REQUIRED_FOOTER_LINKS = []
 
+# Substrings that mark a tracker, pixel or analytics tool. no-trackers fails on any of them in public/
+# HTML or JS (case-insensitive). Adding a tracker means a consent banner first: see
+# fix-prompts/05-cookie-consent.md, and update docs/tracking-audit.md and the Privacy/Cookie policies.
+TRACKER_SIGNATURES = [
+    "gtag", "googletagmanager", "google-analytics", "analytics.js", "fbq", "connect.facebook",
+    "doubleclick", "hotjar", "clarity.ms", "segment", "mixpanel", "plausible", "umami",
+    "cloudflareinsights", "tiktok", "snap.licdn", "sendBeacon", "<noscript><img",
+]
+
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta",
         "param", "source", "track", "wbr"}
 TEXT_EXTS = (".html", ".css", ".js", ".txt", ".xml", ".webmanifest", ".json", ".svg")
@@ -340,6 +349,17 @@ def check_shared_chrome(site):
                 yield page.path, 1, msg
 
 
+def check_no_trackers(site):
+    patterns = [(sig, re.compile(re.escape(sig).replace(r"><", r">\s*<"), re.I)) for sig in TRACKER_SIGNATURES]
+    for path in site.text_files(".html", ".js"):
+        if site.is_admin(path):  # the owner's checklist quotes these names in prompt text
+            continue
+        text = site.read(path)
+        for sig, rx in patterns:
+            for m in rx.finditer(text):
+                yield path, line_of(text, m.start()), "contains tracker signature %r" % sig
+
+
 def check_required_footer_links(site):
     for page in site.pages:
         if site.is_admin(page.path):
@@ -354,6 +374,7 @@ CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
     ("no-client-storage", check_no_client_storage),
+    ("no-trackers", check_no_trackers),
     ("csp-unchanged", check_csp_unchanged),
     ("no-review-schema", check_no_review_schema),
     ("no-placeholders", check_no_placeholders),

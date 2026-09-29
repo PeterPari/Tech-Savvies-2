@@ -105,6 +105,10 @@ Current published prices are from `public/solutions/index.html`.
 | Retention: emails with leads | 12 months (all emails, leads and past clients) | Owner, 2026-09-29 |
 | Sends or plans to send marketing/newsletter emails | No | Owner, 2026-09-29 |
 | Uses email open-tracking | No | Owner, 2026-09-29 |
+| Netlify split testing (nf_ab cookie) | No, off | Owner, 2026-09-29 |
+| Netlify snippet injection | No, none | Owner, 2026-09-29 |
+| Plans for analytics, ads or pixels in the next 6 months | Owner answered “Netlify Analytics are running”; read as no further tools planned (confirm) | Owner, 2026-09-29 |
+| Old tech-savvies.com build loads Microsoft Clarity | Yes, observed in production HTML; to be retired at go-live (see [`tracking-audit.md`](tracking-audit.md)) | Audit, 2026-09-29 |
 | Holds client account logins (Google Business Profile, social media) | Sometimes: some clients add Tech-Savvies as a manager; others who can’t or don’t want to share their login details | Owner, 2026-09-29 |
 
 ## Case study (Grisha.studio)
