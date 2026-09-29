@@ -4,8 +4,8 @@ Every service that receives visitor or client data, as of 2026-09-29. Prompt 08 
 the set; it does not change it. The Privacy Policy (`/privacy/`) must match this file.
 
 Legend: "unverified: owner to check…" means the value can only be confirmed from the provider’s
-current documentation or dashboard. On 2026-09-29 the session’s network policy blocked
-`docs.netlify.com` and `tech-savvies.com`, so no Netlify documentation could be read and no
+current documentation or dashboard. On 2026-09-29 the session’s network policy still blocked
+`docs.netlify.com` (checked twice), so no Netlify documentation could be read and no
 Netlify claim below is cited. Nothing here is guessed.
 
 | Service | Purpose | Data received | Triggered by | Where stored | Privacy policy URL | DPA available | How to delete data there |
@@ -17,6 +17,12 @@ Netlify claim below is cited. Nothing here is guessed.
 | iCloud Mail (Apple), mailbox for info@tech-savvies.com | Receives form notifications and emails from leads and clients | Sender address, message content, attachments; form notification contents | Email, form submit | Apple’s servers; location unverified: owner to check with Apple | https://www.apple.com/legal/privacy/ | unverified: owner to check with Apple | Delete the message and empty Trash in iCloud Mail. Owner rule: emails kept 12 months |
 | Google Domains / Squarespace Domains (registrar for tech-savvies.com) | Domain registration and DNS | Owner’s registrant contact details (name, email, and any address or phone entered at registration) | Domain registration or renewal, not visits | Registrar’s systems | https://www.squarespace.com/privacy | unverified: owner to check with Squarespace | Not deletable while the domain is registered; owner can ask the registrar to update contact details or close the account |
 | Grisha.studio (outbound link) | Case-study link on the homepage | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Grisha.studio’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
+
+## Live site differs from the repo
+
+The table describes what this branch ships. The live site currently also sends visitor data to
+Microsoft Clarity (analytics), Google Fonts (Google) and possibly formsubmit.co (contact form). See
+"Loaded by the browser automatically". Add them to the table only if the owner decides to keep them.
 
 ## Netlify: facts to confirm
 
@@ -38,9 +44,22 @@ All 7 HTML pages (including `/admin/`, `/contact/thanks/` and `404.html`) at 375
 closed and open: 176 requests, all to `http://localhost:8080` (the site’s own origin). No other
 origin, no third-party script, font, stylesheet, frame or image, and no cookies set in the browser.
 
-Production (`https://tech-savvies.com`) was not observable: the session’s network policy returned 403 on
-connect, so any Set-Cookie header or script Netlify injects (for example for Analytics or Forms)
-is unchecked. Owner to re-run this check from a machine with access.
+Production (`https://tech-savvies.com`) was reachable on 2026-09-29 (curl `HTTP/2 200`, `server: Netlify`)
+and it does **not** match this repo. The live homepage HTML and headers show:
+
+- a different CSP that allows `https://www.clarity.ms`, `https://scripts.clarity.ms`, `https://c.clarity.ms`,
+  `https://c.bing.com`, `https://v.clarity.ms`, `https://formsubmit.co`, `https://fonts.googleapis.com` and
+  `https://fonts.gstatic.com`, plus `'unsafe-inline'`;
+- a Microsoft Clarity tag (`https://www.clarity.ms/tag/vwz3thl727`) and Google Fonts stylesheets and font files
+  in the page HTML, and a `services.html` search action in its JSON-LD;
+- no `Set-Cookie` response header on the homepage request. Cookies that Clarity sets in the browser were not
+  observed: Chromium could not load the page through the session proxy (`ERR_CERT_AUTHORITY_INVALID`), so
+  only headers and HTML were inspected, not browser requests.
+
+This looks like an older or different deploy than `claude-fix-plan` (whose `netlify.toml` has no such origins).
+Until that deploy is replaced by this branch, Microsoft Clarity, Google Fonts and formsubmit.co receive
+visitor data on the live site, and the Privacy Policy must not claim otherwise. Owner to confirm which
+branch Netlify publishes (Netlify → Site → Deploys) and what the live contact form submits to.
 
 The CSP in `netlify.toml` (`default-src 'self'`) blocks any other origin from loading. The
 `third-party-allowlist` check in `tools/check_site.py` limits outbound `href` origins to
