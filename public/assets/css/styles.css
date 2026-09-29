@@ -25,6 +25,7 @@
 
 /* ---------- Design tokens ---------- */
 
+/* All color pairs meet WCAG AA; ratios in docs/accessibility-audit.md. Re-check when changing a token. */
 :root {
   --bg: #0f1419;
   --text: #e8eef7;
@@ -290,14 +291,27 @@ main .eyebrow + * {
   color: var(--muted);
 }
 
-/* Links inside sentences need more than color to stand out */
-.lead a {
+/* Links inside sentences need more than color to stand out (WCAG 1.4.1).
+   Nav links, footer lists, buttons and .contact-email are not in-sentence links. */
+.lead a,
+.body-muted a,
+.meta a,
+.form-note a,
+.prose a,
+.includes p a,
+.contact-info p a,
+.link {
   text-decoration: underline;
   text-decoration-color: rgba(16, 185, 129, 0.5);
   text-underline-offset: 0.2em;
 }
 
-.lead a:hover {
+.lead a:hover,
+.body-muted a:hover,
+.prose a:hover,
+.includes p a:hover,
+.contact-info p a:hover,
+.link:hover {
   text-decoration-color: currentColor;
 }
 
@@ -314,16 +328,11 @@ main .eyebrow + * {
 
 .meta a {
   color: inherit;
-  text-decoration: underline;
   text-decoration-color: rgba(148, 163, 184, 0.45);
   text-underline-offset: 0.2em;
 }
 
-.meta a:hover {
-  color: var(--heading);
-  text-decoration-color: currentColor;
-}
-
+.meta a:hover,
 .icon-inline {
   display: inline-block;
   width: 0.75em;
@@ -1037,7 +1046,6 @@ main .eyebrow + * {
 
 .form-note a {
   color: inherit;
-  text-decoration: underline;
   text-decoration-color: rgba(148, 163, 184, 0.45);
   text-underline-offset: 0.2em;
 }
@@ -1240,19 +1248,6 @@ h1 + .meta {
   color: var(--heading);
 }
 
-/* Links inside sentences need more than color to stand out (same as .lead a) */
-.prose a,
-.includes p a {
-  text-decoration: underline;
-  text-decoration-color: rgba(16, 185, 129, 0.5);
-  text-underline-offset: 0.2em;
-}
-
-.prose a:hover,
-.includes p a:hover {
-  text-decoration-color: currentColor;
-}
-
 /* Wide tables scroll sideways inside this box instead of widening the page */
 .table-scroll {
   max-width: 100%;
@@ -1283,6 +1278,44 @@ h1 + .meta {
 
 .table-scroll thead th {
   background: var(--field-bg);
+}
+
+/* ---------- Forced colors (Windows High Contrast) ---------- */
+
+@media (forced-colors: active) {
+  /* Buttons lose their background fill, so give them a border */
+  .btn,
+  .skip-link {
+    border: 2px solid ButtonText;
+  }
+
+  .btn:hover {
+    border-color: Highlight;
+  }
+
+  .nav-link[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.55em;
+  }
+
+  .nav-toggle {
+    border: 1px solid ButtonText;
+  }
+
+  :focus-visible,
+  .input:focus {
+    outline: 2px solid Highlight;
+    outline-offset: 3px;
+  }
+
+  .input:focus {
+    outline-offset: 0;
+  }
+
+  .showcase-frame:has(.showcase-frame-url:focus-visible) {
+    outline: 2px solid Highlight;
+  }
 }
 
 /* ---------- Motion ---------- */
