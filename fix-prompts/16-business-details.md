@@ -6,7 +6,7 @@ The only business detail on the site is info@tech-savvies.com. Four problems fol
 - The Terms and Privacy Policy must name the contracting party and the data controller.
 - CAN-SPAM requires a postal address in commercial email (Prompt 18).
 - Trading as "Tech-Savvies" rather than the owner's legal name may need a NY assumed-name filing (see docs/legal-compliance.md).
-- /contact/ promises replies "during NYC business hours" (public/contact/index.html:59) without defining the hours.
+- /contact/ promises replies "during NYC business hours" (public/contact/index.html:58) without defining the hours.
 
 The current JSON-LD (public/index.html:28-40) is an Organization with name, url, logo, email, foundingDate, founder and description, and no location. The footer copyright line reads "© <span data-year>2026</span> Tech-Savvies. All rights reserved." on every page.
 </context>

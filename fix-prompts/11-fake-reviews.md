@@ -4,7 +4,7 @@
 <context>
 The FTC Rule on Consumer Reviews and Testimonials (16 CFR 465) allows civil penalties for fake or misrepresented reviews and testimonials, undisclosed insider reviews, and suppressing negative reviews. The FTC Endorsement Guides (16 CFR 255) require disclosure of material connections: family, friends, free or discounted work. NY GBL §349 also applies.
 
-The initial audit found no reviews, ratings, testimonials or aggregateRating schema. It found one case study, "Featured Showcase" (public/index.html:98-116). The case study names Grisha.studio, links to it, states specific facts ("secured his preferred domain", "created his Instagram page"), and presents the relationship as an ordinary client engagement.
+The initial audit found no reviews, ratings, testimonials or aggregateRating schema. It found one case study, "Featured Showcase" (public/index.html:97-119). The case study names Grisha.studio, links to it from a browser-frame address bar, shows a screenshot of the client's home page (public/assets/img/grisha-studio.webp) with the name Gregory Parizhsky, the same surname as the founder, states specific facts ("secured his preferred domain", "created his Instagram page"), and presents the relationship as an ordinary client engagement.
 </context>
 
 <inputs>
@@ -15,7 +15,7 @@ docs/business-facts.md, docs/claims-register.md, docs/third-parties.md, docs/com
 1. A scan result for public/, covering quotes, testimonials, ratings, ★ or ⭐ characters, "clients say", "trusted by", client logos, client counts, and review schema, recorded in docs/testimonials-policy.md.
 2. The case study updated according to the owner's answers:
    - inaccurate facts corrected;
-   - if there's no permission to name the client: the name and link removed and the client described as "a local artist" (or the section removed, if the owner prefers), with ALLOWED_LINK_ORIGINS and docs/third-parties.md updated;
+   - if there's no permission to name the client: the name, link and screenshot removed and the client described as "a local artist" (or the section removed, if the owner prefers), with ALLOWED_LINK_ORIGINS and docs/third-parties.md updated;
    - if there's a personal connection or free or discounted work: a disclosure in the same .meta line as the client name.
 3. docs/testimonials-policy.md: rules for future endorsements, each citing the FTC source URL, covering:
    - real customers only, quoted verbatim;
@@ -40,7 +40,7 @@ docs/business-facts.md, docs/claims-register.md, docs/third-parties.md, docs/com
 <constraints>
 - Ask the owner in one AskUserQuestion call, after showing them the case-study paragraph:
   - whether it was a real engagement with accurate facts;
-  - whether the client gave permission to be named (written is preferred);
+  - whether the client gave permission to be named and to show the screenshot of their site (written is preferred);
   - whether there's a personal connection or the work was free or discounted.
 - Add no testimonials to fill the space.
 - Leave contacting the client to the owner.

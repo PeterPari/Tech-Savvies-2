@@ -4,7 +4,7 @@
 <context>
 Audit findings:
 - Fonts: public/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2 and jetbrains-mono-latin-500-normal.woff2 are under SIL OFL 1.1. The full licence texts ship beside them (LICENSE-PlusJakartaSans.txt, LICENSE-JetBrainsMono.txt), and neither declares a Reserved Font Name, so the latin subsets can keep their names. The filenames follow Fontsource's naming.
-- Images: logo.png, og-image.png, icon-192.png, icon-512.png, favicon-64.png, favicon.ico and apple-touch-icon.png carry no embedded metadata, so their origin must come from the owner. og-image.png looks like the logo composed with the two OFL fonts.
+- Images: logo.png, og-image.png, icon-192.png, icon-512.png, favicon-64.png, favicon.ico and apple-touch-icon.png carry no embedded metadata, so their origin must come from the owner. grisha-studio.webp is a screenshot of a client's website and artwork. Its rights sit with the client, so it needs the client's permission (see Prompt 11). og-image.png looks like the logo composed with the two OFL fonts.
 - Inline SVG icons in the HTML (menu, close, arrow "M4 10h12M11 5l5 5-5 5", external link "M5 11l6-6M6 5h5v5") and the checkmark SVG in styles.css have no recorded source. If one comes from an icon set (Heroicons, Lucide, Feather, etc.), it carries a licence notice requirement.
 - design/Tech-Savvies_Website_Mockup.pdf was printed from Chromium.
 </context>

@@ -5,7 +5,7 @@
 The Privacy Policy (Prompt 01) must name every service that receives visitor or client data. An audit of the code on 2026-09-28 found:
 - no third-party scripts, iframes, fonts or stylesheets;
 - CSP default-src 'self' (netlify.toml:17);
-- one outbound link, https://grisha.studio/ (public/index.html:101), with rel="noopener" and "(opens in a new tab)" text; Referrer-Policy strict-origin-when-cross-origin, so only the origin is sent.
+- one outbound link, https://grisha.studio/ (public/index.html:108, in the showcase frame's address bar), with rel="noopener" and "(opens in a new tab)" text; Referrer-Policy strict-origin-when-cross-origin, so only the origin is sent.
 
 Data still reaches third parties outside the page code: Netlify (hosting logs, Forms, form spam filtering), the mailbox provider for info@tech-savvies.com, and the domain registrar.
 </context>

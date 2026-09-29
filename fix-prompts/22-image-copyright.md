@@ -26,7 +26,7 @@ docs/asset-licenses.md, docs/business-facts.md, docs/legal-compliance.md, docs/t
    - a USPTO trademark search for "TECH SAVVIES" / "TECH-SAVVIES" in classes 35 and 42, and a NY DOS entity search;
    - a list of same-name web design businesses found by web search, with URLs.
 3. Every page footer reading "© <span data-year>2026</span> <legal name>. All rights reserved.", enforced by the business-details check.
-4. A "Showing client work" section in docs/asset-licenses.md: client screenshots only with recorded permission; no copying of client-owned photos; photographer credit where the client's licence requires it.
+4. A rights finding for public/assets/img/grisha-studio.webp, a screenshot of the client's site showing their name and artwork, tied to the permission answer recorded by Prompt 11. Also a "Showing client work" section in docs/asset-licenses.md: client screenshots only with recorded permission; no copying of client-owned photos; photographer credit where the client's licence requires it.
 5. Item 22 updated in docs/compliance-log.md, with owner actions.
 6. One commit, "Fix #22: verify image rights and copyright notice", pushed.
 7. A final message of at most 6 bullets.

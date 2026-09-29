@@ -2,14 +2,14 @@
 
 ````text
 <context>
-public/solutions/index.html promises "Transparent pricing (no surprise invoices)" (:107), but leaves these costs undisclosed or vague:
+public/solutions/index.html promises "Transparent pricing (no surprise invoices)" (:106), but leaves these costs undisclosed or vague:
 
 | Location | Problem |
 |----------|---------|
-| :95 "$50 (flat fee, for a one-time fix; monthly for ongoing management)" | The monthly price is missing. An unpriced recurring charge is drip pricing, and NY GBL §527-a requires clear auto-renewal terms. |
-| :62 "Includes your domain setup" | The yearly domain registration fee, hosting costs, who pays, and whose name the domain is in are all unstated. |
-| :80 "up to $250 rush order" | "Rush" is undefined. |
-| :65 "$250-$375 (depending on website caliber and time frame)" | "Caliber" is undefined. |
+| :94 "$50 (flat fee, for a one-time fix; monthly for ongoing management)" | The monthly price is missing. An unpriced recurring charge is drip pricing, and NY GBL §527-a requires clear auto-renewal terms. |
+| :61 "Includes your domain setup" | The yearly domain registration fee, hosting costs, who pays, and whose name the domain is in are all unstated. |
+| :79 "up to $250 rush order" | "Rush" is undefined. |
+| :64 "$250-$375 (depending on website caliber and time frame)" | "Caliber" is undefined. |
 | nowhere | Deposit, payment schedule, payment methods, card fees and sales tax are missing. |
 | :7 and :13 meta and og descriptions | Both repeat headline prices. |
 

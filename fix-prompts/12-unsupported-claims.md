@@ -8,17 +8,17 @@ Claims found in the initial audit:
 
 | Claim | Location | Issue |
 |-------|----------|-------|
-| "We typically reply within 2 hours during NYC business hours" | contact/index.html:7,13,59; contact/thanks/index.html:7,13,58 | Specific and measurable; hard to keep as a one-person business |
-| "Custom site built in as fast as 5 days" | solutions/index.html:62 | Needs a real delivery in that time, and its conditions |
-| "basic SEO so you show up when customers search for your services" | solutions/index.html:62 | Implies a ranking outcome |
-| "SEO Setup (Get found on Google)" | solutions/index.html:69 | Outcome claim |
-| "fix your social media for maximum search visibility" | index.html:92 | "Maximum" can't be proven |
-| "If you want it on your website, you'll get it." | index.html:88 | Absolute promise that conflicts with fixed prices |
-| "you reach your lead engineer, not a ticketing system" | solutions/index.html:107 | Implies a team; the business is one person (Our Story) |
-| "Security Patching" | solutions/index.html:85 | Scope undefined |
-| Case-study facts ("secured his preferred domain", "created his Instagram page") | index.html:98-116 | Accuracy confirmed in Prompt 11 |
+| "We typically reply within 2 hours during NYC business hours" | contact/index.html:7,13,58; contact/thanks/index.html:7,13,57 | Specific and measurable; hard to keep as a one-person business |
+| "Custom site built in as fast as 5 days" | solutions/index.html:61 | Needs a real delivery in that time, and its conditions |
+| "basic SEO so you show up when customers search for your services" | solutions/index.html:61 | Implies a ranking outcome |
+| "SEO Setup (Get found on Google)" | solutions/index.html:68 | Outcome claim |
+| "fix your social media for maximum search visibility" | index.html:91 | "Maximum" can't be proven |
+| "If you want it on your website, you'll get it." | index.html:87 | Absolute promise that conflicts with fixed prices |
+| "you reach your lead engineer, not a ticketing system" | solutions/index.html:106 | Implies a team; the business is one person (Our Story) |
+| "Security Patching" | solutions/index.html:84 | Scope undefined |
+| Case-study facts ("secured his preferred domain", "created his Instagram page") | index.html:97-119 | Accuracy confirmed in Prompt 11 |
 
-Line numbers may have shifted after Prompts 10 and 16.
+Line numbers are as of main at c317362 and may shift after Prompts 10 and 16.
 </context>
 
 <inputs>

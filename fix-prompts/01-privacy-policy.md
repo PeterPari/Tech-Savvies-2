@@ -21,7 +21,7 @@ docs/business-facts.md, docs/data-inventory.md, docs/third-parties.md, docs/trac
 1. public/privacy/index.html:
    - head, header and footer copied from public/our-story/index.html;
    - title "Privacy Policy | Tech-Savvies", a unique meta description, canonical https://tech-savvies.com/privacy/, and og tags;
-   - body structure: main#main > section.section.section--first > .container > p.eyebrow "Legal" > h1.display-md "Privacy Policy" > p.meta "Last updated <time datetime>" > article.prose.
+   - body structure: main#main > section.section.section--first > .container > h1.display-md "Privacy Policy" (no eyebrow label; main removed the page labels) > p.meta "Last updated <time datetime>" > article.prose.
    Sections, each an h2 with the given id:
    - #summary: 4–5 bullets;
    - #what-we-collect;

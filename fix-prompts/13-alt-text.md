@@ -3,7 +3,8 @@
 ````text
 <context>
 WCAG 1.1.1 requires a text alternative for every non-text element. The initial audit found:
-- The only <img> is the logo, twice per page, with alt="Tech-Savvies NYC home". That's correct for a linked logo: it names the destination and contains the visible logo text.
+- The logo appears twice per page with alt="Tech-Savvies NYC home". That's correct for a linked logo: it names the destination and contains the visible logo text.
+- The showcase screenshot (public/index.html:110, grisha-studio.webp) has a descriptive alt of about 130 characters.
 - Every inline <svg> has aria-hidden="true" and sits beside visible or visually hidden text.
 - The checklist ticks are decorative CSS backgrounds.
 - og:image:alt is set on every original page.

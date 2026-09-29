@@ -2,13 +2,13 @@
 
 ````text
 <context>
-The contact form (public/contact/index.html:71-105) collects name, email, business and message, with no notice of how they're used. A just-in-time notice where data is collected meets GDPR Art. 13 (where relevant) and the FTC's notice principle, and points to /privacy/.
+The contact form (public/contact/index.html:70-109) collects name, email, business and message, with no notice of how they're used. A just-in-time notice where data is collected meets GDPR Art. 13 (where relevant) and the FTC's notice principle, and points to /privacy/.
 
 A notice is the right pattern here, not a required "I agree" checkbox. Replying to the person is the form's purpose. A mandatory consent box would bundle consent with the service, so it wouldn't be freely given under GDPR, and it would add friction.
 
 An optional, unticked marketing checkbox is right only if the owner sends marketing. docs/business-facts.md records whether they do.
 
-The site's pattern for opening a link in a new tab is the showcase link (public/index.html:101): target="_blank" rel="noopener", the inline arrow SVG, and <span class="visually-hidden"> (opens in a new tab)</span>. In-sentence links need an underline, because accent against text is 2.17:1.
+The site's pattern for opening a link in a new tab is the showcase frame link (public/index.html:108): target="_blank" rel="noopener", the inline arrow SVG, and <span class="visually-hidden"> (opens in a new tab)</span>. In-sentence links need an underline, because accent against text is 2.17:1.
 </context>
 
 <inputs>
