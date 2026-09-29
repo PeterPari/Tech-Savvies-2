@@ -113,9 +113,9 @@ Notes:
 - **Hover, focus, `aria-current`:** nav hover and `aria-current="page"` use `--heading`, the underline is `--accent`. Link hover in the footer is `--accent` on `--bg`. `.btn:hover` is `--bg` on `--accent-hover`. All rows are above.
 - **Disabled:** `.btn:disabled` uses opacity .75. Disabled controls are exempt from 1.4.3, so 3.40:1 is recorded, not required.
 - **`::selection`:** `--bg` on `--accent`.
-- **Later prompts:** `.prose` (text, headings, list markers, tables), `.form-note` and `.optional` all use `--text` or `--muted` on `--bg`. There is no `.field-error` yet; when Prompt 15 adds it, `--error` on `--bg` is 6.69:1.
+- **Later prompts:** `.prose` (text, headings, list markers, tables), `.form-note` and `.optional` all use `--text` or `--muted` on `--bg`. `.field-error` (added in Prompt 15, 13px) is `--error` on `--bg`, 6.69:1, measured in Chromium.
 - **Decorative:** dividers, frame borders and window dots are below 3:1 on purpose. They aren’t needed to identify a control or read content.
-- **Color-only signals (1.4.1):** in-sentence links (`.lead`, `.body-muted`, `.meta`, `.form-note`, `.prose`, `.includes p`, `.contact-info p`, `.link`) share one underline rule, because `--accent` against body text is only 2.17:1 (against `--muted`, 1.01:1). Nav links, footer lists, buttons and `.contact-email` stay unchanged: they are not inside sentences. The invalid-field border is color-only until Prompt 15 adds text error messages.
+- **Color-only signals (1.4.1):** in-sentence links (`.lead`, `.body-muted`, `.meta`, `.form-note`, `.prose`, `.includes p`, `.contact-info p`, `.link`) share one underline rule, because `--accent` against body text is only 2.17:1 (against `--muted`, 1.01:1). Nav links, footer lists, buttons and `.contact-email` stay unchanged: they are not inside sentences. The red invalid-field border now comes with a text error under the field (Prompt 15); without JavaScript the browser’s own message does that job.
 
 ## Forced colors
 
@@ -124,3 +124,37 @@ An `@media (forced-colors: active)` block gives `.btn` and `.skip-link` a 2px `B
 ## axe results
 
 axe-core (color-contrast and link-in-text-block rules), installed outside the repo, run on all 10 pages (home, solutions, our-story, contact, thanks, privacy, terms, refunds, cookies, 404) at 375px and 1280px: **0 violations**. Some checks come back “incomplete” because axe can’t read the background through a background image or an overlapping element (the contact `select`, and the privacy and refunds tables at 375px); those pairs are covered by the computed ratios above.
+
+# Accessibility Audit: Keyboard
+
+WCAG 2.2 AA: 2.1.1 Keyboard, 2.4.1 Bypass Blocks, 2.4.3 Focus Order, 2.4.7 Focus Visible, 2.4.11 Focus Not Obscured (Minimum), 2.5.8 Target Size (Minimum), 3.3.1 Error Identification and 3.3.2 Labels or Instructions. Tested 2026-09-29 in Chromium (Playwright) at 375px and 1280px, tabbing forwards through each page and backwards from the footer.
+
+## What was fixed
+
+- **Focus behind the mobile menu (2.4.11).** With the menu open, `setOpen()` in `main.js` now sets `inert` on every child of `<body>` except `.site-header`, and removes it on every close path (toggle, Escape, choosing a link, a click outside, growing to the desktop layout). Tab and Shift+Tab also wrap between the first and last header control, so focus stays in the header instead of leaving the page. Opening leaves focus on the toggle; Escape returns it there. Where `inert` is unsupported the menu still works, and the wrap still keeps Tab in the header.
+- **Tall elements under the sticky header (2.4.11).** On /privacy/ the data-sharing table (`.table-scroll`, `tabindex="0"`) is taller than the screen, so the browser ignored `scroll-padding-top` and left its heading row under the header, forwards at both widths and backwards at 375px. `initFocusClearance()` nudges a Tab-focused element down below the header when it overlaps.
+- **Required fields (3.3.2).** The contact form opens with “All fields are required unless marked (optional).” (`p.form-note#form-required`).
+- **Error messages (3.3.1, 1.4.1).** With JavaScript, the form sets `noValidate` and shows a text error under each empty or invalid required field (`p.field-error#<field>-error`, with a visually hidden “Error: ” prefix), sets `aria-invalid="true"`, adds the error id to `aria-describedby` alongside any existing ids, and focuses the first invalid field. An error clears as soon as the field is valid. The red border now follows `aria-invalid`, so it never appears without text. The submit button stays enabled, and the double-submit guard runs only for valid submissions. Without JavaScript, the browser’s built-in validation blocks the submit.
+
+## Results
+
+“Stops” is the number of Tab stops from the top of the page back to the header. Every page has no positive `tabindex`, and its Tab order follows the visual order (the footer goes column by column).
+
+| Page | Stops 375 / 1280 | Skip link → next Tab in `<main>` | Focus clear of header (forwards / backwards) | Targets ≥ 24px or spaced (2.5.8) | Result |
+|------|------------------|----------------------------------|-----------------------------------------------|----------------------------------|--------|
+| / | 16 / 19 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+| /solutions/ | 15 / 18 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+| /our-story/ | 14 / 17 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+| /contact/ | 21 / 24 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix, required note, text errors) |
+| /contact/thanks/ | 15 / 18 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+| /privacy/ | 28 / 31 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix, table focus fix) |
+| /terms/ | 29 / 32 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+| /refunds/ | 20 / 23 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+| /cookies/ | 15 / 18 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+| /404.html | 14 / 17 | ✓ | ✓ / ✓ | ✓ | Pass (menu fix) |
+
+- **Skip link:** activating it moves the browser’s focus starting point to `#main`, so the next Tab lands on the first link in `<main>` on every page. `tabindex="-1"` on `<main>` wasn’t needed.
+- **Targets:** buttons, the menu toggle and form fields are at least 40px tall. Footer and desktop nav links are smaller, but they pass through the 2.5.8 spacing exception (a 24px circle on each doesn’t touch another target). Links inside sentences are exempt.
+- **Honeypot:** the `bot-field` paragraph is `display: none` and the input has `tabindex="-1"`, so Tab skips it and it isn’t in the accessibility tree (checked with a Playwright accessibility snapshot).
+- **Acceptance checks (run twice, all passed):** at 375px on /, 10 Tabs and 10 Shift+Tabs with the menu open stay in `.site-header`; Escape puts focus on the toggle and clears `inert`; the next Tabs reach `<main>`. On /contact/, an empty submit focuses Name, shows “Enter your name.”, and sets `aria-invalid` and `aria-describedby="name-error"`; typing a name clears all three. Typing “bob” in Email and submitting shows the format message and focuses Email. With JavaScript disabled, an empty submit is blocked by native validation and no request is sent.
+- **Not tested here:** Safari, Firefox and a real screen reader, and a live Netlify submission (the owner can check a deploy preview reaches /contact/thanks/).

@@ -1036,7 +1036,7 @@ main .eyebrow + * {
   line-height: 1.4;
 }
 
-/* Privacy notice above the submit button */
+/* Required-fields note at the top of the form, privacy notice above the submit button */
 .form-note {
   margin-top: 0.25rem;
   font-size: 0.8125rem;
@@ -1124,8 +1124,17 @@ main .eyebrow + * {
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
 }
 
-.input:user-invalid {
+/* Without JavaScript the browser flags invalid fields; with it, main.js sets aria-invalid next to a text error */
+html:not(.js) .input:user-invalid,
+.input[aria-invalid="true"] {
   border-color: var(--error);
+}
+
+/* Inline error under a field; main.js adds a visually hidden "Error: " prefix */
+.field-error {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--error);
 }
 
 .input:-webkit-autofill,

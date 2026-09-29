@@ -80,14 +80,18 @@
                   <label>Leave this field empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
                 </p>
 
+                <p class="form-note" id="form-required">All fields are required unless marked (optional).</p>
+
                 <div class="field-row">
                   <div class="field">
                     <label for="name">Name</label>
                     <input class="input" id="name" name="name" type="text" autocomplete="name" required>
+                    <p class="field-error" id="name-error" hidden></p>
                   </div>
                   <div class="field">
                     <label for="email">Email</label>
                     <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+                    <p class="field-error" id="email-error" hidden></p>
                   </div>
                 </div>
 
@@ -105,11 +109,13 @@
                     <option>Google Business Profile &amp; Social Media</option>
                     <option>Not sure yet</option>
                   </select>
+                  <p class="field-error" id="service-error" hidden></p>
                 </div>
 
                 <div class="field">
                   <label for="message">Message</label>
                   <textarea class="input" id="message" name="message" rows="6" required></textarea>
+                  <p class="field-error" id="message-error" hidden></p>
                 </div>
 
                 <p class="form-note" id="form-privacy">We’ll use these details to reply to you and, if you hire us, to run your project, and we won’t add you to a mailing list. If under 18, please have a parent or guardian contact us. Read our <a href="/privacy/" target="_blank" rel="noopener">Privacy Policy<svg class="icon-inline" aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11l6-6M6 5h5v5"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a>.</p>

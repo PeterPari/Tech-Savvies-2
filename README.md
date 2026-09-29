@@ -24,7 +24,7 @@ Everything the site serves lives in `public/`:
 ```
 public/
   assets/css/styles.css   all styles; colors, fonts and sizes are variables at the top
-  assets/js/main.js       mobile menu, footer year, form double-submit guard
+  assets/js/main.js       mobile menu (inert page behind it), focus clearance, footer year, form errors and double-submit guard
   assets/fonts/           Plus Jakarta Sans + JetBrains Mono (self-hosted, OFL licensed)
   assets/img/             logo, icons, social share image
   robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
