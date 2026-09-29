@@ -75,6 +75,29 @@ probe (in a browser from a clean machine) after the move.
 | Email open-tracking or read receipts? | No |
 | Plans for analytics, ads or pixels in the next 6 months? | Answered "Netlify Analytics are running". Read as: no further tools planned beyond Netlify Analytics. Confirm this if it was not the intent |
 
+## Cookie consent
+
+Decision (2026-09-29): **no cookie consent banner.**
+
+Evidence:
+
+- Results table above: 0 cookies, 0 `localStorage`/`sessionStorage` keys, no IndexedDB, no service workers
+  and only first-party requests on every page and viewport. This audit is newer than the last commit
+  touching `public/`, so no re-measurement was needed.
+- `public/assets/js/main.js` (menu, footer year, form double-submit guard) uses no cookies or storage.
+- Netlify Analytics is server-side and cookieless per Netlify (owner answers above); it needs disclosure in
+  the Privacy Policy but no consent prompt.
+- A banner would ask for consent to nothing, add an obstacle for keyboard and screen-reader users on
+  every first visit, and need a cookie of its own to remember the choice.
+
+Guard: the `consent-required` check in `tools/check_site.py` fails when a page outside `public/admin/`
+loads a script other than `/assets/js/main.js`, or JS uses cookies, Web Storage or a tracker signature,
+and no element has `data-consent-banner`. Tested with `<script>document.cookie="x=1"</script>` in a
+temporary copy of `public/`. Adding a tracker or cookie later means following
+`fix-prompts/05-cookie-consent.md` (branch B) first.
+
+Owner should re-check this decision if a cookie-based tool is ever wanted.
+
 ## Owner actions
 
 - Netlify Analytics is left on, as instructed. The Privacy Policy must disclose it.

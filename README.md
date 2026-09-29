@@ -36,6 +36,8 @@ client-side storage, the CSP, review schema, placeholder text, internal links, n
 the shared header and footer. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
 on every push and pull request. To add a check, see the comment at the top of the script.
 
+Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first.
+
 ## Preview locally
 
 Pages link to files with paths like `/assets/...`, so open the site through a local web server

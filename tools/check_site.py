@@ -370,11 +370,41 @@ def check_required_footer_links(site):
                 yield page.path, 1, "footer is missing link %s" % link
 
 
+CONSENT_MESSAGE = "Non-essential storage or tracking added without consent. See fix-prompts/05-cookie-consent.md"
+
+
+def check_consent_required(site):
+    pages = [p for p in site.pages if not site.is_admin(p.path)]
+    if any("data-consent-banner" in t.attrs for p in pages for t in p.tags):
+        return
+    sig_rx = re.compile("|".join(re.escape(s) for s in TRACKER_SIGNATURES if "<" not in s), re.I)
+
+    def uses_tracking(text):
+        return STORAGE_RE.search(text) or sig_rx.search(text)
+
+    for page in pages:
+        for line, typ, src, content in page.scripts:
+            if "json" in typ.lower():
+                continue
+            if src is not None and re.split(r"[?#]", src.strip())[0] != "/assets/js/main.js":
+                yield page.path, line, CONSENT_MESSAGE
+            elif src is None and uses_tracking(content):
+                yield page.path, line, CONSENT_MESSAGE
+    for path in site.text_files(".js"):
+        if site.is_admin(path):
+            continue
+        text = site.read(path)
+        m = STORAGE_RE.search(text) or sig_rx.search(text)
+        if m:
+            yield path, line_of(text, m.start()), CONSENT_MESSAGE
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
     ("no-client-storage", check_no_client_storage),
     ("no-trackers", check_no_trackers),
+    ("consent-required", check_consent_required),
     ("csp-unchanged", check_csp_unchanged),
     ("no-review-schema", check_no_review_schema),
     ("no-placeholders", check_no_placeholders),
