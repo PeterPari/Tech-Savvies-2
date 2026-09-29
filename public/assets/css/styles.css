@@ -25,6 +25,7 @@
 
 /* ---------- Design tokens ---------- */
 
+/* All color pairs meet WCAG AA; ratios in docs/accessibility-audit.md. Re-check when changing a token. */
 :root {
   --bg: #0f1419;
   --text: #e8eef7;
@@ -290,14 +291,27 @@ main .eyebrow + * {
   color: var(--muted);
 }
 
-/* Links inside sentences need more than color to stand out */
-.lead a {
+/* Links inside sentences need more than color to stand out (WCAG 1.4.1).
+   Nav links, footer lists, buttons and .contact-email are not in-sentence links. */
+.lead a,
+.body-muted a,
+.meta a,
+.form-note a,
+.prose a,
+.includes p a,
+.contact-info p a,
+.link {
   text-decoration: underline;
   text-decoration-color: rgba(16, 185, 129, 0.5);
   text-underline-offset: 0.2em;
 }
 
-.lead a:hover {
+.lead a:hover,
+.body-muted a:hover,
+.prose a:hover,
+.includes p a:hover,
+.contact-info p a:hover,
+.link:hover {
   text-decoration-color: currentColor;
 }
 
@@ -314,13 +328,11 @@ main .eyebrow + * {
 
 .meta a {
   color: inherit;
-  text-decoration: underline;
   text-decoration-color: rgba(148, 163, 184, 0.45);
   text-underline-offset: 0.2em;
 }
 
 .meta a:hover {
-  color: var(--heading);
   text-decoration-color: currentColor;
 }
 
@@ -634,7 +646,7 @@ main .eyebrow + * {
 
 @media (min-width: 48em) {
   .footer-grid {
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) repeat(3, auto);
     column-gap: clamp(3rem, 8vw, 8rem);
   }
 
@@ -910,6 +922,47 @@ main .eyebrow + * {
   line-height: 1.6;
 }
 
+/* Tier prices under a service's headline price */
+.price-tiers {
+  display: grid;
+  row-gap: 0.5rem;
+}
+
+.price-tiers .price {
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+}
+
+.price-tiers .price-amount {
+  font-size: var(--fs-h4);
+  letter-spacing: -0.017em;
+}
+
+.price-tiers .price-note {
+  line-height: 1.5;
+}
+
+/* Costs outside our fee, Payment */
+.includes + .includes {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.cost-list {
+  display: grid;
+  row-gap: 0.5rem;
+  max-width: var(--measure);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.cost-list strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
 @media (min-width: 36em) {
   .service .checklist {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -936,6 +989,15 @@ main .eyebrow + * {
 
   .includes {
     padding-bottom: 0;
+  }
+
+  .includes + .includes {
+    margin-top: 2.5rem;
+  }
+
+  /* A note after a list (e.g. the Terms link under Payment) stays in the list's column */
+  .includes > .cost-list + p {
+    grid-column: 2;
   }
 }
 
@@ -981,6 +1043,25 @@ main .eyebrow + * {
   font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.4;
+}
+
+/* Required-fields note at the top of the form, privacy notice above the submit button */
+.form-note {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.form-note a {
+  color: inherit;
+  text-decoration-color: rgba(148, 163, 184, 0.45);
+  text-underline-offset: 0.2em;
+}
+
+.form-note a:hover {
+  color: var(--heading);
+  text-decoration-color: currentColor;
 }
 
 @media (min-width: 56em) {
@@ -1052,8 +1133,17 @@ main .eyebrow + * {
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
 }
 
-.input:user-invalid {
+/* Without JavaScript the browser flags invalid fields; with it, main.js sets aria-invalid next to a text error */
+html:not(.js) .input:user-invalid,
+.input[aria-invalid="true"] {
   border-color: var(--error);
+}
+
+/* Inline error under a field; main.js adds a visually hidden "Error: " prefix */
+.field-error {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--error);
 }
 
 .input:-webkit-autofill,
@@ -1110,6 +1200,140 @@ select.input option {
 
 .simple-page .btn {
   margin-top: 2rem;
+}
+
+/* ---------- Legal pages (privacy, terms, refunds) ---------- */
+
+h1 + .meta {
+  margin-top: 1rem;
+}
+
+.prose {
+  max-width: var(--measure);
+  margin-top: 2.5rem;
+  overflow-wrap: break-word;
+}
+
+.prose > * + * {
+  margin-top: 1rem;
+}
+
+.prose h2 {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.028em;
+  color: var(--heading);
+}
+
+.prose > h2:first-child {
+  margin-top: 0;
+}
+
+.prose h3 {
+  margin-top: 2rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.017em;
+  color: var(--heading);
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0.75rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose li + li {
+  margin-top: 0.5rem;
+}
+
+.prose li::marker {
+  color: var(--muted);
+}
+
+.prose strong {
+  color: var(--heading);
+}
+
+/* Wide tables scroll sideways inside this box instead of widening the page */
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius);
+}
+
+.table-scroll table {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.table-scroll th,
+.table-scroll td {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table-scroll th {
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.table-scroll thead th {
+  background: var(--field-bg);
+}
+
+/* ---------- Forced colors (Windows High Contrast) ---------- */
+
+@media (forced-colors: active) {
+  /* Buttons lose their background fill, so give them a border */
+  .btn,
+  .skip-link {
+    border: 2px solid ButtonText;
+  }
+
+  .btn:hover {
+    border-color: Highlight;
+  }
+
+  .nav-link[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.55em;
+  }
+
+  .nav-toggle {
+    border: 1px solid ButtonText;
+  }
+
+  :focus-visible,
+  .input:focus {
+    outline: 2px solid Highlight;
+    outline-offset: 3px;
+  }
+
+  .input:focus {
+    outline-offset: 0;
+  }
+
+  .showcase-frame:has(.showcase-frame-url:focus-visible) {
+    outline: 2px solid Highlight;
+  }
 }
 
 /* ---------- Motion ---------- */

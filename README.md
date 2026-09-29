@@ -12,19 +12,47 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/our-story/` | `public/our-story/index.html` | Our Story |
 | `/contact/` | `public/contact/index.html` | Contact info and the contact form |
 | `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
+| `/terms/` | `public/terms/index.html` | Terms of Service (linked from every footer’s Legal column and the /solutions/ Payment block) |
+| `/refunds/` | `public/refunds/index.html` | Refund Policy (linked from every footer’s Legal column, the /solutions/ Payment block and the refund wording in /terms/) |
+| `/privacy/` | `public/privacy/index.html` | Privacy Policy (linked from every footer’s Legal column) |
+| `/cookies/` | `public/cookies/index.html` | Cookie Policy (linked from every footer’s Legal column) |
+| `/accessibility/` | `public/accessibility/index.html` | Accessibility statement: WCAG 2.2 AA aim, what was tested, known limitations, how to report a barrier (linked from every footer’s Legal column) |
 | any missing page | `public/404.html` | Page not found |
 | `/admin/` | `public/admin/index.html` | Internal prompt checklist (not linked, not indexed; generated, see below) |
+| `/index.md`, `/privacy.md`, `/contact/thanks.md`, `/404.md` … | `public/*.md`, `public/contact/thanks.md` | Plain-text version of every page except `/admin/`, at the page’s name + .md (generated, see Editing) |
+| `/llms.txt` | `public/llms.txt` | What the site is, and a link to each indexable page’s plain-text version, for AI tools ([llmstxt.org](https://llmstxt.org/); generated) |
 
 Everything the site serves lives in `public/`:
 
 ```
 public/
   assets/css/styles.css   all styles; colors, fonts and sizes are variables at the top
-  assets/js/main.js       mobile menu, footer year, form double-submit guard
+  assets/js/main.js       mobile menu (inert page behind it), focus clearance, footer year, form errors and double-submit guard
   assets/fonts/           Plus Jakarta Sans + JetBrains Mono (self-hosted, OFL licensed)
   assets/img/             logo, icons, social share image
   robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
+docs/                     business-facts.md (owner fills in), data-inventory.md (personal data and retention), data-requests-runbook.md (how to complete a data request), compliance-log.md (status of the 25 items), claims-register.md (evidence for every claim)
+tools/                    check_site.py (regression checker), build_admin.py, build_markdown.py (plain-text mirrors)
 ```
+
+## Checks
+
+`python3 tools/check_site.py` (standard library only, run from the repo root) exits 1 and prints
+`path:line: [check-name] message` for each problem. It guards image alt text, external resources,
+client-side storage, the CSP, review schema, unsupported claims, placeholder text, internal links, new-tab links,
+the shared header and footer, and that every price and the completion guarantee on `/solutions/` match `/terms/`.
+Changing a price, promise or refund rule? Change `/solutions/`, `/terms/`, `/refunds/` and `docs/business-facts.md` together. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
+on every push and pull request. To add a check, see the comment at the top of the script.
+
+Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first.
+
+## Credits & licences
+
+Fonts: Plus Jakarta Sans and JetBrains Mono, SIL Open Font License 1.1, self-hosted with their licence texts in `public/assets/fonts/`.
+Logo: drawn by the owner. Icons and the share image: made for this site from the logo.
+The Grisha.studio screenshot is used with the client’s written permission.
+Every asset, its creator, source and licence: [`docs/asset-licenses.md`](docs/asset-licenses.md).
+Adding an image, font or icon? Add its row there first; `check_site.py` (`asset-inventory`) checks it.
 
 ## Preview locally
 
@@ -40,10 +68,31 @@ Then visit <http://localhost:8080>.
 
 ## Editing
 
+- **Plain-text versions:** after changing any page, run `python3 tools/build_markdown.py`. It rewrites
+  each page’s `.md` mirror, `public/llms.txt` and the mirrors’ block in `netlify.toml` (served as
+  `text/plain; charset=utf-8` with the HTML page as canonical). `check_site.py` (`markdown-mirrors`)
+  fails while any of them is out of date. A new page needs `<link rel="alternate" type="text/markdown" href="/NAME.md">` in its `<head>`.
 - **Text:** edit the HTML file for that page. On the two big headlines, the periods and
   apostrophes are wrapped in `<span class="kern-dot">` / `<span class="kern-apos">` to tuck
   them in tighter, like in the mockup. Keep those spans if you change the wording.
-- **Header and footer:** repeated in every HTML file (6 files). Change all of them together.
+- **Header and footer:** repeated in every HTML file except `/admin/` (9 files). Change all of them together.
+- **Business details:** the legal name (Peter Parizhsky) appears in the footer copyright line
+  of every page, the `legalName` in the JSON-LD in `public/index.html`, the `LEGAL_NAME` constant
+  in `tools/check_site.py`, and one sentence on `/our-story/`. "New York, NY" appears in every
+  footer, the JSON-LD `address`, and the `.contact-info` block on `/contact/`, which also holds the
+  service area and reply time. Source of truth: `docs/business-facts.md`. There is no mailing
+  address or fixed hours to show; add them everywhere above if that changes.
+- **New UI:** follow the honest-UI rules in [`docs/ux-honesty-rules.md`](docs/ux-honesty-rules.md).
+- **Images and alt text:** every image and icon must have a text alternative for accessibility (WCAG 1.1.1). 
+  1. *Linked logos* (a logo that links to a page): `alt="Tech-Savvies NYC home"` names the destination.
+     Example: `<a href="/"><img alt="Tech-Savvies NYC home" …></a>`
+  2. *Meaningful images* (screenshots, case studies): describe content in ≤125 characters, no "image of" prefix.
+     Example: `alt="The Grisha.studio home page, showing the name Gregory Parizhsky beside a photo…"`
+  3. *Decorative SVGs* (icons in buttons, menu toggles): mark as `aria-hidden="true" focusable="false"`.
+     Example: `<svg aria-hidden="true" focusable="false">…</svg>`
+  4. *Social cards* (og:image): both `og:image:alt` and `twitter:image:alt` must describe the card image.
+     Example: `<meta property="og:image:alt" content="…"><meta name="twitter:image:alt" content="…">`
+  Reference: [W3C alt decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).
 - **Colors, fonts, spacing:** the variables at the top of `public/assets/css/styles.css`.
 - **Domain:** links for Google and social sharing use `https://tech-savvies.com`
   (the `canonical` and `og:` tags in each page, `sitemap.xml` and `robots.txt`).

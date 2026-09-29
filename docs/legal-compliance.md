@@ -1,0 +1,167 @@
+# Legal compliance map
+
+> **Not legal advice.** This map shows which laws may apply and where the site handles them. A New York attorney and an accountant should confirm it.
+
+## Summary
+
+Tech-Savvies is a one-person sole proprietorship in New York that trades as “Tech-Savvies” with no
+DBA filed. It serves business clients remotely. Laws that apply: FTC Act §5 and NY GBL §349/§350
+(§349 now also bans “unfair” and “abusive” practices), GBL §130 (a DBA is required, and without one
+you can’t sue on contracts made under that name), the SHIELD Act (client logins are sometimes held),
+GOL §3-101 (the contract signer is under 18), and tax record-keeping. The Grisha.studio case study
+needs an “unavoidable” family-connection disclosure. The monthly plan is re-booked each month, so
+automatic-renewal rules don’t apply. The refund-posting law, the CCPA, CalOPPA and NYC’s
+consumer-pricing law cover goods or consumers, not business clients. Accessibility law and sales tax
+still need an attorney and an accountant.
+
+## Sources
+
+Every quote comes from [`legal-sources.md`](legal-sources.md). The owner collected it on 2026-09-28
+with Claude Cowork from the official pages listed, and checked each quote word for word against the
+live page. This session still can’t open those sites, so it didn’t re-fetch them. The Checked column
+gives the date each page was opened. Only one page failed: dhr.ny.gov/public-accommodations.
+
+## Map
+
+Page anchors are the ones the named prompt is told to create. The final pass (below) checked each against the live page.
+
+| Law | Applies? | Why | Requirement (quoted from the source) | Handled by | Source URL | Checked |
+|-----|----------|-----|--------------------------------------|------------|------------|---------|
+| FTC Act §5 (15 U.S.C. §45) | Yes | The site advertises paid services and their prices | “Unfair methods of competition in or affecting commerce, and unfair or deceptive acts or practices in or affecting commerce, are hereby declared unlawful.” (§45(a)(1)) | 09 site-wide + `docs/ux-honesty-rules.md`, 10 /solutions/, 12 /, /solutions/, /contact/ | https://uscode.house.gov/view.xhtml?req=%28title%3A15+section%3A45+edition%3Aprelim%29 | 2026-09-28 |
+| FTC Rule on Consumer Reviews and Testimonials (16 CFR 465) | Only if Tech-Savvies shows or asks for reviews or testimonials | None on the site today. The Google Business Profile work makes review requests likely. The owner’s brother is an “immediate relative” | “unfair or deceptive act … for an officer or manager of a business to solicit or demand a consumer review about the business … from any of their immediate relatives” (§465.5(c)(1)); “Immediate Relative means a spouse, parent, child, or sibling” (§465.1(i)) | 11 `docs/testimonials-policy.md` + `tools/check_site.py` guard | https://www.ecfr.gov/current/title-16/chapter-I/subchapter-D/part-465 | 2026-09-28 |
+| FTC Endorsement Guides (16 CFR 255) | Unclear; ask an attorney | Whether a portfolio case study is an “endorsement” (§255.0(b)) isn’t settled. The client is the owner’s brother, and disclosure is already planned (compliance log #11) | “Material connections can include a business, family, or personal relationship.” (§255.5(a)); “In any communication using an interactive electronic medium, such as social media or the internet, the disclosure should be unavoidable.” (§255.0(f)) | 11 / case study: disclosure beside the case study itself, not behind a link | https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255 | 2026-09-28 |
+| FTC negative-option rule: current status | Only if the monthly plan renews automatically | Not today: clients re-book each month (owner, 2026-09-29). Status: the Eighth Circuit vacated the 2024 “click-to-cancel” amendments, the pre-2024 rule was restored effective 2026-02-12, and an ANPRM was published 2026-03-13. No later notice appears | “revising its recently amended … Negative Option Rule to recodify the text of the Negative Option Rule as it existed before the effective date of the Commission's 2024 final rule amending it” (91 FR 6507) | 02 /terms/#monthly-plan, 10 /solutions/ (say the plan is re-booked monthly) | https://www.federalregister.gov/documents/2026/02/12/2026-02866/revision-of-the-negative-option-rule-withdrawal-of-the-cars-rule-removal-of-the-non-compete-rule-to and https://www.ftc.gov/legal-library/browse/rules/negative-option-rule | 2026-09-28 |
+| NY GBL §349 / §350 | Yes | A New York business advertising services. §349 (revised from 2025-12-26) now covers unfair and abusive practices too, including anything that “materially interferes with the ability of a person to understand a term or condition” | “Unfair, deceptive, or abusive acts or practices in the conduct of any business, trade or commerce or in the furnishing of any service in this state are hereby declared unlawful.” (§349(a)); “False advertising … is hereby declared unlawful.” (§350) | 09 site-wide, 10 /solutions/, 12 /, /solutions/, /contact/; 02 /terms/ in plain words | https://www.nysenate.gov/legislation/laws/GBS/349 and https://www.nysenate.gov/legislation/laws/GBS/350 | 2026-09-28 |
+| NY GBL §527-a (automatic renewal) | Only if the plan renews automatically or continues until cancelled, and is sold to a “consumer” | Clients re-book each month (owner, 2026-09-29). §527(3) defines a consumer as buying “for personal, family, or household purposes”; clients buy for their businesses | “"Automatic renewal" means a plan or arrangement in which a paid subscription or purchasing agreement is automatically renewed at the end of a definite term for a subsequent term.” (§527(1)) | 02 /terms/#monthly-plan, 10 /solutions/ | https://www.nysenate.gov/legislation/laws/GBS/527-A and https://www.nysenate.gov/legislation/laws/GBS/527 | 2026-09-28 |
+| NY GBL §130 (assumed name) | Yes | Trades as “Tech-Savvies”, not under the owner’s legal name, with no DBA filed. Not filing bars suing on contracts made under the assumed name until you file, and knowingly failing to file is a misdemeanor (§130(9)) | “No person shall … transact business in this state under any name or designation other than his or its real name … unless … shall file in the office of the clerk of each county in which such business is conducted” (§130(1)) | Owner action (DBA filing, below); 16 footer + /contact/, 01 /privacy/#contact, 02 /terms/#about show the legal name | https://www.nysenate.gov/legislation/laws/GBS/130 | 2026-09-28 |
+| NY GBL §218-a (refund policy posting) | No | The text covers “goods, wares or merchandise”, and “service” doesn’t appear in it. Tech-Savvies sells services, and clients buy their own domains | “Every retail mercantile establishment and online retailer shall conspicuously post … its refund policy as to all goods, wares or merchandise offered to the public for sale” (§218-a(1)) | n/a; 03 /refunds/ is posted anyway | https://www.nysenate.gov/legislation/laws/GBS/218-A | 2026-09-28 |
+| NY SHIELD Act (GBL §899-aa, §899-bb) | Yes, for any New York client’s login it holds | Client logins are sometimes held (owner, 2026-09-29), and a login is “private information”. Small businesses get safeguards scaled to their “size and complexity” (§899-bb(2)(c)) | “Any person or business that owns or licenses computerized data which includes private information of a resident of New York shall develop, implement and maintain reasonable safeguards” (§899-bb(2)(a)); “a user name or e-mail address in combination with a password” (§899-aa(1)(b)(ii)) | 01 /privacy/#security, 07 `docs/data-inventory.md`, 20 `docs/data-requests-runbook.md`; owner action (client logins, below) | https://www.nysenate.gov/legislation/laws/GBS/899-AA, https://www.nysenate.gov/legislation/laws/GBS/899-BB, https://ag.ny.gov/resources/organizations/data-breach-reporting/shield-act | 2026-09-28 |
+| NY Child Data Protection Act (GBL §899-ee et seq.) | Only if Tech-Savvies actually knows an enquirer is under 18 | The site isn’t “primarily directed to minors” (§899-ee(6)). A known minor becomes a “covered user”, whose data may be used only where “strictly necessary” or with informed consent (§899-ff(1)). Effective 2025-06-20 | “Within thirty days of determining or being informed that a user is a covered user, an operator shall … dispose of, destroy, or delete … all personal data of such covered user” (§899-ff(6)), unless an exception applies | 17 /privacy/#children, /contact/ `p#form-privacy`, `docs/data-inventory.md` “Minors” | https://www.nysenate.gov/legislation/laws/GBS/899-EE, https://www.nysenate.gov/legislation/laws/GBS/899-FF, https://ag.ny.gov/child-data-protection-act-guidance | 2026-09-28 |
+| NY General Obligations Law §3-101 (minors’ contracts) | Yes | The person who signs client contracts is under 18 (business-facts). The section protects only contracts made at 18 or older. What that means for the owner’s contracts, and for under-18 clients, is a question for the attorney | “A contract made on or after September first, nineteen hundred seventy-four by a person after he has attained the age of eighteen years may not be disaffirmed by him on the ground of infancy.” (§3-101(1)) | Owner action (parent or guardian co-signing, below); 02 /terms/#age, 17 /contact/ `p#form-privacy` | https://www.nysenate.gov/legislation/laws/GOB/3-101 | 2026-09-28 |
+| CalOPPA (Cal. Bus. & Prof. Code §22575–22579) | Unclear; ask an attorney | It covers personal data about a “consumer”, meaning someone buying “for personal, family, or household purposes” (§22577(d)). Enquirers are mostly businesses, but a visitor could be a consumer. /privacy/ is being written anyway | “shall conspicuously post its privacy policy on its Web site”; the policy must “Identify its effective date” and “Disclose how the operator responds to Web browser “do not track” signals” (§22575(a), (b)(4)–(5)) | 01 /privacy/ (in every footer; “Last updated” date; #cookies covers Do Not Track; #changes; #sharing) | https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article= | 2026-09-28 |
+| CCPA/CPRA | No | A one-person business charging $50–$375 per job, which sells or shares no personal data, is far below every threshold. The revenue threshold is $26,625,000 from 2025-01-01 (CPPA) | “had annual gross revenues in excess of twenty-five million dollars ($25,000,000) … annually buys, sells, or shares the personal information of 100,000 or more consumers or households” (Cal. Civ. Code §1798.140(d)(1)) | n/a; 01 /privacy/#how-we-use-it states there’s no sale or sharing | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.140. and https://cppa.ca.gov/regulations/cpi_adjustment.html | 2026-09-28 |
+| Other US state privacy laws | No for Texas, Connecticut and Virginia; other states not checked | Texas exempts small businesses, except that they can’t sell sensitive data without consent (§541.107). Connecticut and Virginia apply only above 100,000 consumers, or 25,000 plus data-sale revenue | “is not a small business as defined by the United States Small Business Administration” (Tex. Bus. & Com. Code §541.002(a)(3)); “personal data of not less than one hundred thousand consumers” (Conn. Gen. Stat. §42-516) | n/a; 01 /privacy/#how-we-use-it, 20 /privacy/#your-rights | https://statutes.capitol.texas.gov/Docs/BC/htm/BC.541.htm, https://www.cga.ct.gov/current/pub/chap_743jj.htm, https://law.lis.virginia.gov/vacode/title59.1/chapter53/section59.1-576/ | 2026-09-28 |
+| GDPR / UK GDPR | Only if EU/UK clients are deliberately targeted | `docs/business-facts.md` says they aren’t (owner, 2026-09-29). Art. 3(2)(a) reaches “the offering of goods or services … to such data subjects in the Union” | n/a unless that changes | 01 /privacy/#international (one sentence: data is processed in the US) | https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng and https://www.legislation.gov.uk/eur/2016/679/article/3 | 2026-09-28 |
+| COPPA (16 CFR 312) | Only if the site is directed to children or knowingly collects data from a child under 13 | The site is for businesses, and the directed-to-children test looks at subject matter, visuals and intended audience (§312.2) | “any operator that has actual knowledge that it is collecting or maintaining personal information from a child” must “Obtain verifiable parental consent prior to any collection, use, and/or disclosure” (§312.3) | 17 /privacy/#children | https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312 | 2026-09-28 |
+| CAN-SPAM | Only if marketing (commercial) email is sent | None sent or planned (owner, 2026-09-29). Replies to enquiries and project emails are transactional or relationship messages. There’s no business-to-business exception, and no postal address is on file | “Your message must include your valid physical postal address.” “You must honor a recipient’s opt-out request within 10 business days.” “The law makes no exception for business-to-business email.” (FTC guide) | 18 `docs/email-policy.md` + signatures | https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business | 2026-09-28 |
+| ADA Title III (website accessibility) | Unclear; ask an attorney | Title III covers “businesses open to the public”, and every example DOJ gives is a physical place. Tech-Savvies is online-only. The guidance is non-binding | “the ADA’s requirements apply to all the goods, services, privileges, or activities offered by public accommodations, including those offered on the web.” (DOJ web guidance, 2022-03-18) | 13, 14, 15, 25 site-wide; 21 /accessibility/ | https://www.ada.gov/resources/web-guidance/ and https://www.ada.gov/topics/title-iii/ | 2026-09-28 |
+| NY State Human Rights Law (Exec. Law §296) | Unclear; ask an attorney | §292(9) lists “establishments dealing with goods or services of any kind”, and doesn’t say whether an online-only business counts. The DHR page failed to load | “unlawful discriminatory practice for any person, being the owner … of any place of public accommodation … because of … disability … to refuse, withhold from or deny to such person any of the accommodations, advantages, facilities or privileges thereof” (§296(2)(a)) | 21 /accessibility/ | https://www.nysenate.gov/legislation/laws/EXC/296 and https://www.nysenate.gov/legislation/laws/EXC/292 | 2026-09-28 (dhr.ny.gov failed) |
+| NYC Human Rights Law (Admin. Code §8-107(4)) | Yes | An NYC-based “provider” of services: the definition isn’t tied to a physical place. How it applies to the website is a question for the attorney | “includes providers, whether licensed or unlicensed, of goods, services, facilities, accommodations, advantages or privileges of any kind” (§8-102); must not deny “full and equal enjoyment, on equal terms and conditions” (§8-107(4)(a)) | 21 /accessibility/ (statement + barrier reporting) | https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-219879 and https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-207412 | 2026-09-28 |
+| NY sales tax: web design, hosting, domain resale | Unclear; ask an accountant | The fetched guidance says nothing about web site design or domain registration. It separates custom from prewritten software and mentions taxable “certain information services”. No tax conclusion is drawn here | “Sales of services are generally exempt from New York sales tax unless they are specifically taxable.” “Every person who sells taxable tangible personal property or taxable services … must register with the Tax Department … before beginning business.” | Owner action (accountant, below); 10 /solutions/ Payment block, 02 /terms/#payment state the result | https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/quick_reference_guide_for_taxable_and_exempt_property_and_services.htm, https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/computer_software.htm, https://www.tax.ny.gov/bus/st/register.htm | 2026-09-28 |
+| NYC consumer protection rules on service pricing (Admin. Code §20-700 et seq.) | Only if services are sold for personal, household or family use | Clients buy for their businesses. The price-posting law (§20-750) covers retail service establishments with order counters, and no DCWP rule on service prices was found | “No person shall engage in any deceptive or unconscionable trade practice in the sale … of any consumer goods or services” (§20-700); consumer goods and services are those “primarily for personal, household or family purposes” (§20-701(c)) | 09 site-wide, 10 /solutions/, 12 /solutions/ | https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-35314 | 2026-09-28 |
+| Record retention for invoices and tax records | Yes | Every sale creates invoices and payment records (Venmo, bank transfer). Emails are kept 12 months (business-facts), which is shorter than the periods quoted | “Keep records for 3 years if situations (4), (5), and (6) below do not apply to you.” (IRS); sales tax vendors keep records “for a minimum of three years from the due date of the return” (TB-ST-770) | Owner action (accountant, below); 07 `docs/data-inventory.md` retention rule, 01 /privacy/#retention | https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records and https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/record-keeping_requirements_for_sales_tax_vendors.htm | 2026-09-28 |
+
+## Notes for other prompts
+
+- **Prompt 11 (case study).** Both FTC sources require disclosures to be unavoidable. §465.1(c)(4)
+  adds that a disclosure “is not clear and conspicuous if a consumer must take any action, such as
+  clicking on a hyperlink”. So the “or be easy to find” option in compliance log #11 doesn’t meet this
+  standard. The disclosure goes beside the case study, wherever the case study appears. If the owner
+  doesn’t want it on the home page, the case study moves off the home page. Also don’t ask the owner’s
+  brother, or any other immediate relative, for a Google review (§465.5(c)).
+- **Prompt 02 (Terms), #monthly-plan.** Its example wording says “renews automatically each month
+  until you cancel”, but the owner confirmed on 2026-09-29 that clients re-book each month. Follow the
+  facts file. §349 now bans practices that make a term hard to understand, so write each clause
+  plainly.
+- **Prompt 17 (minors).** When the business learns an enquirer is under 18, it must delete their data
+  within 30 days unless an exception applies (§899-ff(6)). The deletion timeframe written into
+  `docs/business-facts.md` must be 30 days or less.
+- **Prompts 01 and 20 (data requests).** None of the laws that apply sets an access or deletion
+  deadline for this business. The CCPA doesn’t apply, and the 30-day rule covers minors only. Promise
+  the owner’s own reply time from `docs/business-facts.md`.
+- **Prompt 01 (Privacy).** CalOPPA’s list is a useful checklist even if the law doesn’t apply: data
+  categories, who it’s shared with, how to review or correct data, how changes are announced,
+  effective date, Do Not Track, and whether other parties track visitors (§22575(b)).
+- **Prompts 01 and 07 (security, retention).** Describe how client logins are kept and when they’re
+  deleted, using only facts the owner confirms. The SHIELD Act lists disposal “within a reasonable
+  amount of time after it is no longer needed” as a physical safeguard (§899-bb(2)(b)(ii)(C)(4)). Keep
+  invoices and payment records apart from the 12-month email rule.
+- **Prompt 18 (email).** Marketing email can’t start until there is a street address, a PO box
+  registered with USPS, or a private mailbox registered with a commercial mail receiving agency. None
+  is on file today.
+
+## Final pass (2026-09-29)
+
+Each “Handled by” entry above, checked against the page in `public/` (or the named file) on
+2026-09-29. `python3 tools/check_site.py` passes 25 checks on 12 pages. Two gaps needed at most one
+line of copy and are fixed in this commit. Every source was checked on 2026-09-28, less than 6 months
+ago, so none was refreshed.
+
+| Entry | Laws | Clause or feature found | Result |
+|-------|------|-------------------------|--------|
+| 09 site-wide + `docs/ux-honesty-rules.md` | FTC Act §5, GBL §349/§350, NYC §20-700 | `docs/ux-honesty-rules.md` exists; the `claims` check fails on any phrase the business can’t back up, and passes | Met |
+| 10 /solutions/ | FTC Act §5, GBL §349/§350, §527-a, negative option, NYC §20-700 | “$50/month: Ongoing upkeep, paid in full when you book each month; it doesn’t renew on its own, so there’s nothing to cancel.” `#other-costs` lists the domain, hosting, paid tools and Stripe or Square fees | Met |
+| 10 /solutions/#payment, 02 /terms/#payment | NY sales tax | “Sales tax: our prices don’t include sales tax. If it applies, we’ll tell you the amount before you pay anything.” | Met (whether tax applies is still the accountant’s question) |
+| 12 /, /solutions/, /contact/ | FTC Act §5, GBL §349/§350 | / “We’ll build it, or tell you upfront if it’s outside the quoted price.”; /solutions/ “we aim to deliver a Tier 1, 2 or 3 site within 5 days”; /contact/ “We typically reply within 1 business day.” | Met |
+| 02 /terms/ in plain words | GBL §349 | Short sentences in each section, e.g. #liability “The most we owe you for any claim is what you paid us for the project the claim is about.” | Met |
+| 02 /terms/#monthly-plan | §527-a, negative option | “No automatic renewal: the plan doesn’t renew on its own, and we never charge you automatically.” “Stopping: there’s nothing to cancel and no fee.” | Met |
+| 11 `docs/testimonials-policy.md` + `tools/check_site.py` | 16 CFR 465 | No reviews or ratings on the site; `no-review-schema` and `testimonial-source` checks pass | Met |
+| 11 / case study | 16 CFR 255 | In the `.meta` line with the client name, above the screenshot: “Gregory Parizhsky, a local artist (the founder’s brother; our first project, at a reduced rate)”. The case study appears on / only | Met |
+| 16 footer + /contact/ | GBL §130 | Footer on every page: “© 2026 Peter Parizhsky. All rights reserved.” /contact/ “Business:” gave only “Tech-Savvies”. Fixed: “Tech-Savvies, the trading name of Peter Parizhsky, a sole proprietor” | Gap, fixed (the DBA filing is still an owner action) |
+| 01 /privacy/#contact | GBL §130 | “Tech-Savvies is the trading name of Peter Parizhsky, a sole proprietor based in New York, NY. He is the person responsible for your data.” | Met |
+| 02 /terms/#about | GBL §130 | “These terms are an agreement between you and Tech-Savvies. Tech-Savvies is the trading name of Peter Parizhsky, a sole proprietor based in New York, NY.” | Met |
+| 03 /refunds/ | GBL §218-a (n/a) | Linked in every footer; “This policy covers every service on our Solutions page.” | Met |
+| 01 /privacy/#security | SHIELD Act | “Our Netlify and iCloud accounts use two-step login.” “If you share a password with us, we keep it in a password manager, never in email or notes. We delete it when the work ends.” | Met |
+| 07 `docs/data-inventory.md`, 20 `docs/data-requests-runbook.md` | SHIELD Act, record retention | Runbook: “remove any stored login from the password manager”. Inventory, client records: “Per accountant (legal-compliance.md cites 3 years as a floor; not settled)” | Met (retention period still open) |
+| 17 /privacy/#children | COPPA, NY CDPA | “They aren’t directed to children under 13, and we don’t knowingly collect data from them. If we find that a child under 13 has sent us personal data, we delete it and don’t use it.” The under-18 paragraph ended “If no parent or guardian gets in touch, we delete the details.” with no deadline (§899-ff(6) sets 30 days). Fixed: “…we delete the details within 30 days of learning their age.” | COPPA met; CDPA gap, fixed |
+| 17 /contact/ `p#form-privacy` | NY CDPA, GOL §3-101 | “If under 18, please have a parent or guardian contact us.” | Met |
+| 17 `docs/data-inventory.md` “Minors” | NY CDPA | Delete “within 30 days of learning the person is a minor” | Met |
+| 02 /terms/#age | GOL §3-101 | “To hire us you must be 18 or older. If you’re under 18, a parent or guardian must agree to these Terms and will be our client for the project, including payment.” | Met for clients (the owner’s own age is still an owner action) |
+| 01 /privacy/ | CalOPPA | Privacy link in the footer of all 11 visitor pages; “Last updated September 29, 2026”; #cookies “we treat every visit the same way, whether or not your browser sends a Do Not Track or Global Privacy Control signal”; #changes “we’ll post the new version on this page and change the “Last updated” date”; #sharing lists each service and what it gets | Met |
+| 01 /privacy/#how-we-use-it | CCPA/CPRA, other states | “We don’t sell your personal data.” “We don’t “share” it in the sense of California’s privacy law” | Met |
+| 20 /privacy/#your-rights | Other states, CalOPPA | “give you a copy of the personal data we hold about you; correct it; delete it” and “We finish it within 10 business days.” | Met |
+| 01 /privacy/#international | GDPR / UK GDPR | “We run Tech-Savvies from the United States and handle your data here, though the services we use may store it in other countries.” | Met |
+| 18 `docs/email-policy.md` + signatures | CAN-SPAM | Standard signature “Tech-Savvies (Peter Parizhsky, sole proprietor)”; commercial email waits for a postal address; none is sent | Met |
+| 13, 14, 15, 25 site-wide | ADA Title III | `docs/accessibility-audit.md`: axe-core reports 0 violations on every page | Met |
+| 21 /accessibility/ | ADA Title III, NYSHRL, NYCHRL | “We aim to meet WCAG 2.2 AA” and “If part of this site is hard to use, or you can’t get the information you need, email info@tech-savvies.com … We typically reply within 1 business day.” | Met |
+| 01 /privacy/#retention | Record retention | “Invoices and payment records: as long as tax rules require. We’re confirming the exact period with an accountant.” | Met |
+
+## Owner actions outside the website
+
+1. **DBA filing.** Trading as “Tech-Savvies” rather than under your own legal name requires an
+   assumed-name certificate filed with the county clerk in each county where the business is
+   conducted (GBL §130(1)(a)). Until it’s filed, you can’t sue on contracts made under that name,
+   for example to collect an unpaid invoice (§130(9)). Knowingly not filing is a misdemeanor. The
+   certificate lists your residence address and, because you’re under 18, your age. Once filed, it
+   is a public record, so ask the attorney about that. The fetched Department of State page covers
+   only corporations, LLCs and limited partnerships, so get the sole-proprietor fee from the county
+   clerk. Record the county and filing date in `docs/business-facts.md`.
+2. **Attorney review of Terms, Refunds and Privacy.** Have a New York attorney review /terms/,
+   /refunds/ and /privacy/, and every “Unclear; ask an attorney” row above: endorsements, CalOPPA,
+   ADA and the NY State Human Rights Law.
+3. **Accountant review of sales tax.** Ask an accountant, or the NY Department of Taxation and
+   Finance, whether your services and the hosting on your own Netlify account are taxable. The
+   fetched guidance doesn’t mention web design. Ask whether you must register as a sales tax vendor
+   before your next sale, and how long to keep invoices and payment records. Record both answers in
+   `docs/business-facts.md`.
+4. **Parent or guardian co-signing.** `docs/business-facts.md` says the person who signs client
+   contracts is under 18, and §3-101 protects only contracts made at 18 or older. Have a parent or
+   guardian co-sign client contracts, or sign them as the contracting party, and ask the attorney
+   which is right.
+5. **Client logins.** Prefer being added as a manager. Where a client does share a password, keep it
+   in a password manager, never in email or notes, and delete it when the work ends. That’s the
+   “reasonable safeguards” the SHIELD Act expects of a business your size (§899-bb(2)(c)).
+6. **Logo and name clearance (Prompt 22).** Nothing here is a legal conclusion; give the results to
+   the attorney.
+   - *Reverse image search for `public/assets/img/logo.png`.* Open https://lens.google.com and upload
+     the file, then open https://tineye.com and upload it again. Note any match that isn’t your own
+     site, with its URL and date, in `docs/asset-licenses.md`. A match on a stock or template site
+     means the logo needs review. Do the same with the Procreate export if you find one.
+   - *USPTO trademark search.* In https://tmsearch.uspto.gov search “TECH SAVVIES” and
+     “TECH-SAVVIES” (also “TECH SAVVY”), then filter to class 35 (business services) and class 42
+     (computer and web design services). Save the results. Live marks in those classes need the
+     attorney’s view.
+   - *NY Department of State entity search.* Search “Tech Savvies” and “Tech Savvy” at
+     https://apps.dos.ny.gov/publicInquiry/ and note any active entity with a similar name.
+   - *Same-name businesses found by web search on 2026-09-29* (Prompt 22 did not assess confusion;
+     the attorney does):
+     - Tech Savvy NYC, Brooklyn digital marketing and web design: https://techsavvynyc.com/
+     - Tech Savvy Dragon, New York City freelance web developer: https://www.techsavvydragon.com/
+     - Tech Savvy Solutions Digital Agency LLC: https://www.designrush.com/agency/profile/tech-savvy-solutions-digital-agency-llc
+     - Tech Savvy (West Seneca and Buffalo, NY), IT and AV integration, so a different field:
+       https://techwny.com/
+7. **Copyright evidence and assignments.** Keep dated copies of the logo PNG and any sketches. If a
+   designer or a logo-maker tool was ever involved after all, get a signed copyright assignment or
+   check the tool’s licence before relying on the logo. Ask the attorney whether the AI-coded icons
+   and OG image need any notice, since AI-generated material without enough human authorship may
+   not be copyrightable (https://www.copyright.gov/ai/).

@@ -91,6 +91,19 @@ consistent.
 7. **Don't publish a home address.** A sole proprietor should use a PO box or virtual mailbox
    for the public address. CAN-SPAM accepts either.
 
+> **Notes from Prompt 24 (2026-09-29; sources in `docs/legal-sources.md`).**
+> - Decision 3 treats minors only as possible *clients*, and assumes an adult on Tech-Savvies’ side
+>   of the contract. `docs/business-facts.md` records that the person who signs client contracts is
+>   under 18, and NY GOL §3-101(1) protects only contracts made at 18 or older. A parent or guardian
+>   co-signing is an owner action in [`docs/legal-compliance.md`](docs/legal-compliance.md). Under
+>   the NY Child Data Protection Act, a minor is anyone under 18, and data about a known minor must
+>   be deleted within 30 days unless an exception applies (GBL §899-ff(6)), so the “deletion promise”
+>   needs a timeframe of 30 days or less.
+> - Decision 7 (don’t publish a home address) is complicated by the DBA filing that GBL §130
+>   requires. The certificate filed with the county clerk lists a residence address, plus the age of
+>   anyone under 18, and it becomes a public record. The attorney should advise on this. CAN-SPAM
+>   does accept a PO box registered with USPS or a registered private mailbox, as decision 7 says.
+
 ---
 
 ## 3. Owner inputs required

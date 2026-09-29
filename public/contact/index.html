@@ -4,19 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contact | Tech-Savvies</title>
-    <meta name="description" content="Tell us what you need. We typically reply within 2 hours during NYC business hours. Email info@tech-savvies.com or use the contact form.">
+    <meta name="description" content="Tell us what you need. We typically reply within 1 business day. Email info@tech-savvies.com or use the contact form.">
     <link rel="canonical" href="https://tech-savvies.com/contact/">
+    <link rel="alternate" type="text/markdown" href="/contact.md" title="Plain-text version">
     <meta name="theme-color" content="#0f1419">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Tech-Savvies">
     <meta property="og:title" content="Contact | Tech-Savvies">
-    <meta property="og:description" content="Tell us what you need. We typically reply within 2 hours during NYC business hours. Email info@tech-savvies.com or use the contact form.">
+    <meta property="og:description" content="Tell us what you need. We typically reply within 1 business day. Email info@tech-savvies.com or use the contact form.">
     <meta property="og:url" content="https://tech-savvies.com/contact/">
     <meta property="og:image" content="https://tech-savvies.com/assets/img/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Tech-Savvies: Websites done fast. Websites done right.">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:alt" content="Tech-Savvies: Websites done fast. Websites done right.">
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/assets/img/favicon-64.png" type="image/png" sizes="64x64">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -36,8 +38,8 @@
         </a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
           <span class="visually-hidden">Menu</span>
-          <svg class="icon-menu" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-          <svg class="icon-close" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          <svg class="icon-menu" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon-close" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
         <nav class="site-nav" id="site-nav" aria-label="Main">
           <ul class="nav-list" role="list">
@@ -55,7 +57,7 @@
         <div class="container">
           <div class="contact-intro">
             <h1 class="display-lg">Let<span class="kern-apos">’</span>s Upgrade <span class="accent">Your Business<span class="kern-dot">.</span></span></h1>
-            <p class="lead measure">Tell us what you need. We typically reply within 2 hours during NYC business hours.</p>
+            <p class="lead measure">Tell us what you need. We typically reply within 1 business day.</p>
           </div>
 
           <div class="contact-grid">
@@ -63,6 +65,12 @@
               <h2 class="h3">Contact Info</h2>
               <p class="contact-label">Direct Email:</p>
               <a class="contact-email" href="mailto:info@tech-savvies.com">info@tech-savvies.com</a>
+              <p class="contact-label">Business:</p>
+              <p>Tech-Savvies, the trading name of Peter Parizhsky, a sole proprietor</p>
+              <p class="contact-label">Location:</p>
+              <p>Based in New York, NY. Serving clients anywhere, remotely.</p>
+              <p class="contact-label">Replies:</p>
+              <p>No fixed hours. We typically reply within 1 business day.</p>
             </div>
 
             <div class="contact-form">
@@ -73,14 +81,18 @@
                   <label>Leave this field empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
                 </p>
 
+                <p class="form-note" id="form-required">All fields are required unless marked (optional).</p>
+
                 <div class="field-row">
                   <div class="field">
                     <label for="name">Name</label>
                     <input class="input" id="name" name="name" type="text" autocomplete="name" required>
+                    <p class="field-error" id="name-error" hidden></p>
                   </div>
                   <div class="field">
                     <label for="email">Email</label>
                     <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+                    <p class="field-error" id="email-error" hidden></p>
                   </div>
                 </div>
 
@@ -91,21 +103,26 @@
 
                 <div class="field">
                   <label for="service">What do you need?</label>
-                  <select class="input" id="service" name="service" required>
+                  <select class="input" id="service" name="service" required aria-invalid="false">
                     <option value="">Choose a service</option>
                     <option>Website Launch</option>
                     <option>Website Rescue</option>
                     <option>Google Business Profile &amp; Social Media</option>
                     <option>Not sure yet</option>
                   </select>
+                  <p class="field-error" id="service-error" hidden></p>
                 </div>
 
                 <div class="field">
                   <label for="message">Message</label>
                   <textarea class="input" id="message" name="message" rows="6" required></textarea>
+                  <p class="field-error" id="message-error" hidden></p>
                 </div>
 
-                <button class="btn" type="submit"><span data-label>Send message</span> <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button>
+                <p class="form-note" id="form-privacy">We’ll use these details to reply to you and, if you hire us, to run your project, and we won’t add you to a mailing list. If under 18, please have a parent or guardian contact us. Read our <a href="/privacy/" target="_blank" rel="noopener">Privacy Policy<svg class="icon-inline" aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11l6-6M6 5h5v5"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+
+                <button class="btn" type="submit" aria-describedby="form-privacy"><span data-label>Send message</span> <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button>
+                <p class="visually-hidden" id="form-status" role="status"></p>
               </form>
             </div>
           </div>
@@ -123,7 +140,7 @@
             <p class="footer-tagline">Websites done fast.<br><span class="accent">Websites done right.</span></p>
           </div>
           <nav aria-label="Footer">
-            <p class="eyebrow footer-heading">Pages</p>
+            <h2 class="eyebrow footer-heading">Pages</h2>
             <ul class="footer-links" role="list">
               <li><a href="/">Home</a></li>
               <li><a href="/solutions/">Solutions</a></li>
@@ -132,13 +149,24 @@
             </ul>
           </nav>
           <div>
-            <p class="eyebrow footer-heading">Contact</p>
+            <h2 class="eyebrow footer-heading">Contact</h2>
             <ul class="footer-links" role="list">
               <li><a href="mailto:info@tech-savvies.com">info@tech-savvies.com</a></li>
+              <li>New York, NY</li>
             </ul>
           </div>
+          <nav aria-label="Legal">
+            <h2 class="eyebrow footer-heading">Legal</h2>
+            <ul class="footer-links" role="list">
+              <li><a href="/terms/">Terms of Service</a></li>
+              <li><a href="/refunds/">Refund Policy</a></li>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/cookies/">Cookie Policy</a></li>
+              <li><a href="/accessibility/">Accessibility</a></li>
+            </ul>
+          </nav>
         </div>
-        <p class="footer-bottom">&copy; <span data-year>2026</span> Tech-Savvies. All rights reserved.</p>
+        <p class="footer-bottom">&copy; <span data-year>2026</span> Peter Parizhsky. All rights reserved.</p>
       </div>
     </footer>
   </body>
