@@ -682,6 +682,7 @@ def check_markdown_mirrors(site):
     """Every page links to its plain-text mirror, and the mirrors, llms.txt and their netlify.toml
     block match what tools/build_markdown.py generates (/accessibility/ promises the mirrors)."""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    sys.dont_write_bytecode = True  # no tools/__pycache__ in the repo
     import build_markdown
     if os.path.abspath(site.public) != str(build_markdown.PUBLIC):
         return
