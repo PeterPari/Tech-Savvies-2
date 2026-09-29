@@ -135,9 +135,11 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 
 | Fact | Value | Source |
 |------|-------|--------|
-| Real client | Yes | Owner, 2026-09-29 |
-| Written permission to feature | Yes, in writing | Owner, 2026-09-29 |
-| Personal or family connection | Yes: the owner’s brother (Gregory Parizhsky). The owner asked that it not be on the homepage; a disclosure still has to sit with the case study or be easy to find (see compliance log #11) | Owner, 2026-09-29 |
+| Real client | Yes; the paragraph’s facts are all accurate (domain secured, Instagram page created, several weeks of revisions) | Owner, 2026-09-29 |
+| Written permission to feature | Yes, in writing, covering the name, the link to grisha.studio and the screenshot of the site. Keep the message outside the repo | Owner, 2026-09-29 |
+| Personal or family connection | Yes: the owner’s brother (Gregory Parizhsky). The owner asked that it not be on the homepage; the disclosure has to stay next to the case study wherever it appears (see compliance log #11) | Owner, 2026-09-29 |
+| Free or discounted work | Reduced rate; our first project | Owner, 2026-09-29 |
+| Disclosure wording | “(the founder’s brother; our first project, at a reduced rate)” in the `.meta` line with the client name | Prompt 11, 2026-09-29 |
 
 ## Brand assets
 

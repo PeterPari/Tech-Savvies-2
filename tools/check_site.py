@@ -276,6 +276,16 @@ def check_no_review_schema(site):
                 yield page.path, line, "JSON-LD contains %s" % h
 
 
+def check_testimonial_source(site):
+    for page in site.pages:
+        for tag in page.tags:
+            classes = tag.attrs.get("class", "").lower()
+            if tag.name == "blockquote" or "testimonial" in classes or "review" in classes:
+                if not tag.attrs.get("data-source", "").strip():
+                    yield page.path, tag.line, \
+                        "<%s> is a quote, testimonial or review without a data-source attribute (see docs/testimonials-policy.md)" % tag.name
+
+
 PLACEHOLDER_RES = [
     re.compile(r"TODO\(owner\)"),
     re.compile(r"(?i)\[PLACEHOLDER"),
@@ -466,6 +476,7 @@ CHECKS = [
     ("claims", check_claims),
     ("csp-unchanged", check_csp_unchanged),
     ("no-review-schema", check_no_review_schema),
+    ("testimonial-source", check_testimonial_source),
     ("no-placeholders", check_no_placeholders),
     ("third-party-allowlist", check_third_party_allowlist),
     ("internal-links", check_internal_links),
