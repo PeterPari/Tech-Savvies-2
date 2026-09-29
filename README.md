@@ -28,7 +28,7 @@ public/
   assets/fonts/           Plus Jakarta Sans + JetBrains Mono (self-hosted, OFL licensed)
   assets/img/             logo, icons, social share image
   robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
-docs/                     business-facts.md (owner fills in), data-inventory.md (personal data and retention), compliance-log.md (status of the 25 items), claims-register.md (evidence for every claim)
+docs/                     business-facts.md (owner fills in), data-inventory.md (personal data and retention), data-requests-runbook.md (how to complete a data request), compliance-log.md (status of the 25 items), claims-register.md (evidence for every claim)
 tools/                    check_site.py (regression checker), build_admin.py
 ```
 

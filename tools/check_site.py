@@ -538,6 +538,15 @@ def check_no_age_fields(site):
                     yield page.path, line_of(text, m.start()), "no age or birth-date fields (found %r)" % attr.group(1)
 
 
+def check_data_request(site):
+    """/privacy/ must have #your-rights and a mailto link whose subject contains "request"."""
+    text = site.read(os.path.join(site.public, "privacy", "index.html"))
+    if 'id="your-rights"' not in text:
+        yield "privacy/index.html", 1, 'missing id="your-rights"'
+    if not re.search(r"""(?i)<a\b[^>]*\bhref=["']mailto:[^"'?]+\?[^"']*subject=[^"'&]*request""", text):
+        yield "privacy/index.html", 1, 'needs a mailto link whose subject contains "request"'
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
@@ -558,6 +567,7 @@ CHECKS = [
     ("required-footer-links", check_required_footer_links),
     ("terms-consistency", check_terms_consistency),
     ("form-notice", check_form_notice),
+    ("data-request", check_data_request),
 ]
 
 

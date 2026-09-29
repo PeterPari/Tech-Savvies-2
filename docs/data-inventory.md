@@ -63,6 +63,8 @@ asked for: the contact form has no age or birth-date field, and the `no-age-fiel
 
 ## Retention routine
 
+For a request from a person, follow [`data-requests-runbook.md`](data-requests-runbook.md).
+
 - **Rule:** form submissions 6 months; emails 12 months (owner, 2026-09-29); client records per accountant.
 - **Schedule:** first Monday of each quarter (January, April, July, October).
 - **Who:** the owner, Peter Parizhsky. Tick the run in the log below.
