@@ -8,6 +8,7 @@ import json
 import os
 import re
 import sys
+from html import unescape
 from html.parser import HTMLParser
 
 SITE_ORIGIN = "https://tech-savvies.com"
@@ -30,7 +31,7 @@ ALLOWED_LINK_ORIGINS = [
 LEGAL_NAME = "Peter Parizhsky"
 
 # Footer hrefs every page must contain. Later prompts append here, e.g. "/privacy/".
-REQUIRED_FOOTER_LINKS = ["/privacy/", "/cookies/"]
+REQUIRED_FOOTER_LINKS = ["/terms/", "/privacy/", "/cookies/"]
 
 # Substrings that mark a tracker, pixel or analytics tool. no-trackers fails on any of them in public/
 # HTML or JS (case-insensitive). Adding a tracker means a consent banner first: see
@@ -471,6 +472,50 @@ def check_claims(site):
                     "unsupported claim %r (see docs/claims-register.md)" % phrase
 
 
+def _section_text(html_text, section_id):
+    """Plain text of the <h2 id=section_id> section: from that heading to the next <h2>."""
+    m = re.search(r'<h2\b[^>]*\bid="%s"[^>]*>(.*?)(?=<h2\b|</article>|$)' % re.escape(section_id), html_text, re.S)
+    if not m:
+        return None, 1
+    text = unescape(re.sub(r"<[^>]+>", " ", m.group(1)))
+    return re.sub(r"\s+", " ", text), line_of(html_text, m.start())
+
+
+# Rule: every .price-amount string on /solutions/ must appear, character for character and as a whole
+# amount, in the text of /terms/#payment. (A link from /terms/#payment to /solutions/ is not enough on its own.) The
+# "Completion guarantee: ..." sentence on /solutions/ must also appear word for word in
+# /terms/#completion-guarantee.
+def check_terms_consistency(site):
+    solutions = os.path.join(site.public, "solutions", "index.html")
+    terms = os.path.join(site.public, "terms", "index.html")
+    for path in (solutions, terms):
+        if not os.path.isfile(path):
+            yield path, 1, "file is missing"
+            return
+    sol, ter = site.read(solutions), site.read(terms)
+    payment, pay_line = _section_text(ter, "payment")
+    guarantee, g_line = _section_text(ter, "completion-guarantee")
+    if payment is None:
+        yield terms, 1, 'no <h2 id="payment"> section'
+    if guarantee is None:
+        yield terms, 1, 'no <h2 id="completion-guarantee"> section'
+    if payment is None or guarantee is None:
+        return
+    amounts = re.finditer(r'<span\b[^>]*\bclass="(?:[^"]*\s)?price-amount(?:\s[^"]*)?"[^>]*>(.*?)</span>', sol, re.S)
+    for m in amounts:
+        amount = re.sub(r"\s+", " ", unescape(m.group(1))).strip()
+        # Whole amount only: "$50" must not match inside "$250" or "$50/month"
+        if not re.search(r"(?<![\w$])%s(?![\d/.,]\d|/)" % re.escape(amount), payment):
+            yield terms, pay_line, "price %r from /solutions/ (line %d) is not in /terms/#payment" % (
+                amount, line_of(sol, m.start()))
+    sol_text = re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", sol)))
+    m = re.search(r"Completion guarantee:[^.]*\.", sol_text)
+    if not m:
+        yield solutions, 1, 'no "Completion guarantee: ..." sentence'
+    elif m.group(0) not in guarantee:
+        yield terms, g_line, "completion guarantee on /solutions/ (%r) is not word for word in /terms/#completion-guarantee" % m.group(0)
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
@@ -488,6 +533,7 @@ CHECKS = [
     ("new-tab-links", check_new_tab_links),
     ("shared-chrome", check_shared_chrome),
     ("required-footer-links", check_required_footer_links),
+    ("terms-consistency", check_terms_consistency),
 ]
 
 

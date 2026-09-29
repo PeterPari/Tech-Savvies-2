@@ -24,6 +24,7 @@ establishes it but the owner hasn't confirmed it yet.
 | DBA county | Not applicable until a DBA is filed | Owner, 2026-09-29 |
 | Public mailing address (PO box / virtual mailbox OK) | None. Online-only business with no physical location; use email only | Owner, 2026-09-29 |
 | Person who signs client contracts is 18 or older | No, under 18 | Owner, 2026-09-29 |
+| County (courts named in the Terms) | New York County (Manhattan) | Owner, 2026-09-29 |
 
 ## Service area and hours
 
@@ -34,7 +35,8 @@ establishes it but the owner hasn't confirmed it yet.
 | Realistic first-reply time | Within 1 business day | Owner, 2026-09-29 |
 | Realistic fastest delivery for Website Launch | 5 days, only as a rush order for a relatively simple site | Owner, 2026-09-29 |
 | Sites actually delivered within 5 days | None yet: two clients so far, both Tier 3, neither rushed. The site states 5 days as a target (“we aim to”), not a promise, until one is delivered | Owner, 2026-09-29 |
-| When the 5-day rush clock starts, and what happens if a rush runs late | Not set. Owner to confirm (Prompt 02 terms need it) | Open |
+| When the 5-day rush clock starts | Once the 50% deposit is paid and all the content needed (text, photos, logins) has arrived | Owner, 2026-09-29 |
+| What happens if a rush runs late | If it takes longer than 5 days and we aren’t waiting on the client, the client pays the normal price instead: the tier price for a Launch, $200 for a Rescue | Owner, 2026-09-29 |
 | Serving EU/UK clients deliberately | No | Owner, 2026-09-29 |
 
 ## Prices
@@ -64,6 +66,8 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Monthly management price | $50/month | Owner, 2026-09-29 |
 | What monthly management includes | Google Business Profile and social media upkeep | Owner, 2026-09-29 |
 | When monthly management is paid | $50 paid in full when the client books each month (no 50/50 split) | Owner, 2026-09-29 |
+| What one booked “month” covers | 30 days, starting the day the payment arrives | Owner, 2026-09-29 |
+| Monthly price change | A paid month keeps its price; a new price applies only to months booked after it’s posted on /solutions/ (follows from paying in full at each booking) | Prompt 02, 2026-09-29 |
 | Page wording: monthly note | “Ongoing upkeep, paid in full when you book each month; it doesn’t renew on its own, so there’s nothing to cancel.” | Prompt 10, 2026-09-29 |
 | How to cancel monthly management | Nothing to cancel: the plan covers one month at a time and continues only if the client re-books (earlier answer “email info@tech-savvies.com before the next month starts” superseded) | Owner, 2026-09-29 |
 | Auto-renews until cancelled | No, manual (client re-books each month) | Owner, 2026-09-29 |
@@ -83,6 +87,9 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Fact | Value | Source |
 |------|-------|--------|
 | Revisions included | Unlimited within the agreed scope | Owner, 2026-09-29 |
+| What one revision round is | One set of changes the client sends together; we make them and send the work back for review. A new page or feature is outside the scope and is quoted first | Prompt 02, 2026-09-29 (owner to confirm) |
+| Free fixes after launch | 30 days of free bug fixes and site tweaks if something doesn’t work as agreed or the client doesn’t like the results. Tweaks cover the agreed work only; new pages or features are quoted first | Owner, 2026-09-29 |
+| Liability cap | What the client paid for the project the claim is about (for the monthly plan, the month the claim is about) | Owner, 2026-09-29 |
 | What the "completion guarantee" promises exactly | No extra billing if a project takes longer than expected (current site wording) | Owner, 2026-09-29 |
 | Refund rule: before work starts | Full refund | Owner, 2026-09-29 |
 | Refund rule: mid-project | Pro-rated for work done | Owner, 2026-09-29 |
@@ -103,6 +110,7 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Online payment fees (Tier 5) | Stripe or Square take their own fee from each sale | Owner, 2026-09-29 |
 | Who owns the finished site and code after full payment | The client | Owner, 2026-09-29 |
 | Portfolio-use rights | Only with the client’s written permission | Owner, 2026-09-29 |
+| Pre-existing templates, code or tools reused across clients | None: everything is made for each client, so no licence clause is needed. Third-party parts (CMS, booking calendar, plugins) stay under their makers’ licences | Owner, 2026-09-29 |
 
 ## Data handling and tools
 

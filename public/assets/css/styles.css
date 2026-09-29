@@ -976,6 +976,11 @@ main .eyebrow + * {
   .includes + .includes {
     margin-top: 2.5rem;
   }
+
+  /* A note after a list (e.g. the Terms link under Payment) stays in the list's column */
+  .includes > .cost-list + p {
+    grid-column: 2;
+  }
 }
 
 /* ---------- Our story ---------- */
@@ -1216,13 +1221,15 @@ h1 + .meta {
 }
 
 /* Links inside sentences need more than color to stand out (same as .lead a) */
-.prose a {
+.prose a,
+.includes p a {
   text-decoration: underline;
   text-decoration-color: rgba(16, 185, 129, 0.5);
   text-underline-offset: 0.2em;
 }
 
-.prose a:hover {
+.prose a:hover,
+.includes p a:hover {
   text-decoration-color: currentColor;
 }
 

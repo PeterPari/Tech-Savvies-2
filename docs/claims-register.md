@@ -50,6 +50,19 @@ Evidence comes from [`business-facts.md`](business-facts.md). Locations are as o
 | “Peter continues to run the business and manage every project that comes through it himself.” | /our-story/ (line 57) | Who does the work | Owner, 2026-09-29: Peter, using Claude and ChatGPT as tools | Keep | |
 | Legal name Peter Parizhsky, trading as Tech-Savvies | Every footer, /our-story/, / JSON-LD | Identity | Owner, 2026-09-29 (business-facts, Identity) | Keep | |
 
+## Claims added by /terms/ (Prompt 02, 2026-09-29)
+
+Prices, payment terms, outside costs and the completion guarantee on /terms/ repeat the /solutions/ rows
+above word for word; the `terms-consistency` check keeps the prices and the guarantee in step.
+
+| Claim | Location | Issue | Evidence / owner confirmation | Decision | New wording |
+|-------|----------|-------|-------------------------------|----------|-------------|
+| The 5-day rush clock starts once the deposit and all content are in; a late rush drops to the normal price | /terms/#payment “Rush orders” | Defines the rush target | Owner, 2026-09-29 (business-facts, Service area and hours) | Keep | “If we take longer than 5 days, and we aren’t waiting on you, you pay the normal price instead.” |
+| “For 30 days after your site launches, we fix bugs and make tweaks for free” | /terms/#fixes | Service promise | Owner, 2026-09-29 (business-facts, Scope): agreed work only | Keep | |
+| Completion guarantee means the accepted quote is the most the client pays for that work; “no surprise invoices” lists everything a client can be charged | /terms/#completion-guarantee | Gives the /solutions/ promises a concrete meaning (FTC Act §5, GBL §349) | Owner, 2026-09-29 (business-facts, Scope and Payment) | Keep | |
+| Monthly plan: 30 days per booking, no automatic renewal, nothing to cancel, no partial-month refund | /terms/#monthly-plan | Recurring terms | Owner, 2026-09-29 (business-facts, Monthly management and Refunds) | Keep | |
+| “We reply within 1 business day” to disputes | /terms/#law | Reply time | Owner, 2026-09-29: first reply within 1 business day | Keep | |
+
 ## Puffery (no substantiation needed)
 
 | Wording | Location |

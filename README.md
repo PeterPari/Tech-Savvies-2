@@ -12,6 +12,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/our-story/` | `public/our-story/index.html` | Our Story |
 | `/contact/` | `public/contact/index.html` | Contact info and the contact form |
 | `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
+| `/terms/` | `public/terms/index.html` | Terms of Service (linked from every footer’s Legal column and the /solutions/ Payment block) |
 | `/privacy/` | `public/privacy/index.html` | Privacy Policy (linked from every footer’s Legal column) |
 | `/cookies/` | `public/cookies/index.html` | Cookie Policy (linked from every footer’s Legal column) |
 | any missing page | `public/404.html` | Page not found |
@@ -34,8 +35,9 @@ tools/                    check_site.py (regression checker), build_admin.py
 
 `python3 tools/check_site.py` (standard library only, run from the repo root) exits 1 and prints
 `path:line: [check-name] message` for each problem. It guards image alt text, external resources,
-client-side storage, the CSP, review schema, unsupported claims, placeholder text, internal links, new-tab links and
-the shared header and footer. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
+client-side storage, the CSP, review schema, unsupported claims, placeholder text, internal links, new-tab links,
+the shared header and footer, and that every price and the completion guarantee on `/solutions/` match `/terms/`.
+Changing a price or promise? Change `/solutions/`, `/terms/` and `docs/business-facts.md` together. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
 on every push and pull request. To add a check, see the comment at the top of the script.
 
 Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first.
@@ -57,7 +59,7 @@ Then visit <http://localhost:8080>.
 - **Text:** edit the HTML file for that page. On the two big headlines, the periods and
   apostrophes are wrapped in `<span class="kern-dot">` / `<span class="kern-apos">` to tuck
   them in tighter, like in the mockup. Keep those spans if you change the wording.
-- **Header and footer:** repeated in every HTML file (7 files). Change all of them together.
+- **Header and footer:** repeated in every HTML file except `/admin/` (9 files). Change all of them together.
 - **Business details:** the legal name (Peter Parizhsky) appears in the footer copyright line
   of every page, the `legalName` in the JSON-LD in `public/index.html`, the `LEGAL_NAME` constant
   in `tools/check_site.py`, and one sentence on `/our-story/`. "New York, NY" appears in every
