@@ -678,6 +678,27 @@ def check_link_text(site):
                     "link has vague text %r; use a label that names the destination or action" % visible_text
 
 
+def check_markdown_mirrors(site):
+    """Every page links to its plain-text mirror, and the mirrors, llms.txt and their netlify.toml
+    block match what tools/build_markdown.py generates (/accessibility/ promises the mirrors)."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import build_markdown
+    if os.path.abspath(site.public) != str(build_markdown.PUBLIC):
+        return
+    for page in site.pages:
+        if site.is_admin(page.path):
+            continue
+        want = "/" + build_markdown.mirror_path(build_markdown.Path(os.path.abspath(page.path))) \
+            .relative_to(build_markdown.PUBLIC).as_posix()
+        if not any(t.name == "link" and t.attrs.get("rel") == "alternate" and t.attrs.get("type") == "text/markdown"
+                   and t.attrs.get("href") == want for t in page.tags):
+            yield page.path, 1, 'needs <link rel="alternate" type="text/markdown" href="%s">' % want
+    for path, text in build_markdown.outputs().items():
+        current = path.read_text(encoding="utf-8") if path.exists() else None
+        if current != text:
+            yield str(path), 1, "%s; run python3 tools/build_markdown.py" % ("missing" if current is None else "out of date")
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("svg-alt", check_svg_alt),
@@ -703,6 +724,7 @@ CHECKS = [
     ("data-request", check_data_request),
     ("asset-inventory", check_asset_inventory),
     ("link-text", check_link_text),
+    ("markdown-mirrors", check_markdown_mirrors),
 ]
 
 

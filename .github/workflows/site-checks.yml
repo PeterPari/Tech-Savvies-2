@@ -13,3 +13,5 @@ jobs:
         run: python3 tools/check_site.py
       - name: Admin page is up to date
         run: python3 tools/build_admin.py --check
+      - name: Plain-text mirrors are up to date
+        run: python3 tools/build_markdown.py --check

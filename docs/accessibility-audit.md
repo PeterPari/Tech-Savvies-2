@@ -280,3 +280,20 @@ Read from Chromium after the fixes (375px for / and /contact/, where the menu is
 ### Not tested here (owner action)
 
 A real screen reader: VoiceOver (Safari, macOS and iOS) or NVDA (Firefox or Chrome, Windows). Check that the menu’s expanded state is read, the Service select is read as required, errors are read on submit and on leaving a field, “Sending your message…” is read, and the footer headings and table captions are read. Also check Safari and Firefox, and real Windows High Contrast, since this audit used Chromium emulation.
+
+## Plain-text mirrors
+
+Added 2026-09-29, after the owner’s decision recorded in `business-facts.md`. /accessibility/ offers these as the “information another way”. `tools/build_markdown.py` builds `public/<page>.md` from each page’s `<main>` and footer; there is none for /admin/. It also builds `public/llms.txt` and the mirrors’ headers in `netlify.toml`. Each HTML page links to its mirror with `<link rel="alternate" type="text/markdown">`. `check_site.py` (`markdown-mirrors`) and CI fail when a mirror is missing or stale.
+
+What the builder does, and why:
+
+- **Readable as raw text.** The header, logo, icons, scripts and “(opens in a new tab)” text are dropped. Links keep their visible text and gain a full `https://` address. Each Contact Info label is joined to its value (“**Replies:** No fixed hours…”). The contact form becomes a note that it works on the web page only, the required-fields line, the list of questions (with the Service choices) and the privacy notice.
+- **Tables become lists.** Each /privacy/ and /refunds/ table row becomes a list item named by its row header, with each cell labelled by its column header. A pipe table read as plain text gives a screen reader no headers. The table caption introduces the list.
+- **Structure kept.** The page’s headings are kept in order, starting with its one `#` heading. After it come the page address and the meta description as a “Summary:”, for AI tools and skimming. Two lists in a row use different markers (`-`, then `*`) so Markdown doesn’t merge them. The home page image keeps its alt text.
+- **Served as `text/plain; charset=utf-8`.** Without a charset, Chromium showed the curly quotes as “â€œ” (checked with the local server, which sends `text/markdown` with no charset). `text/plain` is shown inline by every browser. Indexable mirrors carry `Link: <HTML page>; rel="canonical"`; the 404 and thanks mirrors carry `X-Robots-Tag: noindex`, like their HTML pages.
+
+Checked:
+
+- **Rendered with markdown-it 14 (CommonMark):** each of the 11 mirrors has one h1, no skipped heading levels, the image with alt text, only absolute links, no generic link text and no stray escapes. axe on the rendered HTML reports only `target-size` on unstyled footer links, which depends on the Markdown viewer, not on the file.
+- **Word comparison with the HTML:** every word of `<main>` and the footer is in the mirror. The exceptions are the tables’ first column header (“Service”), whose values start each list item, and the “(opens in a new tab)” text.
+- **axe matrix re-run on the HTML pages after this change:** 0 violations outside forced colors. Forced colors: 2,868 raw nodes (12 more, from the three new links on /accessibility/ at four widths) and 0 on the painted color.

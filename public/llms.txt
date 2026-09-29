@@ -1,0 +1,20 @@
+# Tech-Savvies
+
+> Tech-Savvies offers affordable technology solutions for small artists, local businesses, and creators: new websites, website modernization, and Google & social presence.
+
+Tech-Savvies is the trading name of Peter Parizhsky, a sole proprietor based in New York, NY, working with clients anywhere, remotely. Contact: info@tech-savvies.com. Each link below is the plain-text Markdown version of a page; the HTML page is the canonical one, at the same address without .md (the home page is https://tech-savvies.com/).
+
+## Pages
+
+- [Home](https://tech-savvies.com/index.md): Tech-Savvies offers affordable technology solutions for small artists, local businesses, and creators: new websites, website modernization, and Google & social presence.
+- [Solutions & Pricing](https://tech-savvies.com/solutions.md): Website Launch $250–$375 by tier, Website Rescue $200 ($250 rush), and Google Business Profile and social media help at $50 once or $50 a month. Every cost listed, including domain.
+- [Our Story](https://tech-savvies.com/our-story.md): Tech-Savvies was founded in 2020 by Peter Parizhsky. In 2026 it returns as an affordable website creation, repair, and online presence optimization business.
+- [Contact](https://tech-savvies.com/contact.md): Tell us what you need. We typically reply within 1 business day. Email info@tech-savvies.com or use the contact form.
+
+## Legal
+
+- [Terms of Service](https://tech-savvies.com/terms.md): The terms for using tech-savvies.com and hiring Tech-Savvies: quotes, prices, payment, the completion guarantee, the monthly plan, ownership and ending a project.
+- [Refund Policy](https://tech-savvies.com/refunds.md): How refunds work for each Tech-Savvies service: before work starts, during a project, after delivery, rush orders and the monthly plan, and how to ask.
+- [Privacy Policy](https://tech-savvies.com/privacy.md): What Tech-Savvies collects through this website, contact form and email, why, who handles it for us, how long we keep it and how to have it deleted.
+- [Cookie Policy](https://tech-savvies.com/cookies.md): Which cookies and browser storage Tech-Savvies uses (none), how we checked, and how to control cookies in your browser.
+- [Accessibility](https://tech-savvies.com/accessibility.md): How Tech-Savvies makes this website accessible, what we’ve tested, what we know is still limited and how to tell us about a barrier.
