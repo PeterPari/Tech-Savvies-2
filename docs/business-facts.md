@@ -17,7 +17,7 @@ establishes it but the owner hasn't confirmed it yet.
 | Domain | tech-savvies.com | (from site, confirm) |
 | Hosting and contact form | Netlify, Netlify Forms | (from site, confirm) |
 | Contact email | info@tech-savvies.com | (from site, confirm) |
-| Legal business name | TODO(owner) (owner unsure; for a sole proprietor with no DBA this is the owner’s own full legal name as on government ID) |  |
+| Legal business name | Peter Parizhsky | Owner, 2026-09-29 |
 | Entity type | Sole proprietorship | Owner, 2026-09-29 |
 | DBA (assumed name) filed? | No | Owner, 2026-09-29 |
 | DBA county | Not applicable until a DBA is filed | Owner, 2026-09-29 |
@@ -45,7 +45,7 @@ Current published prices are from `public/solutions/index.html`.
 | Google Business Profile and Social Media Presence | $50 flat fee for a one-time fix; "monthly for ongoing management" | (from site, confirm) |
 | What sets the $250 vs $375 Launch price | Features/complexity and turnaround time. Maximum complexity is charged the maximum price, with no rush option | Owner, 2026-09-29 |
 | What makes an order a "rush" order | A 5-day delivery is a rush order | Owner, 2026-09-29 |
-| Rush price for Website Launch | TODO(owner) | |
+| Rush price for Website Launch | $375 | Owner, 2026-09-29 |
 
 ## Monthly management
 
@@ -80,8 +80,8 @@ Current published prices are from `public/solutions/index.html`.
 
 | Fact | Value | Source |
 |------|-------|--------|
-| Who pays for the client's domain and hosting | Client pays directly | Owner, 2026-09-29 |
-| Approximate domain and hosting cost | TODO(owner) (owner confirmed the client pays directly but gave no amount) |  |
+| Who pays for the client's domain and hosting | Client pays for the domain. Tech-Savvies guides them through buying it. Hosting is on Tech-Savvies’ own Netlify account | Owner, 2026-09-29 |
+| Approximate domain and hosting cost | Domain cost depends on the domain the client chooses (paid by the client to the registrar). No separate hosting charge recorded | Owner, 2026-09-29 |
 | Who owns the domain and hosting after handover | Tech-Savvies until paid in full, then the client | Owner, 2026-09-29 |
 | Who owns the finished site and code after full payment | The client | Owner, 2026-09-29 |
 | Portfolio-use rights | Only with the client’s written permission | Owner, 2026-09-29 |
@@ -111,6 +111,6 @@ Current published prices are from `public/solutions/index.html`.
 
 | Fact | Value | Source |
 |------|-------|--------|
-| Logo: who made it, with which tool, license terms | Made by the owner in Canva; license terms TODO(owner) | Owner, 2026-09-29 |
-| OG image: who made it, with which tool, license terms | AI-generated from the owner’s logo; which AI tool and its terms TODO(owner) | Owner, 2026-09-29 |
-| Icons: who made them, with which tool, license terms | AI-generated from the owner’s logo; which AI tool and its terms TODO(owner) | Owner, 2026-09-29 |
+| Logo: who made it, with which tool, license terms | Drawn by the owner in Procreate | Owner, 2026-09-29 |
+| OG image: who made it, with which tool, license terms | Coded by Claude Code from the owner’s logo | Owner, 2026-09-29 |
+| Icons: who made them, with which tool, license terms | Favicon and app icons coded by Claude Code from the owner’s logo | Owner, 2026-09-29 |
