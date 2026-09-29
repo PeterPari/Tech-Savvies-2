@@ -126,12 +126,12 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 |------|-------|--------|
 | Netlify Analytics on | Yes, on | Owner, 2026-09-29 |
 | Netlify form notifications go to which inbox | info@tech-savvies.com | Owner, 2026-09-29 |
-| Netlify spam filtering on | Owner says no, off (honeypot field only); Netlify’s docs say Akismet screens all submissions, so unconfirmed | Owner, 2026-09-29 |
+| Netlify spam filtering on | Yes: Netlify’s built-in filter (Akismet) is on, and the form’s honeypot field adds extra spam prevention (earlier “off, honeypot only” superseded after checking the dashboard) | Owner, 2026-09-29 |
 | Mailbox provider for info@tech-savvies.com | iCloud | Owner, 2026-09-29 |
 | Domain registrar for tech-savvies.com | Squarespace Domains II LLC (formerly Google Domains) | Owner, 2026-09-29 |
 | Netlify Forms stored fields | Submission fields, IP address (`data.ip`), created-at; user agent and referrer unverified. Source: https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/ (read 2026-09-28) | Netlify docs |
 | Netlify submission retention | None documented; submissions stay until deleted. The 6-month rule is enforced by the owner. Source: https://docs.netlify.com/manage/forms/submissions/ | Netlify docs |
-| Netlify spam filtering | Docs say Akismet filters all submissions and give no off switch, which conflicts with the owner’s “off”. Owner to check the dashboard. Source: https://docs.netlify.com/manage/forms/spam-filters/ | Netlify docs, conflict open |
+| Netlify spam filtering | Docs say Akismet filters all submissions and give no off switch. Owner confirmed in the dashboard that it’s on, with the honeypot as an extra layer (2026-09-29). Source: https://docs.netlify.com/manage/forms/spam-filters/ | Netlify docs; owner, 2026-09-29 |
 | Netlify Analytics | Server-side from CDN logs, cookieless per Netlify; counts unique visitors by IP. Source: https://docs.netlify.com/manage/monitoring/web-analytics/overview/ | Netlify docs |
 | Netlify data location | No region stated; AWS among sub-processors, transfers outside EEA under DPF/SCCs. Source: https://www.netlify.com/pdf/netlify-dpa.pdf | Netlify docs |
 | Domain expiry | tech-savvies.com expires 2026-11-11; nameservers NS1, not Netlify DNS (RDAP) | Research, 2026-09-28 |
