@@ -43,6 +43,14 @@ on every push and pull request. To add a check, see the comment at the top of th
 
 Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first.
 
+## Credits & licences
+
+Fonts: Plus Jakarta Sans and JetBrains Mono, SIL Open Font License 1.1, self-hosted with their licence texts in `public/assets/fonts/`.
+Logo: drawn by the owner. Icons and the share image: made for this site from the logo.
+The Grisha.studio screenshot is used with the client’s written permission.
+Every asset, its creator, source and licence: [`docs/asset-licenses.md`](docs/asset-licenses.md).
+Adding an image, font or icon? Add its row there first; `check_site.py` (`asset-inventory`) checks it.
+
 ## Preview locally
 
 Pages link to files with paths like `/assets/...`, so open the site through a local web server

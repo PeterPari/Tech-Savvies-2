@@ -547,6 +547,26 @@ def check_data_request(site):
         yield "privacy/index.html", 1, 'needs a mailto link whose subject contains "request"'
 
 
+def check_asset_inventory(site):
+    doc = os.path.join(os.path.dirname(os.path.abspath(site.public)), "docs", "asset-licenses.md")
+    if not os.path.exists(doc):
+        yield "docs/asset-licenses.md", 1, "missing"
+        return
+    with open(doc, encoding="utf-8") as f:
+        text = f.read()
+    files = []
+    for sub in ("assets/img", "assets/fonts"):
+        base = os.path.join(site.public, sub)
+        if os.path.isdir(base):
+            files += [os.path.join(sub, n) for n in sorted(os.listdir(base))]
+    for n in ("favicon.ico", "apple-touch-icon.png"):
+        if os.path.exists(os.path.join(site.public, n)):
+            files.append(n)
+    for rel in files:
+        if rel.replace(os.sep, "/") not in text:
+            yield rel, 1, "not named in docs/asset-licenses.md (add a row before adding the asset)"
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
@@ -568,6 +588,7 @@ CHECKS = [
     ("terms-consistency", check_terms_consistency),
     ("form-notice", check_form_notice),
     ("data-request", check_data_request),
+    ("asset-inventory", check_asset_inventory),
 ]
 
 

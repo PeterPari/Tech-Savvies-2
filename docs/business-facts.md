@@ -166,3 +166,8 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Logo: who made it, with which tool, license terms | Drawn by the owner in Procreate | Owner, 2026-09-29 |
 | OG image: who made it, with which tool, license terms | Coded by Claude Code from the owner’s logo | Owner, 2026-09-29 |
 | Icons: who made them, with which tool, license terms | Favicon and app icons coded by Claude Code from the owner’s logo | Owner, 2026-09-29 |
+| Logo source file | No longer exists; the PNG in the repo is the only master | Owner, 2026-09-29 (Prompt 19) |
+| Inline UI icons (menu, close, arrow, external link) | Written by Claude Code, not taken from an icon set | Owner, 2026-09-29 (Prompt 19) |
+| Green checkmark in tick lists | Pasted from a Claude chat reply; no icon set or website known. Origin unverified: owner action | Owner, 2026-09-29 (Prompt 19) |
+| Design mockup PDF | Made by the owner and Claude Code; no designer involved, so no rights transfer needed | Owner, 2026-09-29 (Prompt 19) |
+| Font origin | Fontsource 5.3.0 npm packages, byte-identical to the files in the repo (see [`asset-licenses.md`](asset-licenses.md)) | Prompt 19, 2026-09-29 |
