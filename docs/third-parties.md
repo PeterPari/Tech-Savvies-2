@@ -17,6 +17,8 @@ owner’s statement and Netlify’s docs disagree, both are shown.
 | Netlify Web Analytics | Traffic statistics | Built from CDN server logs, no client script. Netlify says it is cookieless and anonymous. It counts unique visitors by IP address per day and shows top pages, sources, locations and bandwidth. Owner confirms it is on (2026-09-29). Whether IPs are hashed or stored raw: unverified | Every visit | Netlify. Chart window 30 days; storage duration: unverified | https://www.netlify.com/privacy/ | Same DPA | Not per person. Turn off: Netlify → Analytics & metrics → Analytics → Danger zone → Cancel Web Analytics service |
 | iCloud Mail (Apple), mailbox for info@tech-savvies.com | Receives form notifications and emails from leads and clients | Sender address, message content, attachments | Email, form submit | Apple and third-party data centers; region unverified. Not end-to-end encrypted | https://www.apple.com/legal/privacy/en-ww/ | unverified: no DPA found for a personal iCloud account | Deleted mail stays in Trash 30 days, then is erased; emptying Trash erases at once. Owner rule: emails kept 12 months |
 | Squarespace Domains II LLC (registrar for tech-savvies.com) | Domain registration | Registrant name or organization, email, phone, postal address, country (summary). Squarespace says free domain privacy is automatic for most domains; whether it is on for this one: unverified: owner to check in the registrar dashboard | Domain registration and renewal, not visits | Squarespace. Retention: unstated | https://www.squarespace.com/privacy (returned 429, not read) | unverified: no DPA found | privacy@squarespace.com (summary). Registration data must be kept while the domain is registered |
+| Claude (Anthropic) | AI tool the owner uses to help build client sites | Only details that are on the client’s public website; no enquiry or client personal details otherwise (owner, 2026-09-29) | Owner’s use while building a site, not visits | Anthropic: unverified | https://www.anthropic.com/legal/privacy (opened 2026-09-29) | unverified | unverified |
+| ChatGPT (OpenAI) | AI tool the owner uses to help build client sites | Same as Claude (owner, 2026-09-29) | Owner’s use while building a site, not visits | OpenAI: unverified | https://openai.com/policies/privacy-policy/ (returned 403, not read) | unverified | unverified |
 | Grisha.studio (outbound link) | Case-study link on the homepage | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Grisha.studio’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
 
 Domain facts (RDAP, 2026-09-28): registered 2020-11-11, **expires 2026-11-11**, nameservers `DNS1-4.P06.NSONE.NET`
@@ -55,7 +57,8 @@ Observed twice. Both runs found only same-origin requests and no cookies.
 
 Response headers on the deployed new site match `netlify.toml`, including the CSP
 (`default-src 'self'` …). The `third-party-allowlist` check in `tools/check_site.py` limits outbound `href`
-origins to `ALLOWED_LINK_ORIGINS` (currently `https://grisha.studio`).
+origins to `ALLOWED_LINK_ORIGINS`: `https://grisha.studio`, plus the privacy-policy origins that
+`/privacy/#sharing` links to (Netlify, Automattic, Apple, Squarespace, Anthropic, OpenAI; added 2026-09-29).
 
 ## Open items for the owner
 

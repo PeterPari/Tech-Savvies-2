@@ -12,6 +12,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/our-story/` | `public/our-story/index.html` | Our Story |
 | `/contact/` | `public/contact/index.html` | Contact info and the contact form |
 | `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
+| `/privacy/` | `public/privacy/index.html` | Privacy Policy (linked from every footer’s Legal column) |
 | any missing page | `public/404.html` | Page not found |
 | `/admin/` | `public/admin/index.html` | Internal prompt checklist (not linked, not indexed; generated, see below) |
 
@@ -55,7 +56,7 @@ Then visit <http://localhost:8080>.
 - **Text:** edit the HTML file for that page. On the two big headlines, the periods and
   apostrophes are wrapped in `<span class="kern-dot">` / `<span class="kern-apos">` to tuck
   them in tighter, like in the mockup. Keep those spans if you change the wording.
-- **Header and footer:** repeated in every HTML file (6 files). Change all of them together.
+- **Header and footer:** repeated in every HTML file (7 files). Change all of them together.
 - **Business details:** the legal name (Peter Parizhsky) appears in the footer copyright line
   of every page, the `legalName` in the JSON-LD in `public/index.html`, the `LEGAL_NAME` constant
   in `tools/check_site.py`, and one sentence on `/our-story/`. "New York, NY" appears in every

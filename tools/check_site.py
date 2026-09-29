@@ -19,13 +19,18 @@ EXPECTED_CSP = (
 )
 
 # Outbound link origins that are documented in docs/third-parties.md. Add one only after updating that file.
-ALLOWED_LINK_ORIGINS = ["https://grisha.studio"]
+ALLOWED_LINK_ORIGINS = [
+    "https://grisha.studio",
+    # Privacy policies of the services listed on /privacy/#sharing
+    "https://www.netlify.com", "https://automattic.com", "https://www.apple.com",
+    "https://www.squarespace.com", "https://www.anthropic.com", "https://openai.com",
+]
 
 # Legal name of the business (sole proprietor). Every footer copyright line and the JSON-LD legalName must match.
 LEGAL_NAME = "Peter Parizhsky"
 
 # Footer hrefs every page must contain. Later prompts append here, e.g. "/privacy/".
-REQUIRED_FOOTER_LINKS = []
+REQUIRED_FOOTER_LINKS = ["/privacy/"]
 
 # Substrings that mark a tracker, pixel or analytics tool. no-trackers fails on any of them in public/
 # HTML or JS (case-insensitive). Adding a tracker means a consent banner first: see

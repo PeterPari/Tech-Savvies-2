@@ -634,7 +634,7 @@ main .eyebrow + * {
 
 @media (min-width: 48em) {
   .footer-grid {
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) repeat(3, auto);
     column-gap: clamp(3rem, 8vw, 8rem);
   }
 
@@ -1149,6 +1149,113 @@ select.input option {
 
 .simple-page .btn {
   margin-top: 2rem;
+}
+
+/* ---------- Legal pages (privacy, terms, refunds) ---------- */
+
+h1 + .meta {
+  margin-top: 1rem;
+}
+
+.prose {
+  max-width: var(--measure);
+  margin-top: 2.5rem;
+  overflow-wrap: break-word;
+}
+
+.prose > * + * {
+  margin-top: 1rem;
+}
+
+.prose h2 {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.028em;
+  color: var(--heading);
+}
+
+.prose > h2:first-child {
+  margin-top: 0;
+}
+
+.prose h3 {
+  margin-top: 2rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.017em;
+  color: var(--heading);
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0.75rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose li + li {
+  margin-top: 0.5rem;
+}
+
+.prose li::marker {
+  color: var(--muted);
+}
+
+.prose strong {
+  color: var(--heading);
+}
+
+/* Links inside sentences need more than color to stand out (same as .lead a) */
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: rgba(16, 185, 129, 0.5);
+  text-underline-offset: 0.2em;
+}
+
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Wide tables scroll sideways inside this box instead of widening the page */
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius);
+}
+
+.table-scroll table {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.table-scroll th,
+.table-scroll td {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table-scroll th {
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.table-scroll thead th {
+  background: var(--field-bg);
 }
 
 /* ---------- Motion ---------- */
