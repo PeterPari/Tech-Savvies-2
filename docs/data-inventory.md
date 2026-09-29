@@ -40,6 +40,27 @@ Legal basis uses EU/UK terms with plain words. The owner is not deliberately ser
 No field was added, removed or changed, so `public/contact/index.html` is unchanged. The thanks page
 (`/contact/thanks/`) shows no submitted data.
 
+## Minors
+
+Applies when an enquirer says, or the message shows, that they are under 18 or under 13. No age is ever
+asked for: the contact form has no age or birth-date field, and the `no-age-fields` check keeps it that way.
+
+1. Reply once, asking them to have a parent or guardian contact info@tech-savvies.com. Say nothing else
+   about the project and quote no price.
+2. Collect nothing more. Use the minor’s name and email only to send that reply and to reach the parent or
+   guardian. Don’t add them to any list or use the details for anything else.
+3. If a parent or guardian follows up, they become the client (Terms #age) and the record moves under
+   client records.
+4. If none does, delete the Netlify submission (Verified and Spam tabs), the notification email and the
+   sent reply within 30 days of learning the person is a minor (business-facts, 2026-09-29). Empty the
+   iCloud Trash.
+5. A parent or guardian who asks for deletion, or data found from a child under 13: delete within the same
+   30 days and don’t use it. Confirm by email.
+6. Note the date and outcome in the log below without the child’s name.
+
+| Date | Action | Deleted by |
+|------|--------|------------|
+
 ## Retention routine
 
 - **Rule:** form submissions 6 months; emails 12 months (owner, 2026-09-29); client records per accountant.

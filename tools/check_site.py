@@ -528,11 +528,22 @@ def check_form_notice(site):
                 yield page.path, line_of(text, m.start()), "checkbox must not be pre-ticked (remove checked)"
 
 
+def check_no_age_fields(site):
+    pattern = re.compile(r"(?i)dob|birth|birthday|\bage\b")
+    for page in site.pages:
+        text = site.read(page.path)
+        for m in re.finditer(r"(?is)<(?:input|select|textarea)\b[^>]*>", text):
+            for attr in re.finditer(r"""(?i)\b(?:name|id)=["']?([^"'\s>]+)""", m.group(0)):
+                if pattern.search(attr.group(1)):
+                    yield page.path, line_of(text, m.start()), "no age or birth-date fields (found %r)" % attr.group(1)
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
     ("no-client-storage", check_no_client_storage),
     ("business-details", check_business_details),
+    ("no-age-fields", check_no_age_fields),
     ("no-trackers", check_no_trackers),
     ("consent-required", check_consent_required),
     ("claims", check_claims),

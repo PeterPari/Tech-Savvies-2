@@ -134,6 +134,7 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Netlify data location | No region stated; AWS among sub-processors, transfers outside EEA under DPF/SCCs. Source: https://www.netlify.com/pdf/netlify-dpa.pdf | Netlify docs |
 | Domain expiry | tech-savvies.com expires 2026-11-11; nameservers NS1, not Netlify DNS (RDAP) | Research, 2026-09-28 |
 | Retention: form submissions | 6 months | Owner, 2026-09-29 |
+| Deletion timeframe for a child’s or minor’s data (parent or guardian request, data found, or no parent or guardian follows up) | 30 days. The NY Child Data Protection Act sets 30 days as the maximum (GBL §899-ff(6)) | Owner, 2026-09-29 (Prompt 17) |
 | Retention rule: non-converted enquiries | Delete Netlify submissions (Verified and Spam tabs) older than 6 months, on the first Monday of each quarter; see [`data-inventory.md`](data-inventory.md) | Owner, 2026-09-29 |
 | Retention: client records (invoices, payment records, project files) | Per accountant (not yet settled) | Owner action |
 | Retention: emails with leads | 12 months (all emails, leads and past clients) | Owner, 2026-09-29 |
