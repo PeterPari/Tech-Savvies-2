@@ -104,6 +104,9 @@ Then visit <http://localhost:8080>.
    and pick this repository.
 2. Leave the build command empty. `netlify.toml` already tells Netlify to publish the `public/` folder.
 3. Add the custom domain under **Domain management**. Netlify sets up HTTPS automatically.
+   For moving `tech-savvies.com` over from the old site, follow [`migration-plan.md`](migration-plan.md)
+   instead. The domain's DNS zone also holds the email and Search Console records, and the old URLs
+   need redirects.
 
 `netlify.toml` also adds security headers, including a Content Security Policy that only allows
 files from this site. If you later add a third-party script, font, video embed or analytics tool,

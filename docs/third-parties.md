@@ -21,8 +21,9 @@ owner’s statement and Netlify’s docs disagree, both are shown.
 | ChatGPT (OpenAI) | AI tool the owner uses to help build client sites | Same as Claude (owner, 2026-09-29) | Owner’s use while building a site, not visits | OpenAI: unverified | https://openai.com/policies/privacy-policy/ (returned 403, not read) | unverified | unverified |
 | Grisha.studio (outbound link) | Case-study link on the homepage | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Grisha.studio’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
 
-Domain facts (RDAP, 2026-09-28): registered 2020-11-11, **expires 2026-11-11**, nameservers `DNS1-4.P06.NSONE.NET`
-(NS1), not Netlify DNS.
+Domain facts (RDAP, 2026-09-28): registered 2020-11-11, **expires 2026-11-11**, nameservers `DNS1-4.P06.NSONE.NET`.
+Those are the NS1 servers that Netlify DNS runs on: the zone's SOA contact is `domains+netlify.netlify.com`, so DNS
+is hosted in Netlify DNS (corrected 2026-09-29; the zone also holds the iCloud MX, SPF and Google verification records).
 
 ## Netlify facts and sources
 
@@ -66,7 +67,7 @@ origins to `ALLOWED_LINK_ORIGINS`: `https://grisha.studio`, plus the privacy-pol
 2. Retention: Netlify keeps submissions until deleted. Delete after 6 months by hand or script, or reword the policy.
 3. Netlify dashboard readouts (Deploys, Forms, Analytics, Domain management, add-ons) are still needed.
 4. Rerun the browser check from a clean machine.
-5. Renew the domain before 2026-11-11 and choose DNS at cutover.
+5. Renew the domain before 2026-11-11. DNS stays in Netlify DNS at cutover; see [`../migration-plan.md`](../migration-plan.md).
 6. Canonical tags already point to `https://tech-savvies.com/`; fine after the move.
 
 ## Adding a third party

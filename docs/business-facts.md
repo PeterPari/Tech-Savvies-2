@@ -134,7 +134,7 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Netlify spam filtering | Docs say Akismet filters all submissions and give no off switch. Owner confirmed in the dashboard that it’s on, with the honeypot as an extra layer (2026-09-29). Source: https://docs.netlify.com/manage/forms/spam-filters/ | Netlify docs; owner, 2026-09-29 |
 | Netlify Analytics | Server-side from CDN logs, cookieless per Netlify; counts unique visitors by IP. Source: https://docs.netlify.com/manage/monitoring/web-analytics/overview/ | Netlify docs |
 | Netlify data location | No region stated; AWS among sub-processors, transfers outside EEA under DPF/SCCs. Source: https://www.netlify.com/pdf/netlify-dpa.pdf | Netlify docs |
-| Domain expiry | tech-savvies.com expires 2026-11-11; nameservers NS1, not Netlify DNS (RDAP) | Research, 2026-09-28 |
+| Domain expiry | tech-savvies.com expires 2026-11-11 (RDAP). DNS is Netlify DNS: nameservers `dns1-4.p06.nsone.net` are the NS1 servers Netlify DNS runs on, and the SOA contact is `domains+netlify.netlify.com` (earlier “not Netlify DNS” corrected). See [`../migration-plan.md`](../migration-plan.md) | Research, 2026-09-28; DNS corrected 2026-09-29 |
 | Retention: form submissions | 6 months | Owner, 2026-09-29 |
 | Deletion timeframe for a child’s or minor’s data (parent or guardian request, data found, or no parent or guardian follows up) | 30 days. The NY Child Data Protection Act sets 30 days as the maximum (GBL §899-ff(6)) | Owner, 2026-09-29 (Prompt 17) |
 | Retention rule: non-converted enquiries | Delete Netlify submissions (Verified and Spam tabs) older than 6 months, on the first Monday of each quarter; see [`data-inventory.md`](data-inventory.md) | Owner, 2026-09-29 |
