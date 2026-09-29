@@ -72,7 +72,7 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Payment schedule | Projects (Launch, Rescue, one-time fix): 50% upfront before work starts, 50% on delivery. Monthly management: paid in full when booked | Owner, 2026-09-29 |
 | Accepted payment methods | Venmo, bank transfer. Cards not accepted | Owner, 2026-09-29 |
 | Payment or card fees charged to the client | None. The client pays exactly the listed price | Owner, 2026-09-29 |
-| Sales tax handling | Prices exclude sales tax. Page says: “If it applies, we’ll tell you the amount before you pay anything.” Whether tax applies is still open: owner action, ask an accountant or NY Dept. of Taxation and Finance | Owner, 2026-09-29 |
+| Sales tax handling | Prices exclude sales tax. Page says: “If it applies, we’ll tell you the amount before you pay anything.” Whether tax applies is still open (owner doesn’t know, 2026-09-29): owner action, ask an accountant or NY Dept. of Taxation and Finance | Owner, 2026-09-29 |
 
 ## Scope, guarantee and refunds
 
@@ -90,9 +90,11 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Fact | Value | Source |
 |------|-------|--------|
 | Who pays for the client's domain and hosting | Client pays the registrar for the domain directly. Tech-Savvies guides them through buying it and sets it up. Hosting is on Tech-Savvies’ own Netlify account | Owner, 2026-09-29 |
-| Approximate domain and hosting cost | Domain: about $10–$20 a year in almost all cases, higher for names in high demand, paid by the client to the registrar. Hosting: $0, no end date, for sites hosted on Tech-Savvies’ Netlify account | Owner, 2026-09-29 |
+| Approximate domain and hosting cost | Domain: about $10–$20 a year in almost all cases, higher for names in high demand, paid by the client to the registrar. Hosting: $0 while the site fits Netlify’s free plan on Tech-Savvies’ account (earlier “no end date” withdrawn, owner 2026-09-29) | Owner, 2026-09-29 |
 | Whose name the domain is registered in | The client’s (earlier “Tech-Savvies until paid in full, then the client” superseded for the domain) | Owner, 2026-09-29 |
-| Hosting account | Tech-Savvies’ Netlify account, $0 to the client, no end date | Owner, 2026-09-29 |
+| Hosting account | Tech-Savvies’ Netlify account, $0 to the client while the site fits Netlify’s free plan. “No end date” withdrawn: the owner can’t promise it for a site that outgrows the free plan | Owner, 2026-09-29 |
+| Site outgrows Netlify’s free plan | Tech-Savvies moves it to a hosting account in the client’s name; the client pays that host directly. No hosting charge passes through Tech-Savvies | Owner, 2026-09-29 |
+| Rescue hosting | Client chooses: keep their current host at their own cost, or move to Tech-Savvies’ Netlify account on the same terms as new sites | Owner, 2026-09-29 |
 | Paid plugins, services or stock images | Free plans and free images by default. A paid one only with the client’s approval, paid by the client to the provider directly | Owner, 2026-09-29 |
 | Online payment fees (Tier 5) | Stripe or Square take their own fee from each sale | Owner, 2026-09-29 |
 | Who owns the finished site and code after full payment | The client | Owner, 2026-09-29 |
