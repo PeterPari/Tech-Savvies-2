@@ -1,6 +1,10 @@
 # Prompt 04: Cookie policy
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 docs/tracking-audit.md records 0 cookies and 0 browser storage, and its "Cookie consent" section records the no-banner decision. Visitors expect a cookie policy. Its content must match what the audit found, so a generic list of "analytics and advertising cookies" would be false. If a consent mechanism is ever added (Prompt 05 branch B), this page will list its cookie.
 

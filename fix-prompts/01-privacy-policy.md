@@ -1,6 +1,10 @@
 # Prompt 01: Privacy policy
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The site collects personal data in two ways: the contact form (name, email, business, service, message) and Netlify's request logs and form metadata. CalOPPA requires a conspicuously posted privacy policy for commercial sites that collect personal information from California residents. A policy that misdescribes actual practice is deceptive under FTC Act §5 and NY GBL §349.
 

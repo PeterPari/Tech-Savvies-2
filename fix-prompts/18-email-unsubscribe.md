@@ -1,6 +1,10 @@
 # Prompt 18: Unsubscribe link in emails
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The website sends no email and has no newsletter signup. Netlify form notifications go to the owner, so there's no unsubscribe link to add in code. The risk is the owner's own email:
 - CAN-SPAM covers any email whose primary purpose is commercial, including B2B follow-ups to leads. Such emails need an honest header and subject, identification as an ad where applicable, a valid postal address, and a working opt-out honoured within 10 business days at no cost.

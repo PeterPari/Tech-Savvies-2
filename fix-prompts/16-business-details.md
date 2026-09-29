@@ -1,6 +1,10 @@
 # Prompt 16: Add real business details
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The only business detail on the site is info@tech-savvies.com. Four problems follow from that:
 - The Terms and Privacy Policy must name the contracting party and the data controller.

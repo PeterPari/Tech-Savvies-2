@@ -6,6 +6,8 @@ something real instead of generic advice.
 
 Each item has a ready-to-run Claude Code prompt in [`fix-prompts/`](fix-prompts/). Run them in
 the order in [Execution order](#execution-order), one prompt per session, one commit per prompt.
+All of them work on the branch `claude-fix-plan`. The last prompt (26) merges that branch into
+main, which is what publishes the changes.
 
 > **Not legal advice.** The legal pages this plan produces are written for what this site
 > actually does, and they are a good starting point. A New York attorney should still review
@@ -147,6 +149,7 @@ check.
 | 4. IP | **19** → **22** | Independent of the rest; needs owner answers |
 | 5. Accessibility | **13** → **14** → **15** → **25** → **21** | Runs after all new pages exist so the full audit (21) covers them; 21 also adds the accessibility statement |
 | 6. Final check | **24** (run again with "final pass" added to the prompt) | Checks every live page against the compliance map one last time |
+| 7. Ship | **26** | Fast-forwards main to `claude-fix-plan` once the checks pass, which publishes the site |
 
 Dependencies that matter:
 - 01 must come before 02, 03, 04, 06, 17, 20 (shared styles, footer column, cross-links).
@@ -154,6 +157,11 @@ Dependencies that matter:
 - 10 and 12 must come before 02 and 03 (Terms/Refunds quote the corrected pricing and promises).
 - 08, 23, 05, 07 must come before 01 (the Privacy Policy describes what they found).
 - 21 last among the accessibility prompts (it audits the finished site).
+- 26 runs last of all. It's the only prompt that pushes to main.
+
+Every prompt starts with a `<branch>` section: fetch `claude-fix-plan`, check it out and pull
+before changing anything, then push back to it. Each new session therefore picks up where the
+previous prompt left off, and main stays untouched until Prompt 26.
 
 ---
 
@@ -207,6 +215,7 @@ one-click copy button. It isn't linked from any page and is `noindex`.
 | 23 | [`fix-prompts/23-tracking-check.md`](fix-prompts/23-tracking-check.md) | Tracking audit report + guard |
 | 24 | [`fix-prompts/24-local-laws.md`](fix-prompts/24-local-laws.md) | `docs/legal-compliance.md` (law → requirement → status) |
 | 25 | [`fix-prompts/25-button-labels.md`](fix-prompts/25-button-labels.md) | Label audit + microcopy rules |
+| 26 | [`fix-prompts/26-push-to-main.md`](fix-prompts/26-push-to-main.md) | `claude-fix-plan` merged into main after the checks pass |
 
 ---
 
@@ -223,3 +232,4 @@ one-click copy button. It isn't linked from any page and is `noindex`.
 - `docs/compliance-log.md` lists each item with status, commit, and anything left for the owner
   (e.g. "Netlify Analytics setting not verifiable from code").
 - Attorney review of `/terms/`, `/refunds/`, `/privacy/` is scheduled (owner action).
+- Prompt 26 has fast-forwarded main to `claude-fix-plan`, and Netlify has deployed it.

@@ -1,6 +1,10 @@
 # Prompt 11: Remove fake reviews
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The FTC Rule on Consumer Reviews and Testimonials (16 CFR 465) allows civil penalties for fake or misrepresented reviews and testimonials, undisclosed insider reviews, and suppressing negative reviews. The FTC Endorsement Guides (16 CFR 255) require disclosure of material connections: family, friends, free or discounted work. NY GBL §349 also applies.
 

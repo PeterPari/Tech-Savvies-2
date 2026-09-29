@@ -1,6 +1,10 @@
 # Prompt 22: Check copyright on images
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 Prompt 19 recorded what each asset is. Rights to an image depend on how it was made:
 - Owner-made: owned by the owner.

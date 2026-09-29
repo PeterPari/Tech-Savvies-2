@@ -1,6 +1,10 @@
 # Prompt 23: Check tracking
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The Privacy Policy and Cookie Policy will say whether Tech-Savvies tracks visitors, and a false statement there is a deceptive practice under FTC Act §5 and NY GBL §349.
 

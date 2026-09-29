@@ -35,7 +35,7 @@
           <p class="lead admin-intro">Run the prompts in step order, one new Claude Code session each. Set the model and effort shown before pasting. Checkmarks are saved in this browser only.</p>
 
           <div class="admin-toolbar">
-            <p class="admin-progress" aria-live="polite"><span data-done-count>0</span> of 27 done</p>
+            <p class="admin-progress" aria-live="polite"><span data-done-count>0</span> of 28 done</p>
             <button class="admin-reset" type="button" data-reset hidden>Clear all checkmarks</button>
           </div>
 
@@ -64,7 +64,11 @@
               <p class="prompt-deliverable"><code>docs/business-facts.md</code>, <code>docs/compliance-log.md</code>, <code>tools/check_site.py</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-00" tabindex="0" aria-label="Prompt 00 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-00" tabindex="0" aria-label="Prompt 00 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The fix prompts in fix-prompts/ publish prices, promises, addresses and legal terms. They can do that safely only with three shared artifacts in place:
 - a single facts file the owner fills in;
 - a status log for the 25 items;
@@ -146,7 +150,11 @@ Create the shared compliance foundation (facts file, compliance log, and site ch
               <p class="prompt-deliverable"><code>docs/legal-compliance.md</code> (law → requirement → status)</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-24" tabindex="0" aria-label="Prompt 24 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-24" tabindex="0" aria-label="Prompt 24 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Tech-Savvies is a one-person web-design business in New York City. It sells website builds, website repairs, and Google Business Profile and social media help, with prices on /solutions/, including a monthly management plan. It collects enquiries through a Netlify contact form. The Privacy Policy, Terms, Refund Policy, email policy and accessibility statement will all be written against the map this prompt produces.
 
 Laws to assess:
@@ -223,7 +231,11 @@ Write docs/legal-compliance.md, mapping each law listed above to whether it appl
               <p class="prompt-deliverable"><code>docs/third-parties.md</code> + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-08" tabindex="0" aria-label="Prompt 08 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-08" tabindex="0" aria-label="Prompt 08 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The Privacy Policy (Prompt 01) must name every service that receives visitor or client data. An audit of the code on 2026-09-28 found:
 - no third-party scripts, iframes, fonts or stylesheets;
 - CSP default-src &#x27;self&#x27; (netlify.toml:17);
@@ -291,7 +303,11 @@ Document every third party that receives Tech-Savvies visitor or client data in 
               <p class="prompt-deliverable">Tracking audit report + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-23" tabindex="0" aria-label="Prompt 23 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-23" tabindex="0" aria-label="Prompt 23 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The Privacy Policy and Cookie Policy will say whether Tech-Savvies tracks visitors, and a false statement there is a deceptive practice under FTC Act §5 and NY GBL §349.
 
 A Playwright probe on 2026-09-28 (all 6 pages, 375px and 1280px) measured 0 cookies, 0 localStorage/sessionStorage keys, and requests only to the site&#x27;s own origin. The code contains no analytics, pixels or tag managers.
@@ -363,7 +379,11 @@ Establish with evidence whether Tech-Savvies tracks website visitors or email re
               <p class="prompt-deliverable">Verification + guard; conditional banner spec</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-05" tabindex="0" aria-label="Prompt 05 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-05" tabindex="0" aria-label="Prompt 05 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Consent laws (EU ePrivacy/GDPR, UK PECR, US state opt-out laws) are triggered by non-essential cookies, device storage or tracking. docs/tracking-audit.md records 0 cookies, 0 browser storage and no third-party requests.
 
 A banner on this site would ask for consent to nothing, which misleads. It would also add a keyboard and screen-reader obstacle to every first visit, and it would need a cookie of its own to remember the choice. The planned outcome is therefore: no banner, a recorded decision, and a guard. Branch B below applies only when a non-essential cookie or tracker exists, or the owner explicitly asks for analytics.
@@ -436,7 +456,11 @@ Decide from the tracking evidence whether the site needs cookie consent, and imp
               <p class="prompt-deliverable">Field review, retention rule, <code>docs/data-inventory.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-07" tabindex="0" aria-label="Prompt 07 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-07" tabindex="0" aria-label="Prompt 07 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The contact form (public/contact/index.html:70-109) collects:
 
 | Field | Required | Assessment |
@@ -511,7 +535,11 @@ Record every piece of personal data Tech-Savvies collects in docs/data-inventory
               <p class="prompt-deliverable">Business details in footer/contact + JSON-LD</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-16" tabindex="0" aria-label="Prompt 16 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-16" tabindex="0" aria-label="Prompt 16 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The only business detail on the site is info@tech-savvies.com. Four problems follow from that:
 - The Terms and Privacy Policy must name the contracting party and the data controller.
 - CAN-SPAM requires a postal address in commercial email (Prompt 18).
@@ -594,7 +622,11 @@ Add Tech-Savvies&#x27; confirmed legal name, location, service area, hours and m
               <p class="prompt-deliverable">Full price disclosure on <code>/solutions/</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-10" tabindex="0" aria-label="Prompt 10 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-10" tabindex="0" aria-label="Prompt 10 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 public/solutions/index.html promises &quot;Transparent pricing (no surprise invoices)&quot; (:106), but leaves these costs undisclosed or vague:
 
 | Location | Problem |
@@ -674,7 +706,11 @@ Rewrite /solutions/ so a visitor can see every cost of each service before conta
               <p class="prompt-deliverable">Claims register + copy rewrites</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-12" tabindex="0" aria-label="Prompt 12 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-12" tabindex="0" aria-label="Prompt 12 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Under FTC Act §5 and NY GBL §349/§350, an advertiser needs a reasonable basis for an objective claim before making it. Obvious puffery (&quot;affordable&quot;, &quot;Websites done fast. Websites done right.&quot;) needs none.
 
 Claims found in the initial audit:
@@ -773,7 +809,11 @@ Replace every objective claim on the Tech-Savvies site that lacks owner-confirme
               <p class="prompt-deliverable">Case-study verification + testimonial policy + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-11" tabindex="0" aria-label="Prompt 11 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-11" tabindex="0" aria-label="Prompt 11 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The FTC Rule on Consumer Reviews and Testimonials (16 CFR 465) allows civil penalties for fake or misrepresented reviews and testimonials, undisclosed insider reviews, and suppressing negative reviews. The FTC Endorsement Guides (16 CFR 255) require disclosure of material connections: family, friends, free or discounted work. NY GBL §349 also applies.
 
 The initial audit found no reviews, ratings, testimonials or aggregateRating schema. It found one case study, &quot;Featured Showcase&quot; (public/index.html:97-119). The case study names Grisha.studio, links to it from a browser-frame address bar, shows a screenshot of the client&#x27;s home page (public/assets/img/grisha-studio.webp) with the name Gregory Parizhsky, the same surname as the founder, states specific facts (&quot;secured his preferred domain&quot;, &quot;created his Instagram page&quot;), and presents the relationship as an ordinary client engagement.
@@ -851,7 +891,11 @@ Correct or remove any endorsement on the Tech-Savvies site that is not genuine, 
               <p class="prompt-deliverable">Audit + fixes + <code>docs/ux-honesty-rules.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-09" tabindex="0" aria-label="Prompt 09 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-09" tabindex="0" aria-label="Prompt 09 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The FTC staff report &quot;Bringing Dark Patterns to Light&quot; (2022) and FTC enforcement treat manipulative interfaces as unfair or deceptive under FTC Act §5. NY GBL §527-a targets subscriptions that are hard to cancel.
 
 The initial audit found no UI dark patterns: no pre-ticked boxes, confirmshaming, countdowns, fake scarcity or disguised ads. It found one pricing risk, the unpriced &quot;monthly&quot; plan behind a &quot;$50&quot; headline, which Prompt 10 addresses. The remaining prompts add legal pages, a form notice, a data-request flow and possibly a cancellation path, so this prompt also sets the rules that UI must follow.
@@ -929,7 +973,11 @@ Audit every Tech-Savvies page and flow for dark patterns, remove any you find, a
               <p class="prompt-deliverable"><code>/privacy/</code> page, <code>.prose</code> styles, footer "Legal" column</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-01" tabindex="0" aria-label="Prompt 01 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-01" tabindex="0" aria-label="Prompt 01 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The site collects personal data in two ways: the contact form (name, email, business, service, message) and Netlify&#x27;s request logs and form metadata. CalOPPA requires a conspicuously posted privacy policy for commercial sites that collect personal information from California residents. A policy that misdescribes actual practice is deceptive under FTC Act §5 and NY GBL §349.
 
 Generic boilerplate (&quot;we may use cookies and share data with partners&quot;) would therefore be false here. The site sets no cookies, runs no analytics and has no ad partners, and every statement in the policy must come from the input documents.
@@ -1016,7 +1064,11 @@ Publish /privacy/, a privacy policy that describes exactly what Tech-Savvies col
               <p class="prompt-deliverable"><code>/cookies/</code> page</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-04" tabindex="0" aria-label="Prompt 04 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-04" tabindex="0" aria-label="Prompt 04 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 docs/tracking-audit.md records 0 cookies and 0 browser storage, and its &quot;Cookie consent&quot; section records the no-banner decision. Visitors expect a cookie policy. Its content must match what the audit found, so a generic list of &quot;analytics and advertising cookies&quot; would be false. If a consent mechanism is ever added (Prompt 05 branch B), this page will list its cookie.
 
 /privacy/, the .prose styles and the footer Legal column already exist (Prompt 01). The unlinked owner page /admin/ is outside the policy&#x27;s scope (see CLAUDE.md).
@@ -1078,7 +1130,11 @@ Publish /cookies/, a cookie policy that states what cookies and storage Tech-Sav
               <p class="prompt-deliverable"><code>/terms/</code> page</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-02" tabindex="0" aria-label="Prompt 02 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-02" tabindex="0" aria-label="Prompt 02 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 /solutions/ sells services with prices and promises, but nothing defines the terms: completion guarantee, monthly plan, rush orders, domain setup. The Terms must match /solutions/ and docs/business-facts.md exactly. Relevant law, detailed in docs/legal-compliance.md:
 - NY GBL §527-a: auto-renewal disclosure and cancellation for the monthly plan;
 - FTC Act §5 and NY GBL §349: the &quot;completion guarantee&quot; and &quot;no surprise invoices&quot; promises need concrete meaning;
@@ -1162,7 +1218,11 @@ Publish /terms/, Terms of Service for website use and for Tech-Savvies projects 
               <p class="prompt-deliverable"><code>/refunds/</code> page</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-03" tabindex="0" aria-label="Prompt 03 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-03" tabindex="0" aria-label="Prompt 03 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Clients pay up to a few hundred dollars upfront. The site promises a completion guarantee and sells an auto-renewing monthly plan, and neither has written refund or cancellation rules. docs/legal-compliance.md covers NY GBL §218-a (refund policy posting) and §527-a (auto-renewal cancellation). The refund rules must agree with /solutions/ and /terms/.
 &lt;/context&gt;
 
@@ -1228,7 +1288,11 @@ Publish /refunds/, a refund and cancellation policy for each Tech-Savvies servic
               <p class="prompt-deliverable">Privacy notice on the contact form</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-06" tabindex="0" aria-label="Prompt 06 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-06" tabindex="0" aria-label="Prompt 06 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The contact form (public/contact/index.html:70-109) collects name, email, business and message, with no notice of how they&#x27;re used. A just-in-time notice where data is collected meets GDPR Art. 13 (where relevant) and the FTC&#x27;s notice principle, and points to /privacy/.
 
 A notice is the right pattern here, not a required &quot;I agree&quot; checkbox. Replying to the person is the form&#x27;s purpose. A mandatory consent box would bundle consent with the service, so it wouldn&#x27;t be freely given under GDPR, and it would add friction.
@@ -1295,7 +1359,11 @@ Add an accurate privacy notice, with a link to the Privacy Policy, directly abov
               <p class="prompt-deliverable">Children's-data clauses + form notice</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-17" tabindex="0" aria-label="Prompt 17 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-17" tabindex="0" aria-label="Prompt 17 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Three rules shape this:
 - COPPA applies to sites directed to children under 13, or with actual knowledge of collecting their data. This site is aimed at businesses.
 - The NY Child Data Protection Act&#x27;s scope for a general-audience site is recorded in docs/legal-compliance.md.
@@ -1363,7 +1431,11 @@ Add children&#x27;s and under-18 data rules to the Privacy Policy, Terms and con
               <p class="prompt-deliverable">Rights section + <code>docs/data-requests-runbook.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-20" tabindex="0" aria-label="Prompt 20 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-20" tabindex="0" aria-label="Prompt 20 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Contact form data lives in several places:
 - Netlify Forms, including the Spam tab;
 - the notification emails Netlify sends to the inbox;
@@ -1443,7 +1515,11 @@ Give visitors a one-email way to request access to or deletion of their data, an
               <p class="prompt-deliverable"><code>docs/email-policy.md</code> + signature template</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-18" tabindex="0" aria-label="Prompt 18 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-18" tabindex="0" aria-label="Prompt 18 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 The website sends no email and has no newsletter signup. Netlify form notifications go to the owner, so there&#x27;s no unsubscribe link to add in code. The risk is the owner&#x27;s own email:
 - CAN-SPAM covers any email whose primary purpose is commercial, including B2B follow-ups to leads. Such emails need an honest header and subject, identification as an ad where applicable, a valid postal address, and a working opt-out honoured within 10 business days at no cost.
 - Transactional and relationship emails (enquiry replies, project updates, invoices) are largely exempt from the opt-out requirement.
@@ -1520,7 +1596,11 @@ Write docs/email-policy.md, classifying each kind of email Tech-Savvies sends an
               <p class="prompt-deliverable"><code>docs/asset-licenses.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-19" tabindex="0" aria-label="Prompt 19 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-19" tabindex="0" aria-label="Prompt 19 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Audit findings:
 - Fonts: public/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2 and jetbrains-mono-latin-500-normal.woff2 are under SIL OFL 1.1. The full licence texts ship beside them (LICENSE-PlusJakartaSans.txt, LICENSE-JetBrainsMono.txt), and neither declares a Reserved Font Name, so the latin subsets can keep their names. The filenames follow Fontsource&#x27;s naming.
 - Images: logo.png, og-image.png, icon-192.png, icon-512.png, favicon-64.png, favicon.ico and apple-touch-icon.png carry no embedded metadata, so their origin must come from the owner. grisha-studio.webp is a screenshot of a client&#x27;s website and artwork. Its rights sit with the client, so it needs the client&#x27;s permission (see Prompt 11). og-image.png looks like the logo composed with the two OFL fonts.
@@ -1585,7 +1665,11 @@ Record the creator and licence of every font, image and icon in the repo in docs
               <p class="prompt-deliverable">Provenance record, copyright line fix, name/logo clearance checklist</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-22" tabindex="0" aria-label="Prompt 22 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-22" tabindex="0" aria-label="Prompt 22 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Prompt 19 recorded what each asset is. Rights to an image depend on how it was made:
 - Owner-made: owned by the owner.
 - Freelance designer: in the US the designer usually keeps copyright unless there&#x27;s a written assignment; work-for-hire rarely covers a contractor-made logo.
@@ -1654,7 +1738,11 @@ Establish whether Tech-Savvies owns or is licensed to use each image on the site
               <p class="prompt-deliverable">Alt-text verification + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-13" tabindex="0" aria-label="Prompt 13 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-13" tabindex="0" aria-label="Prompt 13 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 WCAG 1.1.1 requires a text alternative for every non-text element. The initial audit found:
 - The logo appears twice per page with alt=&quot;Tech-Savvies NYC home&quot;. That&#x27;s correct for a linked logo: it names the destination and contains the visible logo text.
 - The showcase screenshot (public/index.html:110, grisha-studio.webp) has a descriptive alt of about 130 characters.
@@ -1723,7 +1811,11 @@ Give every image and icon on every page in public/ a correct text alternative, a
               <p class="prompt-deliverable">Contrast report + forced-colors + error-state fixes</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-14" tabindex="0" aria-label="Prompt 14 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-14" tabindex="0" aria-label="Prompt 14 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 WCAG requirements that apply:
 - 1.4.3: 4.5:1 for body text, 3:1 for large text;
 - 1.4.11: 3:1 for UI boundaries and focus indicators;
@@ -1799,7 +1891,11 @@ Make every text, link, control and focus indicator on every page meet WCAG 2.2 A
               <p class="prompt-deliverable">Mobile-menu focus fix + form instructions</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-15" tabindex="0" aria-label="Prompt 15 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-15" tabindex="0" aria-label="Prompt 15 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Already working: the skip link, :focus-visible outlines, a &lt;button&gt; menu toggle with aria-expanded, Escape to close with focus returned, and labelled native form controls.
 
 Failures:
@@ -1877,7 +1973,11 @@ Make every Tech-Savvies page fully keyboard-operable without focus going behind 
               <p class="prompt-deliverable">Label audit + microcopy rules</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-25" tabindex="0" aria-label="Prompt 25 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-25" tabindex="0" aria-label="Prompt 25 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 WCAG criteria covered:
 - 2.4.4: link purpose;
 - 2.4.6: labels;
@@ -1948,7 +2048,11 @@ Make every button and link on the Tech-Savvies site name exactly what it does, c
               <p class="prompt-deliverable">axe + manual WCAG 2.2 AA audit, fixes, <code>/accessibility/</code> statement</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-21" tabindex="0" aria-label="Prompt 21 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-21" tabindex="0" aria-label="Prompt 21 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Website accessibility claims arise under ADA Title III, the NY State Human Rights Law and the NYC Human Rights Law (see docs/legal-compliance.md). The business&#x27;s audience includes people who don&#x27;t feel confident with technology, including older adults (see /our-story/).
 
 Prompts 13, 14, 15 and 25 fixed alt text, contrast, keyboard access and labels, and recorded their results in docs/accessibility-audit.md. This prompt covers the rest of WCAG 2.2 AA across the finished site, including every legal page, and adds an accessibility statement.
@@ -2030,7 +2134,11 @@ Bring every page in public/ to WCAG 2.2 AA and publish /accessibility/ with a wa
               <p class="prompt-deliverable">Checks every live page against <code>docs/legal-compliance.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
-                <pre class="prompt-text" id="prompt-24-final" tabindex="0" aria-label="Prompt 24 text">&lt;context&gt;
+                <pre class="prompt-text" id="prompt-24-final" tabindex="0" aria-label="Prompt 24 text">&lt;branch&gt;
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session&#x27;s default branch. Leave main unchanged.
+&lt;/branch&gt;
+
+&lt;context&gt;
 Tech-Savvies is a one-person web-design business in New York City. It sells website builds, website repairs, and Google Business Profile and social media help, with prices on /solutions/, including a monthly management plan. It collects enquiries through a Netlify contact form. The Privacy Policy, Terms, Refund Policy, email policy and accessibility statement will all be written against the map this prompt produces.
 
 Laws to assess:
@@ -2096,6 +2204,76 @@ final pass</pre>
             <td class="col-effort" role="cell" data-label="Effort"><span class="effort effort--high">High</span></td>
             <td class="col-copy" role="cell">
               <button class="btn btn--sm copy-btn" type="button" data-copy="prompt-24-final" hidden><span data-copy-label>Copy</span><span class="visually-hidden"> step 27 prompt</span></button>
+            </td>
+          </tr>
+          <tr class="prompt-row" role="row" data-row="26">
+            <td class="col-done" role="cell">
+              <input class="done-box" type="checkbox" id="done-26" data-done="26">
+              <label class="visually-hidden" for="done-26">Mark step 28 done</label>
+            </td>
+            <td class="col-step" role="cell" data-label="Step">28</td>
+            <td class="col-prompt" role="cell">
+              <p class="prompt-title"><span class="prompt-num">26</span> Push the finished fix plan to main</p>
+              <p class="prompt-deliverable"><code>claude-fix-plan</code> merged into main after the checks pass</p>
+              <details class="prompt-details">
+                <summary>View prompt</summary>
+                <pre class="prompt-text" id="prompt-26" tabindex="0" aria-label="Prompt 26 text">&lt;branch&gt;
+Start from the git branch claude-fix-plan: run git fetch origin, check out claude-fix-plan, and pull. This prompt is the only one with explicit permission to push to main, and only by fast-forwarding main to claude-fix-plan.
+&lt;/branch&gt;
+
+&lt;context&gt;
+Prompts 00–25, plus the Prompt 24 final pass, have each committed to claude-fix-plan. Netlify deploys main to tech-savvies.com, so pushing to main publishes every change on the branch. Main may have gained commits since claude-fix-plan was created. docs/compliance-log.md records each item&#x27;s status and owner follow-ups. docs/legal-compliance.md holds the final-pass results.
+&lt;/context&gt;
+
+&lt;inputs&gt;
+docs/compliance-log.md, docs/legal-compliance.md, tools/check_site.py, tools/build_admin.py
+&lt;/inputs&gt;
+
+&lt;deliverables&gt;
+1. claude-fix-plan with origin/main merged in:
+   - a merge commit, not a rebase;
+   - conflicts resolved per the constraints below;
+   - public/admin/index.html rebuilt with python3 tools/build_admin.py if the merge changed fix-prompts/ or fix-plan.md;
+   - pushed to origin claude-fix-plan.
+2. main fast-forwarded to claude-fix-plan with git push origin claude-fix-plan:main.
+3. A final message of at most 10 bullets:
+   - the commit range pushed to main;
+   - the pages added or changed;
+   - every item in docs/compliance-log.md that isn&#x27;t done, with its owner follow-ups;
+   - the legal pages flagged for attorney review.
+&lt;/deliverables&gt;
+
+&lt;constraints&gt;
+- Push to main only when all of these hold on the merged tree:
+  - python3 tools/check_site.py exits 0;
+  - python3 tools/build_admin.py --check exits 0;
+  - docs/legal-compliance.md has a &quot;Final pass&quot; section;
+  - public/ contains no TODO(owner).
+  If any fails, stop before pushing and report which one failed, naming the prompt that owns the fix.
+- When both sides of a merge conflict can be kept, keep both. When both sides changed the same copy or legal text and choosing one loses content, stop and ask the owner with AskUserQuestion, showing both versions.
+- Don&#x27;t force-push, rebase or rewrite history on claude-fix-plan or main. If the fast-forward is rejected because main moved again, fetch and merge again, at most 2 more times, then stop and report.
+- Leave the claude-fix-plan branch in place after pushing.
+&lt;/constraints&gt;
+
+&lt;acceptance_criteria&gt;
+- After the push, git rev-parse origin/main equals git rev-parse origin/claude-fix-plan.
+- Both checks exit 0 on that commit.
+&lt;/acceptance_criteria&gt;
+
+&lt;if_uncertain&gt;
+If docs/compliance-log.md shows any item not done, list those items and ask the owner with AskUserQuestion, offering &quot;Push anyway&quot; or &quot;Stop&quot;, before pushing.
+&lt;/if_uncertain&gt;
+
+&lt;task&gt;
+Fast-forward main to the finished claude-fix-plan branch once the site checks pass, so the completed fix plan goes live on tech-savvies.com.
+&lt;/task&gt;</pre>
+              </details>
+            </td>
+            <td class="col-phase" role="cell" data-label="Phase">7 · Ship</td>
+            <td class="col-model" role="cell" data-label="Model"><span class="badge badge--sonnet">Sonnet</span></td>
+            <td class="col-effort" role="cell" data-label="Effort"><span class="effort effort--medium">Medium</span></td>
+            <td class="col-copy" role="cell">
+              <button class="btn btn--sm copy-btn" type="button" data-copy="prompt-26" hidden><span data-copy-label>Copy</span><span class="visually-hidden"> step 28 prompt</span></button>
             </td>
           </tr>
             </tbody>

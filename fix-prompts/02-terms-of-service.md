@@ -1,6 +1,10 @@
 # Prompt 02: Terms of Service
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 /solutions/ sells services with prices and promises, but nothing defines the terms: completion guarantee, monthly plan, rush orders, domain setup. The Terms must match /solutions/ and docs/business-facts.md exactly. Relevant law, detailed in docs/legal-compliance.md:
 - NY GBL §527-a: auto-renewal disclosure and cancellation for the monthly plan;

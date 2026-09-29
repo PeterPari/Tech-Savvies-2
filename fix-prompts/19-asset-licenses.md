@@ -1,6 +1,10 @@
 # Prompt 19: License fonts and images
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 Audit findings:
 - Fonts: public/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2 and jetbrains-mono-latin-500-normal.woff2 are under SIL OFL 1.1. The full licence texts ship beside them (LICENSE-PlusJakartaSans.txt, LICENSE-JetBrainsMono.txt), and neither declares a Reserved Font Name, so the latin subsets can keep their names. The filenames follow Fontsource's naming.

@@ -1,6 +1,10 @@
 # Prompt 09: Remove dark patterns
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The FTC staff report "Bringing Dark Patterns to Light" (2022) and FTC enforcement treat manipulative interfaces as unfair or deceptive under FTC Act §5. NY GBL §527-a targets subscriptions that are hard to cancel.
 

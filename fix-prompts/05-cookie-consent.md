@@ -1,6 +1,10 @@
 # Prompt 05: Cookie consent (decide, guard, conditional banner)
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 Consent laws (EU ePrivacy/GDPR, UK PECR, US state opt-out laws) are triggered by non-essential cookies, device storage or tracking. docs/tracking-audit.md records 0 cookies, 0 browser storage and no third-party requests.
 

@@ -1,6 +1,10 @@
 # Prompt 03: Refund policy
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 Clients pay up to a few hundred dollars upfront. The site promises a completion guarantee and sells an auto-renewing monthly plan, and neither has written refund or cancellation rules. docs/legal-compliance.md covers NY GBL §218-a (refund policy posting) and §527-a (auto-renewal cancellation). The refund rules must agree with /solutions/ and /terms/.
 </context>

@@ -1,6 +1,10 @@
 # Prompt 24: Check local laws (compliance map)
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 Tech-Savvies is a one-person web-design business in New York City. It sells website builds, website repairs, and Google Business Profile and social media help, with prices on /solutions/, including a monthly management plan. It collects enquiries through a Netlify contact form. The Privacy Policy, Terms, Refund Policy, email policy and accessibility statement will all be written against the map this prompt produces.
 

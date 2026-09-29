@@ -1,6 +1,10 @@
 # Prompt 00: Foundation (facts file, compliance log, site checker)
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The fix prompts in fix-prompts/ publish prices, promises, addresses and legal terms. They can do that safely only with three shared artifacts in place:
 - a single facts file the owner fills in;

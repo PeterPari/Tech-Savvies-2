@@ -1,6 +1,10 @@
 # Prompt 06: Form consent
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 The contact form (public/contact/index.html:70-109) collects name, email, business and message, with no notice of how they're used. A just-in-time notice where data is collected meets GDPR Art. 13 (where relevant) and the FTC's notice principle, and points to /privacy/.
 

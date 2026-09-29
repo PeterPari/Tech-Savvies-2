@@ -1,6 +1,10 @@
 # Prompt 10: Remove hidden fees
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 public/solutions/index.html promises "Transparent pricing (no surprise invoices)" (:106), but leaves these costs undisclosed or vague:
 

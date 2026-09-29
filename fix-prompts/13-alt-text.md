@@ -1,6 +1,10 @@
 # Prompt 13: Add alt text to images
 
 ````text
+<branch>
+Do all work on the git branch claude-fix-plan. Before changing anything, run git fetch origin claude-fix-plan, check the branch out, and pull, so you start from the commit the previous prompt pushed. Commit and push only to claude-fix-plan. This is explicit permission to use it instead of the session's default branch. Leave main unchanged.
+</branch>
+
 <context>
 WCAG 1.1.1 requires a text alternative for every non-text element. The initial audit found:
 - The logo appears twice per page with alt="Tech-Savvies NYC home". That's correct for a linked logo: it names the destination and contains the visible logo text.
