@@ -13,6 +13,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/contact/` | `public/contact/index.html` | Contact info and the contact form |
 | `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
 | `/privacy/` | `public/privacy/index.html` | Privacy Policy (linked from every footer’s Legal column) |
+| `/cookies/` | `public/cookies/index.html` | Cookie Policy (linked from every footer’s Legal column) |
 | any missing page | `public/404.html` | Page not found |
 | `/admin/` | `public/admin/index.html` | Internal prompt checklist (not linked, not indexed; generated, see below) |
 

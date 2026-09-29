@@ -30,7 +30,7 @@ ALLOWED_LINK_ORIGINS = [
 LEGAL_NAME = "Peter Parizhsky"
 
 # Footer hrefs every page must contain. Later prompts append here, e.g. "/privacy/".
-REQUIRED_FOOTER_LINKS = ["/privacy/"]
+REQUIRED_FOOTER_LINKS = ["/privacy/", "/cookies/"]
 
 # Substrings that mark a tracker, pixel or analytics tool. no-trackers fails on any of them in public/
 # HTML or JS (case-insensitive). Adding a tracker means a consent banner first: see
