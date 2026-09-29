@@ -105,3 +105,27 @@ Page anchors are the ones the named prompt is told to create. The final-pass run
 5. **Client logins.** Prefer being added as a manager. Where a client does share a password, keep it
    in a password manager, never in email or notes, and delete it when the work ends. That’s the
    “reasonable safeguards” the SHIELD Act expects of a business your size (§899-bb(2)(c)).
+6. **Logo and name clearance (Prompt 22).** Nothing here is a legal conclusion; give the results to
+   the attorney.
+   - *Reverse image search for `public/assets/img/logo.png`.* Open https://lens.google.com and upload
+     the file, then open https://tineye.com and upload it again. Note any match that isn’t your own
+     site, with its URL and date, in `docs/asset-licenses.md`. A match on a stock or template site
+     means the logo needs review. Do the same with the Procreate export if you find one.
+   - *USPTO trademark search.* In https://tmsearch.uspto.gov search “TECH SAVVIES” and
+     “TECH-SAVVIES” (also “TECH SAVVY”), then filter to class 35 (business services) and class 42
+     (computer and web design services). Save the results. Live marks in those classes need the
+     attorney’s view.
+   - *NY Department of State entity search.* Search “Tech Savvies” and “Tech Savvy” at
+     https://apps.dos.ny.gov/publicInquiry/ and note any active entity with a similar name.
+   - *Same-name businesses found by web search on 2026-09-29* (Prompt 22 did not assess confusion;
+     the attorney does):
+     - Tech Savvy NYC, Brooklyn digital marketing and web design: https://techsavvynyc.com/
+     - Tech Savvy Dragon, New York City freelance web developer: https://www.techsavvydragon.com/
+     - Tech Savvy Solutions Digital Agency LLC: https://www.designrush.com/agency/profile/tech-savvy-solutions-digital-agency-llc
+     - Tech Savvy (West Seneca and Buffalo, NY), IT and AV integration, so a different field:
+       https://techwny.com/
+7. **Copyright evidence and assignments.** Keep dated copies of the logo PNG and any sketches. If a
+   designer or a logo-maker tool was ever involved after all, get a signed copyright assignment or
+   check the tool’s licence before relying on the logo. Ask the attorney whether the AI-coded icons
+   and OG image need any notice, since AI-generated material without enough human authorship may
+   not be copyrightable (https://www.copyright.gov/ai/).

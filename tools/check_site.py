@@ -385,6 +385,8 @@ def check_business_details(site):
         m = re.search(r"<footer\b.*?</footer>", html, re.S)
         if not m or LEGAL_NAME not in m.group(0):
             yield page.path, 1, "footer must contain LEGAL_NAME %r" % LEGAL_NAME
+        elif not re.search(r"(?:&copy;|©) <span data-year>\d{4}</span> %s\. All rights reserved\." % re.escape(LEGAL_NAME), m.group(0)):
+            yield page.path, 1, "footer must read '© <span data-year>YYYY</span> %s. All rights reserved.'" % LEGAL_NAME
     home = os.path.join(site.public, "index.html")
     with open(home, encoding="utf-8") as f:
         blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', f.read(), re.S)
