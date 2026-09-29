@@ -102,6 +102,8 @@ Current published prices are from `public/solutions/index.html`.
 | Netlify data location | No region stated; AWS among sub-processors, transfers outside EEA under DPF/SCCs. Source: https://www.netlify.com/pdf/netlify-dpa.pdf | Netlify docs |
 | Domain expiry | tech-savvies.com expires 2026-11-11; nameservers NS1, not Netlify DNS (RDAP) | Research, 2026-09-28 |
 | Retention: form submissions | 6 months | Owner, 2026-09-29 |
+| Retention rule: non-converted enquiries | Delete Netlify submissions (Verified and Spam tabs) older than 6 months, on the first Monday of each quarter; see [`data-inventory.md`](data-inventory.md) | Owner, 2026-09-29 |
+| Retention: client records (invoices, payment records, project files) | Per accountant (not yet settled) | Owner action |
 | Retention: emails with leads | 12 months (all emails, leads and past clients) | Owner, 2026-09-29 |
 | Sends or plans to send marketing/newsletter emails | No | Owner, 2026-09-29 |
 | Uses email open-tracking | No | Owner, 2026-09-29 |
