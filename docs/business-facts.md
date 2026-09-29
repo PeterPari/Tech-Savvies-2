@@ -92,10 +92,15 @@ Current published prices are from `public/solutions/index.html`.
 |------|-------|--------|
 | Netlify Analytics on | Yes, on | Owner, 2026-09-29 |
 | Netlify form notifications go to which inbox | info@tech-savvies.com | Owner, 2026-09-29 |
-| Netlify spam filtering on | No, off (honeypot field only) | Owner, 2026-09-29 |
+| Netlify spam filtering on | Owner says no, off (honeypot field only); Netlify’s docs say Akismet screens all submissions, so unconfirmed | Owner, 2026-09-29 |
 | Mailbox provider for info@tech-savvies.com | iCloud | Owner, 2026-09-29 |
-| Domain registrar for tech-savvies.com | Google Domains / Squarespace Domains | Owner, 2026-09-29 |
-| Netlify docs facts (form metadata, log contents, Analytics cookieless, data location, spam-filter behavior) | Not yet confirmed: `docs.netlify.com` was unreachable from the session on 2026-09-29. See docs/third-parties.md | Pending |
+| Domain registrar for tech-savvies.com | Squarespace Domains II LLC (formerly Google Domains) | Owner, 2026-09-29 |
+| Netlify Forms stored fields | Submission fields, IP address (`data.ip`), created-at; user agent and referrer unverified. Source: https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/ (read 2026-09-28) | Netlify docs |
+| Netlify submission retention | None documented; submissions stay until deleted. The 6-month rule is enforced by the owner. Source: https://docs.netlify.com/manage/forms/submissions/ | Netlify docs |
+| Netlify spam filtering | Docs say Akismet filters all submissions and give no off switch, which conflicts with the owner’s “off”. Owner to check the dashboard. Source: https://docs.netlify.com/manage/forms/spam-filters/ | Netlify docs, conflict open |
+| Netlify Analytics | Server-side from CDN logs, cookieless per Netlify; counts unique visitors by IP. Source: https://docs.netlify.com/manage/monitoring/web-analytics/overview/ | Netlify docs |
+| Netlify data location | No region stated; AWS among sub-processors, transfers outside EEA under DPF/SCCs. Source: https://www.netlify.com/pdf/netlify-dpa.pdf | Netlify docs |
+| Domain expiry | tech-savvies.com expires 2026-11-11; nameservers NS1, not Netlify DNS (RDAP) | Research, 2026-09-28 |
 | Retention: form submissions | 6 months | Owner, 2026-09-29 |
 | Retention: emails with leads | 12 months (all emails, leads and past clients) | Owner, 2026-09-29 |
 | Sends or plans to send marketing/newsletter emails | No | Owner, 2026-09-29 |

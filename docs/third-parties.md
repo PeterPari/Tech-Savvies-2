@@ -3,56 +3,68 @@
 Every service that receives visitor or client data, as of 2026-09-29. Prompt 08 only documents
 the set; it does not change it. The Privacy Policy (`/privacy/`) must match this file.
 
-Legend: "unverified: owner to check…" means the value can only be confirmed from the provider’s
-current documentation or dashboard. On 2026-09-29 the session’s network policy still blocked
-`docs.netlify.com` (checked twice), so no Netlify documentation could be read and no
-Netlify claim below is cited. Nothing here is guessed.
+Sources were read on 2026-09-28 by a research agent (Netlify docs, Netlify DPA, RDAP, Apple and
+Squarespace help pages). "unverified" means the source did not state it or could not be read. Items
+marked "(summary)" came back from a fetch tool as a paraphrase, not a verbatim quote. Where the
+owner’s statement and Netlify’s docs disagree, both are shown.
 
 | Service | Purpose | Data received | Triggered by | Where stored | Privacy policy URL | DPA available | How to delete data there |
 |---------|---------|---------------|--------------|--------------|--------------------|---------------|--------------------------|
-| Netlify (hosting, request logs) | Serves the site | IP address and request details (URL, user agent, referrer) as a normal web request. Exact log fields: unverified, see Netlify section | Every visit | unverified: owner to check in Netlify → Site → Logs / Analytics | https://www.netlify.com/privacy/ | unverified: owner to check with Netlify | unverified: owner to check in Netlify → Team settings → Support / privacy contact |
-| Netlify Forms | Contact form at `/contact/` | Every form field the visitor types, plus per-submission metadata (fields and retention unverified) | Form submit | unverified: owner to check in Netlify → Site → Forms. Owner’s own retention rule: delete after 6 months | https://www.netlify.com/privacy/ | unverified: owner to check with Netlify | Netlify → Site → Forms → Submissions → delete a submission (owner to confirm in the dashboard) |
-| Netlify Analytics | Traffic statistics | Owner confirms it is on (2026-09-29). Server-side/cookieless: unverified | Every visit | unverified: owner to check in Netlify → Site → Analytics | https://www.netlify.com/privacy/ | unverified: owner to check with Netlify | Not per person; unverified: owner to check in Netlify → Site → Analytics |
-| Netlify form spam filtering | — | Owner confirms it is off; only the `bot-field` honeypot is used (2026-09-29), so submissions are not sent for spam scoring by this setting | Form submit | Not applicable while off | — | — | Not applicable; re-check Netlify → Site → Forms → Spam filters if it is ever turned on |
-| iCloud Mail (Apple), mailbox for info@tech-savvies.com | Receives form notifications and emails from leads and clients | Sender address, message content, attachments; form notification contents | Email, form submit | Apple’s servers; location unverified: owner to check with Apple | https://www.apple.com/legal/privacy/ | unverified: owner to check with Apple | Delete the message and empty Trash in iCloud Mail. Owner rule: emails kept 12 months |
-| Google Domains / Squarespace Domains (registrar for tech-savvies.com) | Domain registration and DNS | Owner’s registrant contact details (name, email, and any address or phone entered at registration) | Domain registration or renewal, not visits | Registrar’s systems | https://www.squarespace.com/privacy | unverified: owner to check with Squarespace | Not deletable while the domain is registered; owner can ask the registrar to update contact details or close the account |
+| Netlify (hosting, request logs) | Serves the site | IP address, user agent, referrer, URL, method, status, country and timestamp are the fields Netlify’s traffic logs carry (per its log-drain field list). Whether the site’s own request logs keep them, and for how long: unverified: owner to check in Netlify → Site → Logs. Netlify’s DPA says its own service logging is kept online 90 days and offline 1 year | Every visit | Netlify and its sub-processors (includes AWS); may be processed outside the EEA, UK and Switzerland. Region: unverified: ask privacy@netlify.com | https://www.netlify.com/privacy/ | Yes, https://www.netlify.com/pdf/netlify-dpa.pdf; incorporated into Netlify’s self-serve terms, no separate signature documented | Not per visitor. Account-owner requests: privacy@netlify.com |
+| Netlify Forms | Contact form at `/contact/` | Every field the visitor submits, plus IP address (docs show `data.ip`) and a created-at timestamp. User agent and referrer as stored fields: unverified | Form submit | Netlify’s user database (“securely stored”). Retention: Netlify documents none | https://www.netlify.com/privacy/ | Yes, same DPA. For submitters, Netlify acts as processor and the owner is the controller | Netlify → Site → Forms → tick submissions → Delete submission (permanent), or API `DELETE /api/v1/submissions/{submission_id}`; “Delete form” removes all of a form’s submissions |
+| Netlify form spam filtering (Akismet) | Screens submissions | Netlify’s docs say “All form submissions are filtered for spam using Akismet”. What fields go to Akismet: unverified. Owner says spam filtering is off (honeypot only): conflicts with the docs, unverified: owner to check in Netlify → Site → Forms | Form submit | Akismet’s systems: unverified | https://automattic.com/privacy/ (Akismet’s operator; not read) | unverified | Deleting a Netlify spam submission is as for Netlify Forms; anything Akismet keeps: unverified |
+| Netlify notification emails | Send each submission to info@tech-savvies.com | The submission content, sent from formresponses@netlify.com | Form submit | Netlify’s mail systems, then the iCloud mailbox below | https://www.netlify.com/privacy/ | Same DPA | Netlify → Site → Forms → Form notifications to remove the recipient; delete the email in iCloud |
+| Netlify Web Analytics | Traffic statistics | Built from CDN server logs, no client script. Netlify says it is cookieless and anonymous. It counts unique visitors by IP address per day and shows top pages, sources, locations and bandwidth. Owner confirms it is on (2026-09-29). Whether IPs are hashed or stored raw: unverified | Every visit | Netlify. Chart window 30 days; storage duration: unverified | https://www.netlify.com/privacy/ | Same DPA | Not per person. Turn off: Netlify → Analytics & metrics → Analytics → Danger zone → Cancel Web Analytics service |
+| iCloud Mail (Apple), mailbox for info@tech-savvies.com | Receives form notifications and emails from leads and clients | Sender address, message content, attachments | Email, form submit | Apple and third-party data centers; region unverified. Not end-to-end encrypted | https://www.apple.com/legal/privacy/en-ww/ | unverified: no DPA found for a personal iCloud account | Deleted mail stays in Trash 30 days, then is erased; emptying Trash erases at once. Owner rule: emails kept 12 months |
+| Squarespace Domains II LLC (registrar for tech-savvies.com) | Domain registration | Registrant name or organization, email, phone, postal address, country (summary). Squarespace says free domain privacy is automatic for most domains; whether it is on for this one: unverified: owner to check in the registrar dashboard | Domain registration and renewal, not visits | Squarespace. Retention: unstated | https://www.squarespace.com/privacy (returned 429, not read) | unverified: no DPA found | privacy@squarespace.com (summary). Registration data must be kept while the domain is registered |
 | Grisha.studio (outbound link) | Case-study link on the homepage | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Grisha.studio’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
 
-## Netlify: facts to confirm
+Domain facts (RDAP, 2026-09-28): registered 2020-11-11, **expires 2026-11-11**, nameservers `DNS1-4.P06.NSONE.NET`
+(NS1), not Netlify DNS.
 
-Each item needs a current Netlify docs URL before the Privacy Policy states it. Confirmed by the
-owner (see `docs/business-facts.md`): Analytics on, spam filtering off, retention 6 months.
+## Netlify facts and sources
 
-| Question | Status |
-|----------|--------|
-| Fields and metadata stored per form submission (IP, user agent, referrer) and how long Netlify keeps them | unverified: owner to check in Netlify → Site → Forms, and Netlify’s Forms docs (`docs.netlify.com`, submissions and API pages) |
-| Does spam filtering send submissions to another service, and can it be turned off | Owner reports it is off. Whether Netlify’s filter uses another service: unverified, see Netlify’s Forms spam-filter docs |
-| What request logs contain | unverified: owner to check in Netlify → Site → Logs, and Netlify’s log docs |
-| Is Netlify Analytics server-side and cookieless | unverified. Prompt 05 and 23 need this; check Netlify’s Analytics docs |
-| Where data is stored | unverified: owner to check Netlify’s docs or DPA |
+| Question | Answer | Source |
+|----------|--------|--------|
+| Fields stored per form submission | `id`, `number`, `title`, `email`, `name`, `first_name`, `last_name`, `company`, `summary`, `body`, `data` (the fields plus `ip`), `created_at`, `site_url`. User agent and referrer: unverified | https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/ (Forms section) |
+| Submission retention | Not stated. “Form submission data is securely stored in our user database … we recommend that you actively manage the data by exporting form submissions and deleting them regularly.” The owner’s 6 months must be enforced by the owner | https://docs.netlify.com/manage/forms/submissions/ |
+| Does spam filtering send data to another service | “All form submissions are filtered for spam using Akismet.” No off switch is documented. A honeypot-caught submission is “quietly reject[ed]” and not listed as spam | https://docs.netlify.com/manage/forms/spam-filters/ |
+| Deleting submissions | Dashboard Delete submission, or API `DELETE /api/v1/submissions/{submission_id}` | https://docs.netlify.com/manage/forms/submissions/ |
+| Notification emails | Sent from formresponses@netlify.com | https://docs.netlify.com/manage/forms/notifications/ |
+| Request logs | Traffic-log fields: `client_ip`, `user_agent`, `referrer`, `url`, `method`, `status_code`, `country`, `timestamp`, `request_id`. Log drains are Enterprise only. Function logs 7 days (the site has no functions) | https://docs.netlify.com/manage/monitoring/log-drains/ and https://docs.netlify.com/manage/monitoring/logs/ |
+| Netlify’s own service-log retention | Online 90 days, offline 1 year | https://www.netlify.com/pdf/netlify-dpa.pdf (Exhibit II) |
+| Analytics server-side and cookieless | “Data for Web Analytics comes from our Content Delivery Network (CDN) server logs … no client-side code”; “tracked anonymously without cookies or personally identifying information” (Netlify’s claim). It still counts by IP address | https://docs.netlify.com/manage/monitoring/web-analytics/overview/ and https://docs.netlify.com/manage/monitoring/web-analytics/how-web-analytics-works/ |
+| Where data is stored | Sub-processors include AWS, Datadog, WorkOS, Fivetran, CrowdStrike. Processing may occur outside the EEA, UK and Switzerland (EU-US DPF, with SCCs as fallback). No region is stated | https://www.netlify.com/pdf/netlify-dpa.pdf (§6, §14) and https://trust-center.netlify-corp.com/ |
 
 ## Loaded by the browser automatically
 
-Observed 2026-09-29 with Playwright and Chromium against `python3 -m http.server 8080 --directory public`.
-All 7 HTML pages (including `/admin/`, `/contact/thanks/` and `404.html`) at 375px and 1280px, mobile menu
-closed and open: 176 requests, all to `http://localhost:8080` (the site’s own origin). No other
-origin, no third-party script, font, stylesheet, frame or image, and no cookies set in the browser.
+Observed twice. Both runs found only same-origin requests and no cookies.
 
-The new site is currently live at `https://tech-savvies-2.netlify.app/` and will move to `tech-savvies.com`
-later. Its homepage (curl, 2026-09-29) returns `HTTP/2 200`, `server: Netlify`, the same CSP as
-`netlify.toml`, no `Set-Cookie` header, and only same-origin scripts (`/assets/js/main.js` and inline
-JSON-LD). The only external URL in the HTML is `https://grisha.studio/`.
+- Local copy of the repo (2026-09-29, Playwright and Chromium): all 7 HTML pages at 375px and 1280px, mobile
+  menu closed and open. 176 requests, all to `http://localhost:8080`. No cookies.
+- Deployed new site `https://tech-savvies-2.netlify.app/` (2026-09-28, research agent): `/`, `/solutions/`,
+  `/our-story/`, `/contact/`, `/contact/thanks/` and a 404 URL, 375px and 1280px, menu closed and open.
+  The only request origin was the site itself (HTML, 2 woff2 fonts, CSS, `main.js`, logo, and the
+  self-hosted Grisha.studio image). No cookies, no `Set-Cookie` header, no script injected by Netlify. At
+  1280px the menu toggle is hidden, so "menu open" was not tested there.
+- Provisional: that run went through a TLS-intercepting proxy. Repeat it from a clean machine, and again
+  after the move to `tech-savvies.com`.
+- The old `https://tech-savvies.com` is a different build that still loads Microsoft Clarity and Google
+  Fonts and allows `formsubmit.co` (headers and HTML, 2026-09-29). It is being replaced and is not part
+  of this document’s table.
 
-The old site currently at `https://tech-savvies.com` is a different codebase and is being replaced.
-Its headers and HTML (2026-09-29) show Microsoft Clarity, Google Fonts and a CSP allowing `formsubmit.co`.
-Those do not belong to the new site and must not be copied into the Privacy Policy, but they receive data
-until the domain moves. Browser-level requests and cookies were not observed on either production host:
-Chromium could not load them through the session proxy (`ERR_CERT_AUTHORITY_INVALID`). Owner to re-run
-the browser check on `tech-savvies-2.netlify.app` and again after the move.
+Response headers on the deployed new site match `netlify.toml`, including the CSP
+(`default-src 'self'` …). The `third-party-allowlist` check in `tools/check_site.py` limits outbound `href`
+origins to `ALLOWED_LINK_ORIGINS` (currently `https://grisha.studio`).
 
-The CSP in `netlify.toml` (`default-src 'self'`) blocks any other origin from loading. The
-`third-party-allowlist` check in `tools/check_site.py` limits outbound `href` origins to
-`ALLOWED_LINK_ORIGINS` (currently `https://grisha.studio`).
+## Open items for the owner
+
+1. Spam filtering: Netlify says Akismet screens every submission. Check Netlify → Site → Forms and say whether "off" is true.
+2. Retention: Netlify keeps submissions until deleted. Delete after 6 months by hand or script, or reword the policy.
+3. Netlify dashboard readouts (Deploys, Forms, Analytics, Domain management, add-ons) are still needed.
+4. Rerun the browser check from a clean machine.
+5. Renew the domain before 2026-11-11 and choose DNS at cutover.
+6. Canonical tags already point to `https://tech-savvies.com/`; fine after the move.
 
 ## Adding a third party
 
