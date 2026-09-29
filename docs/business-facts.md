@@ -94,6 +94,8 @@ Current published prices are from `public/solutions/index.html`.
 | Netlify form notifications go to which inbox | info@tech-savvies.com | Owner, 2026-09-29 |
 | Netlify spam filtering on | No, off (honeypot field only) | Owner, 2026-09-29 |
 | Mailbox provider for info@tech-savvies.com | iCloud | Owner, 2026-09-29 |
+| Domain registrar for tech-savvies.com | Google Domains / Squarespace Domains | Owner, 2026-09-29 |
+| Netlify docs facts (form metadata, log contents, Analytics cookieless, data location, spam-filter behavior) | Not yet confirmed: `docs.netlify.com` was unreachable from the session on 2026-09-29. See docs/third-parties.md | Pending |
 | Retention: form submissions | 6 months | Owner, 2026-09-29 |
 | Retention: emails with leads | 12 months (all emails, leads and past clients) | Owner, 2026-09-29 |
 | Sends or plans to send marketing/newsletter emails | No | Owner, 2026-09-29 |

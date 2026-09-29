@@ -18,6 +18,9 @@ EXPECTED_CSP = (
     "object-src 'none'"
 )
 
+# Outbound link origins that are documented in docs/third-parties.md. Add one only after updating that file.
+ALLOWED_LINK_ORIGINS = ["https://grisha.studio"]
+
 # Footer hrefs every page must contain. Later prompts append here, e.g. "/privacy/".
 REQUIRED_FOOTER_LINKS = []
 
@@ -272,6 +275,19 @@ def check_no_placeholders(site):
                 yield path, line_of(text, m.start()), "placeholder text %r" % m.group(0)
 
 
+def check_third_party_allowlist(site):
+    for page in site.pages:
+        for tag in page.tags:
+            u = tag.attrs.get("href", "").strip()
+            if tag.name not in ("a", "link", "area") or not is_external(u):
+                continue
+            m = re.match(r"(?i)(?:(https?):)?//([^/?#]+)", u)
+            origin = "%s://%s" % ((m.group(1) or "https").lower(), m.group(2).lower())
+            if origin not in ALLOWED_LINK_ORIGINS:
+                yield page.path, tag.line, \
+                    "href %s goes to %s, which is not in ALLOWED_LINK_ORIGINS (document it in docs/third-parties.md first)" % (u, origin)
+
+
 def check_internal_links(site):
     for page in site.pages:
         for tag in page.tags:
@@ -341,6 +357,7 @@ CHECKS = [
     ("csp-unchanged", check_csp_unchanged),
     ("no-review-schema", check_no_review_schema),
     ("no-placeholders", check_no_placeholders),
+    ("third-party-allowlist", check_third_party_allowlist),
     ("internal-links", check_internal_links),
     ("new-tab-links", check_new_tab_links),
     ("shared-chrome", check_shared_chrome),
