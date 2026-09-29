@@ -516,6 +516,18 @@ def check_terms_consistency(site):
         yield terms, g_line, "completion guarantee on /solutions/ (%r) is not word for word in /terms/#completion-guarantee" % m.group(0)
 
 
+def check_form_notice(site):
+    for page in site.pages:
+        text = site.read(page.path)
+        for m in re.finditer(r"(?is)<form\b.*?</form>", text):
+            if not re.search(r"""(?i)<a\b[^>]*\bhref=["']/privacy/(#[^"']*)?["']""", m.group(0)):
+                yield page.path, line_of(text, m.start()), "form needs a link to /privacy/ (privacy notice)"
+        for m in re.finditer(r"(?i)<input\b[^>]*>", text):
+            tag = m.group(0)
+            if re.search(r"""\btype=["']?checkbox""", tag, re.I) and re.search(r"\schecked\b", tag, re.I):
+                yield page.path, line_of(text, m.start()), "checkbox must not be pre-ticked (remove checked)"
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
@@ -534,6 +546,7 @@ CHECKS = [
     ("shared-chrome", check_shared_chrome),
     ("required-footer-links", check_required_footer_links),
     ("terms-consistency", check_terms_consistency),
+    ("form-notice", check_form_notice),
 ]
 
 
