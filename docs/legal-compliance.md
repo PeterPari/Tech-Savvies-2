@@ -23,7 +23,7 @@ gives the date each page was opened. Only one page failed: dhr.ny.gov/public-acc
 
 ## Map
 
-Page anchors are the ones the named prompt is told to create. The final-pass run checks each against the live page.
+Page anchors are the ones the named prompt is told to create. The final pass (below) checked each against the live page.
 
 | Law | Applies? | Why | Requirement (quoted from the source) | Handled by | Source URL | Checked |
 |-----|----------|-----|--------------------------------------|------------|------------|---------|
@@ -79,6 +79,42 @@ Page anchors are the ones the named prompt is told to create. The final-pass run
 - **Prompt 18 (email).** Marketing email can’t start until there is a street address, a PO box
   registered with USPS, or a private mailbox registered with a commercial mail receiving agency. None
   is on file today.
+
+## Final pass (2026-09-29)
+
+Each “Handled by” entry above, checked against the page in `public/` (or the named file) on
+2026-09-29. `python3 tools/check_site.py` passes 25 checks on 12 pages. Two gaps needed at most one
+line of copy and are fixed in this commit. Every source was checked on 2026-09-28, less than 6 months
+ago, so none was refreshed.
+
+| Entry | Laws | Clause or feature found | Result |
+|-------|------|-------------------------|--------|
+| 09 site-wide + `docs/ux-honesty-rules.md` | FTC Act §5, GBL §349/§350, NYC §20-700 | `docs/ux-honesty-rules.md` exists; the `claims` check fails on any phrase the business can’t back up, and passes | Met |
+| 10 /solutions/ | FTC Act §5, GBL §349/§350, §527-a, negative option, NYC §20-700 | “$50/month: Ongoing upkeep, paid in full when you book each month; it doesn’t renew on its own, so there’s nothing to cancel.” `#other-costs` lists the domain, hosting, paid tools and Stripe or Square fees | Met |
+| 10 /solutions/#payment, 02 /terms/#payment | NY sales tax | “Sales tax: our prices don’t include sales tax. If it applies, we’ll tell you the amount before you pay anything.” | Met (whether tax applies is still the accountant’s question) |
+| 12 /, /solutions/, /contact/ | FTC Act §5, GBL §349/§350 | / “We’ll build it, or tell you upfront if it’s outside the quoted price.”; /solutions/ “we aim to deliver a Tier 1, 2 or 3 site within 5 days”; /contact/ “We typically reply within 1 business day.” | Met |
+| 02 /terms/ in plain words | GBL §349 | Short sentences in each section, e.g. #liability “The most we owe you for any claim is what you paid us for the project the claim is about.” | Met |
+| 02 /terms/#monthly-plan | §527-a, negative option | “No automatic renewal: the plan doesn’t renew on its own, and we never charge you automatically.” “Stopping: there’s nothing to cancel and no fee.” | Met |
+| 11 `docs/testimonials-policy.md` + `tools/check_site.py` | 16 CFR 465 | No reviews or ratings on the site; `no-review-schema` and `testimonial-source` checks pass | Met |
+| 11 / case study | 16 CFR 255 | In the `.meta` line with the client name, above the screenshot: “Gregory Parizhsky, a local artist (the founder’s brother; our first project, at a reduced rate)”. The case study appears on / only | Met |
+| 16 footer + /contact/ | GBL §130 | Footer on every page: “© 2026 Peter Parizhsky. All rights reserved.” /contact/ “Business:” gave only “Tech-Savvies”. Fixed: “Tech-Savvies, the trading name of Peter Parizhsky, a sole proprietor” | Gap, fixed (the DBA filing is still an owner action) |
+| 01 /privacy/#contact | GBL §130 | “Tech-Savvies is the trading name of Peter Parizhsky, a sole proprietor based in New York, NY. He is the person responsible for your data.” | Met |
+| 02 /terms/#about | GBL §130 | “These terms are an agreement between you and Tech-Savvies. Tech-Savvies is the trading name of Peter Parizhsky, a sole proprietor based in New York, NY.” | Met |
+| 03 /refunds/ | GBL §218-a (n/a) | Linked in every footer; “This policy covers every service on our Solutions page.” | Met |
+| 01 /privacy/#security | SHIELD Act | “Our Netlify and iCloud accounts use two-step login.” “If you share a password with us, we keep it in a password manager, never in email or notes. We delete it when the work ends.” | Met |
+| 07 `docs/data-inventory.md`, 20 `docs/data-requests-runbook.md` | SHIELD Act, record retention | Runbook: “remove any stored login from the password manager”. Inventory, client records: “Per accountant (legal-compliance.md cites 3 years as a floor; not settled)” | Met (retention period still open) |
+| 17 /privacy/#children | COPPA, NY CDPA | “They aren’t directed to children under 13, and we don’t knowingly collect data from them. If we find that a child under 13 has sent us personal data, we delete it and don’t use it.” The under-18 paragraph ended “If no parent or guardian gets in touch, we delete the details.” with no deadline (§899-ff(6) sets 30 days). Fixed: “…we delete the details within 30 days of learning their age.” | COPPA met; CDPA gap, fixed |
+| 17 /contact/ `p#form-privacy` | NY CDPA, GOL §3-101 | “If under 18, please have a parent or guardian contact us.” | Met |
+| 17 `docs/data-inventory.md` “Minors” | NY CDPA | Delete “within 30 days of learning the person is a minor” | Met |
+| 02 /terms/#age | GOL §3-101 | “To hire us you must be 18 or older. If you’re under 18, a parent or guardian must agree to these Terms and will be our client for the project, including payment.” | Met for clients (the owner’s own age is still an owner action) |
+| 01 /privacy/ | CalOPPA | Privacy link in the footer of all 11 visitor pages; “Last updated September 29, 2026”; #cookies “we treat every visit the same way, whether or not your browser sends a Do Not Track or Global Privacy Control signal”; #changes “we’ll post the new version on this page and change the “Last updated” date”; #sharing lists each service and what it gets | Met |
+| 01 /privacy/#how-we-use-it | CCPA/CPRA, other states | “We don’t sell your personal data.” “We don’t “share” it in the sense of California’s privacy law” | Met |
+| 20 /privacy/#your-rights | Other states, CalOPPA | “give you a copy of the personal data we hold about you; correct it; delete it” and “We finish it within 10 business days.” | Met |
+| 01 /privacy/#international | GDPR / UK GDPR | “We run Tech-Savvies from the United States and handle your data here, though the services we use may store it in other countries.” | Met |
+| 18 `docs/email-policy.md` + signatures | CAN-SPAM | Standard signature “Tech-Savvies (Peter Parizhsky, sole proprietor)”; commercial email waits for a postal address; none is sent | Met |
+| 13, 14, 15, 25 site-wide | ADA Title III | `docs/accessibility-audit.md`: axe-core reports 0 violations on every page | Met |
+| 21 /accessibility/ | ADA Title III, NYSHRL, NYCHRL | “We aim to meet WCAG 2.2 AA” and “If part of this site is hard to use, or you can’t get the information you need, email info@tech-savvies.com … We typically reply within 1 business day.” | Met |
+| 01 /privacy/#retention | Record retention | “Invoices and payment records: as long as tax rules require. We’re confirming the exact period with an accountant.” | Met |
 
 ## Owner actions outside the website
 

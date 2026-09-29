@@ -10,7 +10,7 @@ Tell us what you need. We typically reply within 1 business day.
 
 **Direct Email:** [info@tech-savvies.com](mailto:info@tech-savvies.com)
 
-**Business:** Tech-Savvies
+**Business:** Tech-Savvies, the trading name of Peter Parizhsky, a sole proprietor
 
 **Location:** Based in New York, NY. Serving clients anywhere, remotely.
 

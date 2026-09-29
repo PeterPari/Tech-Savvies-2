@@ -163,7 +163,7 @@ Our email isn’t end-to-end encrypted. If you can, add us as a manager on your 
 
 This website and our services are for businesses. They aren’t directed to children under 13, and we don’t knowingly collect data from them. If we find that a child under 13 has sent us personal data, we delete it and don’t use it.
 
-If you’re under 18, please ask a parent or guardian to contact us. If we learn that someone under 18 has written to us, we use their details only to reply and to reach their parent or guardian. We don’t use them for anything else. If no parent or guardian gets in touch, we delete the details.
+If you’re under 18, please ask a parent or guardian to contact us. If we learn that someone under 18 has written to us, we use their details only to reply and to reach their parent or guardian. We don’t use them for anything else. If no parent or guardian gets in touch, we delete the details within 30 days of learning their age.
 
 If you’re a parent or guardian and think your child sent us something, email [info@tech-savvies.com](mailto:info@tech-savvies.com). We’ll delete it within 30 days.
 
