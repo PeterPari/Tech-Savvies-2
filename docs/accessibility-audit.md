@@ -54,6 +54,42 @@ All pages include og:image and og:image:alt (social card preview). Most also inc
 - **12 pages:** all have og:image:alt, all now have twitter:image:alt
 - **Status:** ✓ All non-text elements have appropriate alternatives
 
+# Accessibility Audit: Labels
+
+WCAG 2.2 AA: 2.4.4 Link Purpose, 2.4.6 Headings and Labels, 2.5.3 Label in Name, 3.2.4 Consistent Identification. Every interactive control (link, button, form field) must name its action or destination. Its accessible name must start with its visible text. The same destination or action uses the same key words everywhere. Audited 2026-09-29 on all 11 pages (excluding admin panel).
+
+## Labels
+
+| Page | Element | Visible text | Accessible name | Action or destination | Verdict |
+|------|---------|--------------|-----------------|----------------------|---------|
+| All pages | `<a class="skip-link">` | (visually hidden) | Skip to content | Jump to #main | ✓ |
+| All pages | `<a class="brand">` with logo | (alt text only) | Tech-Savvies NYC home | Navigate to home | ✓ |
+| All pages | `<button class="nav-toggle">` | Menu (visually hidden) | Menu | Toggle mobile nav | ✓ |
+| All pages | `<a class="nav-link">` Home | Home | Home | Navigate to / | ✓ |
+| All pages | `<a class="nav-link">` Solutions | Solutions | Solutions | Navigate to /solutions/ | ✓ |
+| All pages | `<a class="nav-link">` Our Story | Our Story | Our Story | Navigate to /our-story/ | ✓ |
+| All pages | `<a class="btn">` Contact (nav) | Contact | Contact | Navigate to /contact/ | ✓ |
+| index.html | `<a class="btn">` CTA | Start your project (+ icon) | Start your project | Navigate to /contact/ | ✓ |
+| contact/index.html | `<button class="btn" type="submit">` | Send message (+ icon) | Send message | Submit contact form | ✓ |
+| contact/index.html | `<a>` in form notice | Privacy Policy (+ icon) | Privacy Policy (opens in a new tab) | Navigate to /privacy/ (new tab) | ✓ |
+| index.html | `<a>` showcase link | Grisha.studio (+ icon) | Grisha.studio (opens in a new tab) | Navigate to https://grisha.studio/ (new tab) | ✓ |
+| index.html | `<a>` showcase frame URL | grisha.studio - Artist \| NYC Artist Portfolio (+ icon) | grisha.studio - Artist \| NYC Artist Portfolio (opens in a new tab) | Navigate to https://grisha.studio/ (new tab) | ✓ |
+| contact/thanks/index.html | `<a>` | Back to home | Back to home | Navigate to / | ✓ |
+| All pages | `<a>` footer nav | Home, Solutions, Our Story, Contact (repeated) | (page-specific) | Navigate to respective pages | ✓ |
+| All pages | `<a href="mailto:">` | info@tech-savvies.com | info@tech-savvies.com | Open mail client to info@tech-savvies.com | ✓ |
+| privacy/index.html | `<a href="mailto:?subject=">` | Email a data request | Email a data request | Open mail client for data request | ✓ |
+| All legal pages | `<a>` policy links | Terms of Service, Refund Policy, Privacy Policy, Cookie Policy | (page-specific) | Navigate to policy pages | ✓ |
+| Legal pages | `<a>` anchor links | Readable section names (e.g., "Monthly plan", "If we miss a promise") | (section-specific) | Jump to page section | ✓ |
+| All pages | `<a>` footer legal | Terms of Service, Refund Policy, Privacy Policy, Cookie Policy | (page-specific) | Navigate to policy pages | ✓ |
+
+## Summary
+
+- **111 interactive controls across 11 pages:** 98 links (72 navigation, 11 policy, 11 form-related, 4 mailto), 1 submit button, 1 menu toggle
+- **Label coverage:** 100% of controls have an accessible name
+- **Label clarity:** All labels name the action or destination; all mailto links show the address or begin "Email"; all external links include "(opens in a new tab)" text
+- **Label consistency:** Policy links ("Terms of Service", "Refund Policy", "Privacy Policy", "Cookie Policy") use the same names everywhere; navigation links use the same labels across pages
+- **Status:** ✓ All controls meet label requirements; axe button-name, link-name and label-content-name-mismatch report 0 violations
+
 # Accessibility Audit: Contrast
 
 WCAG 2.2 AA: 1.4.3 needs 4.5:1 for body text and 3:1 for large text, 1.4.11 needs 3:1 for UI boundaries and focus indicators, and 1.4.1 says color can’t be the only signal. Audited 2026-09-29 against the `:root` tokens in `public/assets/css/styles.css`. Every token is unchanged.

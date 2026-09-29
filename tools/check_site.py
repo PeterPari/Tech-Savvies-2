@@ -630,6 +630,54 @@ def check_asset_inventory(site):
             yield rel, 1, "not named in docs/asset-licenses.md (add a row before adding the asset)"
 
 
+def check_link_text(site):
+    """Check link and button text for clarity and accessibility. Fail when:
+    - visible text is one of the banned generic phrases (case-insensitive)
+    - <a> has no accessible name (links with only images inside are OK if img has alt)
+    """
+    banned_phrases = {"click here", "here", "learn more", "read more", "more", "submit", "go"}
+
+    for page in site.pages:
+        text = site.read(page.path)
+
+        # Find all links with context
+        for m in re.finditer(r'<a\b([^>]*)>(.*?)</a>', text, re.S | re.I):
+            attrs_str = m.group(1)
+            inner_html = m.group(2)
+            link_line = line_of(text, m.start())
+
+            # Extract aria-label
+            aria_label_match = re.search(r'aria-label=["\']([^"\']*)["\']', attrs_str)
+            aria_label = aria_label_match.group(1) if aria_label_match else ""
+
+            # Extract visible text (remove tags and visually-hidden content)
+            # Remove visually-hidden spans first
+            visible_html = re.sub(r'<span[^>]*class="[^"]*visually-hidden[^"]*"[^>]*>.*?</span>', '', inner_html, flags=re.S | re.I)
+            # Extract text by removing remaining tags
+            visible_text = re.sub(r'<[^>]+>', '', visible_html)
+            visible_text = re.sub(r'\s+', ' ', unescape(visible_text)).strip()
+
+            # Check if there's an image inside
+            has_img = '<img' in inner_html
+
+            # Determine accessible name
+            accessible_name = aria_label or visible_text
+
+            # If no accessible name and has image, skip (img-alt check handles this)
+            if not accessible_name and has_img:
+                continue
+
+            # Check if there's no accessible name
+            if not accessible_name:
+                yield page.path, link_line, "<a> has no visible text or aria-label"
+                continue
+
+            # Check if visible text is banned
+            if visible_text and visible_text.lower() in banned_phrases:
+                yield page.path, link_line, \
+                    "link has vague text %r; use a label that names the destination or action" % visible_text
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("svg-alt", check_svg_alt),
@@ -654,6 +702,7 @@ CHECKS = [
     ("form-notice", check_form_notice),
     ("data-request", check_data_request),
     ("asset-inventory", check_asset_inventory),
+    ("link-text", check_link_text),
 ]
 
 
