@@ -36,16 +36,22 @@ establishes it but the owner hasn't confirmed it yet.
 
 ## Prices
 
-Current published prices are from `public/solutions/index.html`.
+Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take their terms from here.
 
 | Fact | Value | Source |
 |------|-------|--------|
-| Website Launch | $250-$375 (depending on website caliber and time frame) | (from site, confirm) |
-| Website Rescue | $200 flat fee, "up to $250 rush order" | (from site, confirm) |
-| Google Business Profile and Social Media Presence | $50 flat fee for a one-time fix; "monthly for ongoing management" | (from site, confirm) |
-| What sets the $250 vs $375 Launch price | Features/complexity and turnaround time. Maximum complexity is charged the maximum price, with no rush option | Owner, 2026-09-29 |
-| What makes an order a "rush" order | A 5-day delivery is a rush order | Owner, 2026-09-29 |
-| Rush price for Website Launch | $375 | Owner, 2026-09-29 |
+| Website Launch | $250–$375, set by tier (below). Earlier “depending on website caliber and time frame” superseded | Owner, 2026-09-29 |
+| Launch Tier 1: One-Page Scroller, $250 | Single page with hero, about, services, and contact. Template layout, no unique features. Contact is a mailto link or phone number. Full SEO: title and meta tags, schema markup, alt text, sitemap, Google Business Profile link, fast load | Owner, 2026-09-29 |
+| Launch Tier 2: Custom Brochure Site, $250 | Three to five pages (Home, About, Services or Work, Contact) with shared navigation. Custom design and branding, photo gallery, embedded map, working contact form, mobile optimization. Full SEO: per-page titles and descriptions, local business schema, sitemap, clean URLs, analytics and Search Console | Owner, 2026-09-29 |
+| Launch Tier 3: Polished Showcase Site, $300 | Fully custom design with animations and scroll effects. Filterable portfolio or project pages, testimonials, FAQ, embedded booking calendar (Calendly or similar). Full SEO: FAQ and review schema, image optimization, internal linking, Open Graph previews, analytics and Search Console | Owner, 2026-09-29 |
+| Launch Tier 4: Editable and Integrated Site, $330 | Owner updates content through a CMS without touching code. Blog or news section, online booking or appointment forms, newsletter signup, social feeds, Google Business Profile integration. Full SEO: blog-driven keyword content, per-page metadata editable in the CMS, structured data, analytics and Search Console | Owner, 2026-09-29 |
+| Launch Tier 5: Sales-Ready Site, $375 | Everything above plus a small online store or payments through Stripe or Square. Sells products, prints, gift cards, or deposits. Order confirmation emails, simple admin view, optional client login for private galleries or files. Full SEO: product schema, indexed product pages, and everything from lower tiers | Owner, 2026-09-29 |
+| What makes an order a “rush” order | Delivery within 5 days | Owner, 2026-09-29 |
+| Rush price for Website Launch | $375 for a Tier 1, 2 or 3 site delivered within 5 days. Tiers 4 and 5 can’t be rushed | Owner, 2026-09-29 |
+| Website Rescue | $200 flat fee | Owner, 2026-09-29 |
+| Rush price for Website Rescue | $250 for a Rescue finished within 5 days | Owner, 2026-09-29 |
+| Google Business Profile and Social Media, one-time fix | $50 flat fee | Owner, 2026-09-29 |
+| Page wording: Launch headline note | “The tier sets the price; a 5-day rush on a Tier 1–3 site costs $375.” | Prompt 10, 2026-09-29 |
 
 ## Monthly management
 
@@ -53,6 +59,8 @@ Current published prices are from `public/solutions/index.html`.
 |------|-------|--------|
 | Monthly management price | $50/month | Owner, 2026-09-29 |
 | What monthly management includes | Google Business Profile and social media upkeep | Owner, 2026-09-29 |
+| When monthly management is paid | $50 paid in full when the client books each month (no 50/50 split) | Owner, 2026-09-29 |
+| Page wording: monthly note | “Ongoing upkeep, paid in full when you book each month; it doesn’t renew on its own, so there’s nothing to cancel.” | Prompt 10, 2026-09-29 |
 | How to cancel monthly management | Nothing to cancel: the plan covers one month at a time and continues only if the client re-books (earlier answer “email info@tech-savvies.com before the next month starts” superseded) | Owner, 2026-09-29 |
 | Auto-renews until cancelled | No, manual (client re-books each month) | Owner, 2026-09-29 |
 
@@ -61,9 +69,10 @@ Current published prices are from `public/solutions/index.html`.
 | Fact | Value | Source |
 |------|-------|--------|
 | Deposit | 50% upfront | Owner, 2026-09-29 |
-| Payment schedule | 50% upfront, 50% on delivery | Owner, 2026-09-29 |
-| Accepted payment methods | Venmo, bank transfer | Owner, 2026-09-29 |
-| Sales tax handling | Prices currently do not include tax; whether tax applies is not yet determined (owner needs advice, e.g. NY Dept. of Taxation and Finance or an accountant). TODO(owner) | Owner, 2026-09-29 |
+| Payment schedule | Projects (Launch, Rescue, one-time fix): 50% upfront before work starts, 50% on delivery. Monthly management: paid in full when booked | Owner, 2026-09-29 |
+| Accepted payment methods | Venmo, bank transfer. Cards not accepted | Owner, 2026-09-29 |
+| Payment or card fees charged to the client | None. The client pays exactly the listed price | Owner, 2026-09-29 |
+| Sales tax handling | Prices exclude sales tax. Page says: “If it applies, we’ll tell you the amount before you pay anything.” Whether tax applies is still open: owner action, ask an accountant or NY Dept. of Taxation and Finance | Owner, 2026-09-29 |
 
 ## Scope, guarantee and refunds
 
@@ -80,9 +89,12 @@ Current published prices are from `public/solutions/index.html`.
 
 | Fact | Value | Source |
 |------|-------|--------|
-| Who pays for the client's domain and hosting | Client pays for the domain. Tech-Savvies guides them through buying it. Hosting is on Tech-Savvies’ own Netlify account | Owner, 2026-09-29 |
-| Approximate domain and hosting cost | Domain cost depends on the domain the client chooses (paid by the client to the registrar). No separate hosting charge recorded | Owner, 2026-09-29 |
-| Who owns the domain and hosting after handover | Tech-Savvies until paid in full, then the client | Owner, 2026-09-29 |
+| Who pays for the client's domain and hosting | Client pays the registrar for the domain directly. Tech-Savvies guides them through buying it and sets it up. Hosting is on Tech-Savvies’ own Netlify account | Owner, 2026-09-29 |
+| Approximate domain and hosting cost | Domain: about $10–$20 a year in almost all cases, higher for names in high demand, paid by the client to the registrar. Hosting: $0, no end date, for sites hosted on Tech-Savvies’ Netlify account | Owner, 2026-09-29 |
+| Whose name the domain is registered in | The client’s (earlier “Tech-Savvies until paid in full, then the client” superseded for the domain) | Owner, 2026-09-29 |
+| Hosting account | Tech-Savvies’ Netlify account, $0 to the client, no end date | Owner, 2026-09-29 |
+| Paid plugins, services or stock images | Free plans and free images by default. A paid one only with the client’s approval, paid by the client to the provider directly | Owner, 2026-09-29 |
+| Online payment fees (Tier 5) | Stripe or Square take their own fee from each sale | Owner, 2026-09-29 |
 | Who owns the finished site and code after full payment | The client | Owner, 2026-09-29 |
 | Portfolio-use rights | Only with the client’s written permission | Owner, 2026-09-29 |
 

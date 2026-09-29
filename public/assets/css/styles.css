@@ -904,6 +904,47 @@ main .eyebrow + * {
   line-height: 1.6;
 }
 
+/* Tier prices under a service's headline price */
+.price-tiers {
+  display: grid;
+  row-gap: 0.5rem;
+}
+
+.price-tiers .price {
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+}
+
+.price-tiers .price-amount {
+  font-size: var(--fs-h4);
+  letter-spacing: -0.017em;
+}
+
+.price-tiers .price-note {
+  line-height: 1.5;
+}
+
+/* Costs outside our fee, Payment */
+.includes + .includes {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.cost-list {
+  display: grid;
+  row-gap: 0.5rem;
+  max-width: var(--measure);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.cost-list strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
 @media (min-width: 36em) {
   .service .checklist {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -930,6 +971,10 @@ main .eyebrow + * {
 
   .includes {
     padding-bottom: 0;
+  }
+
+  .includes + .includes {
+    margin-top: 2.5rem;
   }
 }
 
