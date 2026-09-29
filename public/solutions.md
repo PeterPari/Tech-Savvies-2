@@ -8,7 +8,7 @@ Summary: Website Launch $250–$375 by tier, Website Rescue $200 ($250 rush), an
 
 A new site for your business, priced by tier: the features you need set the price. We guide you through buying your domain, set it up, and host the site on our Netlify account at no charge while it fits Netlify’s free plan.
 
-**$250–$375**: The tier sets the price; a rush on a Tier 1–3 site (5-day target) costs $375.
+**$250–$375**:
 
 - **$250**: Tier 1, One-Page Scroller: hero, about, services and contact on one page, with an email link or phone number.
 - **$250**: Tier 2, Custom Brochure Site: 3–5 pages, custom design, photo gallery, map and a working contact form.

@@ -59,7 +59,7 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Rush price for Website Rescue | $250 for a Rescue finished within 5 days | Owner, 2026-09-29 |
 | What Rescue “Security Updates” covers (formerly “Security Patching”) | Updating the site’s platform, theme and plugins to current versions and making sure HTTPS is on. No security audit or ongoing monitoring | Owner, 2026-09-29 |
 | Google Business Profile and Social Media, one-time fix | $50 flat fee | Owner, 2026-09-29 |
-| Page wording: Launch headline note | “The tier sets the price; a rush on a Tier 1–3 site (5-day target) costs $375.” | Prompt 12, 2026-09-29 |
+| Page wording: Launch headline note | None. The owner had the note “The tier sets the price; a rush on a Tier 1–3 site (5-day target) costs $375.” removed from /solutions/; only the price range shows | Owner, 2026-09-29 |
 
 ## Monthly management
 
