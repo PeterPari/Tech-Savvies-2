@@ -24,7 +24,17 @@ public/
   assets/fonts/           Plus Jakarta Sans + JetBrains Mono (self-hosted, OFL licensed)
   assets/img/             logo, icons, social share image
   robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
+docs/                     business-facts.md (owner fills in), compliance-log.md (status of the 25 items)
+tools/                    check_site.py (regression checker), build_admin.py
 ```
+
+## Checks
+
+`python3 tools/check_site.py` (standard library only, run from the repo root) exits 1 and prints
+`path:line: [check-name] message` for each problem. It guards image alt text, external resources,
+client-side storage, the CSP, review schema, placeholder text, internal links, new-tab links and
+the shared header and footer. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
+on every push and pull request. To add a check, see the comment at the top of the script.
 
 ## Preview locally
 
