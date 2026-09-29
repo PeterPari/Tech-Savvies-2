@@ -36,6 +36,14 @@ TRACKER_SIGNATURES = [
     "cloudflareinsights", "tiktok", "snap.licdn", "sendBeacon", "<noscript><img",
 ]
 
+# Claims the business can't back up. claims fails on any of them in public/ (case-insensitive, straight
+# or curly apostrophe). A new objective claim (a time, number, result, guarantee or fact about the
+# business) needs a row in docs/claims-register.md, with its evidence, before it goes on the site.
+BANNED_PHRASES = [
+    "within 2 hours", "maximum search visibility", "guaranteed ranking", "#1 on Google",
+    "lead engineer", "you'll get it",
+]
+
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta",
         "param", "source", "track", "wbr"}
 TEXT_EXTS = (".html", ".css", ".js", ".txt", ".xml", ".webmanifest", ".json", ".svg")
@@ -424,6 +432,30 @@ def check_consent_required(site):
             yield path, line_of(text, m.start()), CONSENT_MESSAGE
 
 
+def _phrase_re(phrase):
+    parts = []
+    for ch in phrase:
+        if ch == "'":
+            parts.append(r"(?:'|’|&rsquo;|&#8217;|&#39;)")
+        elif ch == " ":
+            parts.append(r"\s+")
+        else:
+            parts.append(re.escape(ch))
+    return re.compile("".join(parts), re.I)
+
+
+def check_claims(site):
+    patterns = [(p, _phrase_re(p)) for p in BANNED_PHRASES]
+    for path in site.text_files():
+        if site.is_admin(path):  # the owner's checklist quotes the old claims in prompt text
+            continue
+        text = site.read(path)
+        for phrase, rx in patterns:
+            for m in rx.finditer(text):
+                yield path, line_of(text, m.start()), \
+                    "unsupported claim %r (see docs/claims-register.md)" % phrase
+
+
 CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
@@ -431,6 +463,7 @@ CHECKS = [
     ("business-details", check_business_details),
     ("no-trackers", check_no_trackers),
     ("consent-required", check_consent_required),
+    ("claims", check_claims),
     ("csp-unchanged", check_csp_unchanged),
     ("no-review-schema", check_no_review_schema),
     ("no-placeholders", check_no_placeholders),

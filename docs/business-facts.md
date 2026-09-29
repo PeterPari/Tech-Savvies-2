@@ -12,8 +12,9 @@ establishes it but the owner hasn't confirmed it yet.
 | Fact | Value | Source |
 |------|-------|--------|
 | Brand name | Tech-Savvies (logo reads "Tech-Savvies NYC") | (from site, confirm) |
-| Founder | Peter Parizhsky | (from site, confirm) |
-| History | Founded 2020, paused 2023, relaunched 2026 | (from site, confirm) |
+| Founder | Peter Parizhsky | Owner, 2026-09-29 |
+| History | Founded 2020 by Peter to help older adults with technology, paused 2023 for school, relaunched 2026 | Owner, 2026-09-29 |
+| Who does the work | Peter Parizhsky himself, using Claude and ChatGPT as tools. No staff, freelancers or subcontractors | Owner, 2026-09-29 |
 | Domain | tech-savvies.com | (from site, confirm) |
 | Hosting and contact form | Netlify, Netlify Forms | (from site, confirm) |
 | Contact email | info@tech-savvies.com | (from site, confirm) |
@@ -32,6 +33,8 @@ establishes it but the owner hasn't confirmed it yet.
 | What "business hours" means (days, times, ET) | No fixed hours. Work happens when there are clients and time after school | Owner, 2026-09-29 |
 | Realistic first-reply time | Within 1 business day | Owner, 2026-09-29 |
 | Realistic fastest delivery for Website Launch | 5 days, only as a rush order for a relatively simple site | Owner, 2026-09-29 |
+| Sites actually delivered within 5 days | None yet: two clients so far, both Tier 3, neither rushed. The site states 5 days as a target (“we aim to”), not a promise, until one is delivered | Owner, 2026-09-29 |
+| When the 5-day rush clock starts, and what happens if a rush runs late | Not set. Owner to confirm (Prompt 02 terms need it) | Open |
 | Serving EU/UK clients deliberately | No | Owner, 2026-09-29 |
 
 ## Prices
@@ -50,8 +53,9 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Rush price for Website Launch | $375 for a Tier 1, 2 or 3 site delivered within 5 days. Tiers 4 and 5 can’t be rushed | Owner, 2026-09-29 |
 | Website Rescue | $200 flat fee | Owner, 2026-09-29 |
 | Rush price for Website Rescue | $250 for a Rescue finished within 5 days | Owner, 2026-09-29 |
+| What Rescue “Security Updates” covers (formerly “Security Patching”) | Updating the site’s platform, theme and plugins to current versions and making sure HTTPS is on. No security audit or ongoing monitoring | Owner, 2026-09-29 |
 | Google Business Profile and Social Media, one-time fix | $50 flat fee | Owner, 2026-09-29 |
-| Page wording: Launch headline note | “The tier sets the price; a 5-day rush on a Tier 1–3 site costs $375.” | Prompt 10, 2026-09-29 |
+| Page wording: Launch headline note | “The tier sets the price; a rush on a Tier 1–3 site (5-day target) costs $375.” | Prompt 12, 2026-09-29 |
 
 ## Monthly management
 
