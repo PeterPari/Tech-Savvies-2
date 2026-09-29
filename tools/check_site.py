@@ -21,6 +21,9 @@ EXPECTED_CSP = (
 # Outbound link origins that are documented in docs/third-parties.md. Add one only after updating that file.
 ALLOWED_LINK_ORIGINS = ["https://grisha.studio"]
 
+# Legal name of the business (sole proprietor). Every footer copyright line and the JSON-LD legalName must match.
+LEGAL_NAME = "Peter Parizhsky"
+
 # Footer hrefs every page must contain. Later prompts append here, e.g. "/privacy/".
 REQUIRED_FOOTER_LINKS = []
 
@@ -349,6 +352,28 @@ def check_shared_chrome(site):
                 yield page.path, 1, msg
 
 
+def check_business_details(site):
+    for page in site.pages:
+        if site.is_admin(page.path):
+            continue
+        with open(page.path, encoding="utf-8") as f:
+            html = f.read()
+        m = re.search(r"<footer\b.*?</footer>", html, re.S)
+        if not m or LEGAL_NAME not in m.group(0):
+            yield page.path, 1, "footer must contain LEGAL_NAME %r" % LEGAL_NAME
+    home = os.path.join(site.public, "index.html")
+    with open(home, encoding="utf-8") as f:
+        blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', f.read(), re.S)
+    names = []
+    for b in blocks:
+        try:
+            names.append(json.loads(b).get("legalName"))
+        except ValueError:
+            yield home, 1, "JSON-LD does not parse"
+    if LEGAL_NAME not in names:
+        yield home, 1, "JSON-LD legalName must equal LEGAL_NAME %r" % LEGAL_NAME
+
+
 def check_no_trackers(site):
     patterns = [(sig, re.compile(re.escape(sig).replace(r"><", r">\s*<"), re.I)) for sig in TRACKER_SIGNATURES]
     for path in site.text_files(".html", ".js"):
@@ -403,6 +428,7 @@ CHECKS = [
     ("img-alt", check_img_alt),
     ("no-external-resources", check_no_external_resources),
     ("no-client-storage", check_no_client_storage),
+    ("business-details", check_business_details),
     ("no-trackers", check_no_trackers),
     ("consent-required", check_consent_required),
     ("csp-unchanged", check_csp_unchanged),

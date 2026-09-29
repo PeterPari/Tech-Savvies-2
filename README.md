@@ -56,6 +56,12 @@ Then visit <http://localhost:8080>.
   apostrophes are wrapped in `<span class="kern-dot">` / `<span class="kern-apos">` to tuck
   them in tighter, like in the mockup. Keep those spans if you change the wording.
 - **Header and footer:** repeated in every HTML file (6 files). Change all of them together.
+- **Business details:** the legal name (Peter Parizhsky) appears in the footer copyright line
+  of every page, the `legalName` in the JSON-LD in `public/index.html`, the `LEGAL_NAME` constant
+  in `tools/check_site.py`, and one sentence on `/our-story/`. "New York, NY" appears in every
+  footer, the JSON-LD `address`, and the `.contact-info` block on `/contact/`, which also holds the
+  service area and reply time. Source of truth: `docs/business-facts.md`. There is no mailing
+  address or fixed hours to show; add them everywhere above if that changes.
 - **Colors, fonts, spacing:** the variables at the top of `public/assets/css/styles.css`.
 - **Domain:** links for Google and social sharing use `https://tech-savvies.com`
   (the `canonical` and `og:` tags in each page, `sitemap.xml` and `robots.txt`).
