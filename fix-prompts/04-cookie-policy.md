@@ -4,7 +4,7 @@
 <context>
 docs/tracking-audit.md records 0 cookies and 0 browser storage, and its "Cookie consent" section records the no-banner decision. Visitors expect a cookie policy. Its content must match what the audit found, so a generic list of "analytics and advertising cookies" would be false. If a consent mechanism is ever added (Prompt 05 branch B), this page will list its cookie.
 
-/privacy/, the .prose styles and the footer Legal column already exist (Prompt 01).
+/privacy/, the .prose styles and the footer Legal column already exist (Prompt 01). The unlinked owner page /admin/ is outside the policy's scope (see CLAUDE.md).
 </context>
 
 <inputs>
@@ -49,6 +49,7 @@ Publish /cookies/, a cookie policy that states what cookies and storage Tech-Sav
 - Prompts 05 (branch A) and 01 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: low. The content is small and fully determined by the audit.
 
 ## What to test

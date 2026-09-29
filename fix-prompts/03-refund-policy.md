@@ -54,6 +54,7 @@ Publish /refunds/, a refund and cancellation policy for each Tech-Savvies servic
 - The owner chooses the refund rules during the session if they aren't already in the facts file.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high.
 
 ## What to test

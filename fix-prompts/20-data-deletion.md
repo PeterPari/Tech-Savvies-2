@@ -67,6 +67,7 @@ Give visitors a one-email way to request access to or deletion of their data, an
 - Prompts 07, 08, 24, 01 and 17 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

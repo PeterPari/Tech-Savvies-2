@@ -63,6 +63,7 @@ Make every text, link, control and focus indicator on every page meet WCAG 2.2 A
 - Prompt 13 has run. Prompt 15 may not have run yet.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

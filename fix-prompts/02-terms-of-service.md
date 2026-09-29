@@ -72,6 +72,7 @@ Publish /terms/, Terms of Service for website use and for Tech-Savvies projects 
 - An attorney will review the page before anyone relies on it.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high.
 
 ## What to test

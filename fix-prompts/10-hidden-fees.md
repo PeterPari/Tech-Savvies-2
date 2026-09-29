@@ -68,6 +68,7 @@ Rewrite /solutions/ so a visitor can see every cost of each service before conta
 - The owner has decided their prices, or can decide during the session.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high. Pricing copy has legal consequences.
 
 ## What to test

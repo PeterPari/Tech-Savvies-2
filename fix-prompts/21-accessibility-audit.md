@@ -69,6 +69,7 @@ Bring every page in public/ to WCAG 2.2 AA and publish /accessibility/ with a wa
 - Every other prompt except the Prompt 24 final pass has run.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high.
 
 ## What to test

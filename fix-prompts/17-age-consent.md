@@ -55,6 +55,7 @@ Add children's and under-18 data rules to the Privacy Policy, Terms and contact 
 - Prompts 01, 02 and 06 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

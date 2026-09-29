@@ -62,6 +62,7 @@ Record every piece of personal data Tech-Savvies collects in docs/data-inventory
 - Prompts 08, 23 and 05 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

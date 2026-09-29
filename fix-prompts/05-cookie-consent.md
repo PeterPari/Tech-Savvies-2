@@ -15,7 +15,7 @@ docs/tracking-audit.md, docs/third-parties.md, docs/business-facts.md, docs/comp
 Applies when there are no non-essential cookies, storage or trackers.
 1. A "Cookie consent" section in docs/tracking-audit.md recording the decision, the evidence and the date.
 2. A check named consent-required in tools/check_site.py that fails when both are true:
-   - any page has a <script src> other than /assets/js/main.js, or inline or linked JS that uses cookies, Web Storage or a TRACKER_SIGNATURES entry;
+   - any page outside public/admin/ has a <script src> other than /assets/js/main.js, or inline or linked JS that uses cookies, Web Storage or a TRACKER_SIGNATURES entry;
    - no element has data-consent-banner.
    The failure message is "Non-essential storage or tracking added without consent. See fix-prompts/05-cookie-consent.md". The check must pass on the current main.js.
 3. One line in the README "Checks" section: "Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first."
@@ -61,6 +61,7 @@ Decide from the tracking evidence whether the site needs cookie consent, and imp
 - The expected result is branch A.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

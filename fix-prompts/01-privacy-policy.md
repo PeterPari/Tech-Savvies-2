@@ -75,6 +75,7 @@ Publish /privacy/, a privacy policy that describes exactly what Tech-Savvies col
 - An attorney will review the page before anyone relies on it.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high.
 
 ## What to test

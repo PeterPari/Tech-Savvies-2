@@ -58,6 +58,7 @@ Make every button and link on the Tech-Savvies site name exactly what it does, c
 - Prompts 01–21, except 21, have run, so all new controls exist.
 
 ## Parameters
+- Model: haiku.
 - Reasoning effort: low.
 
 ## What to test

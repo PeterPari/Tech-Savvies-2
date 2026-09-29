@@ -31,22 +31,22 @@ The owner-input fields are the rows of the table in fix-plan.md §3. The startin
    Initial checks:
    - img-alt: every <img> has an alt attribute; an <img> that is a link's only content has non-empty alt.
    - no-external-resources: no script, iframe, stylesheet or preload link, img, video, audio or source loaded from another origin. Plain <a href> links are allowed.
-   - no-client-storage: no document.cookie, localStorage, sessionStorage, indexedDB or navigator.sendBeacon in public/**/*.js or in inline scripts.
+   - no-client-storage: no document.cookie, localStorage, sessionStorage, indexedDB or navigator.sendBeacon in public/**/*.js or in inline scripts, excluding public/admin/.
    - csp-unchanged: the CSP in netlify.toml equals an EXPECTED_CSP constant.
    - no-review-schema: every JSON-LD block parses and contains no aggregateRating or "@type": "Review".
    - no-placeholders: no TODO(owner), [PLACEHOLDER, lorem ipsum, XXX or [ADDRESS in public/.
    - internal-links: every root-relative href/src resolves to a file in public/ (/x/ maps to public/x/index.html). Ignore fragments, mailto: and tel:.
    - new-tab-links: every target="_blank" link has rel containing noopener, plus visually hidden text "(opens in a new tab)".
-   - shared-chrome: every page's main-nav and footer href sets equal those in public/index.html.
-   - required-footer-links: every page's footer contains each entry of REQUIRED_FOOTER_LINKS. The list starts empty; later prompts append to it.
-4. .github/workflows/site-checks.yml: runs the checker on push and pull_request, on ubuntu-latest, with no install step.
+   - shared-chrome: every page's main-nav and footer href sets equal those in public/index.html, excluding public/admin/.
+   - required-footer-links: every page's footer (excluding public/admin/) contains each entry of REQUIRED_FOOTER_LINKS. The list starts empty; later prompts append to it.
+4. .github/workflows/site-checks.yml: runs the checker and `python3 tools/build_admin.py --check` on push and pull_request, on ubuntu-latest, with no install step.
 5. README.md: a "Checks" section of at most 8 lines, and docs/ added to the file tree.
 6. One commit, "Fix #00: add business facts file, compliance log and site checker", pushed.
 7. A final message of at most 8 bullets, followed by the list of free-text facts still set to TODO(owner).
 </deliverables>
 
 <constraints>
-- Leave public/ unchanged.
+- Leave public/ unchanged. public/admin/ is the owner's generated prompt checklist (see CLAUDE.md).
 - Ask about choice-type facts (entity type, yes/no questions, auto-renewal, whether the contract signer is 18 or older) with AskUserQuestion, at most 4 questions per call. List free-text facts (address, prices, hours, refund rules) in the final message instead of asking them one at a time.
 - If a check finds a real existing problem, record it in docs/compliance-log.md and keep the check strict. Don't loosen it.
 </constraints>
@@ -70,6 +70,7 @@ Create the shared compliance foundation (facts file, compliance log, and site ch
 - The owner is available to answer questions during the session.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 - Output schema and temperature: none, and default. The output is repo changes plus the final message.
 

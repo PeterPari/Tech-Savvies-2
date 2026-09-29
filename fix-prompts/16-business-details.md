@@ -71,6 +71,7 @@ Add Tech-Savvies' confirmed legal name, location, service area, hours and mailin
 - The owner decides whether to publish an address.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

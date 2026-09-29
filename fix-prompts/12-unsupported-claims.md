@@ -87,6 +87,7 @@ Replace every objective claim on the Tech-Savvies site that lacks owner-confirme
 - Prompt 16 has defined the business hours.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high. It needs judgment on what counts as puffery and what counts as an objective claim.
 
 ## What to test

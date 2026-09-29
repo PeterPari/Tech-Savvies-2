@@ -65,6 +65,7 @@ Make every Tech-Savvies page fully keyboard-operable without focus going behind 
 - Prompts 06 and 14 have run.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high. It changes interactive JS on the only form.
 
 ## What to test

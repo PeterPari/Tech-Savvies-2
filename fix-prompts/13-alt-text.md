@@ -56,6 +56,7 @@ Give every image and icon on every page in public/ a correct text alternative, a
 - Phases 1–4 have run, so all new pages exist.
 
 ## Parameters
+- Model: haiku.
 - Reasoning effort: low.
 
 ## What to test

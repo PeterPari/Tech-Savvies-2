@@ -56,6 +56,7 @@ Document every third party that receives Tech-Savvies visitor or client data in 
 - Netlify's documentation is reachable with WebFetch.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

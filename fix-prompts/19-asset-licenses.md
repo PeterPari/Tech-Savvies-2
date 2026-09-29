@@ -53,6 +53,7 @@ Record the creator and licence of every font, image and icon in the repo in docs
 - The owner knows where the logo came from, or can find out.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

@@ -65,6 +65,7 @@ Audit every Tech-Savvies page and flow for dark patterns, remove any you find, a
 - Prompts 10, 12 and 11 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

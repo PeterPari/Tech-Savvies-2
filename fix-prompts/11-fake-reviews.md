@@ -65,6 +65,7 @@ Correct or remove any endorsement on the Tech-Savvies site that is not genuine, 
 - Prompts 00, 08 and 12 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

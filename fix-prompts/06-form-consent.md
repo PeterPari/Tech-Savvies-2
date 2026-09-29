@@ -54,6 +54,7 @@ Add an accurate privacy notice, with a link to the Privacy Policy, directly abov
 - Prompts 07 and 01 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: low.
 
 ## What to test

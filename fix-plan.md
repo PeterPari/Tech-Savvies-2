@@ -173,7 +173,11 @@ To run one from a terminal at the repo root, extract the fenced block:
 claude "$(awk '/^````/{f=!f; next} f' fix-prompts/00-foundation.md)"
 ```
 
-Set the session's reasoning effort to the value listed under Parameters.
+Set the session's model and reasoning effort to the values listed under Parameters.
+
+The same list is available as a checklist at `/admin/` on the site (`public/admin/`, generated
+by `tools/build_admin.py`). It has one row per step, a checkbox, the model and effort, and a
+one-click copy button. It isn't linked from any page and is `noindex`.
 
 | # | Prompt file | Deliverable |
 |---|-------------|-------------|

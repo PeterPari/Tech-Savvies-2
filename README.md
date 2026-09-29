@@ -13,6 +13,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/contact/` | `public/contact/index.html` | Contact info and the contact form |
 | `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
 | any missing page | `public/404.html` | Page not found |
+| `/admin/` | `public/admin/index.html` | Internal prompt checklist (not linked, not indexed; generated, see below) |
 
 Everything the site serves lives in `public/`:
 
@@ -72,3 +73,17 @@ two settings have to be switched on in the Netlify dashboard once the site is de
 Submissions also appear on the **Forms** page in Netlify. A hidden honeypot field (`bot-field`)
 filters out simple spam bots. After sending, visitors land on `/contact/thanks/`.
 The form can't be tested with a local server, so test it after deploying to Netlify.
+
+## Prompt checklist (`/admin/`)
+
+`/admin/` lists the compliance fix prompts from `fix-prompts/` in run order. Each row has a
+checkbox, the model and effort to use, a one-click copy button, and the full prompt text. It
+isn't linked from any page and is marked `noindex`, but anyone with the URL can open it.
+Checkmarks are saved in your browser only.
+
+The page is generated. After editing a prompt or the tables in `fix-plan.md`, rebuild it:
+
+```sh
+python3 tools/build_admin.py          # rewrite public/admin/index.html
+python3 tools/build_admin.py --check  # fail if it's out of date
+```

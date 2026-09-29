@@ -65,6 +65,7 @@ Write docs/email-policy.md, classifying each kind of email Tech-Savvies sends an
 - The site has no newsletter, so there's nothing to change in its code.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: low.
 
 ## What to test

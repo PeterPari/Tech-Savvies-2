@@ -65,6 +65,7 @@ Write docs/legal-compliance.md, mapping each law listed above to whether it appl
 - WebSearch and WebFetch can reach official government sites from the session.
 
 ## Parameters
+- Model: opus.
 - Reasoning effort: high. Applicability depends on reading statutes against facts.
 - Temperature: default.
 

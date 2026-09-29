@@ -20,7 +20,7 @@ docs/business-facts.md, docs/compliance-log.md, docs/third-parties.md, public/
 <deliverables>
 1. docs/tracking-audit.md, containing:
    - the method and date;
-   - a results table with one row per page × viewport, and columns for request origins, cookies, localStorage, sessionStorage, IndexedDB and service workers, including a contact-form submit (a local 501 response is expected);
+   - a results table with one row per visitor-facing page × viewport (public/admin/ is excluded: its localStorage holds only the owner's checklist; note that in one line), and columns for request origins, cookies, localStorage, sessionStorage, IndexedDB and service workers, including a contact-form submit (a local 501 response is expected);
    - production results, or "production not reachable";
    - the owner's answers about Netlify Analytics, split testing, snippet injection, email open-tracking, and plans for analytics in the next 6 months;
    - a one-sentence conclusion the Privacy Policy can quote.
@@ -60,6 +60,7 @@ Establish with evidence whether Tech-Savvies tracks website visitors or email re
 - The owner can check their Netlify dashboard and email settings.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test

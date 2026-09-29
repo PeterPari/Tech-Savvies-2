@@ -56,6 +56,7 @@ Establish whether Tech-Savvies owns or is licensed to use each image on the site
 - Prompts 19 and 16 have run.
 
 ## Parameters
+- Model: sonnet.
 - Reasoning effort: medium.
 
 ## What to test
