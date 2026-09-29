@@ -13,6 +13,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/contact/` | `public/contact/index.html` | Contact info and the contact form |
 | `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
 | `/terms/` | `public/terms/index.html` | Terms of Service (linked from every footer’s Legal column and the /solutions/ Payment block) |
+| `/refunds/` | `public/refunds/index.html` | Refund Policy (linked from every footer’s Legal column, the /solutions/ Payment block and the refund wording in /terms/) |
 | `/privacy/` | `public/privacy/index.html` | Privacy Policy (linked from every footer’s Legal column) |
 | `/cookies/` | `public/cookies/index.html` | Cookie Policy (linked from every footer’s Legal column) |
 | any missing page | `public/404.html` | Page not found |
@@ -37,7 +38,7 @@ tools/                    check_site.py (regression checker), build_admin.py
 `path:line: [check-name] message` for each problem. It guards image alt text, external resources,
 client-side storage, the CSP, review schema, unsupported claims, placeholder text, internal links, new-tab links,
 the shared header and footer, and that every price and the completion guarantee on `/solutions/` match `/terms/`.
-Changing a price or promise? Change `/solutions/`, `/terms/` and `docs/business-facts.md` together. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
+Changing a price, promise or refund rule? Change `/solutions/`, `/terms/`, `/refunds/` and `docs/business-facts.md` together. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
 on every push and pull request. To add a check, see the comment at the top of the script.
 
 Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first.

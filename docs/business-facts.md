@@ -89,12 +89,18 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Revisions included | Unlimited within the agreed scope | Owner, 2026-09-29 |
 | What one revision round is | One set of changes the client sends together; we make them and send the work back for review. A new page or feature is outside the scope and is quoted first | Prompt 02, 2026-09-29 (owner to confirm) |
 | Free fixes after launch | 30 days of free bug fixes and site tweaks if something doesn’t work as agreed or the client doesn’t like the results. Tweaks cover the agreed work only; new pages or features are quoted first | Owner, 2026-09-29 |
+| Which projects get the 30-day free fixes | Website Launch and Website Rescue, counted from delivery. The Google & Social one-time fix has no free-fix period and no refund after delivery | Owner, 2026-09-29 (Prompt 03) |
 | Liability cap | What the client paid for the project the claim is about (for the monthly plan, the month the claim is about) | Owner, 2026-09-29 |
 | What the "completion guarantee" promises exactly | No extra billing if a project takes longer than expected (current site wording) | Owner, 2026-09-29 |
 | Refund rule: before work starts | Full refund | Owner, 2026-09-29 |
-| Refund rule: mid-project | Pro-rated for work done | Owner, 2026-09-29 |
-| Refund rule: after delivery | Refund only if an issue can’t be fixed | Owner, 2026-09-29 |
+| Refund rule: mid-project | Pro-rated for work done, whichever side ends the project. We estimate the share of the quoted work that’s done and email the amount and how we worked it out before any money moves. Deposit above that amount is refunded; work done worth more than the deposit is paid by the client | Owner, 2026-09-29 (method: Prompt 03) |
+| Refund rule: after delivery | Refund only if an issue can’t be fixed: Launch and Rescue only, asked within the 30-day free-fix period, refunding the share of the price for the part that can’t be fixed, with the amount and method explained by email. No refund for the one-time fix once delivered | Owner, 2026-09-29 (details: Prompt 03) |
 | Refund rule: monthly plan | No refund for the current month; a next month happens only if the client re-books | Owner, 2026-09-29 |
+| Refund rule: rush order | A late rush (over 5 days, not waiting on the client) is charged at the normal price; the difference comes off the second 50% payment. The deposit (half the rush price) is always below the normal price, so no refund is needed | Follows from “What happens if a rush runs late”, Prompt 03, 2026-09-29 |
+| Refund rule: completion guarantee | The accepted quote is the most the client pays for its work; anything paid above it is refunded | Follows from the completion guarantee, Prompt 03, 2026-09-29 (attorney to confirm) |
+| Refund rule: outside costs | Domain, paid tools and images, Stripe/Square fees are paid to other companies and aren’t refunded by Tech-Savvies; their own refund rules apply | Follows from “Domain, hosting and ownership”, Prompt 03, 2026-09-29 |
+| Refund method and timing | Back to the same Venmo account or bank account the client paid from, within 5 business days of agreeing the amount. Reply to a refund request within 1 business day | Owner, 2026-09-29 (Prompt 03) |
+| How to ask for a refund | Email info@tech-savvies.com, subject “Refund request”, with the project name or invoice number | Prompt 03, 2026-09-29 |
 
 ## Domain, hosting and ownership
 

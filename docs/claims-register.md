@@ -58,7 +58,7 @@ above word for word; the `terms-consistency` check keeps the prices and the guar
 | Claim | Location | Issue | Evidence / owner confirmation | Decision | New wording |
 |-------|----------|-------|-------------------------------|----------|-------------|
 | The 5-day rush clock starts once the deposit and all content are in; a late rush drops to the normal price | /terms/#payment “Rush orders” | Defines the rush target | Owner, 2026-09-29 (business-facts, Service area and hours) | Keep | “If we take longer than 5 days, and we aren’t waiting on you, you pay the normal price instead.” |
-| “For 30 days after your site launches, we fix bugs and make tweaks for free” | /terms/#fixes | Service promise | Owner, 2026-09-29 (business-facts, Scope): agreed work only | Keep | |
+| “For 30 days after your site launches, we fix bugs and make tweaks for free” | /terms/#fixes | Service promise | Owner, 2026-09-29 (business-facts, Scope): agreed work only; Launch and Rescue only (Prompt 03) | Qualify (Prompt 03) | “For 30 days after we deliver a Website Launch or a Website Rescue, we fix bugs and make tweaks for free” |
 | Completion guarantee means the accepted quote is the most the client pays for that work; “no surprise invoices” lists everything a client can be charged | /terms/#completion-guarantee | Gives the /solutions/ promises a concrete meaning (FTC Act §5, GBL §349) | Owner, 2026-09-29 (business-facts, Scope and Payment) | Keep | |
 | Monthly plan: 30 days per booking, no automatic renewal, nothing to cancel, no partial-month refund | /terms/#monthly-plan | Recurring terms | Owner, 2026-09-29 (business-facts, Monthly management and Refunds) | Keep | |
 | “We reply within 1 business day” to disputes | /terms/#law | Reply time | Owner, 2026-09-29: first reply within 1 business day | Keep | |
@@ -74,3 +74,13 @@ above word for word; the `terms-consistency` check keeps the prices and the guar
 | “we are here to help”, “we’re here to help” | / lead and Start Your Project |
 | “Let’s Upgrade Your Business.” | /contact/ headline |
 | “That’s how we work.” | /solutions/ Every Project Includes |
+
+## Claims added by /refunds/ (Prompt 03, 2026-09-29)
+
+| Claim | Location | Issue | Evidence / owner confirmation | Decision | New wording |
+|-------|----------|-------|-------------------------------|----------|-------------|
+| Full refund if a project ends before work starts; pro-rated for work done mid-project, explained by email | /refunds/ summary table, #before-work-starts, #during-a-project; /terms/#termination | Refund promise | Owner, 2026-09-29 (business-facts, Scope, guarantee and refunds) | Keep | |
+| After delivery, refund of the unfixable part within 30 days (Launch and Rescue); none for the one-time fix | /refunds/ summary table, #after-delivery; /terms/#fixes | Refund promise | Owner, 2026-09-29 (Prompt 03) | Keep | |
+| A late rush is charged at the normal price, taken off the second payment (Tier 1 example: $187.50 deposit, $62.50 second payment) | /refunds/#rush-orders, #if-we-miss-a-promise; /terms/#payment | Rush remedy | Owner, 2026-09-29 (business-facts, Service area and hours); arithmetic from the 50/50 split | Keep | |
+| Anything paid above the accepted quote is refunded | /refunds/#if-we-miss-a-promise; /terms/#completion-guarantee | Guarantee remedy | Follows from the completion guarantee (business-facts) | Keep; attorney to confirm | |
+| Refund sent within 5 business days to the same Venmo or bank account; reply within 1 business day | /refunds/#timing, #chargebacks | Time promise | Owner, 2026-09-29 (Prompt 03); reply time from business-facts | Keep | |
