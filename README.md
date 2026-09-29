@@ -76,6 +76,16 @@ Then visit <http://localhost:8080>.
   service area and reply time. Source of truth: `docs/business-facts.md`. There is no mailing
   address or fixed hours to show; add them everywhere above if that changes.
 - **New UI:** follow the honest-UI rules in [`docs/ux-honesty-rules.md`](docs/ux-honesty-rules.md).
+- **Images and alt text:** every image and icon must have a text alternative for accessibility (WCAG 1.1.1). 
+  1. *Linked logos* (a logo that links to a page): `alt="Tech-Savvies NYC home"` names the destination.
+     Example: `<a href="/"><img alt="Tech-Savvies NYC home" …></a>`
+  2. *Meaningful images* (screenshots, case studies): describe content in ≤125 characters, no "image of" prefix.
+     Example: `alt="The Grisha.studio home page, showing the name Gregory Parizhsky beside a photo…"`
+  3. *Decorative SVGs* (icons in buttons, menu toggles): mark as `aria-hidden="true" focusable="false"`.
+     Example: `<svg aria-hidden="true" focusable="false">…</svg>`
+  4. *Social cards* (og:image): both `og:image:alt` and `twitter:image:alt` must describe the card image.
+     Example: `<meta property="og:image:alt" content="…"><meta name="twitter:image:alt" content="…">`
+  Reference: [W3C alt decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).
 - **Colors, fonts, spacing:** the variables at the top of `public/assets/css/styles.css`.
 - **Domain:** links for Google and social sharing use `https://tech-savvies.com`
   (the `canonical` and `og:` tags in each page, `sitemap.xml` and `robots.txt`).

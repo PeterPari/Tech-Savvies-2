@@ -181,10 +181,22 @@ def is_external(url):
 # --- checks ---------------------------------------------------------------
 
 def check_img_alt(site):
+    # Generic alt text that provides no useful info
+    generic_patterns = [
+        re.compile(r"(?i)^[a-z0-9_\-\.]+\.(png|jpg|jpeg|webp|gif|svg)$"),  # filenames
+        re.compile(r"(?i)^image$|^photo$|^picture$|^icon$|^logo$"),  # generic words only
+    ]
+
     for page in site.pages:
         for tag in page.tags:
             if tag.name == "img" and "alt" not in tag.attrs:
                 yield page.path, tag.line, "<img> has no alt attribute"
+            elif tag.name == "img" and "alt" in tag.attrs:
+                alt = tag.attrs["alt"]
+                # Check for filename or generic-only alt text
+                for pattern in generic_patterns:
+                    if pattern.match(alt):
+                        yield page.path, tag.line, "alt text %r is a filename or generic word without context" % alt
         for anchor in page.anchors:
             if anchor.children == ["img"] and not anchor.has_text:
                 img = next(t for t in page.tags if t.name == "img" and t.line >= anchor.tag.line)
@@ -549,6 +561,55 @@ def check_data_request(site):
         yield "privacy/index.html", 1, 'needs a mailto link whose subject contains "request"'
 
 
+def check_svg_alt(site):
+    """SVGs must either be aria-hidden="true" focusable="false" (decorative), or have role="img"
+    with aria-label or <title> (meaningful)."""
+    for page in site.pages:
+        text = site.read(page.path)
+        # Find all <svg> tags
+        for m in re.finditer(r'<svg\b([^>]*)>', text):
+            attrs_str = m.group(1)
+            line = line_of(text, m.start())
+
+            is_hidden = 'aria-hidden="true"' in attrs_str
+            is_role_img = 'role="img"' in attrs_str
+            has_focusable_false = 'focusable="false"' in attrs_str
+            has_aria_label = 'aria-label=' in attrs_str
+
+            # Check for <title> inside the SVG (look ahead until closing tag)
+            close_match = re.search(r'</svg>', text[m.end():])
+            has_title = False
+            if close_match:
+                svg_content = text[m.end():m.end() + close_match.start()]
+                has_title = '<title' in svg_content
+
+            # Rule: if aria-hidden, must have focusable="false"
+            if is_hidden and not has_focusable_false:
+                yield page.path, line, '<svg> with aria-hidden="true" must also have focusable="false"'
+
+            # Rule: if role="img", must have aria-label or <title>
+            if is_role_img and not has_aria_label and not has_title:
+                yield page.path, line, '<svg role="img"> must have aria-label or <title>'
+
+            # Rule: must be either decorative (aria-hidden) or meaningful (role="img")
+            if not is_hidden and not is_role_img:
+                yield page.path, line, '<svg> must either have aria-hidden="true" focusable="false" (decorative) or role="img" with aria-label/<title> (meaningful)'
+
+
+def check_og_image_alt(site):
+    """Every page must have og:image:alt and twitter:image:alt."""
+    for page in site.pages:
+        if site.is_admin(page.path):
+            continue
+        text = site.read(page.path)
+
+        if 'property="og:image:alt"' not in text and 'property="og:image"' in text:
+            yield page.path, 1, 'has og:image but missing og:image:alt'
+
+        if 'property="og:image"' in text and 'name="twitter:image:alt"' not in text:
+            yield page.path, 1, 'has og:image but missing twitter:image:alt'
+
+
 def check_asset_inventory(site):
     doc = os.path.join(os.path.dirname(os.path.abspath(site.public)), "docs", "asset-licenses.md")
     if not os.path.exists(doc):
@@ -571,6 +632,8 @@ def check_asset_inventory(site):
 
 CHECKS = [
     ("img-alt", check_img_alt),
+    ("svg-alt", check_svg_alt),
+    ("og-image-alt", check_og_image_alt),
     ("no-external-resources", check_no_external_resources),
     ("no-client-storage", check_no_client_storage),
     ("business-details", check_business_details),
