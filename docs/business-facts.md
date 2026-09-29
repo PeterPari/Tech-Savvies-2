@@ -53,7 +53,7 @@ Current published prices are from `public/solutions/index.html`.
 |------|-------|--------|
 | Monthly management price | $50/month | Owner, 2026-09-29 |
 | What monthly management includes | Google Business Profile and social media upkeep | Owner, 2026-09-29 |
-| How to cancel monthly management | Email info@tech-savvies.com before the next month starts | Owner, 2026-09-29 |
+| How to cancel monthly management | Nothing to cancel: the plan covers one month at a time and continues only if the client re-books (earlier answer “email info@tech-savvies.com before the next month starts” superseded) | Owner, 2026-09-29 |
 | Auto-renews until cancelled | No, manual (client re-books each month) | Owner, 2026-09-29 |
 
 ## Payment
@@ -74,7 +74,7 @@ Current published prices are from `public/solutions/index.html`.
 | Refund rule: before work starts | Full refund | Owner, 2026-09-29 |
 | Refund rule: mid-project | Pro-rated for work done | Owner, 2026-09-29 |
 | Refund rule: after delivery | Refund only if an issue can’t be fixed | Owner, 2026-09-29 |
-| Refund rule: monthly plan | No refund for the current month; cancel to stop the next month | Owner, 2026-09-29 |
+| Refund rule: monthly plan | No refund for the current month; a next month happens only if the client re-books | Owner, 2026-09-29 |
 
 ## Domain, hosting and ownership
 
@@ -98,6 +98,7 @@ Current published prices are from `public/solutions/index.html`.
 | Retention: emails with leads | 12 months (all emails, leads and past clients) | Owner, 2026-09-29 |
 | Sends or plans to send marketing/newsletter emails | No | Owner, 2026-09-29 |
 | Uses email open-tracking | No | Owner, 2026-09-29 |
+| Holds client account logins (Google Business Profile, social media) | Sometimes: some clients add Tech-Savvies as a manager; others who can’t or don’t want to share their login details | Owner, 2026-09-29 |
 
 ## Case study (Grisha.studio)
 

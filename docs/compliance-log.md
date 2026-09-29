@@ -7,7 +7,7 @@ left for the owner.
 | # | Item | Status | Prompt | Commit | Owner follow-ups |
 |---|------|--------|--------|--------|------------------|
 | 1 | Privacy policy | Missing | [01](../fix-prompts/01-privacy-policy.md) | | Mailing address, retention, mailbox provider. Netlify Analytics is on (owner, 2026-09-29), so the policy must disclose it |
-| 2 | Terms of service | Missing | [02](../fix-prompts/02-terms-of-service.md) | | Payment, ownership and monthly-plan facts. Contract signer is under 18 (see #17) |
+| 2 | Terms of service | Missing | [02](../fix-prompts/02-terms-of-service.md) | | Payment, ownership and monthly-plan facts. Contract signer is under 18 (see #17). The monthly plan does not auto-renew; clients re-book each month (owner, 2026-09-29), so #monthly-plan must not say “renews automatically” (see docs/legal-compliance.md) |
 | 3 | Refund policy | Missing | [03](../fix-prompts/03-refund-policy.md) | | Refund rules and what the completion guarantee promises |
 | 4 | Cookie policy | Missing (nothing to disclose) | [04](../fix-prompts/04-cookie-policy.md) | | |
 | 5 | Cookie consent banner | Not needed today, verify and guard | [05](../fix-prompts/05-cookie-consent.md) | | Confirm Netlify Analytics (on) sets no cookies; it is server-side |
@@ -29,7 +29,7 @@ left for the owner.
 | 21 | Fix accessibility | Good base; 3 fixes + statement | [21](../fix-prompts/21-accessibility-audit.md) | | |
 | 22 | Copyright on images | Unverified | [22](../fix-prompts/22-image-copyright.md) | | Copyright line should name Peter Parizhsky (sole proprietor); name/logo clearance |
 | 23 | Tracking | None in code; Netlify Analytics is on | [23](../fix-prompts/23-tracking-check.md) | | Netlify Analytics is on in the dashboard (owner, 2026-09-29); the audit and Privacy Policy must reflect it. No email open-tracking |
-| 24 | Local laws | Not reviewed | [24](../fix-prompts/24-local-laws.md) | | DBA not filed (NY GBL §130); minor contract signer |
+| 24 | Local laws | Mapped in [`docs/legal-compliance.md`](legal-compliance.md); requirement text not yet quoted (official sites blocked in the session) | [24](../fix-prompts/24-local-laws.md) | `Fix #24: add legal compliance map` | Run [`docs/legal-sources-prompt.md`](legal-sources-prompt.md), save the result as `docs/legal-sources.md`, re-run Prompt 24. File a DBA (NY GBL §130). Parent or guardian co-signs contracts (signer under 18). Attorney review of Terms, Refunds, Privacy and the “Unclear” rows. Accountant: sales tax and how long to keep invoices. Client logins sometimes held (SHIELD Act question) |
 | 25 | Clear button labels | Passes, guard | [25](../fix-prompts/25-button-labels.md) | | |
 
 ## Problems found by `tools/check_site.py`

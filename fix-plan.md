@@ -91,6 +91,14 @@ consistent.
 7. **Don't publish a home address.** A sole proprietor should use a PO box or virtual mailbox
    for the public address. CAN-SPAM accepts either.
 
+> **Note from Prompt 24 (2026-09-29).** Decision 3 treats minors only as possible *clients*, and
+> assumes an adult on Tech-Savvies’ side of the contract. `docs/business-facts.md` records that the
+> person who signs client contracts for Tech-Savvies is under 18. So NY General Obligations Law
+> §3-101 (minors’ contracts) applies to the business too, and a parent or guardian co-signing is an
+> owner action in [`docs/legal-compliance.md`](docs/legal-compliance.md). No other §2 decision was
+> contradicted. The official legal sources couldn’t be opened in that session, though, so re-check
+> §2 when the map is refreshed.
+
 ---
 
 ## 3. Owner inputs required
