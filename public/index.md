@@ -28,13 +28,13 @@ We helped a small, up-and-coming artist bring his website to life. We worked wit
 
 [grisha.studio - Artist | NYC Artist Portfolio](https://grisha.studio/)
 
-![The Grisha.studio home page, showing the name Gregory Parizhsky beside a photo of a tall green ceramic tower sculpture](https://tech-savvies.com/assets/img/grisha-studio.webp)
+![The grisha.studio home page, showing the name Gregory Parizhsky beside a photo of a tall green ceramic tower sculpture](https://tech-savvies.com/assets/img/grisha-studio.webp)
 
 - New Website Build
 - Social Channel Streamlining
 - New Website Domain
 
-Client: [Grisha.studio](https://grisha.studio/), Gregory Parizhsky, a local artist (the founder’s brother; our first project, at a reduced rate)
+Client: [grisha.studio](https://grisha.studio/), Gregory Parizhsky, a local artist (the founder’s brother; our first project, at a reduced rate)
 
 ## Start Your Project
 

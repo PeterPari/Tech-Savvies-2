@@ -51,7 +51,7 @@ Use these exact labels for recurring controls and destinations. If a page or sec
 
 ### External links
 
-- **Grisha.studio:** showcase client's site (always includes "(opens in a new tab)" visually hidden text)
+- **grisha.studio:** showcase client's site (always includes "(opens in a new tab)" visually hidden text)
 
 ## Checking Your Work
 
