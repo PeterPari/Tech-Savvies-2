@@ -32,7 +32,8 @@
       <section class="section section--first">
         <div class="container container--wide">
           <h1 class="display-md">Prompt checklist</h1>
-          <p class="lead admin-intro">Run the prompts in step order, one new Claude Code session each. Set the model and effort shown before pasting. Checkmarks are saved in this browser only.</p>
+          <p class="lead admin-intro">Run the steps from top to bottom, one new Claude Code session each. Set the model and effort shown before pasting. Checkmarks are saved in this browser only.</p>
+          <p class="admin-note">Steps follow the order the prompts depend on each other. Prompt numbers come from the original 25-item list, so they don’t run in sequence.</p>
 
           <div class="admin-toolbar">
             <p class="admin-progress" aria-live="polite"><span data-done-count>0</span> of 28 done</p>
@@ -60,8 +61,8 @@
             </td>
             <td class="col-step" role="cell" data-label="Step">1</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">00</span> Foundation (facts file, compliance log, site checker)</p>
-              <p class="prompt-deliverable"><code>docs/business-facts.md</code>, <code>docs/compliance-log.md</code>, <code>tools/check_site.py</code></p>
+              <p class="prompt-title">Foundation (facts file, compliance log, site checker)</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 00</span> <code>docs/business-facts.md</code>, <code>docs/compliance-log.md</code>, <code>tools/check_site.py</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-00" tabindex="0" aria-label="Prompt 00 text">&lt;branch&gt;
@@ -146,8 +147,8 @@ Create the shared compliance foundation (facts file, compliance log, and site ch
             </td>
             <td class="col-step" role="cell" data-label="Step">2</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">24</span> Check local laws (compliance map)</p>
-              <p class="prompt-deliverable"><code>docs/legal-compliance.md</code> (law → requirement → status)</p>
+              <p class="prompt-title">Check local laws (compliance map)</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 24</span> <code>docs/legal-compliance.md</code> (law → requirement → status)</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-24" tabindex="0" aria-label="Prompt 24 text">&lt;branch&gt;
@@ -227,8 +228,8 @@ Write docs/legal-compliance.md, mapping each law listed above to whether it appl
             </td>
             <td class="col-step" role="cell" data-label="Step">3</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">08</span> Audit third-party SDKs and embeds</p>
-              <p class="prompt-deliverable"><code>docs/third-parties.md</code> + guard</p>
+              <p class="prompt-title">Audit third-party SDKs and embeds</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 08</span> <code>docs/third-parties.md</code> + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-08" tabindex="0" aria-label="Prompt 08 text">&lt;branch&gt;
@@ -299,8 +300,8 @@ Document every third party that receives Tech-Savvies visitor or client data in 
             </td>
             <td class="col-step" role="cell" data-label="Step">4</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">23</span> Check tracking</p>
-              <p class="prompt-deliverable">Tracking audit report + guard</p>
+              <p class="prompt-title">Check tracking</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 23</span> Tracking audit report + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-23" tabindex="0" aria-label="Prompt 23 text">&lt;branch&gt;
@@ -375,8 +376,8 @@ Establish with evidence whether Tech-Savvies tracks website visitors or email re
             </td>
             <td class="col-step" role="cell" data-label="Step">5</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">05</span> Cookie consent (decide, guard, conditional banner)</p>
-              <p class="prompt-deliverable">Verification + guard; conditional banner spec</p>
+              <p class="prompt-title">Cookie consent (decide, guard, conditional banner)</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 05</span> Verification + guard; conditional banner spec</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-05" tabindex="0" aria-label="Prompt 05 text">&lt;branch&gt;
@@ -452,8 +453,8 @@ Decide from the tracking evidence whether the site needs cookie consent, and imp
             </td>
             <td class="col-step" role="cell" data-label="Step">6</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">07</span> Only collect necessary data</p>
-              <p class="prompt-deliverable">Field review, retention rule, <code>docs/data-inventory.md</code></p>
+              <p class="prompt-title">Only collect necessary data</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 07</span> Field review, retention rule, <code>docs/data-inventory.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-07" tabindex="0" aria-label="Prompt 07 text">&lt;branch&gt;
@@ -531,8 +532,8 @@ Record every piece of personal data Tech-Savvies collects in docs/data-inventory
             </td>
             <td class="col-step" role="cell" data-label="Step">7</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">16</span> Add real business details</p>
-              <p class="prompt-deliverable">Business details in footer/contact + JSON-LD</p>
+              <p class="prompt-title">Add real business details</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 16</span> Business details in footer/contact + JSON-LD</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-16" tabindex="0" aria-label="Prompt 16 text">&lt;branch&gt;
@@ -618,8 +619,8 @@ Add Tech-Savvies&#x27; confirmed legal name, location, service area, hours and m
             </td>
             <td class="col-step" role="cell" data-label="Step">8</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">10</span> Remove hidden fees</p>
-              <p class="prompt-deliverable">Full price disclosure on <code>/solutions/</code></p>
+              <p class="prompt-title">Remove hidden fees</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 10</span> Full price disclosure on <code>/solutions/</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-10" tabindex="0" aria-label="Prompt 10 text">&lt;branch&gt;
@@ -702,8 +703,8 @@ Rewrite /solutions/ so a visitor can see every cost of each service before conta
             </td>
             <td class="col-step" role="cell" data-label="Step">9</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">12</span> Remove unsupported claims</p>
-              <p class="prompt-deliverable">Claims register + copy rewrites</p>
+              <p class="prompt-title">Remove unsupported claims</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 12</span> Claims register + copy rewrites</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-12" tabindex="0" aria-label="Prompt 12 text">&lt;branch&gt;
@@ -805,8 +806,8 @@ Replace every objective claim on the Tech-Savvies site that lacks owner-confirme
             </td>
             <td class="col-step" role="cell" data-label="Step">10</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">11</span> Remove fake reviews</p>
-              <p class="prompt-deliverable">Case-study verification + testimonial policy + guard</p>
+              <p class="prompt-title">Remove fake reviews</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 11</span> Case-study verification + testimonial policy + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-11" tabindex="0" aria-label="Prompt 11 text">&lt;branch&gt;
@@ -887,8 +888,8 @@ Correct or remove any endorsement on the Tech-Savvies site that is not genuine, 
             </td>
             <td class="col-step" role="cell" data-label="Step">11</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">09</span> Remove dark patterns</p>
-              <p class="prompt-deliverable">Audit + fixes + <code>docs/ux-honesty-rules.md</code></p>
+              <p class="prompt-title">Remove dark patterns</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 09</span> Audit + fixes + <code>docs/ux-honesty-rules.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-09" tabindex="0" aria-label="Prompt 09 text">&lt;branch&gt;
@@ -969,8 +970,8 @@ Audit every Tech-Savvies page and flow for dark patterns, remove any you find, a
             </td>
             <td class="col-step" role="cell" data-label="Step">12</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">01</span> Privacy policy</p>
-              <p class="prompt-deliverable"><code>/privacy/</code> page, <code>.prose</code> styles, footer "Legal" column</p>
+              <p class="prompt-title">Privacy policy</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 01</span> <code>/privacy/</code> page, <code>.prose</code> styles, footer "Legal" column</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-01" tabindex="0" aria-label="Prompt 01 text">&lt;branch&gt;
@@ -1060,8 +1061,8 @@ Publish /privacy/, a privacy policy that describes exactly what Tech-Savvies col
             </td>
             <td class="col-step" role="cell" data-label="Step">13</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">04</span> Cookie policy</p>
-              <p class="prompt-deliverable"><code>/cookies/</code> page</p>
+              <p class="prompt-title">Cookie policy</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 04</span> <code>/cookies/</code> page</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-04" tabindex="0" aria-label="Prompt 04 text">&lt;branch&gt;
@@ -1126,8 +1127,8 @@ Publish /cookies/, a cookie policy that states what cookies and storage Tech-Sav
             </td>
             <td class="col-step" role="cell" data-label="Step">14</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">02</span> Terms of Service</p>
-              <p class="prompt-deliverable"><code>/terms/</code> page</p>
+              <p class="prompt-title">Terms of Service</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 02</span> <code>/terms/</code> page</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-02" tabindex="0" aria-label="Prompt 02 text">&lt;branch&gt;
@@ -1214,8 +1215,8 @@ Publish /terms/, Terms of Service for website use and for Tech-Savvies projects 
             </td>
             <td class="col-step" role="cell" data-label="Step">15</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">03</span> Refund policy</p>
-              <p class="prompt-deliverable"><code>/refunds/</code> page</p>
+              <p class="prompt-title">Refund policy</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 03</span> <code>/refunds/</code> page</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-03" tabindex="0" aria-label="Prompt 03 text">&lt;branch&gt;
@@ -1284,8 +1285,8 @@ Publish /refunds/, a refund and cancellation policy for each Tech-Savvies servic
             </td>
             <td class="col-step" role="cell" data-label="Step">16</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">06</span> Form consent</p>
-              <p class="prompt-deliverable">Privacy notice on the contact form</p>
+              <p class="prompt-title">Form consent</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 06</span> Privacy notice on the contact form</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-06" tabindex="0" aria-label="Prompt 06 text">&lt;branch&gt;
@@ -1355,8 +1356,8 @@ Add an accurate privacy notice, with a link to the Privacy Policy, directly abov
             </td>
             <td class="col-step" role="cell" data-label="Step">17</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">17</span> Age consent for kids&#x27; data</p>
-              <p class="prompt-deliverable">Children's-data clauses + form notice</p>
+              <p class="prompt-title">Age consent for kids&#x27; data</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 17</span> Children's-data clauses + form notice</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-17" tabindex="0" aria-label="Prompt 17 text">&lt;branch&gt;
@@ -1427,8 +1428,8 @@ Add children&#x27;s and under-18 data rules to the Privacy Policy, Terms and con
             </td>
             <td class="col-step" role="cell" data-label="Step">18</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">20</span> Data deletion requests</p>
-              <p class="prompt-deliverable">Rights section + <code>docs/data-requests-runbook.md</code></p>
+              <p class="prompt-title">Data deletion requests</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 20</span> Rights section + <code>docs/data-requests-runbook.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-20" tabindex="0" aria-label="Prompt 20 text">&lt;branch&gt;
@@ -1511,8 +1512,8 @@ Give visitors a one-email way to request access to or deletion of their data, an
             </td>
             <td class="col-step" role="cell" data-label="Step">19</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">18</span> Unsubscribe link in emails</p>
-              <p class="prompt-deliverable"><code>docs/email-policy.md</code> + signature template</p>
+              <p class="prompt-title">Unsubscribe link in emails</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 18</span> <code>docs/email-policy.md</code> + signature template</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-18" tabindex="0" aria-label="Prompt 18 text">&lt;branch&gt;
@@ -1592,8 +1593,8 @@ Write docs/email-policy.md, classifying each kind of email Tech-Savvies sends an
             </td>
             <td class="col-step" role="cell" data-label="Step">20</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">19</span> License fonts and images</p>
-              <p class="prompt-deliverable"><code>docs/asset-licenses.md</code></p>
+              <p class="prompt-title">License fonts and images</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 19</span> <code>docs/asset-licenses.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-19" tabindex="0" aria-label="Prompt 19 text">&lt;branch&gt;
@@ -1661,8 +1662,8 @@ Record the creator and licence of every font, image and icon in the repo in docs
             </td>
             <td class="col-step" role="cell" data-label="Step">21</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">22</span> Check copyright on images</p>
-              <p class="prompt-deliverable">Provenance record, copyright line fix, name/logo clearance checklist</p>
+              <p class="prompt-title">Check copyright on images</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 22</span> Provenance record, copyright line fix, name/logo clearance checklist</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-22" tabindex="0" aria-label="Prompt 22 text">&lt;branch&gt;
@@ -1734,8 +1735,8 @@ Establish whether Tech-Savvies owns or is licensed to use each image on the site
             </td>
             <td class="col-step" role="cell" data-label="Step">22</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">13</span> Add alt text to images</p>
-              <p class="prompt-deliverable">Alt-text verification + guard</p>
+              <p class="prompt-title">Add alt text to images</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 13</span> Alt-text verification + guard</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-13" tabindex="0" aria-label="Prompt 13 text">&lt;branch&gt;
@@ -1807,8 +1808,8 @@ Give every image and icon on every page in public/ a correct text alternative, a
             </td>
             <td class="col-step" role="cell" data-label="Step">23</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">14</span> Check and fix color contrast</p>
-              <p class="prompt-deliverable">Contrast report + forced-colors + error-state fixes</p>
+              <p class="prompt-title">Check and fix color contrast</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 14</span> Contrast report + forced-colors + error-state fixes</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-14" tabindex="0" aria-label="Prompt 14 text">&lt;branch&gt;
@@ -1887,8 +1888,8 @@ Make every text, link, control and focus indicator on every page meet WCAG 2.2 A
             </td>
             <td class="col-step" role="cell" data-label="Step">24</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">15</span> Keyboard navigation and keyboard-friendly forms</p>
-              <p class="prompt-deliverable">Mobile-menu focus fix + form instructions</p>
+              <p class="prompt-title">Keyboard navigation and keyboard-friendly forms</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 15</span> Mobile-menu focus fix + form instructions</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-15" tabindex="0" aria-label="Prompt 15 text">&lt;branch&gt;
@@ -1969,8 +1970,8 @@ Make every Tech-Savvies page fully keyboard-operable without focus going behind 
             </td>
             <td class="col-step" role="cell" data-label="Step">25</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">25</span> Use clear button labels</p>
-              <p class="prompt-deliverable">Label audit + microcopy rules</p>
+              <p class="prompt-title">Use clear button labels</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 25</span> Label audit + microcopy rules</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-25" tabindex="0" aria-label="Prompt 25 text">&lt;branch&gt;
@@ -2044,8 +2045,8 @@ Make every button and link on the Tech-Savvies site name exactly what it does, c
             </td>
             <td class="col-step" role="cell" data-label="Step">26</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">21</span> Fix accessibility (full WCAG 2.2 AA audit and statement)</p>
-              <p class="prompt-deliverable">axe + manual WCAG 2.2 AA audit, fixes, <code>/accessibility/</code> statement</p>
+              <p class="prompt-title">Fix accessibility (full WCAG 2.2 AA audit and statement)</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 21</span> axe + manual WCAG 2.2 AA audit, fixes, <code>/accessibility/</code> statement</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-21" tabindex="0" aria-label="Prompt 21 text">&lt;branch&gt;
@@ -2130,8 +2131,8 @@ Bring every page in public/ to WCAG 2.2 AA and publish /accessibility/ with a wa
             </td>
             <td class="col-step" role="cell" data-label="Step">27</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">24</span> Local laws: final pass</p>
-              <p class="prompt-deliverable">Checks every live page against <code>docs/legal-compliance.md</code></p>
+              <p class="prompt-title">Local laws: final pass</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 24</span> Checks every live page against <code>docs/legal-compliance.md</code></p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-24-final" tabindex="0" aria-label="Prompt 24 text">&lt;branch&gt;
@@ -2213,8 +2214,8 @@ final pass</pre>
             </td>
             <td class="col-step" role="cell" data-label="Step">28</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">26</span> Push the finished fix plan to main</p>
-              <p class="prompt-deliverable"><code>claude-fix-plan</code> merged into main after the checks pass</p>
+              <p class="prompt-title">Push the finished fix plan to main</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt 26</span> <code>claude-fix-plan</code> merged into main after the checks pass</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-26" tabindex="0" aria-label="Prompt 26 text">&lt;branch&gt;

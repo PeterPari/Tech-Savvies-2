@@ -83,8 +83,8 @@ def row_html(step, num, phase, final, prompt, deliverable):
             </td>
             <td class="col-step" role="cell" data-label="Step">{step}</td>
             <td class="col-prompt" role="cell">
-              <p class="prompt-title"><span class="prompt-num">{num}</span> {html.escape(title)}</p>
-              <p class="prompt-deliverable">{deliverable}</p>
+              <p class="prompt-title">{html.escape(title)}</p>
+              <p class="prompt-meta"><span class="prompt-num">Prompt {num}</span> {deliverable}</p>
               <details class="prompt-details">
                 <summary>View prompt</summary>
                 <pre class="prompt-text" id="prompt-{key}" tabindex="0" aria-label="Prompt {num} text">{html.escape(text)}</pre>
@@ -146,7 +146,8 @@ TEMPLATE = """<!doctype html>
       <section class="section section--first">
         <div class="container container--wide">
           <h1 class="display-md">Prompt checklist</h1>
-          <p class="lead admin-intro">Run the prompts in step order, one new Claude Code session each. Set the model and effort shown before pasting. Checkmarks are saved in this browser only.</p>
+          <p class="lead admin-intro">Run the steps from top to bottom, one new Claude Code session each. Set the model and effort shown before pasting. Checkmarks are saved in this browser only.</p>
+          <p class="admin-note">Steps follow the order the prompts depend on each other. Prompt numbers come from the original 25-item list, so they don’t run in sequence.</p>
 
           <div class="admin-toolbar">
             <p class="admin-progress" aria-live="polite"><span data-done-count>0</span> of {total} done</p>
