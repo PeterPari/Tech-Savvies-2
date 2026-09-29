@@ -826,6 +826,12 @@ main .eyebrow + * {
   margin-top: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
 }
 
+.showcase-note {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9375rem;
+}
+
 /* ---------- Home: start your project ---------- */
 
 .cta {
