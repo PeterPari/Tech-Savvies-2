@@ -62,6 +62,7 @@ Then visit <http://localhost:8080>.
   footer, the JSON-LD `address`, and the `.contact-info` block on `/contact/`, which also holds the
   service area and reply time. Source of truth: `docs/business-facts.md`. There is no mailing
   address or fixed hours to show; add them everywhere above if that changes.
+- **New UI:** follow the honest-UI rules in [`docs/ux-honesty-rules.md`](docs/ux-honesty-rules.md).
 - **Colors, fonts, spacing:** the variables at the top of `public/assets/css/styles.css`.
 - **Domain:** links for Google and social sharing use `https://tech-savvies.com`
   (the `canonical` and `og:` tags in each page, `sitemap.xml` and `robots.txt`).
