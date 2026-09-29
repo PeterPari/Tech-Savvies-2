@@ -18,12 +18,6 @@ Netlify claim below is cited. Nothing here is guessed.
 | Google Domains / Squarespace Domains (registrar for tech-savvies.com) | Domain registration and DNS | Owner’s registrant contact details (name, email, and any address or phone entered at registration) | Domain registration or renewal, not visits | Registrar’s systems | https://www.squarespace.com/privacy | unverified: owner to check with Squarespace | Not deletable while the domain is registered; owner can ask the registrar to update contact details or close the account |
 | Grisha.studio (outbound link) | Case-study link on the homepage | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Grisha.studio’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
 
-## Live site differs from the repo
-
-The table describes what this branch ships. The live site currently also sends visitor data to
-Microsoft Clarity (analytics), Google Fonts (Google) and possibly formsubmit.co (contact form). See
-"Loaded by the browser automatically". Add them to the table only if the owner decides to keep them.
-
 ## Netlify: facts to confirm
 
 Each item needs a current Netlify docs URL before the Privacy Policy states it. Confirmed by the
@@ -44,22 +38,17 @@ All 7 HTML pages (including `/admin/`, `/contact/thanks/` and `404.html`) at 375
 closed and open: 176 requests, all to `http://localhost:8080` (the site’s own origin). No other
 origin, no third-party script, font, stylesheet, frame or image, and no cookies set in the browser.
 
-Production (`https://tech-savvies.com`) was reachable on 2026-09-29 (curl `HTTP/2 200`, `server: Netlify`)
-and it does **not** match this repo. The live homepage HTML and headers show:
+The new site is currently live at `https://tech-savvies-2.netlify.app/` and will move to `tech-savvies.com`
+later. Its homepage (curl, 2026-09-29) returns `HTTP/2 200`, `server: Netlify`, the same CSP as
+`netlify.toml`, no `Set-Cookie` header, and only same-origin scripts (`/assets/js/main.js` and inline
+JSON-LD). The only external URL in the HTML is `https://grisha.studio/`.
 
-- a different CSP that allows `https://www.clarity.ms`, `https://scripts.clarity.ms`, `https://c.clarity.ms`,
-  `https://c.bing.com`, `https://v.clarity.ms`, `https://formsubmit.co`, `https://fonts.googleapis.com` and
-  `https://fonts.gstatic.com`, plus `'unsafe-inline'`;
-- a Microsoft Clarity tag (`https://www.clarity.ms/tag/vwz3thl727`) and Google Fonts stylesheets and font files
-  in the page HTML, and a `services.html` search action in its JSON-LD;
-- no `Set-Cookie` response header on the homepage request. Cookies that Clarity sets in the browser were not
-  observed: Chromium could not load the page through the session proxy (`ERR_CERT_AUTHORITY_INVALID`), so
-  only headers and HTML were inspected, not browser requests.
-
-This looks like an older or different deploy than `claude-fix-plan` (whose `netlify.toml` has no such origins).
-Until that deploy is replaced by this branch, Microsoft Clarity, Google Fonts and formsubmit.co receive
-visitor data on the live site, and the Privacy Policy must not claim otherwise. Owner to confirm which
-branch Netlify publishes (Netlify → Site → Deploys) and what the live contact form submits to.
+The old site currently at `https://tech-savvies.com` is a different codebase and is being replaced.
+Its headers and HTML (2026-09-29) show Microsoft Clarity, Google Fonts and a CSP allowing `formsubmit.co`.
+Those do not belong to the new site and must not be copied into the Privacy Policy, but they receive data
+until the domain moves. Browser-level requests and cookies were not observed on either production host:
+Chromium could not load them through the session proxy (`ERR_CERT_AUTHORITY_INVALID`). Owner to re-run
+the browser check on `tech-savvies-2.netlify.app` and again after the move.
 
 The CSP in `netlify.toml` (`default-src 'self'`) blocks any other origin from loading. The
 `third-party-allowlist` check in `tools/check_site.py` limits outbound `href` origins to
