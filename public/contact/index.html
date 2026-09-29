@@ -102,7 +102,7 @@
 
                 <div class="field">
                   <label for="service">What do you need?</label>
-                  <select class="input" id="service" name="service" required>
+                  <select class="input" id="service" name="service" required aria-invalid="false">
                     <option value="">Choose a service</option>
                     <option>Website Launch</option>
                     <option>Website Rescue</option>
@@ -121,6 +121,7 @@
                 <p class="form-note" id="form-privacy">We’ll use these details to reply to you and, if you hire us, to run your project, and we won’t add you to a mailing list. If under 18, please have a parent or guardian contact us. Read our <a href="/privacy/" target="_blank" rel="noopener">Privacy Policy<svg class="icon-inline" aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11l6-6M6 5h5v5"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
 
                 <button class="btn" type="submit" aria-describedby="form-privacy"><span data-label>Send message</span> <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button>
+                <p class="visually-hidden" id="form-status" role="status"></p>
               </form>
             </div>
           </div>
@@ -138,7 +139,7 @@
             <p class="footer-tagline">Websites done fast.<br><span class="accent">Websites done right.</span></p>
           </div>
           <nav aria-label="Footer">
-            <p class="eyebrow footer-heading">Pages</p>
+            <h2 class="eyebrow footer-heading">Pages</h2>
             <ul class="footer-links" role="list">
               <li><a href="/">Home</a></li>
               <li><a href="/solutions/">Solutions</a></li>
@@ -147,19 +148,20 @@
             </ul>
           </nav>
           <div>
-            <p class="eyebrow footer-heading">Contact</p>
+            <h2 class="eyebrow footer-heading">Contact</h2>
             <ul class="footer-links" role="list">
               <li><a href="mailto:info@tech-savvies.com">info@tech-savvies.com</a></li>
               <li>New York, NY</li>
             </ul>
           </div>
           <nav aria-label="Legal">
-            <p class="eyebrow footer-heading">Legal</p>
+            <h2 class="eyebrow footer-heading">Legal</h2>
             <ul class="footer-links" role="list">
               <li><a href="/terms/">Terms of Service</a></li>
               <li><a href="/refunds/">Refund Policy</a></li>
               <li><a href="/privacy/">Privacy Policy</a></li>
               <li><a href="/cookies/">Cookie Policy</a></li>
+              <li><a href="/accessibility/">Accessibility</a></li>
             </ul>
           </nav>
         </div>

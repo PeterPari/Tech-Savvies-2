@@ -16,6 +16,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/refunds/` | `public/refunds/index.html` | Refund Policy (linked from every footer’s Legal column, the /solutions/ Payment block and the refund wording in /terms/) |
 | `/privacy/` | `public/privacy/index.html` | Privacy Policy (linked from every footer’s Legal column) |
 | `/cookies/` | `public/cookies/index.html` | Cookie Policy (linked from every footer’s Legal column) |
+| `/accessibility/` | `public/accessibility/index.html` | Accessibility statement: WCAG 2.2 AA aim, what was tested, known limitations, how to report a barrier (linked from every footer’s Legal column) |
 | any missing page | `public/404.html` | Page not found |
 | `/admin/` | `public/admin/index.html` | Internal prompt checklist (not linked, not indexed; generated, see below) |
 

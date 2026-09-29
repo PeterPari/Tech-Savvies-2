@@ -117,6 +117,7 @@ function initContactForm() {
   if (!button || !label) return;
 
   var idleText = label.textContent;
+  var status = document.getElementById("form-status");
   var messages = {
     name: "Enter your name.",
     email: "Enter your email address.",
@@ -164,8 +165,13 @@ function initContactForm() {
     var error = document.getElementById(field.id + "-error");
     error.textContent = "";
     error.hidden = true;
-    field.removeAttribute("aria-invalid");
+    field.setAttribute("aria-invalid", "false"); // "false", not removed: an empty required <select> is otherwise exposed as invalid
     describedBy(field, error.id, false);
+  }
+
+  // Screen readers read the role="status" paragraph without moving focus (WCAG 4.1.3)
+  function announce(text) {
+    if (status) status.textContent = text;
   }
 
   // Returns true when the field is valid
@@ -178,8 +184,9 @@ function initContactForm() {
 
   fields.forEach(function (field) {
     // Check a field once the visitor leaves it after typing, and clear its error as soon as it's fixed
+    // Focus has usually moved on by then, so the error is also announced
     field.addEventListener("change", function () {
-      check(field);
+      announce(check(field) ? "" : "Error: " + errorFor(field));
     });
     field.addEventListener("input", function () {
       if (field.getAttribute("aria-invalid") === "true" && !errorFor(field)) clearError(field);
@@ -192,19 +199,23 @@ function initContactForm() {
       if (!check(field) && !firstInvalid) firstInvalid = field;
     });
 
+    // Focus moves to the first invalid field, whose description is its error, so nothing is announced
     if (firstInvalid) {
       event.preventDefault();
+      announce("");
       firstInvalid.focus();
       return;
     }
 
     button.disabled = true;
     label.textContent = "Sending…";
+    announce("Sending your message…");
   });
 
   // Restore the button if the visitor comes back with the Back button
   window.addEventListener("pageshow", function () {
     button.disabled = false;
     label.textContent = idleText;
+    announce("");
   });
 }

@@ -332,7 +332,10 @@ main .eyebrow + * {
   text-underline-offset: 0.2em;
 }
 
-.meta a:hover,
+.meta a:hover {
+  text-decoration-color: currentColor;
+}
+
 .icon-inline {
   display: inline-block;
   width: 0.75em;

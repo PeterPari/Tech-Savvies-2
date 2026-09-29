@@ -80,7 +80,7 @@ WCAG 2.2 AA: 2.4.4 Link Purpose, 2.4.6 Headings and Labels, 2.5.3 Label in Name,
 | privacy/index.html | `<a href="mailto:?subject=">` | Email a data request | Email a data request | Open mail client for data request | ✓ |
 | All legal pages | `<a>` policy links | Terms of Service, Refund Policy, Privacy Policy, Cookie Policy | (page-specific) | Navigate to policy pages | ✓ |
 | Legal pages | `<a>` anchor links | Readable section names (e.g., "Monthly plan", "If we miss a promise") | (section-specific) | Jump to page section | ✓ |
-| All pages | `<a>` footer legal | Terms of Service, Refund Policy, Privacy Policy, Cookie Policy | (page-specific) | Navigate to policy pages | ✓ |
+| All pages | `<a>` footer legal | Terms of Service, Refund Policy, Privacy Policy, Cookie Policy, Accessibility (added in Prompt 21) | (page-specific) | Navigate to policy pages | ✓ |
 
 ## Summary
 
@@ -194,3 +194,89 @@ WCAG 2.2 AA: 2.1.1 Keyboard, 2.4.1 Bypass Blocks, 2.4.3 Focus Order, 2.4.7 Focus
 - **Honeypot:** the `bot-field` paragraph is `display: none` and the input has `tabindex="-1"`, so Tab skips it and it isn’t in the accessibility tree (checked with a Playwright accessibility snapshot).
 - **Acceptance checks (run twice, all passed):** at 375px on /, 10 Tabs and 10 Shift+Tabs with the menu open stay in `.site-header`; Escape puts focus on the toggle and clears `inert`; the next Tabs reach `<main>`. On /contact/, an empty submit focuses Name, shows “Enter your name.”, and sets `aria-invalid` and `aria-describedby="name-error"`; typing a name clears all three. Typing “bob” in Email and submitting shows the format message and focuses Email. With JavaScript disabled, an empty submit is blocked by native validation and no request is sent.
 - **Not tested here:** Safari, Firefox and a real screen reader, and a live Netlify submission (the owner can check a deploy preview reaches /contact/thanks/).
+
+# Accessibility Audit: WCAG 2.2 AA
+
+Prompt 21, 2026-09-29. It covers the rest of WCAG 2.2 AA across all 12 HTML files in `public/`, including every legal page and the new /accessibility/ page. Everything was tested in Chromium (Playwright 1.56, headless) against `python3 -m http.server`. “Before” is commit `0b5b2b7`, served from a scratch worktree; “after” is this commit. axe-core 4.13.0 was installed in a scratch directory outside the repo.
+
+## Automated
+
+**Setup.** axe-core ran with the tags `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa` and `best-practice` on every HTML page. Each page ran at 320, 375, 768 and 1280px wide (800px tall), in five states:
+
+- **default:** page as loaded.
+- **menu open:** the menu toggle clicked. This state only exists at 320 and 375px; at 768px and up the toggle is hidden (the menu becomes the desktop nav at 48em). /admin/ has no menu.
+- **form errors:** on /contact/, “bob” typed in Email and the form submitted empty otherwise, so all four text errors show. Other pages have no form.
+- **reduced motion:** `prefers-reduced-motion: reduce` emulated.
+- **forced colors:** `forced-colors: active` emulated.
+
+That makes 156 runs before and 170 after; the 70 page/state/width combinations that don’t exist are marked n/a. Each cell below is violation nodes summed over the widths, before → after.
+
+| Page | default | menu open | form errors | reduced motion | forced colors (raw axe) | forced colors (painted color) |
+|---|---|---|---|---|---|---|
+| / | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 124 → 128 | 0 → 0 |
+| /solutions/ | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 268 → 272 | 0 → 0 |
+| /our-story/ | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 72 → 76 | 0 → 0 |
+| /contact/ | 0 → 0 | 0 → 0 | 0 → 0 | 0 → 0 | 146 → 150 | 0 → 0 |
+| /contact/thanks/ | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 82 → 86 | 0 → 0 |
+| /privacy/ | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 398 → 402 | 0 → 0 |
+| /terms/ | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 442 → 446 | 0 → 0 |
+| /refunds/ | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 270 → 274 | 0 → 0 |
+| /cookies/ | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 114 → 118 | 0 → 0 |
+| /404.html | 0 → 0 | 0 → 0 | n/a | 0 → 0 | 78 → 82 | 0 → 0 |
+| /admin/ | 0 → 0 | n/a | n/a | 0 → 0 | 692 → 692 | 0 → 0 |
+| /accessibility/ | new → 0 | new → 0 | n/a | new → 0 | new → 130 | new → 0 |
+
+**Totals.** Outside forced colors, there are 0 violations before and after. The raw forced-colors column is 2,686 → 2,856 nodes, all `color-contrast`. It rises only because of the new footer link and the new page. Measured on the painted color, it is 0 → 0.
+
+**Why the raw forced-colors count is not a real failure.** Under forced colors, Chromium paints text in the forced system color, and `getComputedStyle().color` reports that color. The computed `-webkit-text-fill-color`, however, keeps the author color. axe reads `-webkit-text-fill-color` before `color` (axe.js line 25340), so it measures, for example, `#94a3b8` on the forced white Canvas. To check what is actually drawn, element screenshots were decoded under forced colors: 31 elements on /, /contact/, /privacy/ and /accessibility/, covering `.lead`, `.line.accent`, `.eyebrow`, `.meta`, `.nav-link`, `.btn`, footer links, `.prose p`, `.contact-label` and `.form-note`. In every one, the ink was the forced color: black `0,0,0`, or navy `0,0,159` for links, on white `255,255,255`. It was never the author color axe reports.
+
+The “painted color” column re-runs axe in the same page, with `-webkit-text-fill-color` hidden from axe so it reads the painted color. This is a test-harness correction, not a site change; the site sets `-webkit-text-fill-color` only on autofilled inputs. Changing the CSS just to satisfy the tool would risk the real system colors, so it was left as is.
+
+**Incomplete.** 116 `color-contrast` nodes, the same before and after, come back “needs review” outside forced colors. They are on /contact/ (the `select`’s background image), and on the /privacy/ and /refunds/ tables inside the horizontally scrolling region, where axe can’t see the background. Those pairs are in the Contrast section’s computed ratios.
+
+## Manual
+
+Probes were Playwright scripts run on every page. The accessibility tree came from `ariaSnapshot()` and the CDP `Accessibility.getFullAXTree`. “All pages” means the 11 visitor pages; /admin/ is the owner’s internal checklist and is covered by axe only.
+
+| Criterion | Result | Evidence |
+|---|---|---|
+| 1.3.1 / 1.3.2 One h1, headings | **Fail → fixed** | Every page has exactly one `h1` and no skipped heading levels. The footer column labels “Pages”, “Contact” and “Legal” looked like headings but were `<p class="eyebrow footer-heading">`, so the tree read them as “paragraph: Pages”. They are now `<h2 class="eyebrow footer-heading">` on every page. The computed font, size, weight, spacing, color, position and box are identical at 375 and 1280px. |
+| 1.3.1 Lists | Pass | Nav, footer, offer grid, checklists and legal lists are `ul`/`li`. Lists with `list-style: none` carry `role="list"`, and the tree shows `list`/`listitem`. |
+| 1.3.1 Tables | **Fail → fixed** | The /privacy/ data-sharing table had no `<caption>` and was exposed as an unnamed “table”. It now has a visually hidden caption, matching /refunds/, and the tree reads `table "Services that handle data for us, what each gets and its privacy policy"`. Every `th` on both tables has `scope`: 13 of 13 on /privacy/, 8 of 8 on /refunds/. |
+| 1.3.1 Landmarks | Pass | Every page has banner, `nav "Main"`, main, contentinfo, `nav "Footer"` and `nav "Legal"`. The home sections, the contact form and the scrollable table regions are named by their headings or labels. No visible text lies outside a landmark except the skip link. |
+| 1.3.2 Reading order | Pass | The DOM order matches the visual order at every width. The accessibility-tree order for /, /contact/ and /privacy/ is below. |
+| 1.3.5 Autocomplete | Pass | Name `name`, Email `email`, Business or current website `organization`. Service and Message have no matching input purpose. The honeypot is `off`. |
+| 1.4.4 / 1.4.10 Resize, reflow | Pass | No page-level horizontal scroll on any page at 320×800, 640×400 (1280 at 200%) or 320×200 (1280 at 400%), including with the menu open. Wide tables scroll inside `.table-scroll` (allowed for data tables). The showcase frame’s tab title “grisha.studio - Artist \| NYC Artist Portfolio” is cut off with an ellipsis at 320 and 375px, as it was before, because it imitates a browser tab. The full title is its link’s accessible name, and the site name and link are shown in full in the “Client: Grisha.studio” line above. |
+| 1.4.12 Text spacing | Pass | Injected `line-height: 1.5`, `letter-spacing: .12em`, `word-spacing: .16em` and `p { margin-bottom: 2em }`, all `!important`, at 320 and 1280px on every page. No element with `overflow: hidden/clip` cuts text, and no button, input, menu toggle or skip-link content leaves its box. Kerned punctuation (`kern-dot`, `kern-apos` on the /, /contact/, /contact/thanks/ and 404 headlines): each glyph’s box starts exactly its negative margin (0.1em, 0.07em) inside the previous glyph’s box, which now includes the added 0.12em letter spacing. So the dot or apostrophe sits 0.02–0.06em clear of its neighbours, on the same line; nothing overlaps. The showcase tab title is cut off at 320/375px with or without the overrides, and shows in full at 768px and up even with them. |
+| 1.4.13 Content on hover or focus | **Fail → fixed** | No tooltips, `title` attributes, hover menus or focus pop-ups. The skip link showing on focus is the focused control itself. A stray selector from Prompt 14 (`.meta a:hover, .icon-inline { width: .75em; … }`) gave the “Grisha.studio” link on / the icon’s 0.75em box on hover. Sampled every 30ms with the pointer at rest on it, the link flipped between 88px and 11px wide and in and out of `:hover`, so it flickered and was hard to click. The rule is now split: hover only darkens the underline, and 8 of 8 samples stay 88px and hovered. |
+| 2.2.2 / 2.3.1 Motion, flashing | Pass | No `@keyframes`, `animation`, autoplay, video, GIF, carousel or timer in `public/` (the /solutions/ “animations” is a tier description). Only 0.15s color/transform transitions, which `prefers-reduced-motion: reduce` cuts to 0.01ms. Nothing flashes. |
+| 2.4.2 Page titled | Pass | 12 titles, 12 unique, each “Topic \| Tech-Savvies” (the home page leads with the brand). |
+| 2.5.8 Target size | Pass | Every link, button and field was measured at 320 (menu closed and open) and 1280px. Buttons, the toggle and fields are ≥ 40px. Smaller targets (footer and desktop nav links) pass the spacing exception: a 24px circle on each touches no other target or circle. In-sentence links are exempt. 0 failures on every page, including the new footer link. |
+| 3.1.1 Language | Pass | `<html lang="en">` on all 12 files. |
+| 3.2.3 / 3.2.4 / 3.2.6 Consistency | Pass | Header and footer links (href and text) are in the same order on every page (compared to /). Names match the glossary in `microcopy.md`. The help mechanisms (header Contact button, footer email, footer Contact link) sit in the same place on every page. |
+| 3.3.7 Redundant entry | Pass | The only process is the one-step contact form; nothing is asked twice. |
+| 3.3.8 Accessible authentication | Pass | No login, password or CAPTCHA anywhere (the honeypot is invisible and needs nothing from people). |
+| 4.1.2 Name, role, value | **Fail → fixed** | Menu toggle `button "Menu"` with `expanded` false/true. Every field has a label; required text fields are `required=true`. The Service `select` (a required select with an empty first option) was exposed as `invalid=true` on page load, before anything was entered. It now has `aria-invalid="false"`, and `main.js` sets `"false"` rather than removing the attribute when an error clears; the tree shows `invalid="false"` on load and `"true"` only with an error. |
+| 4.1.2 Required state of the select | **Needs manual screen-reader check** | Chromium’s tree doesn’t report `required` for the combobox, even with `aria-required` (tested in isolation). “All fields are required unless marked (optional).” is stated in text above the form, so 3.3.2 is met either way. |
+| 4.1.3 Status messages | **Fail → fixed** | *Errors on submit* need no live region. Focus moves to the first invalid field, and its accessible description is the error (the tree shows `textbox "Name" … desc="Error: Enter your name." focused`). A live region would announce twice. *Errors on leaving a field* did need one. The `change` check shows the error after focus has moved on (for example, focus on Business while “Error: Enter an email address like name@example.com.” appears under Email), and nothing was announced. *“Sending…”* also needed one: the button text changes and the button is disabled, with no focus change. Fix: an empty `<p class="visually-hidden" id="form-status" role="status">` in the form (tree: `status`, `live="polite"`). `main.js` puts the error text there on `change` and “Sending your message…” on a valid submit, and clears it on submit errors, on a fixed field and on `pageshow`. Verified: leaving Email as “bob” → status carries the error while focus is on Business; empty submit → status empty, focus on Name; valid submit → button “Sending…” disabled, status “Sending your message…”. |
+
+### Accessibility tree: reading order and names
+
+Read from Chromium after the fixes (375px for / and /contact/, where the menu is closed, so the Main nav is out of the tree until opened; 1280px for /privacy/).
+
+- **/**: link “Skip to content” → banner (link “Tech-Savvies NYC home” with img of the same name, button “Menu”) → main: heading 1 “Websites done fast. Websites done right.” (the `.line` spans are joined by a space) → lead → region “What we offer” (h2, list of three items each with an h3) → region “Featured Showcase” (h2, h3, paragraph, “Client:” paragraph with link “Grisha.studio (opens in a new tab)”, figure with link “grisha.studio - Artist \| NYC Artist Portfolio (opens in a new tab)” and the described img, list of three) → region “Start Your Project” (h2, paragraph, link “Start your project”) → contentinfo: logo link, tagline, navigation “Footer” (heading 2 “Pages”, list), heading 2 “Contact” with email link and “New York, NY”, navigation “Legal” (heading 2 “Legal”, five links), copyright.
+- **/contact/**: … main: heading 1 “Let’s Upgrade Your Business.” (the kern span doesn’t split the word) → lead → heading 2 “Contact Info”, then label/value paragraphs (“Direct Email:” then link “info@tech-savvies.com”, “Business:”, “Location:”, “Replies:”; the colon carries the relationship) → heading 2 “Contact Form” → form “Contact Form”: required-fields note, textbox “Name”, textbox “Email”, textbox “Business or current website (optional)”, combobox “What do you need?” with five options, textbox “Message”, privacy notice with link “Privacy Policy (opens in a new tab)”, button “Send message” (described by the privacy notice), status (empty). The honeypot is not in the tree.
+- **/privacy/**: … main: heading 1 “Privacy Policy”, “Last updated” with time, then h2/h3 sections in document order. region “Services that handle data for us” (focusable) contains table “Services that handle data for us, what each gets and its privacy policy” with four columnheaders and nine rowheaders (Netlify … ChatGPT, run by OpenAI) → contentinfo as on /.
+
+### Fixed in this prompt
+
+1. Footer column labels are `h2` on every page (1.3.1).
+2. Caption on the /privacy/ table (1.3.1).
+3. `.meta a:hover` no longer collapses the link (the stray `.icon-inline` selector is split out).
+4. The Service select is no longer announced as invalid before input (4.1.2).
+5. A `role="status"` region announces errors that appear after focus has moved on, and “Sending your message…” (4.1.3).
+6. /accessibility/ published and linked from every footer’s Legal column. Each page gains one Tab stop (the footer Accessibility link), so the Keyboard section’s counts rise by one. /accessibility/ itself has 15 stops at 375px and 18 at 1280px; each has a 2px outline and none is under the header.
+
+### Not tested here (owner action)
+
+A real screen reader: VoiceOver (Safari, macOS and iOS) or NVDA (Firefox or Chrome, Windows). Check that the menu’s expanded state is read, the Service select is read as required, errors are read on submit and on leaving a field, “Sending your message…” is read, and the footer headings and table captions are read. Also check Safari and Firefox, and real Windows High Contrast, since this audit used Chromium emulation.

@@ -63,6 +63,17 @@ above word for word; the `terms-consistency` check keeps the prices and the guar
 | Monthly plan: 30 days per booking, no automatic renewal, nothing to cancel, no partial-month refund | /terms/#monthly-plan | Recurring terms | Owner, 2026-09-29 (business-facts, Monthly management and Refunds) | Keep | |
 | “We reply within 1 business day” to disputes | /terms/#law | Reply time | Owner, 2026-09-29: first reply within 1 business day | Keep | |
 
+## Claims added by /accessibility/ (Prompt 21, 2026-09-29)
+
+| Claim | Location | Issue | Evidence / owner confirmation | Decision | New wording |
+|-------|----------|-------|-------------------------------|----------|-------------|
+| “We aim to meet WCAG 2.2 AA” | /accessibility/#goal | Conformance claim | Worded as an aim, never “fully compliant”; audit in accessibility-audit.md | Keep | |
+| Tested with axe-core at 320–1280px, menu open and form errors showing; keyboard; 200% zoom and text spacing; reduced motion and high-contrast mode | /accessibility/#what-we-checked | Testing claims | accessibility-audit.md, Automated and Manual sections (Prompt 21) and Keyboard section (Prompt 15) | Keep | |
+| “None known as of September 29, 2026. So far we’ve tested in Chrome-based browsers, not yet with a screen reader.” | /accessibility/#limitations | Limitations | Every manual criterion passes or was fixed; screen-reader pass is an owner action (compliance log #21) | Keep; update after the screen-reader pass | |
+| “We typically reply within 1 business day” | /accessibility/#report | Reply time | Owner, 2026-09-29 (business-facts) | Keep | |
+| “each page also has a plain-text Markdown version … tech-savvies.com/privacy.md” | /accessibility/#report | Not yet true: the mirrors don’t exist | Owner, 2026-09-29: will add them; told the addresses return 404 until then and chose to publish now | Keep at owner’s request; owner action to publish the mirrors | |
+| “This site relies on HTML and CSS. JavaScript is optional” | /accessibility/#technologies | Technical fact | Without JavaScript the nav links wrap under the logo and the form posts with native validation (main.js header comment, Prompt 15 test) | Keep | |
+
 ## Puffery (no substantiation needed)
 
 | Wording | Location |

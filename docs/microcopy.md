@@ -35,7 +35,7 @@ Use these exact labels for recurring controls and destinations. If a page or sec
 - **Refund Policy:** cancellation and refund page at /refunds/
 - **Privacy Policy:** privacy page at /privacy/
 - **Cookie Policy:** cookies and tracking page at /cookies/
-- **Accessibility:** (reserved for future page)
+- **Accessibility:** accessibility statement at /accessibility/ (footer Legal column)
 
 ### Contact and data
 
