@@ -934,7 +934,7 @@ main .eyebrow + * {
 
 .price-tiers .price {
   display: grid;
-  grid-template-columns: 3.75rem minmax(0, 1fr);
+  grid-template-columns: 4.5rem minmax(0, 1fr);
   column-gap: 0.75rem;
 }
 
@@ -945,6 +945,11 @@ main .eyebrow + * {
 
 .price-tiers .price-note {
   line-height: 1.5;
+}
+
+.price-tiers .price-note strong {
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* Costs outside our fee, Payment */
