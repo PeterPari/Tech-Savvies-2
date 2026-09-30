@@ -31,7 +31,7 @@ Evidence comes from [`business-facts.md`](business-facts.md). Locations are as o
 | Claim | Location | Issue | Evidence / owner confirmation | Decision | New wording |
 |-------|----------|-------|-------------------------------|----------|-------------|
 | “Rush: the Rescue finished within 5 days.” | /solutions/ Rescue (line 90) | Same as the Launch rush: no Rescue delivered yet | Owner, 2026-09-29: no rushed project yet. Owner to confirm when the 5 days start | Qualify: a target | “Rush: we aim to finish the Rescue within 5 days.” |
-| Tier prices $250 / $250 / $300 / $330 / $375; Rescue $200, rush $250; $50 one-time; $50/month | /solutions/ meta, og and service cards | Prices | Owner, 2026-09-29 (business-facts, Prices and Monthly management) | Keep | |
+| Tier prices $250 / $275 / $300 / $330 / $375; Rescue $200, rush $250; $50 one-time; $50/month | /solutions/ meta, og and service cards | Prices | Owner, 2026-09-29; Tier 2 changed to $275 by the owner, 2026-09-30 (business-facts, Prices and Monthly management) | Keep | |
 | Tier contents (pages, gallery, map, form, animations, CMS, store) | /solutions/ Launch tiers (lines 66–70) | Scope per price | Owner, 2026-09-29 (business-facts, Prices) | Keep | |
 | “Tiers 4 and 5 can’t be rushed” | /solutions/ Rush row (line 71) | Limit | Owner, 2026-09-29 | Keep | |
 | “Mobile Responsive (Phone Ready)”, “Custom Design from Tier 2”, “Contact Form from Tier 2” | /solutions/ Launch checklist (lines 75–77) | Feature claims | Tier contents in business-facts (Tier 1 is a template layout) | Keep | |

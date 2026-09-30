@@ -4,7 +4,7 @@ Plain-text version of the web page “Terms of Service | Tech-Savvies” at http
 
 Summary: The terms for using tech-savvies.com and hiring Tech-Savvies: quotes, prices, payment, the completion guarantee, the monthly plan, ownership and ending a project.
 
-Last updated September 29, 2026
+Last updated September 30, 2026
 
 ## About these terms
 
@@ -35,7 +35,7 @@ Our prices are the ones on our [Solutions page](https://tech-savvies.com/solutio
 
 - **Website Launch:** $250–$375, set by tier.
   - Tier 1, One-Page Scroller: $250
-  - Tier 2, Custom Brochure Site: $250
+  - Tier 2, Custom Brochure Site: $275
   - Tier 3, Polished Showcase Site: $300
   - Tier 4, Editable and Integrated Site: $330
   - Tier 5, Sales-Ready Site: $375

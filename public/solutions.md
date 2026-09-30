@@ -17,38 +17,42 @@ A new site for your business, priced by tier: the features you need set the pric
 
 **$250–$375**:
 
-- **$250**: Tier 1, One-Page Scroller: hero, about, services and contact on one page, with an email link or phone number.
-- **$250**: Tier 2, Custom Brochure Site: 3–5 pages, custom design, photo gallery, map and a working contact form.
-- **$300**: Tier 3, Polished Showcase Site: animations, filterable portfolio, testimonials, FAQ and an embedded booking calendar.
-- **$330**: Tier 4, Editable and Integrated Site: a CMS you edit yourself, blog, booking forms, newsletter signup and social feeds.
-- **$375**: Tier 5, Sales-Ready Site: everything above plus a small store or payments through Stripe or Square.
-- **$375**: Rush: we aim to deliver a Tier 1, 2 or 3 site within 5 days; Tiers 4 and 5 can’t be rushed.
+- **Tier 1**: **$250**, One-Page Scroller: hero, about, services and contact on one page, with an email link or phone number.
+- **Tier 2**: **$275**, Custom Brochure Site: 3–5 pages, custom design, photo gallery, map and a working contact form.
+- **Tier 3**: **$300**, Polished Showcase Site: animations, filterable portfolio, testimonials, FAQ and an embedded booking calendar.
+- **Tier 4**: **$330**, Editable and Integrated Site: a CMS you edit yourself, blog, booking forms, newsletter signup and social feeds.
+- **Tier 5**: **$375**, Sales-Ready Site: everything above plus a small store or payments through Stripe or Square.
+- **Rush**: **$375**, we aim to deliver a Tier 1, 2 or 3 site within 5 days; Tiers 4 and 5 can’t be rushed.
 
 ## Website Rescue
 
 Your current site is slow or outdated, but you love your brand. We modernize the look and feel while keeping your identity intact. Includes speed optimization, layout repairs, and mobile fixes.
-
-**$200**: Flat fee for any Rescue.
-
-**$250**: Rush: we aim to finish the Rescue within 5 days.
 
 - Speed Optimization
 - Fix Broken Layouts
 - Mobile Compatibility Fixes
 - Security Updates (platform, theme and plugins updated; HTTPS on)
 
+**$200**: Flat fee for any Rescue.
+
+**$250**: Rush: we aim to finish the Rescue within 5 days.
+
 ## Google Business Profile and Social Media Presence
 
 If you don’t have a Google Business Profile or it feels old or bland, or your social media presence is underperforming, we can help you drive more engagement and potentially more customers.
-
-**$50**: One-time fix: a flat fee to set up or refresh your Google Business Profile and social media.
-
-**$50/month**: Ongoing upkeep, paid in full when you book each month; it doesn’t renew on its own, so there’s nothing to cancel.
 
 - Google Business Profile Setup
 - Google Business Profile Optimization
 - Social Media Presence
 - Social Media Management (monthly)
+
+**$50**: One-time fix: a flat fee to set up or refresh your Google Business Profile and social media.
+
+**$50/month**: Ongoing upkeep, paid in full when you book each month; it doesn’t renew on its own, so there’s nothing to cancel.
+
+## Every Project Includes
+
+Transparent pricing (our prices and the outside costs above are all on this page, so no surprise invoices). Direct communication (you talk directly to Peter, who builds your site, not a ticketing system). Unlimited revisions within the agreed scope. Completion guarantee: no extra billing if a project takes longer than expected. That’s how we work.
 
 ## Costs outside our fee
 
@@ -66,10 +70,6 @@ If you don’t have a Google Business Profile or it feels old or bland, or your 
 - **Sales tax:** our prices don’t include sales tax. If it applies, we’ll tell you the amount before you pay anything.
 
 See our [Terms of Service](https://tech-savvies.com/terms/) and [Refund Policy](https://tech-savvies.com/refunds/) for full details.
-
-## Every Project Includes
-
-Transparent pricing (our prices and the outside costs above are all on this page, so no surprise invoices). Direct communication (you talk directly to Peter, who builds your site, not a ticketing system). Unlimited revisions within the agreed scope. Completion guarantee: no extra billing if a project takes longer than expected. That’s how we work.
 
 ---
 
