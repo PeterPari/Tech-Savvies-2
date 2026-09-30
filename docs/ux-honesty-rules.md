@@ -5,8 +5,8 @@ Patterns to Light”, 2022; NY GBL §527-a on hard-to-cancel subscriptions), and
 must follow. Audited 2026-09-29 on the tree after Prompts 10–12.
 
 Scope: `/`, `/solutions/`, `/our-story/`, `/contact/` (and its submit flow),
-`/contact/thanks/`, `/404.html`, at 375px and 1280px. `public/admin/` is the owner’s internal
-checklist (noindex, unlinked) and is out of scope. Checks run in Chromium: no horizontal
+`/contact/thanks/`, `/404.html`, at 375px and 1280px. The owner’s internal
+checklist at `public/admin/` (removed 2026-09-30) was out of scope. Checks run in Chromium: no horizontal
 overflow at either width on any page, and zero checkboxes, radios or dialogs in the markup.
 
 ## Audit

@@ -4,13 +4,13 @@ Plain-text version of the web page “Cookie Policy | Tech-Savvies” at https:/
 
 Summary: Which cookies and browser storage Tech-Savvies uses (none), how we checked, and how to control cookies in your browser.
 
-Last updated September 29, 2026
+Last updated September 30, 2026
 
 ## The short version
 
 **“Tech-Savvies doesn’t use advertising or tracking tools, and this website doesn’t set cookies. Our host counts page visits from its server logs, without cookies.”**
 
-That count comes from Netlify Web Analytics, which reads server logs and needs no cookies. If tech-savvies.com still shows our older website, that version uses Microsoft Clarity. We’re replacing it with this one.
+That count comes from Netlify Web Analytics, which reads server logs and needs no cookies. The older version of our website, which this one replaced, used Microsoft Clarity. This version doesn’t.
 
 ## What cookies are
 

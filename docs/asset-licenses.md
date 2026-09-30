@@ -36,7 +36,7 @@ No image was made by a freelance designer or a logo-maker or template tool (owne
 | Select-box chevron (CSS data-URI, viewBox 12×8, path `M1 1.5l5 5 5-5`) | `public/assets/css/styles.css`, `select.input` | Claude Code (part of the site’s form styles) | None | Written for this site | None | Same page as the form styles | Documented (owner has not been asked separately) |
 
 Not listed, because they are code or data rather than assets: `site.webmanifest`, `robots.txt`,
-`sitemap.xml`, the CSS and JS. The `public/admin/` checklist has no images.
+`sitemap.xml`, the CSS and JS.
 
 ## Showing client work
 

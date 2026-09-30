@@ -4,7 +4,7 @@ Plain-text version of the web page “Privacy Policy | Tech-Savvies” at https:
 
 Summary: What Tech-Savvies collects through this website, contact form and email, why, who handles it for us, how long we keep it and how to have it deleted.
 
-Last updated September 29, 2026
+Last updated September 30, 2026
 
 ## Summary
 
@@ -101,7 +101,7 @@ This site links to other sites, such as grisha.studio. If you click one of those
 
 This website doesn’t set cookies and doesn’t use advertising or tracking tools. Our host counts page visits from its server logs, without cookies. It counts unique visitors by IP address. It shows us our top pages, where visitors came from and their general location.
 
-If tech-savvies.com still shows the older version of our website, that version uses Microsoft Clarity. Clarity is a Microsoft tool that records how visitors use a page. We’re replacing that version with this one, which doesn’t use Clarity.
+The older version of our website, which this one replaced, used Microsoft Clarity. Clarity is a Microsoft tool that records how visitors use a page. This version doesn’t use Clarity.
 
 We don’t track you across websites, so we treat every visit the same way, whether or not your browser sends a Do Not Track or Global Privacy Control signal.
 

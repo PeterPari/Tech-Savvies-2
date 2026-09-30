@@ -11,6 +11,22 @@ The findings below come from the live site, the old repo, public DNS and a web s
 ## Status (2026-09-30)
 
 - **Done:** Phase 1 (all code, checks and docs) and the D2 and D4 decisions. Phase 2 result: see Phase 2.
+- **Also done 2026-09-30, for the final publish:**
+  - Removed the internal `/admin/` checklist page. It would otherwise have been public on
+    tech-savvies.com. Its build tool and CI step went with it.
+  - Reworded the Clarity sentences on /privacy/ and /cookies/ in the past tense, so they're true once
+    this site is on the domain.
+- **Pre-launch audit (2026-09-30, local copy, Chromium, `netlify.toml` CSP applied):** all 11 pages at
+  375px and 1280px passed with:
+  - no console errors or CSP violations, and no failed or third-party requests;
+  - no horizontal scroll, and no broken images;
+  - exactly one `h1` per page, and JSON-LD that parses;
+  - title, description, canonical and `og:` tags on every page, with titles and descriptions unique;
+  - a sitemap that matches the indexable pages exactly;
+  - 0 axe-core violations (WCAG 2.2 AA and best practice);
+  - a mobile menu that opens and closes with Escape.
+
+  Outbound links all answer 200, except openai.com, which returns 403 to automated requests.
 - **Left for you before the move:** Phase 0 steps 1 to 4 (renew the domain, Search Console exports,
   Netlify readouts, DNS backup), a test message through the contact form (Phase 2 step 3), then the
   cutover itself (Phase 3).
@@ -248,7 +264,7 @@ Publish deploy). But first:
 
 - clear the old site's build command;
 - remove its UI-installed build plugins (a sitemap plugin would overwrite `public/sitemap.xml` with
-  `/404`, `/admin/` and `/contact/thanks/` in it);
+  `/404` and `/contact/thanks/` in it);
 - turn on form detection, the `info@` notification and Analytics there;
 - afterwards, delete the `tech-savvies-2` site so its `netlify.app` copy doesn't stay online as a
   duplicate.
