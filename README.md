@@ -18,8 +18,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/cookies/` | `public/cookies/index.html` | Cookie Policy (linked from every footer’s Legal column) |
 | `/accessibility/` | `public/accessibility/index.html` | Accessibility statement: WCAG 2.2 AA aim, what was tested, known limitations, how to report a barrier (linked from every footer’s Legal column) |
 | any missing page | `public/404.html` | Page not found |
-| `/admin/` | `public/admin/index.html` | Internal prompt checklist (not linked, not indexed; generated, see below) |
-| `/index.md`, `/privacy.md`, `/contact/thanks.md`, `/404.md` … | `public/*.md`, `public/contact/thanks.md` | Plain-text version of every page except `/admin/`, at the page’s name + .md (generated, see Editing) |
+| `/index.md`, `/privacy.md`, `/contact/thanks.md`, `/404.md` … | `public/*.md`, `public/contact/thanks.md` | Plain-text version of every page, at the page’s name + .md (generated, see Editing) |
 | `/llms.txt` | `public/llms.txt` | What the site is, and a link to each indexable page’s plain-text version, for AI tools ([llmstxt.org](https://llmstxt.org/); generated) |
 
 Everything the site serves lives in `public/`:
@@ -33,7 +32,7 @@ public/
   robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
   sw.js                   removes the old site’s service worker from browsers that still have it (keep it)
 docs/                     business-facts.md (owner fills in), data-inventory.md (personal data and retention), data-requests-runbook.md (how to complete a data request), compliance-log.md (status of the 25 items), claims-register.md (evidence for every claim)
-tools/                    check_site.py (regression checker), check_migration.py (live check of a deploy), build_admin.py, build_markdown.py (plain-text mirrors)
+tools/                    check_site.py (regression checker), check_migration.py (live check of a deploy), build_markdown.py (plain-text mirrors)
 ```
 
 ## Checks
@@ -42,7 +41,7 @@ tools/                    check_site.py (regression checker), check_migration.py
 `path:line: [check-name] message` for each problem. It guards image alt text, external resources,
 client-side storage, the CSP, review schema, unsupported claims, placeholder text, internal links, new-tab links,
 the shared header and footer, and that every price and the completion guarantee on `/solutions/` match `/terms/`.
-Changing a price, promise or refund rule? Change `/solutions/`, `/terms/`, `/refunds/` and `docs/business-facts.md` together. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
+Changing a price, promise or refund rule? Change `/solutions/`, `/terms/`, `/refunds/` and `docs/business-facts.md` together. GitHub Actions runs it, and `python3 tools/build_markdown.py --check`,
 on every push and pull request. To add a check, see the comment at the top of the script.
 
 Old-site URLs (`/services`, `/about.html` and the rest) redirect to the new pages through the `[[redirects]]`
@@ -83,7 +82,7 @@ Then visit <http://localhost:8080>.
 - **Text:** edit the HTML file for that page. On the two big headlines, the periods and
   apostrophes are wrapped in `<span class="kern-dot">` / `<span class="kern-apos">` to tuck
   them in tighter, like in the mockup. Keep those spans if you change the wording.
-- **Header and footer:** repeated in every HTML file except `/admin/` (9 files). Change all of them together.
+- **Header and footer:** repeated in every HTML file (11 files). Change all of them together.
 - **Business details:** the legal name (Peter Parizhsky) appears in the footer copyright line
   of every page, the `legalName` in the JSON-LD in `public/index.html`, the `LEGAL_NAME` constant
   in `tools/check_site.py`, and one sentence on `/our-story/`. "New York, NY" appears in every
@@ -133,17 +132,3 @@ two settings have to be switched on in the Netlify dashboard once the site is de
 Submissions also appear on the **Forms** page in Netlify. A hidden honeypot field (`bot-field`)
 filters out simple spam bots. After sending, visitors land on `/contact/thanks/`.
 The form can't be tested with a local server, so test it after deploying to Netlify.
-
-## Prompt checklist (`/admin/`)
-
-`/admin/` lists the compliance fix prompts from `fix-prompts/` in run order. Each row has a
-checkbox, the model and effort to use, a one-click copy button, and the full prompt text. It
-isn't linked from any page and is marked `noindex`, but anyone with the URL can open it.
-Checkmarks are saved in your browser only.
-
-The page is generated. After editing a prompt or the tables in `fix-plan.md`, rebuild it:
-
-```sh
-python3 tools/build_admin.py          # rewrite public/admin/index.html
-python3 tools/build_admin.py --check  # fail if it's out of date
-```

@@ -196,9 +196,9 @@ claude "$(awk '/^````/{f=!f; next} f' fix-prompts/00-foundation.md)"
 
 Set the session's model and reasoning effort to the values listed under Parameters.
 
-The same list is available as a checklist at `/admin/` on the site (`public/admin/`, generated
-by `tools/build_admin.py`). It has one row per step, a checkbox, the model and effort, and a
-one-click copy button. It isn't linked from any page and is `noindex`.
+The plan is finished. The `/admin/` checklist page that listed these prompts, and `tools/build_admin.py`
+that generated it, were removed on 2026-09-30 before the site moved to tech-savvies.com. The prompts
+and this plan stay as the record of the work.
 
 | # | Prompt file | Deliverable |
 |---|-------------|-------------|

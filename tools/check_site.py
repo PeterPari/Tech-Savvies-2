@@ -181,9 +181,6 @@ class Site:
                     found.append(os.path.join(root, n))
         return sorted(found)
 
-    def is_admin(self, path):
-        return os.path.relpath(path, self.public).split(os.sep)[0] == "admin"
-
     def text_files(self, *exts):
         return self._walk(*(exts or TEXT_EXTS))
 
@@ -262,14 +259,10 @@ STORAGE_RE = re.compile(r"document\s*\.\s*cookie|localStorage|sessionStorage|ind
 
 def check_no_client_storage(site):
     for path in site.text_files(".js"):
-        if site.is_admin(path):
-            continue
         text = site.read(path)
         for m in STORAGE_RE.finditer(text):
             yield path, line_of(text, m.start()), "uses %s" % re.sub(r"\s+", "", m.group(0))
     for page in site.pages:
-        if site.is_admin(page.path):
-            continue
         for line, typ, src, content in page.scripts:
             if src or "json" in typ.lower():
                 continue
@@ -340,8 +333,6 @@ PLACEHOLDER_RES = [
 
 def check_no_placeholders(site):
     for path in site.text_files():
-        if site.is_admin(path):  # the owner's prompt checklist quotes these strings
-            continue
         text = site.read(path)
         for rx in PLACEHOLDER_RES:
             for m in rx.finditer(text):
@@ -400,7 +391,7 @@ def check_shared_chrome(site):
         yield home, 1, "reference page not found"
         return
     for page in site.pages:
-        if site.is_admin(page.path) or page is ref:
+        if page is ref:
             continue
         for attr, label in (("in_nav", "main-nav"), ("in_footer", "footer")):
             want, have = _chrome(ref, attr), _chrome(page, attr)
@@ -415,8 +406,6 @@ def check_shared_chrome(site):
 
 def check_business_details(site):
     for page in site.pages:
-        if site.is_admin(page.path):
-            continue
         with open(page.path, encoding="utf-8") as f:
             html = f.read()
         m = re.search(r"<footer\b.*?</footer>", html, re.S)
@@ -440,8 +429,6 @@ def check_business_details(site):
 def check_no_trackers(site):
     patterns = [(sig, re.compile(re.escape(sig).replace(r"><", r">\s*<"), re.I)) for sig in TRACKER_SIGNATURES]
     for path in site.text_files(".html", ".js"):
-        if site.is_admin(path):  # the owner's checklist quotes these names in prompt text
-            continue
         text = site.read(path)
         for sig, rx in patterns:
             for m in rx.finditer(text):
@@ -450,8 +437,6 @@ def check_no_trackers(site):
 
 def check_required_footer_links(site):
     for page in site.pages:
-        if site.is_admin(page.path):
-            continue
         have = _chrome(page, "in_footer")
         for link in REQUIRED_FOOTER_LINKS:
             if link not in have:
@@ -462,7 +447,7 @@ CONSENT_MESSAGE = "Non-essential storage or tracking added without consent. See 
 
 
 def check_consent_required(site):
-    pages = [p for p in site.pages if not site.is_admin(p.path)]
+    pages = site.pages
     if any("data-consent-banner" in t.attrs for p in pages for t in p.tags):
         return
     sig_rx = re.compile("|".join(re.escape(s) for s in TRACKER_SIGNATURES if "<" not in s), re.I)
@@ -479,8 +464,6 @@ def check_consent_required(site):
             elif src is None and uses_tracking(content):
                 yield page.path, line, CONSENT_MESSAGE
     for path in site.text_files(".js"):
-        if site.is_admin(path):
-            continue
         text = site.read(path)
         m = STORAGE_RE.search(text) or sig_rx.search(text)
         if m:
@@ -502,8 +485,6 @@ def _phrase_re(phrase):
 def check_claims(site):
     patterns = [(p, _phrase_re(p)) for p in BANNED_PHRASES]
     for path in site.text_files():
-        if site.is_admin(path):  # the owner's checklist quotes the old claims in prompt text
-            continue
         text = site.read(path)
         for phrase, rx in patterns:
             for m in rx.finditer(text):
@@ -624,8 +605,6 @@ def check_svg_alt(site):
 def check_og_image_alt(site):
     """Every page must have og:image:alt and twitter:image:alt."""
     for page in site.pages:
-        if site.is_admin(page.path):
-            continue
         text = site.read(page.path)
 
         if 'property="og:image:alt"' not in text and 'property="og:image"' in text:
@@ -712,8 +691,6 @@ def check_markdown_mirrors(site):
     if os.path.abspath(site.public) != str(build_markdown.PUBLIC):
         return
     for page in site.pages:
-        if site.is_admin(page.path):
-            continue
         want = "/" + build_markdown.mirror_path(build_markdown.Path(os.path.abspath(page.path))) \
             .relative_to(build_markdown.PUBLIC).as_posix()
         if not any(t.name == "link" and t.attrs.get("rel") == "alternate" and t.attrs.get("type") == "text/markdown"

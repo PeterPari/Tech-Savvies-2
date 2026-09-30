@@ -15,7 +15,7 @@ them to visitors, and AI tools read them in place of the HTML.
 Written to be read aloud and read as raw text: one idea per line, headings in page order, tables
 turned into lists (a screen reader reads a pipe table cell by cell with no headers), link text
 kept with the full address, no decorative markup. Only <main> and the footer are copied; the
-header, logo, icons and scripts are left out. public/admin/ is the owner's checklist and gets none.
+header, logo, icons and scripts are left out.
 Standard library only.
 """
 
@@ -274,7 +274,7 @@ def mirror_url(html_path):
 
 
 def pages():
-    return sorted(p for p in PUBLIC.rglob("*.html") if p.relative_to(PUBLIC).parts[0] != "admin")
+    return sorted(PUBLIC.rglob("*.html"))
 
 
 def meta(root, name):

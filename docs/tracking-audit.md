@@ -26,8 +26,8 @@ publish the Privacy Policy sentence until that switch is done and re-checked.
 5. Production: fetched the pages with curl (headers, `Set-Cookie`, HTML) and compared the scripts and
    external origins they reference. See "Production".
 
-`public/admin/` is excluded: it is the owner’s internal checklist, and its `localStorage` holds only the
-owner’s own checklist state.
+`public/admin/` was excluded: it was the owner’s internal checklist, and its `localStorage` held only the
+owner’s own checklist state. It was removed on 2026-09-30, so nothing on the site uses `localStorage` now.
 
 ## Results: this repository (local, 2026-09-29)
 
@@ -93,7 +93,7 @@ Evidence:
 - A banner would ask for consent to nothing, add an obstacle for keyboard and screen-reader users on
   every first visit, and need a cookie of its own to remember the choice.
 
-Guard: the `consent-required` check in `tools/check_site.py` fails when a page outside `public/admin/`
+Guard: the `consent-required` check in `tools/check_site.py` fails when a page
 loads a script other than `/assets/js/main.js`, or JS uses cookies, Web Storage or a tracker signature,
 and no element has `data-consent-banner`. Tested with `<script>document.cookie="x=1"</script>` in a
 temporary copy of `public/`. Adding a tracker or cookie later means following
