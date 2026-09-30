@@ -162,6 +162,17 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Free or discounted work | Reduced rate; our first project | Owner, 2026-09-29 |
 | Disclosure wording | “(the founder’s brother; our first project, at a reduced rate)” in the `.meta` line with the client name | Prompt 11, 2026-09-29 |
 
+## Case study (Eldunary)
+
+| Fact | Value | Source |
+|------|-------|--------|
+| Project | Fantasy encyclopedia website for a large world-building (lore) project. The client reached out to us | Owner, 2026-09-29 |
+| Scope | Around 100 pages with a complex web of connections between them; a connection map and interactive maps | Owner, 2026-09-29 |
+| Duration and status | Months of close work; we still work with the client to add new features | Owner, 2026-09-29 |
+| Claim | “One of our most ambitious projects to this day” | Owner, 2026-09-29 |
+| Tier | Tier 4 (sub-heading “New Website Build, Tier 4”) | Owner, 2026-09-29 |
+| Written permission to feature | Yes: the client’s written permission covers the name, the link to eldunary.org and the screenshot. The message is kept outside the repo | Owner, 2026-09-29 |
+
 ## Brand assets
 
 | Fact | Value | Source |

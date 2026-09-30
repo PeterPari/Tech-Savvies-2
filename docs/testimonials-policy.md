@@ -15,7 +15,7 @@ advice; the owner should ask an attorney about anything unclear.
 | Client logos | None. The only logo is Tech-Savvies’ own |
 | Client counts (“50+ clients”) | None |
 | Review schema (`aggregateRating`, `"@type": "Review"`) | None. The `no-review-schema` check reads every JSON-LD block, including nested objects and arrays; a temporary copy with both nested in a `LocalBusiness` block made it fail |
-| Case studies | One: Featured Showcase on `/` (Grisha.studio) |
+| Case studies | Two: Grisha.studio (Featured Showcase on `/` and on `/showcases/`) and Eldunary (`/showcases/`) |
 
 ## Case study: Grisha.studio
 
@@ -31,6 +31,16 @@ Owner actions: keep the written permission outside the repo (see rule 2); the ow
 connection to stay off the home page, but the disclosure must stay wherever the case study
 appears. If it is removed from the home page, the case study has to move with it. Do not ask a
 relative for a Google review (rule 4).
+
+## Case study: Eldunary
+
+Owner answers, 2026-09-29 (also in [`business-facts.md`](business-facts.md), Case study (Eldunary)):
+real engagement described in the owner’s own words; the client reached out, the site is around 100
+pages, and the work continues. The client gave written permission to name the site, link to it and
+show its screenshot. No family or other connection and no discount to disclose. No quotes or
+ratings are attached to it.
+
+Owner action: keep the written permission outside the repo (see rule 2).
 
 ## Rules for future endorsements
 

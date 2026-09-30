@@ -22,6 +22,7 @@ EXPECTED_CSP = (
 # Outbound link origins that are documented in docs/third-parties.md. Add one only after updating that file.
 ALLOWED_LINK_ORIGINS = [
     "https://grisha.studio",
+    "https://eldunary.org",
     # Privacy policies of the services listed on /privacy/#sharing
     "https://www.netlify.com", "https://automattic.com", "https://www.apple.com",
     "https://www.squarespace.com", "https://www.anthropic.com", "https://openai.com",

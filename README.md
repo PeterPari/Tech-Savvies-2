@@ -12,6 +12,7 @@ It is plain HTML, CSS and a little JavaScript, with no build step and no depende
 | `/our-story/` | `public/our-story/index.html` | Our Story |
 | `/contact/` | `public/contact/index.html` | Contact info and the contact form |
 | `/contact/thanks/` | `public/contact/thanks/index.html` | Shown after the form is sent (not indexed by Google) |
+| `/showcases/` | `public/showcases/index.html` | Featured Work: the grisha.studio and Eldunary case studies (linked from the header nav and the home page’s “See more work” button) |
 | `/terms/` | `public/terms/index.html` | Terms of Service (linked from every footer’s Legal column and the /solutions/ Payment block) |
 | `/refunds/` | `public/refunds/index.html` | Refund Policy (linked from every footer’s Legal column, the /solutions/ Payment block and the refund wording in /terms/) |
 | `/privacy/` | `public/privacy/index.html` | Privacy Policy (linked from every footer’s Legal column) |

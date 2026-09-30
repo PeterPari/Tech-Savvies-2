@@ -1,26 +1,10 @@
-# Websites done fast. Websites done right.
+# Featured Work
 
-Plain-text version of the web page “Tech-Savvies | Affordable websites for small businesses and creators” at https://tech-savvies.com/.
+Plain-text version of the web page “Showcases | Tech-Savvies” at https://tech-savvies.com/showcases/.
 
-Summary: Tech-Savvies offers affordable technology solutions for small artists, local businesses, and creators: new websites, website modernization, and Google & social presence.
+Summary: Featured work from Tech-Savvies: a new website and social presence for an artist, and a fantasy encyclopedia site of around 100 pages with interactive maps.
 
-Tech-Savvies offers affordable technology solutions for small artists, local businesses, and creators. Tech-Savvies is for people who don’t feel tech-savvy yet. When it feels impossible to make a website or set up a business profile, we’re here to help.
-
-## What we offer
-
-### Modernization
-
-Update your current website into a modern version without abandoning your brand. We update the design, performance, layout, and mobile look while keeping your brand intact.
-
-### New Websites
-
-Custom-built websites to your specifications. We focus on quality and customer satisfaction. Tell us what you want on your site. We’ll build it, or tell you upfront if it’s outside the quoted price.
-
-### Google & Social Presence
-
-Make it easier for locals and tourists to find you. We set up or refresh your Google Business Profile and your social media profiles.
-
-## Featured Showcase
+## grisha.studio
 
 ### New Website Build, Social Presence
 
@@ -36,13 +20,21 @@ We helped a small, up-and-coming artist bring his website to life. We worked wit
 
 Client: [grisha.studio](https://grisha.studio/), Gregory Parizhsky, a local artist (the founder’s brother; our first project, at a reduced rate)
 
-[See more work](https://tech-savvies.com/showcases/)
+## Eldunary
 
-## Start Your Project
+### New Website Build, Tier 4
 
-Whether you are an up-and-coming artist, a local farm, or a coffee shop, we are here to help.
+We built a fantasy encyclopedia website for a vast lore web. This client reached out to us and asked us to build a website for his large world-building project. We worked closely for months to get all the features like the complicated connection map and the interactive maps working right. The website ended up being around 100 pages, with a complicated web of connections from each one to the next. We still work with this client to bring new features to his website, and this remains one of our most ambitious projects to this day.
 
-[Start your project](https://tech-savvies.com/contact/)
+[eldunary.org - Tales of Eldunary: Encyclopedia](https://eldunary.org/)
+
+![The Eldunary home page, with the headline The Living Encyclopedia and buttons for Explore the World, View World Map and Connection Graph](https://tech-savvies.com/assets/img/eldunary.webp)
+
+- New Website Build
+- Interactive Maps
+- Ongoing New Features
+
+Client: [eldunary.org](https://eldunary.org/)
 
 ---
 

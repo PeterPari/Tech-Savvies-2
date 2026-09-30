@@ -19,7 +19,8 @@ owner’s statement and Netlify’s docs disagree, both are shown.
 | Squarespace Domains II LLC (registrar for tech-savvies.com) | Domain registration | Registrant name or organization, email, phone, postal address, country (summary). Squarespace says free domain privacy is automatic for most domains; whether it is on for this one: unverified: owner to check in the registrar dashboard | Domain registration and renewal, not visits | Squarespace. Retention: unstated | https://www.squarespace.com/privacy (returned 429, not read) | unverified: no DPA found | privacy@squarespace.com (summary). Registration data must be kept while the domain is registered |
 | Claude (Anthropic) | AI tool the owner uses to help build client sites | Only details that are on the client’s public website; no enquiry or client personal details otherwise (owner, 2026-09-29) | Owner’s use while building a site, not visits | Anthropic: unverified | https://www.anthropic.com/legal/privacy (opened 2026-09-29) | unverified | unverified |
 | ChatGPT (OpenAI) | AI tool the owner uses to help build client sites | Same as Claude (owner, 2026-09-29) | Owner’s use while building a site, not visits | OpenAI: unverified | https://openai.com/policies/privacy-policy/ (returned 403, not read) | unverified | unverified |
-| Grisha.studio (outbound link) | Case-study link on the homepage | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Grisha.studio’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
+| Grisha.studio (outbound link) | Case-study link on the homepage and /showcases/ | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Grisha.studio’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
+| Eldunary.org (outbound link) | Case-study link on /showcases/ (added 2026-09-29) | Visitor’s IP and the origin `https://tech-savvies.com` as referrer (Referrer-Policy strict-origin-when-cross-origin) | Link click | Eldunary.org’s own systems | Not checked (a client site) | Not applicable | Visitor contacts that site |
 
 Domain facts (RDAP, 2026-09-28): registered 2020-11-11, **expires 2026-11-11**, nameservers `DNS1-4.P06.NSONE.NET`.
 Those are the NS1 servers that Netlify DNS runs on: the zone's SOA contact is `domains+netlify.netlify.com`, so DNS
@@ -58,7 +59,7 @@ Observed twice. Both runs found only same-origin requests and no cookies.
 
 Response headers on the deployed new site match `netlify.toml`, including the CSP
 (`default-src 'self'` …). The `third-party-allowlist` check in `tools/check_site.py` limits outbound `href`
-origins to `ALLOWED_LINK_ORIGINS`: `https://grisha.studio`, plus the privacy-policy origins that
+origins to `ALLOWED_LINK_ORIGINS`: `https://grisha.studio`, `https://eldunary.org` (added 2026-09-29), plus the privacy-policy origins that
 `/privacy/#sharing` links to (Netlify, Automattic, Apple, Squarespace, Anthropic, OpenAI; added 2026-09-29).
 
 ## Open items for the owner
