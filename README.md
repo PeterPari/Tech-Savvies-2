@@ -31,8 +31,9 @@ public/
   assets/fonts/           Plus Jakarta Sans + JetBrains Mono (self-hosted, OFL licensed)
   assets/img/             logo, icons, social share image
   robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
+  sw.js                   removes the old site’s service worker from browsers that still have it (keep it)
 docs/                     business-facts.md (owner fills in), data-inventory.md (personal data and retention), data-requests-runbook.md (how to complete a data request), compliance-log.md (status of the 25 items), claims-register.md (evidence for every claim)
-tools/                    check_site.py (regression checker), build_admin.py, build_markdown.py (plain-text mirrors)
+tools/                    check_site.py (regression checker), check_migration.py (live check of a deploy), build_admin.py, build_markdown.py (plain-text mirrors)
 ```
 
 ## Checks
@@ -43,6 +44,13 @@ client-side storage, the CSP, review schema, unsupported claims, placeholder tex
 the shared header and footer, and that every price and the completion guarantee on `/solutions/` match `/terms/`.
 Changing a price, promise or refund rule? Change `/solutions/`, `/terms/`, `/refunds/` and `docs/business-facts.md` together. GitHub Actions runs it, and `python3 tools/build_admin.py --check`,
 on every push and pull request. To add a check, see the comment at the top of the script.
+
+Old-site URLs (`/services`, `/about.html` and the rest) redirect to the new pages through the `[[redirects]]`
+in `netlify.toml`. Keep them for good. The `legacy-redirects` check fails if one goes missing or a file in
+`public/` blocks one. `python3 tools/check_migration.py <site-url>` tests a live deploy: every redirect, every
+sitemap page, `/sw.js` and the 404 page. Add `--production` for `https://tech-savvies.com`, which also checks
+the `www` and `http://` redirects and the email and Search Console DNS records. See
+[`migration-plan.md`](migration-plan.md).
 
 Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first.
 

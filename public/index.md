@@ -1,6 +1,6 @@
 # Websites done fast. Websites done right.
 
-Plain-text version of the web page “Tech-Savvies | Websites done fast. Websites done right.” at https://tech-savvies.com/.
+Plain-text version of the web page “Tech-Savvies | Affordable websites for small businesses and creators” at https://tech-savvies.com/.
 
 Summary: Tech-Savvies offers affordable technology solutions for small artists, local businesses, and creators: new websites, website modernization, and Google & social presence.
 

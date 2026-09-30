@@ -8,6 +8,13 @@ rankings and recognition the old site has built up.
 The findings below come from the live site, the old repo, public DNS and a web search, all checked on
 2026-09-29. Work happens on the branch `migration`.
 
+## Status (2026-09-30)
+
+- **Done:** Phase 1 (all code, checks and docs) and the D2 and D4 decisions. Phase 2 result: see Phase 2.
+- **Left for you before the move:** Phase 0 steps 1 to 4 (renew the domain, Search Console exports,
+  Netlify readouts, DNS backup), a test message through the contact form (Phase 2 step 3), then the
+  cutover itself (Phase 3).
+
 ---
 
 ## In short
@@ -63,7 +70,7 @@ there, while the old sitemap lists the extensionless ones. Both get redirects.
 | `/services.md`, `/about.md` | 200 | Markdown copies for AI crawlers, listed in the old `llms.txt` | `/solutions.md`, `/our-story.md` |
 | `/index.md`, `/contact.md`, `/llms.txt` | 200 | The new site has files at the same paths | No rule |
 | `/content/*.md` | 404 on the live build, present in the old repo | | Matching new `.md` file |
-| `/404` | 200 with `noindex`, listed in the old sitemap by mistake | | No rule; the new site returns a real 404 |
+| `/404` | 200 with `noindex`, listed in the old sitemap by mistake | | No rule. Netlify serves the new 404 page there too, also with status 200 and `noindex`, so it stays out of search results; genuinely missing pages get a real 404 |
 | `/who-is-tech-savvies` | 404 already | From an older generation of the site; a web search still lists `www.tech-savvies.com/who-is-tech-savvies` with a "discontinued" notice | `/our-story/` |
 | `/assets/logo.png` | 200 | Old share image, logo in the old structured data and image sitemap | `/assets/img/logo.png` |
 | `/assets/logo.webp` | 200 | | `/assets/img/logo.png` |
@@ -107,29 +114,18 @@ the CSP already allows it (`script-src 'self'`).
   Concierge IT, and targeted the Upper West Side (10025). `docs/business-facts.md` now says the business
   is online-only and serves anyone remotely. Rankings for those services and that neighbourhood won't
   carry over.
-- **Improvements the new site already brings:** a real 404 instead of a `200` page listed in the sitemap,
-  one URL per page instead of `/about` and `/about.html` both returning 200, legal pages, and faster pages
+- **Improvements the new site already brings:** a sitemap that lists only real pages (the old one listed
+  its 404 page), one URL per page instead of `/about` and `/about.html` both returning 200, legal pages, and faster pages
   with no third-party scripts.
 
 ---
 
 ## 2. Redirect map
 
-Added at the end of `netlify.toml`, outside the generated `BEGIN/END plain-text mirrors` block. Targets
-are relative, so the same rules work on `tech-savvies-2.netlify.app` for testing and on
-`tech-savvies.com` after cutover.
-
-```toml
-# Old site (before the 2026 relaunch): send every URL search engines know to the matching new page.
-# Keep these for good. Removing one turns old links and search results into 404s. A rule stops working
-# if a file with the same path is added to public/ (check_site.py `legacy-redirects` guards this).
-[[redirects]]
-  from = "/services"
-  to = "/solutions/"
-  status = 301
-```
-
-The full list, one `[[redirects]]` entry each, all `status = 301`:
+The rules are at the end of `netlify.toml`, outside the generated `BEGIN/END plain-text mirrors` block.
+`LEGACY_REDIRECTS` in `tools/check_site.py` lists the same map, and its `legacy-redirects` check keeps the
+two in step. Targets are relative, so the same rules work on `tech-savvies-2.netlify.app` for testing and
+on `tech-savvies.com` after cutover. All 18 rules are `status = 301`:
 
 | From | To |
 |------|----|
@@ -174,39 +170,48 @@ Rules deliberately left out:
    - Which site Netlify Analytics is on.
    - The old site's name (`<name>.netlify.app`), for rollback.
 4. **Back up the DNS zone:** screenshot or export every record in Netlify → Domains →
-   `tech-savvies.com`. At minimum: 2 MX, the SPF TXT, the `apple-domain` TXT and the
-   `google-site-verification` TXT.
+   `tech-savvies.com`. Public DNS showed these on 2026-09-30, and `check_migration.py --production`
+   checks that they are still there after cutover:
+
+   | Name | Type | Value | Used for |
+   |------|------|-------|----------|
+   | `tech-savvies.com` | MX | `mx01.mail.icloud.com`, `mx02.mail.icloud.com` (priority 10) | Receiving `info@` mail |
+   | `tech-savvies.com` | TXT | `v=spf1 include:icloud.com ~all` | Mail sent from `info@` not marked as spam |
+   | `tech-savvies.com` | TXT | `apple-domain=…` | iCloud custom-domain verification |
+   | `tech-savvies.com` | TXT | `google-site-verification=…` | Search Console verification |
+   | `sig1._domainkey.tech-savvies.com` | CNAME | `sig1.dkim.tech-savvies.com.at.icloudmailadmin.com` | iCloud DKIM mail signing |
+   | `tech-savvies.com`, `www` | Netlify records | Managed by Netlify | Follow the domain to whichever site it's on |
+
+   Public DNS only shows records whose names are known, so the screenshot is still needed for anything
+   else in the zone.
 5. **Decide D1 to D4** (section 4).
 
-### Phase 1: Code on the `migration` branch (Claude, one session)
+### Phase 1: Code on the `migration` branch (done 2026-09-30)
 
-1. Add the redirect map (section 2) to `netlify.toml`.
-2. Add `public/sw.js`, the self-removing service worker, with a comment saying why it exists and to keep
-   it. Test it locally with Playwright:
-   - serve the old repo on `localhost:8080` and load it, so its worker registers;
-   - serve `public/` on the same port and reload;
-   - confirm no service worker is registered and Cache Storage is empty.
-3. Add a `legacy-redirects` check to `tools/check_site.py`. It fails if a rule from the map is missing
-   from `netlify.toml`, if a file in `public/` shadows a rule's path, or if `public/sw.js` is missing.
-4. Add `tools/check_migration.py`, standard library only: `python3 tools/check_migration.py <base-url>`.
-   It checks against a live deploy:
-   - every old URL returns a 301 to the right target, and the target returns 200;
-   - every sitemap URL returns 200, its canonical path matches, and it has no `noindex`;
-   - `/contact` ends up at `/contact/`;
-   - `/sw.js` returns 200 as JavaScript;
-   - with `--production` also: `http://` and `www` redirect to `https://tech-savvies.com/`,
-     `tech-savvies-2.netlify.app` redirects to the domain, and the MX and verification TXT records still
-     resolve.
-5. Add a `WebSite` JSON-LD block to the home page (`name` "Tech-Savvies", `url`), plus `alternateName`
-   if the owner approves it in D2.
-6. Apply the title and description changes the owner approves in D2, then rerun
-   `python3 tools/build_markdown.py`.
-7. If D4 is yes, delete the stale copy of the site at the repo root (see D4).
-8. Documentation:
-   - a Migration row in the README;
-   - the DNS correction in `docs/business-facts.md` and `docs/third-parties.md`.
-9. `python3 tools/check_site.py`, `python3 tools/build_admin.py --check` and
-   `python3 tools/build_markdown.py --check` must all exit 0. Commit and push to `migration`.
+- `netlify.toml`: the 18 redirect rules in section 2.
+- `public/sw.js`: the self-removing service worker. Tested in Chromium with Playwright:
+  - after loading the old repo on `localhost:8080`, its worker and its `tech-savvies-v2.3` cache were
+    installed;
+  - after switching the same address to `public/`, both were gone during the first page load, and the
+    page was no longer controlled by a worker after a reload;
+  - with `sw.js` deleted, the old worker and cache stayed, so the file is what removes them.
+- `tools/check_site.py`: the `legacy-redirects` check and the `LEGACY_REDIRECTS` map. A test copy had a
+  rule removed, a rule changed to 302, a page added at `/about/` and `sw.js` deleted; the check reported
+  all four.
+- `tools/check_migration.py`: the live check (usage in the README's Checks section).
+  - Before the deploy, it failed on exactly the 18 redirects and `/sw.js` on `tech-savvies-2.netlify.app`,
+    and passed its other 71 checks.
+  - Against today's `tech-savvies.com`, its `--production` checks pass for `http://`, `www` and all six
+    DNS records. The two `netlify.app` redirect checks can only pass after cutover.
+- Home page JSON-LD: a `WebSite` block, and `alternateName` on it and on `ProfessionalService` (D2).
+- The D2 titles on Home, Solutions and Our Story, also in `og:title`. The plain-text mirrors and
+  `llms.txt` were rebuilt.
+- The stale copy at the repo root deleted (D4).
+- Docs updated:
+  - README;
+  - `docs/business-facts.md` (alternate names, DNS);
+  - `docs/third-parties.md` (DNS);
+  - `docs/tracking-audit.md` (`sw.js`).
 
 ### Phase 2: Test on tech-savvies-2.netlify.app
 
@@ -284,12 +289,12 @@ they cost nothing.
 
 ## 4. Decisions for the owner
 
-| # | Decision | Recommendation |
-|---|----------|----------------|
+| # | Decision | Recommendation or answer |
+|---|----------|--------------------------|
 | D1 | Cutover method: Option B (move the domain to `tech-savvies-2`) or Option A (relink the old site to this repo) | **B**, unless Phase 0 shows the sites and DNS zone are in different Netlify teams |
-| D2 | Titles, descriptions and `alternateName`: keep the slogan titles, or add the words people search for | Put what you sell in the Home and Solutions titles, and your name in Our Story, using only wording already in `docs/business-facts.md`. For example, Home: "Tech-Savvies \| Affordable websites for small businesses and creators". Our Story: "Our Story: Peter Parizhsky \| Tech-Savvies". Also confirm whether "Tech Savvies", "Tech-Savvys" and "Tech Savvys" may be listed as alternate names |
+| D2 | Titles, descriptions and `alternateName`: keep the slogan titles, or add the words people search for | **Decided 2026-09-30:** Home "Tech-Savvies \| Affordable websites for small businesses and creators", Solutions "Website design and repair pricing \| Tech-Savvies", Our Story "Our Story: Peter Parizhsky, founder \| Tech-Savvies", Contact unchanged. Descriptions unchanged. Alternate names: "Tech Savvies", "Tech-Savvys", "Tech Savvys" |
 | D3 | Cutover date | First half of October 2026, after Phase 0 step 1 (renewal) and Phase 2 pass. Not in the days just before 2026-11-11 unless the domain is already renewed |
-| D4 | Delete the stale copy of the site at the repo root (`index.html`, `assets/`, `privacy/` and more). It was committed by accident in `2141dee` ("Fix #06") and no longer matches `public/` | **Yes.** Netlify serves only `public/`, so visitors never see it, but it's easy to edit by mistake, and it would go live if the publish folder ever changed |
+| D4 | Delete the stale copy of the site at the repo root (`index.html`, `assets/`, `privacy/` and more). It was committed by accident in `2141dee` ("Fix #06") and no longer matches `public/` | **Decided 2026-09-30: deleted.** Netlify serves only `public/`, so visitors never saw it, but it was easy to edit by mistake, and it would have gone live if the publish folder ever changed |
 
 ---
 

@@ -1,6 +1,6 @@
 # Our Story
 
-Plain-text version of the web page “Our Story | Tech-Savvies” at https://tech-savvies.com/our-story/.
+Plain-text version of the web page “Our Story: Peter Parizhsky, founder | Tech-Savvies” at https://tech-savvies.com/our-story/.
 
 Summary: Tech-Savvies was founded in 2020 by Peter Parizhsky. In 2026 it returns as an affordable website creation, repair, and online presence optimization business.
 

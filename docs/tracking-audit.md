@@ -85,6 +85,9 @@ Evidence:
   and only first-party requests on every page and viewport. This audit is newer than the last commit
   touching `public/`, so no re-measurement was needed.
 - `public/assets/js/main.js` (menu, footer year, form double-submit guard) uses no cookies or storage.
+- `public/sw.js` is never registered by this site. It only runs in browsers that still have the old
+  site’s service worker: it deletes that worker’s caches and unregisters it, so it removes storage and
+  adds none (see [`../migration-plan.md`](../migration-plan.md)).
 - Netlify Analytics is server-side and cookieless per Netlify (owner answers above); it needs disclosure in
   the Privacy Policy but no consent prompt.
 - A banner would ask for consent to nothing, add an obstacle for keyboard and screen-reader users on

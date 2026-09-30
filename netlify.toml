@@ -99,3 +99,98 @@
   [headers.values]
     Content-Type = "text/plain; charset=utf-8"
 # END plain-text mirrors
+
+# Old site (before the 2026 relaunch): send every URL that search engines and old links know to the
+# matching new page. Keep these for good: removing one turns old search results and links into 404s.
+# A rule only applies while no file in public/ has the same path, and /contact needs no rule (Netlify
+# adds the slash itself). LEGACY_REDIRECTS in tools/check_site.py must list the same rules; see
+# migration-plan.md.
+[[redirects]]
+  from = "/services"
+  to = "/solutions/"
+  status = 301
+
+[[redirects]]
+  from = "/services.html"
+  to = "/solutions/"
+  status = 301
+
+[[redirects]]
+  from = "/services.md"
+  to = "/solutions.md"
+  status = 301
+
+[[redirects]]
+  from = "/content/services.md"
+  to = "/solutions.md"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/our-story/"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/our-story/"
+  status = 301
+
+[[redirects]]
+  from = "/about.md"
+  to = "/our-story.md"
+  status = 301
+
+[[redirects]]
+  from = "/content/about.md"
+  to = "/our-story.md"
+  status = 301
+
+[[redirects]]
+  from = "/who-is-tech-savvies"
+  to = "/our-story/"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/content/contact.md"
+  to = "/contact.md"
+  status = 301
+
+[[redirects]]
+  from = "/content/index.md"
+  to = "/index.md"
+  status = 301
+
+[[redirects]]
+  from = "/assets/logo.png"
+  to = "/assets/img/logo.png"
+  status = 301
+
+[[redirects]]
+  from = "/assets/logo.webp"
+  to = "/assets/img/logo.png"
+  status = 301
+
+[[redirects]]
+  from = "/assets/favicon.png"
+  to = "/assets/img/favicon-64.png"
+  status = 301
+
+[[redirects]]
+  from = "/assets/icon-192.png"
+  to = "/assets/img/icon-192.png"
+  status = 301
+
+[[redirects]]
+  from = "/assets/icon-512.png"
+  to = "/assets/img/icon-512.png"
+  status = 301
+
+[[redirects]]
+  from = "/assets/icon-512-maskable.png"
+  to = "/assets/img/icon-512.png"
+  status = 301

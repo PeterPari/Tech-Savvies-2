@@ -33,6 +33,31 @@ LEGAL_NAME = "Peter Parizhsky"
 # Footer hrefs every page must contain. Later prompts append here, e.g. "/privacy/".
 REQUIRED_FOOTER_LINKS = ["/terms/", "/refunds/", "/privacy/", "/cookies/", "/accessibility/"]
 
+# URLs of the old site (before the 2026 relaunch) and the page each one 301-redirects to in netlify.toml.
+# Search engines and old links know these, so keep them for good (see migration-plan.md). legacy-redirects
+# fails if a rule is missing or changed, if a file in public/ shadows one (Netlify then serves the file
+# and skips the rule), if a target doesn't exist, or if public/sw.js (removes the old service worker) is gone.
+LEGACY_REDIRECTS = {
+    "/services": "/solutions/",
+    "/services.html": "/solutions/",
+    "/services.md": "/solutions.md",
+    "/content/services.md": "/solutions.md",
+    "/about": "/our-story/",
+    "/about.html": "/our-story/",
+    "/about.md": "/our-story.md",
+    "/content/about.md": "/our-story.md",
+    "/who-is-tech-savvies": "/our-story/",
+    "/contact.html": "/contact/",
+    "/content/contact.md": "/contact.md",
+    "/content/index.md": "/index.md",
+    "/assets/logo.png": "/assets/img/logo.png",
+    "/assets/logo.webp": "/assets/img/logo.png",
+    "/assets/favicon.png": "/assets/img/favicon-64.png",
+    "/assets/icon-192.png": "/assets/img/icon-192.png",
+    "/assets/icon-512.png": "/assets/img/icon-512.png",
+    "/assets/icon-512-maskable.png": "/assets/img/icon-512.png",
+}
+
 # Substrings that mark a tracker, pixel or analytics tool. no-trackers fails on any of them in public/
 # HTML or JS (case-insensitive). Adding a tracker means a consent banner first: see
 # fix-prompts/05-cookie-consent.md, and update docs/tracking-audit.md and the Privacy/Cookie policies.
@@ -700,7 +725,48 @@ def check_markdown_mirrors(site):
             yield str(path), 1, "%s; run python3 tools/build_markdown.py" % ("missing" if current is None else "out of date")
 
 
+def netlify_redirects(text):
+    """[[redirects]] rules in netlify.toml as {from: (to, status, line)}."""
+    rules = {}
+    for m in re.finditer(r"^\[\[redirects\]\]\n((?:[ \t]+\w+[ \t]*=.*\n?)+)", text, re.M):
+        values = dict(re.findall(r'^[ \t]+(\w+)[ \t]*=[ \t]*"?([^"\n]*)"?[ \t]*$', m.group(1), re.M))
+        if "from" in values:
+            rules[values["from"]] = (values.get("to"), values.get("status"), line_of(text, m.start()))
+    return rules
+
+
+def served_files(public, path):
+    """Files in public/ that Netlify would serve at path, which stops a redirect rule for it from applying."""
+    base = os.path.join(public, path.strip("/"))
+    candidates = [base]
+    if not os.path.splitext(path)[1]:
+        candidates += [base + ".html", os.path.join(base, "index.html")]
+    return [c for c in candidates if os.path.isfile(c)]
+
+
+def check_legacy_redirects(site):
+    text = site.read(site.netlify)
+    rules = netlify_redirects(text)
+    for old, new in LEGACY_REDIRECTS.items():
+        to, status, line = rules.get(old, (None, None, 1))
+        if to is None:
+            yield site.netlify, 1, "no redirect rule for old URL %s (want 301 to %s)" % (old, new)
+        elif to != new or status != "301":
+            yield site.netlify, line, "redirect for %s goes to %s with status %s, want %s with 301" % (old, to, status, new)
+        for path in served_files(site.public, old):
+            yield path, 1, "shadows the redirect for old URL %s; remove the file or the rule" % old
+        target = os.path.join(site.public, new.lstrip("/"))
+        if new.endswith("/"):
+            target = os.path.join(target, "index.html")
+        if not os.path.isfile(target):
+            yield site.netlify, line, "redirect target %s for %s does not exist in public/" % (new, old)
+    sw = os.path.join(site.public, "sw.js")
+    if not os.path.isfile(sw) or "unregister()" not in site.read(sw):
+        yield sw, 1, "missing or no longer unregisters: browsers keep the old site's service worker without it"
+
+
 CHECKS = [
+    ("legacy-redirects", check_legacy_redirects),
     ("img-alt", check_img_alt),
     ("svg-alt", check_svg_alt),
     ("og-image-alt", check_og_image_alt),

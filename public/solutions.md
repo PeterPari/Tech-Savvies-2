@@ -1,6 +1,6 @@
 # Core Services
 
-Plain-text version of the web page “Solutions & Pricing | Tech-Savvies” at https://tech-savvies.com/solutions/.
+Plain-text version of the web page “Website design and repair pricing | Tech-Savvies” at https://tech-savvies.com/solutions/.
 
 Summary: Website Launch $250–$375 by tier, Website Rescue $200 ($250 rush), and Google Business Profile and social media help at $50 once or $50 a month. Every cost listed, including domain.
 

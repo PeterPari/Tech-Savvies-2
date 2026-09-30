@@ -12,6 +12,7 @@ establishes it but the owner hasn't confirmed it yet.
 | Fact | Value | Source |
 |------|-------|--------|
 | Brand name | Tech-Savvies (logo reads "Tech-Savvies NYC") | (from site, confirm) |
+| Other spellings of the name, listed for search engines (`alternateName` in the home page JSON-LD) | Tech Savvies, Tech-Savvys, Tech Savvys (same list as the old site) | Owner, 2026-09-30 |
 | Founder | Peter Parizhsky | Owner, 2026-09-29 |
 | History | Founded 2020 by Peter to help older adults with technology, paused 2023 for school, relaunched 2026 | Owner, 2026-09-29 |
 | Who does the work | Peter Parizhsky himself, using Claude and ChatGPT as tools. No staff, freelancers or subcontractors | Owner, 2026-09-29 |
