@@ -77,6 +77,12 @@
     Link = "<https://tech-savvies.com/refunds/>; rel=\"canonical\""
 
 [[headers]]
+  for = "/showcases.md"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Link = "<https://tech-savvies.com/showcases/>; rel=\"canonical\""
+
+[[headers]]
   for = "/solutions.md"
   [headers.values]
     Content-Type = "text/plain; charset=utf-8"

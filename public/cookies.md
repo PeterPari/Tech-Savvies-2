@@ -43,6 +43,7 @@ Questions? Email [info@tech-savvies.com](mailto:info@tech-savvies.com). For how 
 - [Home](https://tech-savvies.com/)
 - [Solutions](https://tech-savvies.com/solutions/)
 - [Our Story](https://tech-savvies.com/our-story/)
+- [Showcases](https://tech-savvies.com/showcases/)
 - [Contact](https://tech-savvies.com/contact/)
 
 ## Contact

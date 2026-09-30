@@ -744,9 +744,7 @@ main .eyebrow + * {
   border-radius: calc(var(--radius) + 4px);
   background: var(--field-bg);
   overflow: hidden;
-  box-shadow:
-    0 1.5rem 3rem -1.5rem rgba(0, 0, 0, 0.7),
-    0 0 4rem -1rem rgba(16, 185, 129, 0.12);
+  box-shadow: 0 1.5rem 3rem -1.5rem rgba(0, 0, 0, 0.7);
 }
 
 .showcase-frame-bar {
@@ -759,19 +757,8 @@ main .eyebrow + * {
   border-bottom: 1px solid var(--line);
 }
 
-.showcase-frame-dots {
-  display: flex;
-  gap: 0.375rem;
-}
-
-.showcase-frame-dots span {
-  width: 0.5625rem;
-  height: 0.5625rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
-}
-
 .showcase-frame-url {
+  grid-column: 2;
   display: flex;
   align-items: center;
   min-width: 0;
@@ -842,6 +829,11 @@ main .eyebrow + * {
   margin-top: 1rem;
   text-align: center;
   font-size: 0.9375rem;
+}
+
+.showcase-more {
+  margin-top: 1.75rem;
+  text-align: center;
 }
 
 /* ---------- Home: start your project ---------- */
