@@ -33,7 +33,7 @@ public/
   robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
   sw.js                   removes the old site’s service worker from browsers that still have it (keep it)
 docs/                     business-facts.md (owner fills in), data-inventory.md (personal data and retention), data-requests-runbook.md (how to complete a data request), compliance-log.md (status of the 25 items), claims-register.md (evidence for every claim)
-tools/                    check_site.py (regression checker), check_migration.py (live check of a deploy), build_markdown.py (plain-text mirrors)
+tools/                    check_site.py (regression checker), check_migration.py (live check of a deploy), build_markdown.py (plain-text mirrors), build_images.js (PNG icons and share image from the SVG logo)
 ```
 
 ## Checks
@@ -57,7 +57,7 @@ Adding analytics or any cookie? Read fix-prompts/05-cookie-consent.md first.
 ## Credits & licences
 
 Fonts: Plus Jakarta Sans and JetBrains Mono, SIL Open Font License 1.1, self-hosted with their licence texts in `public/assets/fonts/`.
-Logo: drawn by the owner. Icons and the share image: made for this site from the logo.
+Logo: drawn by the owner; SVG version (`logo.svg`, `icon.svg`) made by Claude Code. Icons and the share image: generated from the SVG by `tools/build_images.js`.
 The Grisha.studio screenshot is used with the client’s written permission.
 Every asset, its creator, source and licence: [`docs/asset-licenses.md`](docs/asset-licenses.md).
 Adding an image, font or icon? Add its row there first; `check_site.py` (`asset-inventory`) checks it.
