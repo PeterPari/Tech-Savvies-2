@@ -178,9 +178,10 @@ Published on `/solutions/` by Prompt 10 (2026-09-29). Prompts 02 and 03 take the
 | Fact | Value | Source |
 |------|-------|--------|
 | Logo: who made it, with which tool, license terms | Drawn by the owner in Procreate | Owner, 2026-09-29 |
+| Logo and icon SVGs (`logo.svg`, `icon.svg`): who made them | Made by Claude from the owner’s logo; the logo design is the owner’s | Owner, 2026-10-08 |
 | OG image: who made it, with which tool, license terms | Coded by Claude Code from the owner’s logo | Owner, 2026-09-29 |
 | Icons: who made them, with which tool, license terms | Favicon and app icons coded by Claude Code from the owner’s logo | Owner, 2026-09-29 |
-| Logo source file | No longer exists; the PNG in the repo is the only master | Owner, 2026-09-29 (Prompt 19) |
+| Logo source file | The Procreate file no longer exists. Since 2026-10-08 `public/assets/img/logo.svg` is the master; the logo PNG, icons and share image are generated from it | Owner, 2026-09-29 (Prompt 19); Owner, 2026-10-08 |
 | Inline UI icons (menu, close, arrow, external link) | Written by Claude Code, not taken from an icon set | Owner, 2026-09-29 (Prompt 19) |
 | Green checkmark in tick lists | Pasted from a Claude chat reply; no icon set or website known. Origin unverified: owner action | Owner, 2026-09-29 (Prompt 19) |
 | Design mockup PDF | Made by the owner and Claude Code; no designer involved, so no rights transfer needed | Owner, 2026-09-29 (Prompt 19) |
