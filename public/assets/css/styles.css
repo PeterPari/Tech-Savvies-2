@@ -1022,6 +1022,25 @@ main .eyebrow + * {
   min-width: 270px;
 }
 
+/* Arrow is hidden until hover/focus; zero width keeps the label centered. */
+.story-contact .btn svg {
+  width: 0;
+  margin-left: -0.5rem;
+  opacity: 0;
+  transition: width 0.15s ease, margin-left 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
+}
+
+.story-contact .btn:hover svg,
+.story-contact .btn:focus-visible svg {
+  width: 1.1em;
+  margin-left: 0;
+  opacity: 1;
+}
+
+.story-contact .btn:focus-visible svg {
+  transform: translateX(2px);
+}
+
 /* ---------- Contact ---------- */
 
 .contact-intro .lead {
